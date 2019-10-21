@@ -1,0 +1,303 @@
+body {
+  font-family: Cereal, sans-serif;
+}
+
+/* @media (min-width: 1100px) {
+  #navbarMenu {
+    display: none !important;
+  }
+}
+
+@media (min-width) {
+  #xlNavbar,
+  .navbar-expand-xl {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  #navbarMenuToggler {
+    display: none !important;
+  }
+} */
+
+/* le nav bar :( :(  */
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+.navbar-brand,
+.nav-link {
+  line-height: 70px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 200;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.navbar-text:hover,
+.nav-link:hover,
+.dropdown:hover {
+  color: #008489;
+}
+
+.dropdown-menu {
+  border-radius: 5px;
+  box-shadow: 0 0 4px 3px #f1f1f1;
+  z-index: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+}
+
+.indent {
+  padding: 4px 50px;
+}
+
+li .nav-link:hover,
+div .dropdown-item:hover {
+  color: #008489;
+  background: white;
+}
+
+input[type="search"]:focus {
+  border: 1px solid #d0d0d0;
+  border-radius: 2px;
+  box-shadow: 0 0 0 white;
+}
+
+#Eng {
+  color: #008489;
+  font-weight: 400;
+}
+
+@media (max-width: 1200px) {
+  .nav-element {
+    order: 2;
+  }
+
+  .lang-dropdown {
+    order: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-link {
+    line-height: 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .lang-dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+}
+
+.btn-search {
+  color: #222;
+  border: 0;
+}
+
+.btn-search:hover {
+  color: #008489;
+  border: 0;
+}
+
+.menu-toggler:focus {
+  outline: none;
+}
+
+/* end of nav */
+
+/* hero section */
+
+.container {
+  max-width: 1640px;
+  margin: 0 auto;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.container .main-img-section {
+  margin-top: 80px;
+  padding-bottom: 80px;
+}
+
+.main-title {
+  font-size: 32px;
+  letter-spacing: 0.5px;
+}
+
+.main-summary {
+  font-size: 18px;
+  line-height: 2;
+  letter-spacing: 0.5px;
+}
+
+.main-subInfo {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.main-subInfo a {
+  color: #008489;
+}
+
+.main-subInfo a:hover {
+  color: #003a3d;
+  text-decoration: none;
+}
+
+/* end of hero */
+
+/* latest news */
+
+.news-title {
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+.news-summary {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+.news-subInfo a {
+  color: #008489;
+}
+
+.news-subInfo a:hover {
+  color: #003a3d;
+  text-decoration: none;
+}
+
+/* end of news */
+
+/* gallery menu */
+
+.item-list {
+  list-style: none;
+}
+
+.gallery-menu {
+  display: flex;
+}
+
+.gallry-menu-item {
+  padding: 0 32px 0 0;
+}
+
+#selected-item {
+  padding-bottom: 8px;
+  border-bottom: solid 4px #008489;
+}
+
+.scrollableRow {
+  overflow-x: scroll;
+  white-space: nowrap;
+  transition: opacity;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+/* end of gallery menu */
+
+/* gallery */
+
+.aspectRatioBox {
+  padding-top: calc(2 / 3 * 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.gallery-title {
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+.gallery-summary {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+.gallery-subInfo a {
+  color: #008489;
+}
+
+.gallery-subInfo a:hover {
+  color: #003a3d;
+  text-decoration: none;
+}
+
+/* end of gallery */
+
+/* More button */
+
+.btn-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-item {
+  background: #008489;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  padding: 24px 48px;
+}
+
+.btn-item:hover {
+  background-color: #006d72;
+  color: white;
+}
+
+/* end of More button */
+
+/* footer nav */
+
+.footer-title,
+.footer-list {
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+.footer-list li a {
+  color: #767676;
+}
+
+/* end of footer nav */
+
+/* footer bar */
+
+.footer-brand-title,
+.footer-terms-privacy a {
+  color: #767676;
+  letter-spacing: 0.4px;
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: end;
+}
+
+.fab {
+  color: #767676;
+  font-size: 20px;
+}
