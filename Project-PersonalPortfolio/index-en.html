@@ -16,24 +16,65 @@
     <link rel="icon" sizes="192x192" href="https://raw.githubusercontent.com/BKmetoff/Altcademy/master/Project-PersonalPortfolio/images/logo-sq.png?token=ACP3G5M7W4SCVNB6HKWT7KK5WQ6ZW">
     <title>Le'Push Official</title>
   </head>
+
   <body>
 
     <!--
-
     - nav:
       - logo;
       - about;
       - contact;
       - media;
       - lang;
-
     -->
 
     <!-- nav bar -->
     <nav class="navbar navbar-expand-xl py-0 px-4 px-xl-5 border-bottom">
-      <a class="navbar-brand"><img src="https://github.com/BKmetoff/Altcademy/blob/master/Project-PersonalPortfolio/images/logolepushbqloo.png?raw=true"></a>
+
+      <a class="navbar-brand"><img class="nav-logo" src="https://github.com/BKmetoff/Altcademy/blob/master/Project-PersonalPortfolio/images/logo-dark.png?raw=true"></a>
       <span class="navbar-text font-weight-light mr-auto">Le'Push</span>
+
+      <button class="navbar-toggler menu-toggler" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="fas fa-bars"></span>
+      </button>
+
+      <div id="navbarMenu" class="collapse navbar-collapse bg-white flex-container">
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item flex-item nav-element">
+            <a href="#about" class="nav-link pl-5">About</a>
+          </li>
+          <li class="nav-item flex-item nav-element">
+            <a href="#media" class="nav-link pl-5">Media</a>
+          </li>
+          <li class="nav-item flex-item nav-element">
+            <a href="#contact" class="nav-link pl-5">Contact</a>
+          </li>
+          <li class="dropdown nav-item flex-item nav-element pl-4">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown-target">
+              <img class="flag-icon flag-icon-bg flag-icon-squared"/>
+              <span>BG</span>
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" area-labelledby="dropdown-target">
+              <a href="#" class="dropdown-item font-weight-light">
+                <img class="flag-icon flag-icon-gb flag-icon-squared"/>
+                <span>EN</span>
+              </a>
+              <a href="#" class="dropdown-item font-weight-light">
+                <img class="flag-icon flag-icon-gb flag-icon-squared"/>
+                <span>EN</span>
+              </a>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+
+
     </nav>
+
 
 
     <!-- ================================== -->
