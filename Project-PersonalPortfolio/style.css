@@ -1,5 +1,70 @@
 body {
   font-family: Cereal, sans-serif;
-  background: #222;
-  color: white;
+}
+
+.nav-logo {
+  width: 70px;
+  height: 40px;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+/* language icons */
+
+.flag-icon-background {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.flag-icon {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: relative;
+  display: inline-block;
+  width: 1.33333333em;
+  height: 1.33333333em;
+  line-height: 1em;
+}
+
+.flag-icon: before {
+  content: "\00a0";
+}
+
+/* .flag-icon.flag-icon-squared {
+  width: 1em;
+} */
+
+.flag-icon-squared {
+  background-image: url(./images/bg.svg);
+}
+
+.flag-icon-gb.flag-icon-squared {
+  background-image: url(./images/gb.svg);
+}
+
+/* nav bar */
+
+.navbar-brand,
+.nav-link {
+  line-height: 70px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 200;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* drop-down */
+
+.dropdown-menu {
+  border-radius: 5px;
+  box-shadow: 0 0 4px 3px #f1f1f1;
 }
