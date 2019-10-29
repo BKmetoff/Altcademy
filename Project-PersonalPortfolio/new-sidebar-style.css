@@ -2,23 +2,13 @@ body {
   font-family: Cereal, sans-serif;
   overflow-x: hidden;
 }
-
+/*
 html,
 body,
 header,
 #intro {
   height: 100%;
-}
-
-#intro {
-  background: url(./images/background/guitar-mic.jpg) no-repeat top center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  width: 100%;
-  background-attachment: fixed;
-}
+} */
 
 a {
   color: black;
@@ -61,7 +51,91 @@ a:hover {
 
 /* main */
 
-.landing-text h1 {
+#intro {
+  background: url(./images/background/mic.jpg) no-repeat top left;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  background-attachment: fixed;
+}
+
+.containerMain {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainTitle h1 {
   font-weight: 700;
   font-size: 500%;
+  letter-spacing: 3px;
+}
+
+.mainTitle h3 {
+  letter-spacing: 1px;
+}
+
+/* end of main */
+
+/* Album */
+
+.padding {
+  height: 150px;
+}
+
+.aspectRatioBox-album {
+  padding-top: calc(1 / 1 * 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+/* end of Album */
+
+/* image spacing */
+#fixed {
+  background: url(./images/band/band-gig-5.jpg) no-repeat center center fixed;
+  display: table;
+  height: 35vh;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+}
+
+/* end of image spacing */
+
+/* media */
+
+@media (min-width: 1200px) {
+  .container-fluid {
+    max-width: 1140px;
+  }
+}
+
+.container-fluid {
+  /* max-width: 1080px; */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.aspectRatioBox-media {
+  padding-top: calc(2 / 3 * 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.scrollableRow {
+  overflow-x: scroll;
+  padding-left: 18px;
+  padding-right: 18px;
+  /* margin-left: -24px;
+  margin-right: -24px; */
+}
+
+.scrollableRow > [class*=col-] {
+  padding-left: 6px;
+  padding-right: 6px;
 }
