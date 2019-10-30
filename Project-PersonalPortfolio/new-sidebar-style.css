@@ -2,21 +2,18 @@ body {
   font-family: Cereal, sans-serif;
   overflow-x: hidden;
 }
-/*
-html,
-body,
-header,
-#intro {
-  height: 100%;
-} */
 
-a {
+html {
+  scroll-behavior: smooth;
+}
+
+/* a {
   color: black;
 }
 
 a:hover {
   color: black;
-}
+} */
 
 /* lang flags */
 .flag-icon.flag-icon-squared {
@@ -82,7 +79,6 @@ a:hover {
 /* end of main */
 
 /* Album */
-
 .padding {
   height: 150px;
 }
@@ -108,18 +104,17 @@ a:hover {
 /* end of image spacing */
 
 /* media */
-
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .container-fluid {
     max-width: 1140px;
   }
 }
 
 .container-fluid {
-  /* max-width: 1080px; */
+  max-width: 1080px;
   padding-left: 24px;
   padding-right: 24px;
-}
+} */
 
 .aspectRatioBox-media {
   padding-top: calc(2 / 3 * 100%);
@@ -138,4 +133,27 @@ a:hover {
 .scrollableRow > [class*=col-] {
   padding-left: 6px;
   padding-right: 6px;
+}
+
+/* end of media */
+
+/* Bio */
+.aspectRatioBox-band {
+  padding-top: calc(1 / 2 * 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 999px) {
+  .aspectRatioBox-band {
+    padding-top: calc(0.8 / 2 * 100%);
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.band-bio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
