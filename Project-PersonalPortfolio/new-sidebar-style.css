@@ -80,7 +80,7 @@ a:hover {
 
 /* Album */
 .padding {
-  height: 100px;
+  height: 150px;
 }
 
 .aspectRatioBox-album {
@@ -92,19 +92,10 @@ a:hover {
 /* end of Album */
 
 /* image spacing */
-#fixed-up {
+#fixed {
   background: url(./images/band/band-gig-5.jpg) no-repeat center center fixed;
   display: table;
-  height: 38vh;
-  position: relative;
-  width: 100%;
-  background-size: cover;
-}
-
-#fixed-down {
-  background: url(./images/band/band-gig-5.jpg) no-repeat center center fixed;
-  display: table;
-  height: 38vh;
+  height: 35vh;
   position: relative;
   width: 100%;
   background-size: cover;
@@ -144,31 +135,7 @@ a:hover {
   padding-right: 6px;
 }
 
-.media-title {
-  display: flex;
-  justify-content: flex-end;
-}
-
 /* end of media */
-
-/* contact */
-.social-media a {
-  font-size: 300%;
-  padding-top: 18px;
-}
-
-.social-media a:hover {
-  text-decoration: none;
-  padding-top: 13px;
-  transition: 0.2s ease;
-}
-
-.contact-title {
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* end of contact */
 
 /* Bio */
 .aspectRatioBox-band {
@@ -190,24 +157,3 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
-
-.about-title {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* end of bio */
-
-/* footer */
-
-footer {
-  color: #6c757d;
-  display: flex;
-  justify-content: space-between;
-  letter-spacing: 0.5px;
-}
-
-/* .footerBar {
-  display: flex;
-  justify-content: space-between;
-} */
