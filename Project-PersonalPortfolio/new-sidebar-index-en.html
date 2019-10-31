@@ -38,7 +38,7 @@
 
     <!-- nav -->
     <nav class="fixed-top navbar navbar-expand-lg font-weight-light">
-      <a class="navbar-brand ml-3" href="#home">
+      <a class="navbar-brand ml-3" href="#intro">
         <img src="./images/logo/logo-white.png" width="66" height="40">
       </a>
       <button class="navbar-toggler text-white border" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,13 +48,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item pl-4">
+            <a class="nav-link" href="#media">Media</a>
+          </li>
+          <li class="nav-item pl-4">
+            <a class="nav-link" href="#connect">Connect</a>
+          </li>
+          <li class="nav-item pl-4">
             <a class="nav-link" href="#about">About<span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item pl-4">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-          <li class="nav-item pl-4">
-            <a class="nav-link" href="#">Media</a>
           </li>
           <li class="nav-item pl-4">
             <a class="nav-link" href="#"><img class="flag-icon flag-icon-bg flag-icon-squared"/></a>
@@ -64,7 +64,7 @@
     </nav>
     <!-- nav -->
 
-    <!-- Main ? -->
+    <!-- Main -->
     <div id="intro" class="view">
       <div class="containerMain text-white">
         <div>
@@ -80,7 +80,6 @@
       </div>
     </div>
     <!-- Main -->
-
 
     <!-- Album -->
     <div class="padding"></div>
@@ -104,29 +103,28 @@
       </div>
     <!-- Album -->
 
-    <!-- fixed ?? -->
-    <div id="fixed"></div>
-    <!-- fixed ?? -->
+    <!-- full-width image spacer section -->
+    <div id="fixed-up"></div>
+    <!-- full-width image spacer section -->
+
+    <div class="padding"></div>
 
     <!-- Media -->
-    <div class="container">
-      <div class="row flex-nowrap scrollableRow no-gutters pt-3 px-xl-0">
-        <div class="col-12 col-md-6 col-xl-4">
+    <div class="container" id="media">
+      <div class="media-title mb-3 mx-0 border-bottom">
+        <h1 class="font-weight-light">Media</h1>
+      </div>
+      <div class="row flex-nowrap scrollableRow no-gutters px-xl-0">
+        <div class="col-12 col-lg-6 pl-0">
           <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-1.jpg')">
           </div>
-          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-2.jpg')">
+        </div>
+        <div class="col-12 col-lg-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-1.jpg')">
           </div>
         </div>
-        <div class="col-12 col-md-6 col-xl-4">
-          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-3.jpg')">
-          </div>
-          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-4.jpg')">
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-xl-4">
-          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-6.jpg')">
-          </div>
-          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-7.jpg')">
+        <div class="col-12 col-lg-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-1.jpg')">
           </div>
         </div>
       </div>
@@ -135,10 +133,34 @@
 
     <div class="padding"></div>
 
+    <!-- Connect -->
+    <div class="container mb-5" id="connect">
+      <div class="contact-title border-bottom">
+        <h1 class="font-weight-light">Connect</h1>
+      </div>
+      <ul class="social-media list-unstyled d-flex flex-row justify-content-between pb-3 border-bottom">
+        <li><a href="#" class="fab fa-facebook" style="color: #3b5998;"></a></li>
+        <li><a href="#" class="fab fa-twitter" style="color: #6699FF;"></a></li>
+        <li><a href="#" class="fab fa-instagram" style="color: #e4405f;"></a></li>
+        <li><a href="#" class="fab fa-youtube" style="color: #c4302b;"></a></li>
+        <li><a href="#" class="fab fa-soundcloud" style="color: #f70"></a></li>
+        <li><a href="#" class="fab fa-spotify" style="color: #1db954"></a></li>
+        <li><a href="#" class="fab fa-bandcamp" style="color: #629aa9"></a></li>
+      </ul>
+    </div>
+    <!-- Connect -->
+
+
+    <!-- full-width image spacer section -->
+    <div id="fixed-down"></div>
+    <!-- full-width image spacer section -->
+
+    <div class="padding"></div>
+
     <!-- Bio -->
     <div class="container" id="about">
-      <div class="media-title mb-3 mx-0">
-        <h1 class="font-weight-light border-bottom">About us</h1>
+      <div class="about-title mb-3 mx-0 border-bottom">
+        <h1 class="font-weight-light">About us</h1>
       </div>
       <div class="row">
         <div class="d-none d-md-flex col-md-12 col-lg-6">
@@ -154,7 +176,7 @@
           </div>
         </div>
         <div class="d-flex d-xs-12 col-lg-6 mt-3 mt-lg-0">
-          <div class="band-bio text-justify font-weight-light">
+          <div class="band-bio text-center font-weight-light">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </div>
         </div>
@@ -162,58 +184,21 @@
     </div>
     <!-- Bio -->
 
-    <!-- Bio -->
-    <!-- <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <img class="rounded-circle" width="300" height="300" src="./images/band/gray-yasen-crop.jpg">
-        </div>
-        <div class="col-md-8 font-weight-light">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-        <div class="row">
-          <div class="col-md-8 font-weight-light">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </div>
-          <div class="col-md-4">
-            <img class="rounded-circle" width="300" height="300" src="./images/band/gray-yasen-crop.jpg">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <img class="rounded-circle" width="300" height="300" src="./images/band/gray-yasen-crop.jpg">
-          </div>
-        <div class="col-md-8 font-weight-light">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </div>
-        </div>
-      </div>
-      -->
+    <div class="padding"></div>
 
-    <!-- Contact // Footer-->
-    <footer class="container-fluid">
-        <div class="row">
-          <div class="col-sm-4 text-left">
-            <span class="footer-brand-title">© Le'Push 2019</span>
-          </div>
-          <div class="col-sm-4 text-center">
-            <h3>Connect</h3>
-            <br>
-            <a href="#" class="fab fa-facebook-square"></a>
-            <a href="#" class="fab fa-twitter-square"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-youtube-square"></a>
-          </div>
-          <div class="col-sm-4 text-right">
-            <h3>Contact</h3>
-            <br>
-            <h4>email</h4>
-            <h4>phone</h4>
-          </div>
+    <hr>
 
-        </div>
-      </footer>
+    <!-- Footer-->
+    <footer class="container footerBar mb-5 mt-2">
+      <div>
+        <small class="d-flex justify-content-start font-weight-light">© Le'Push 2019</small>
+      </div>
+      <div>
+        <small class="d-flex justify-content-end font-weight-light">Live photos by Vitage House, Plovdiv, BG</small>
+        <small class="d-flex justify-content-end font-weight-light">Main photo by Hrayr Movsisyan on Unsplash</small>
+        <small class="d-flex justify-content-end font-weight-light">"Untitled" album cover by Artist Name</small>
+      </div>
+    </footer>
     <!-- Contact // Footer-->
 
     <!-- ================================== -->
