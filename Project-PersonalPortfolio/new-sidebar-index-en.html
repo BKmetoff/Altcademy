@@ -37,27 +37,28 @@
     -->
 
     <!-- nav -->
-    <nav class="fixed-top navbar navbar-expand-lg font-weight-light">
-      <a class="navbar-brand ml-3" href="#intro">
-        <img src="./images/logo/logo-white.png" width="66" height="40">
+    <nav class="fixed-top navbar navbar-expand-lg font-weight-light py-1">
+      <a class="navbar-brand ml-2" href="#intro"  id="logo-mobile-2">
+        <img src="./images/logo/logo-white.png" id="band-logo">
       </a>
-      <button class="navbar-toggler text-white border" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white border" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"  id="menuToggle-mobile-1">
         <span class="fas fa-bars"></span>
       </button>
+      <a class="nav-link" href="#" id="bgFlagNavbar-mobile-3"><img class="flag-icon flag-icon-bg flag-icon-squared"/></a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse navItems-mobile-4" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item pl-4">
+          <li class="nav-item">
             <a class="nav-link" href="#media">Media</a>
           </li>
-          <li class="nav-item pl-4">
+          <li class="nav-item">
             <a class="nav-link" href="#connect">Connect</a>
           </li>
-          <li class="nav-item pl-4">
+          <li class="nav-item">
             <a class="nav-link" href="#about">About<span class="sr-only"></span></a>
           </li>
-          <li class="nav-item pl-4">
-            <a class="nav-link" href="#"><img class="flag-icon flag-icon-bg flag-icon-squared"/></a>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img class="flag-icon flag-icon-bg flag-icon-squared" id="bgFlagDropdown"/></a>
           </li>
         </ul>
       </div>
@@ -189,16 +190,55 @@
     <hr>
 
     <!-- Footer-->
-    <footer class="container footerBar mb-5 mt-2">
-      <div>
-        <small class="d-flex justify-content-start font-weight-light">© Le'Push 2019</small>
+    <div class="container footerBar mb-2 mb-md-5 mt-2">
+      <div class="row">
+
+        <div class="col-6 col-md-4">
+          <div class="d-flex justify-content-start">
+            <small>Live photos</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-start font-weight-light"><a href="#https://www.instagram.com/vintagehouseplovdiv/">Vitage House, Plovdiv</a></small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-start font-weight-light"> Blagovest Popov</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-start font-weight-light">Ivaylo Kostadinov</small>
+          </div>
+        </div>
+
+        <div class="d-none d-md-flex col-md-4 justify-content-center">
+          <small class="d-flex font-weight-light">© Le'Push 2019</small>
+        </div>
+
+        <div class="col-6 col-md-4">
+          <div>
+            <small class="d-flex justify-content-end">Main photo</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-end font-weight-light">Hrayr Movsisyan</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-end">"Untitled" album cover</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-end font-weight-light">Artist Name</small>
+          </div>
+        </div>
       </div>
-      <div>
-        <small class="d-flex justify-content-end font-weight-light">Live photos by Vitage House, Plovdiv, BG</small>
-        <small class="d-flex justify-content-end font-weight-light">Main photo by Hrayr Movsisyan on Unsplash</small>
-        <small class="d-flex justify-content-end font-weight-light">"Untitled" album cover by Artist Name</small>
-      </div>
+    </div>
+
+    <hr class="d-md-none">
+
+    <footer class="container footerBar mb-5 d-md-none">
+      <small class="d-flex justify-content-start font-weight-light">© Le'Push 2019</small>
     </footer>
+
+
+
+
+
     <!-- Contact // Footer-->
 
     <!-- ================================== -->
