@@ -7,13 +7,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* a {
-  color: black;
+.footerBar a {
+  color: #6c757d;
 }
-
-a:hover {
-  color: black;
-} */
 
 /* lang flags */
 .flag-icon.flag-icon-squared {
@@ -30,20 +26,81 @@ a:hover {
 }
 
 /* nav-bar */
-.navbar {
-  background: rgba(0, 0, 0, 0.7);
+#band-logo {
+  width: 66px;
+  height: 40px;
 }
 
-.navbar li:not(:last-child) {
-  font-size: 18px;
+.navbar {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .navbar a {
   color: white;
 }
 
-.navbar a:hover {
+.navbar-collapse a:hover {
   color: #d5d5d5;
+}
+
+.navbar li:not(:last-child) {
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navbar li:not(:last-child) a {
+  padding-top: 11px;
+}
+
+@media (max-width: 991px) {
+  .navbar ul {
+    padding-left: 2px;
+  }
+
+  .navbar li:not(:last-child) {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .navbar li:(:last-child) {
+    display: none;
+  }
+
+  #menuToggle-mobile-1 {
+    order: 1;
+  }
+
+  #logo-mobile-2 {
+    order: 2;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #bgFlagNavbar-mobile-3 {
+    order: 3;
+    padding-right: 0;
+    padding-left: 8px;
+  }
+
+  .navItems-mobile-4 {
+    order: 4;
+  }
+
+  #band-logo {
+    width: 56px;
+    height: 35px;
+  }
+
+  #bgFlagDropdown {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #bgFlagNavbar-mobile-3 {
+    display: none;
+  }
 }
 
 /* main */
@@ -74,6 +131,18 @@ a:hover {
 
 .mainTitle h3 {
   letter-spacing: 1px;
+}
+
+@media (max-width: 992px) {
+  .mainTitle h1 {
+    font-weight: 650;
+    font-size: 400%;
+    letter-spacing: 3px;
+  }
+
+  .mainTitle h3 {
+    font-size: 110%;
+  }
 }
 
 /* end of main */
@@ -200,14 +269,14 @@ a:hover {
 
 /* footer */
 
-footer {
+.footerBar {
   color: #6c757d;
-  display: flex;
-  justify-content: space-between;
-  letter-spacing: 0.5px;
+  font-size: 12px;
 }
 
-/* .footerBar {
-  display: flex;
-  justify-content: space-between;
-} */
+@media (max-width: 768px) {
+  .footerBar {
+    letter-spacing: 0.5px;
+    font-size: 10px;
+  }
+}
