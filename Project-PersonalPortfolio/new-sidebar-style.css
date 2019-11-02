@@ -25,6 +25,24 @@ html {
   background-image: url(./images/flag/gb.svg);
 }
 
+@media (max-width: 767px) {
+  #album h1 {
+    font-size: 2rem;
+  }
+
+  #media h1 {
+    font-size: 2rem;
+  }
+
+  #connect h1 {
+    font-size: 2rem;
+  }
+
+  #about h1 {
+    font-size: 2rem;
+  }
+}
+
 /* nav-bar */
 #band-logo {
   width: 66px;
@@ -220,24 +238,35 @@ html {
 
 /* end of media */
 
-/* contact */
+/* connect */
 .social-media a {
   font-size: 300%;
-  padding-top: 18px;
+  padding-top: 12px;
+  transform: translateY(2px);
+  transition: 0.15s ease;
+  -o-transition: 0.15s ease;
+  -ms-transition: 0.15s ease;
+  -moz-transition: 0.15s ease;
+  -webkit-transition: 0.15s ease;
 }
 
 .social-media a:hover {
   text-decoration: none;
-  padding-top: 13px;
-  transition: 0.2s ease;
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+  -o-transition: 0.15s ease;
+  -ms-transition: 0.15s ease;
+  -moz-transition: 0.15s ease;
+  -webkit-transition: 0.15s ease;
 }
 
-.contact-title {
-  display: flex;
-  justify-content: flex-start;
+@media (max-width: 767px) {
+  .social-media a {
+    font-size: 250%;
+  }
 }
 
-/* end of contact */
+/* end of connect */
 
 /* Bio */
 .aspectRatioBox-band {
