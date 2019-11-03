@@ -1,80 +1,352 @@
 body {
   font-family: Cereal, sans-serif;
+  overflow-x: hidden;
+  background-color: #f8f9fa;
 }
 
-.aspectRatioBox {
+html {
+  scroll-behavior: smooth;
+}
+
+.footerBar a {
+  color: #6c757d;
+}
+
+/* lang flags */
+.flag-icon.flag-icon-squared {
+  width: 2em;
+  height: 1.5em;
+}
+
+.flag-icon-bg {
+  background-image: url(./images/flag/bg.svg);
+}
+
+.flag-icon-gb {
+  background-image: url(./images/flag/gb.svg);
+}
+
+@media (max-width: 767px) {
+  #album h1 {
+    font-size: 2rem;
+  }
+
+  #media h1 {
+    font-size: 2rem;
+  }
+
+  #connect h1 {
+    font-size: 2rem;
+  }
+
+  #about h1 {
+    font-size: 2rem;
+  }
+}
+
+.padding {
+  height: 100px;
+}
+
+@media (max-width: 1024px) {
+  .padding {
+    height: 80px;
+  }
+}
+
+/* nav-bar */
+#band-logo {
+  width: 66px;
+  height: 40px;
+}
+
+.navbar {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.navbar a {
+  color: white;
+}
+
+.navbar-collapse a:hover {
+  color: #d5d5d5;
+}
+
+.navbar li:not(:last-child) {
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navbar li:not(:last-child) a {
+  padding-top: 11px;
+}
+
+@media (max-width: 991px) {
+  .navbar ul {
+    padding-left: 2px;
+  }
+
+  .navbar li:not(:last-child) {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .navbar li:(:last-child) {
+    display: none;
+  }
+
+  #menuToggle-mobile-1 {
+    order: 1;
+  }
+
+  #logo-mobile-2 {
+    order: 2;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #bgFlagNavbar-mobile-3 {
+    order: 3;
+    padding-right: 0;
+    padding-left: 8px;
+  }
+
+  .navItems-mobile-4 {
+    order: 4;
+  }
+
+  #band-logo {
+    width: 56px;
+    height: 35px;
+  }
+
+  #bgFlagDropdown {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #bgFlagNavbar-mobile-3 {
+    display: none;
+  }
+}
+
+/* main */
+
+/* english version, static background */
+#intro {
+  background: url(./images/background/mic.jpg) no-repeat top left;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  background-attachment: fixed;
+}
+
+.containerMain {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* bulgarian version, video background */
+#main {
+  position: relative;
+  height: 100vh;
+}
+
+#main video {
+  height: 100vh;
+  width: 100%;
+  background-position: absolute;
+  z-index: 10;
+  object-fit: cover;
+}
+
+#main .mainTitle {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.mainTitle h1 {
+  font-weight: 700;
+  font-size: 500%;
+  letter-spacing: 3px;
+}
+
+.mainTitle h3 {
+  letter-spacing: 1px;
+}
+
+@media (max-width: 992px) {
+  .mainTitle h1 {
+    font-weight: 650;
+    font-size: 400%;
+    letter-spacing: 3px;
+  }
+
+  .mainTitle h3 {
+    font-size: 110%;
+  }
+}
+
+/* end of main */
+
+/* Album */
+.aspectRatioBox-album {
+  padding-top: calc(1 / 1 * 100%);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0.125rem 0.25rem #333;
+}
+
+.album-title {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* end of Album */
+
+/* image spacing */
+#fixed-up {
+  background: url(./images/band/band-gig-5.jpg) no-repeat center center fixed;
+  display: table;
+  height: 30vh;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+}
+
+#fixed-down {
+  background: url(./images/band/band-gig-9.jpg) no-repeat center center fixed;
+  display: table;
+  height: 30vh;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+}
+
+@media (min-width: 1024px) {
+  #fixed-up {
+    height: 40vh;
+  }
+
+  #fixed-down {
+    height: 40vh;
+  }
+}
+
+/* end of image spacing */
+
+/* media */
+/* @media (min-width: 1200px) {
+  .container-fluid {
+    max-width: 1140px;
+  }
+}
+
+.container-fluid {
+  max-width: 1080px;
+  padding-left: 24px;
+  padding-right: 24px;
+} */
+
+.aspectRatioBox-media {
   padding-top: calc(2 / 3 * 100%);
   background-size: cover;
   background-position: center;
+  box-shadow: 0 0.125rem 0.25rem #333;
 }
 
-a {
-  color: black;
+.scrollableRow {
+  overflow-x: scroll;
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
-a:hover {
-  color: black;
+.scrollableRow > [class*=col-] {
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
-/* .flag-icon.flag-icon-squared {
-  width: 1em;
+/* end of media */
+
+/* connect */
+.social-media a {
+  font-size: 300%;
+  padding-top: 12px;
+  transform: translateY(2px);
+  transition: 0.15s ease;
+  -o-transition: 0.15s ease;
+  -ms-transition: 0.15s ease;
+  -moz-transition: 0.15s ease;
+  -webkit-transition: 0.15s ease;
+}
+
+.social-media a:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+  -o-transition: 0.15s ease;
+  -ms-transition: 0.15s ease;
+  -moz-transition: 0.15s ease;
+  -webkit-transition: 0.15s ease;
+}
+
+@media (max-width: 767px) {
+  .social-media a {
+    font-size: 250%;
+  }
+}
+
+/* end of connect */
+
+/* Bio */
+.aspectRatioBox-band {
+  padding-top: calc(2 / 3 * 100%);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0.125rem 0.25rem #333;
+}
+
+/* @media (max-width: 999px) {
+  .aspectRatioBox-band {
+    padding-top: calc(0.8 / 2 * 100%);
+    background-size: cover;
+    background-position: center;
+  }
 } */
 
-.flag-icon-squared {
-  background-image: url(./images/bg.svg);
+.band-bio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.flag-icon-gb.flag-icon-squared {
-  background-image: url(./images/gb.svg);
+/* end of bio */
+
+/* footer */
+.footerBar {
+  color: #6c757d;
+  font-size: 12px;
 }
 
-/* nav bar */
-
-.nav-logo {
-  /* width: 70px;
-  height: 40px; */
-  width: 3.5rem;
-  height: 2rem;
+.footerBar a:hover {
+  text-decoration: underline;
 }
 
-.navbar-brand,
-.nav-link {
-  line-height: 70px;
-  color: #333;
-  font-size: 16px;
-  font-weight: 200;
-  padding-top: 0;
-  padding-bottom: 0;
+@media (max-width: 768px) {
+  .footerBar {
+    letter-spacing: 0.5px;
+    font-size: 11px;
+  }
 }
-
-/* drop-down */
-
-.dropdown-menu {
-  border-radius: 5px;
-  box-shadow: 0 0 4px 3px #f1f1f1;
-}
-
-/* language icons */
-
-.flag-icon-background {
-  background-size: contain;
-  background-position: 50%;
-  background-repeat: no-repeat;
-}
-
-.flag-icon {
-  background-size: contain;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  position: relative;
-  display: inline-block;
-  width: 1.33333333em;
-  height: 1.33333333em;
-  line-height: 1em;
-}
-
-.flag-icon: before {
-  content: "\00a0";
-}
-
-/* end of nav bar */

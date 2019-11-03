@@ -10,83 +10,323 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Tab icon -->
-    <link rel="icon" sizes="192x192" href="https://raw.githubusercontent.com/BKmetoff/Altcademy/master/Project-PersonalPortfolio/images/logo-sq.png?token=ACP3G5M7W4SCVNB6HKWT7KK5WQ6ZW">
+    <link rel="icon" href="./images/logo/logo-white-square.png">
     <title>Le'Push Official</title>
   </head>
 
   <body>
 
-    <!--
-    - nav:
-      - logo #home;
-      - about #bio;
-      - contact #contact;
-      - media #media;
-      - lang #index-en / #index-bg;
-    -->
-
-    <!-- nav bar -->
-    <nav class="navbar navbar-expand-xl py-0 px-4 px-xl-5 border-bottom">
-
-      <a class="navbar-brand"><img class="nav-logo" src="./images/logo-dark.png"></a>
-      <span class="navbar-text font-weight-light mr-auto">Le'Push</span>
-
-      <button class="navbar-toggler menu-toggler" data-toggle="collapse" data-target="#navbarMenu">
+    <!-- nav -->
+    <nav class="fixed-top navbar navbar-expand-lg font-weight-light py-1">
+      <a class="navbar-brand ml-2" href="#intro"  id="logo-mobile-2">
+        <img src="./images/logo/logo-white.png" id="band-logo">
+      </a>
+      <button class="navbar-toggler text-white border" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"  id="menuToggle-mobile-1">
         <span class="fas fa-bars"></span>
       </button>
+      <a class="nav-link" href="./index-bg.html" id="bgFlagNavbar-mobile-3"><img class="flag-icon flag-icon-bg flag-icon-squared"/></a>
 
-      <div id="navbarMenu" class="collapse navbar-collapse bg-white flex-container">
-
+      <div class="collapse navbar-collapse navItems-mobile-4" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item flex-item nav-element">
-            <a href="#about" class="nav-link pl-5">About</a>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" href="#padding-media">Media</a>
           </li>
-          <li class="nav-item flex-item nav-element">
-            <a href="#media" class="nav-link pl-5">Media</a>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" href="#padding-connect">Connect</a>
           </li>
-          <li class="nav-item flex-item nav-element">
-            <a href="#contact" class="nav-link pl-5">Contact</a>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" href="#padding-about">About<span class="sr-only"></span></a>
           </li>
-          <li class="dropdown nav-item flex-item nav-element pl-4">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown-target">
-              <img class="flag-icon flag-icon-bg flag-icon-squared"/>
-              <span>BG</span>
-              <span class="caret"></span>
-            </a>
-            <div class="dropdown-menu" area-labelledby="dropdown-target">
-              <a href="#" class="dropdown-item font-weight-light">
-                <img class="flag-icon flag-icon-gb flag-icon-squared"/>
-                <span>EN</span>
-              </a>
-              <a href="#" class="dropdown-item font-weight-light">
-                <img class="flag-icon flag-icon-gb flag-icon-squared"/>
-                <span>EN</span>
-              </a>
-            </div>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" href="./index-bg.html"><img class="flag-icon flag-icon-bg flag-icon-squared" id="bgFlagDropdown"/></a>
           </li>
-
         </ul>
-
       </div>
-
-
     </nav>
+    <!-- nav -->
 
-    <!-- hero -->
-    <div class="wrap d-xl-block">
-      <div class="container">
-        <div class="row main-image-section">
-          <div class="col-12">
-            <div class="row flex-container align-items-center">
-              
+    <!-- Main -->
+    <div id="intro" class="view">
+      <div class="containerMain text-white">
+        <div>
+          <div class="row">
+            <div class="text-center">
+              <div class="mainTitle">
+                <h1 class="border-bottom">LE'PUSH</h1>
+                <h3 class="pt-2 font-weight-light">Accoustic trio</h3>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Main -->
+
+    <div class="padding"></div>
+
+    <!-- Album -->
+    <div class="container" id="album">
+      <div class="album-title mb-3 mx-0 border-bottom d-flex justify-content-end">
+        <h1 class="font-weight-light"><strong>"Untitled"</strong> is out now!</h1>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-5 pr-md-3 pr-0 mb-3">
+            <div class="aspectRatioBox-album rounded" style="background-image: url('./images/band/album-cover.jpg')"></div>
+        </div>
+        <div class="col-md-7 pl-md-3 pl-0 mb-3 pt-2">
+          <div class="album-summary">
+            <p class="font-weight-light text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Album -->
+
+    <div class="padding"></div>
+
+    <!-- full-width image spacer section -->
+    <div id="fixed-up"></div>
+    <!-- full-width image spacer section -->
+
+    <div class="padding" id="padding-media"></div>
+
+    <!-- Media -->
+    <div class="container">
+      <div class="media-title mb-3 mx-0 border-bottom d-flex justify-content-start">
+        <h1 class="font-weight-light">Media</h1>
+      </div>
+      <div class="row flex-nowrap scrollableRow no-gutters px-2">
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-1.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-5.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-4.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-2.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-7.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-8.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-9.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-10.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-11.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-12.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-13.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-14.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-15.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-16.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-17.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-18.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-19.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-20.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-21.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-22.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-23.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-24.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-25.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-26.jpg')">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 pl-0">
+          <div class="aspectRatioBox-media mb-3 rounded" style="background-image: url('./images/band/band-gig-27.jpg')">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Media -->
+
+    <div class="padding" id="padding-connect"></div>
+
+    <!-- Connect large -->
+    <div id="connect">
+      <div class="container mb-5 d-none d-sm-block">
+        <div class="contact-title border-bottom d-flex justify-content-end">
+          <h1 class="font-weight-light">Connect</h1>
+        </div>
+        <ul class="social-media list-unstyled d-flex flex-row justify-content-between pb-3 border-bottom">
+          <li><a href="https://www.facebook.com/lepush420/"  target="_blank" class="fab fa-facebook" style="color: #3b5998;"></a></li>
+          <li><a href="#" class="fab fa-twitter" style="color: #6699FF;"></a></li>
+          <li><a href="https://www.instagram.com/lepush420/?hl=bg" class="fab fa-instagram" target="_blank" style="color: #e4405f;"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCLxaz6mKxmc8sUxua9Iky8Q" target="_blank" class="fab fa-youtube" style="color: #c4302b;"></a></li>
+          <li><a href="#" class="fab fa-soundcloud" style="color: #f70"></a></li>
+          <li><a href="#" class="fab fa-spotify" style="color: #1db954"></a></li>
+          <li><a href="#" class="fab fa-bandcamp" style="color: #629aa9"></a></li>
+        </ul>
+      </div>
+      <!-- Connect large -->
+
+      <!-- Connect small -->
+      <div class="container mb-5 d-sm-none d-block">
+
+        <div class="contact-title border-bottom">
+          <h1 class="font-weight-light">Connect</h1>
+        </div>
+
+        <ul class="social-media list-unstyled d-flex flex-row justify-content-around">
+          <li><a href="https://www.facebook.com/lepush420/"  target="_blank" class="fab fa-facebook" style="color: #3b5998;"></a></li>
+          <li><a href="#" class="fab fa-twitter" style="color: #6699FF;"></a></li>
+          <li><a href="https://www.instagram.com/lepush420/?hl=bg" class="fab fa-instagram" target="_blank" style="color: #e4405f;"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCLxaz6mKxmc8sUxua9Iky8Q" target="_blank" class="fab fa-youtube" style="color: #c4302b;"></a></li>
+        </ul>
+
+        <ul class="social-media list-unstyled d-flex flex-row justify-content-around pb-3 border-bottom">
+          <li><a href="#" class="fab fa-soundcloud" style="color: #f70"></a></li>
+          <li><a href="#" class="fab fa-spotify" style="color: #1db954"></a></li>
+          <li><a href="#" class="fab fa-bandcamp" style="color: #629aa9"></a></li>
+        </ul>
+
+      </div>
+    </div>
+    <!-- Connect small -->
+
+    <!-- full-width image spacer section -->
+    <div id="fixed-down"></div>
+    <!-- full-width image spacer section -->
+
+    <div class="padding" id="padding-about"></div>
+
+    <!-- Bio -->
+    <div class="container" id="about">
+      <div class="about-title mb-3 mx-0 border-bottom d-flex justify-content-start">
+        <h1 class="font-weight-light">About us</h1>
+      </div>
+      <div class="row no-gutter">
+        <div class="d-none d-lg-flex col-md-12 col-lg-5 justify-content-start">
+          <div class="col-4 mr-2 px-0 aspectRatioBox-band rounded" style="background-image: url('./images/band/about-yasen.jpg')">
+          </div>
+          <div class="col-4 mr-2 px-0 aspectRatioBox-band rounded" style="background-image: url('./images/band/about-ivan.jpg')">
+          </div>
+          <div class="col-4 px-0 aspectRatioBox-band rounded" style="background-image: url('./images/band/about-momo.jpg')">
+          </div>
+        </div>
+        <div class="d-xs-12 col-lg-7 mt-3 mt-lg-0 pl-lg-4">
+          <div class="band-bio font-weight-light pt-0 pt-lg-3">
+            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bio -->
+
+    <div class="padding"></div>
+
+    <hr>
+
+    <!-- Footer-->
+    <div class="container footerBar mb-2 mb-md-5 mt-2">
+      <div class="row">
+
+        <div class="col-6 col-md-4">
+          <div class="d-flex justify-content-start">
+            <small>Live photos</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-start font-weight-light"><a href="https://www.instagram.com/vintagehouseplovdiv/">Vitage House, Plovdiv</a></small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-start font-weight-light"><a href="https://www.facebook.com/Blagovest-Popov-Photography-1572884559619550/?eid=ARCkiHCBPBRs0hW7gxLqE8bcdAnP0y2cEMARCYuY1zwVkMZbdhcOBlIn624AhmaQREtksYrgjJbpcCZG&timeline_context_item_type=intro_card_work&timeline_context_item_source=1621416225&fref=tag">Blagovest Popov</a></small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-start font-weight-light">Ivaylo Kostadinov</small>
+          </div>
+        </div>
+
+        <div class="d-none d-md-flex col-md-4 justify-content-center">
+          <small class="d-flex font-weight-light">© Le'Push 2019</small>
+        </div>
+
+        <div class="col-6 col-md-4">
+          <div>
+            <small class="d-flex justify-content-end">Main photo</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-end font-weight-light">Hrayr Movsisyan on Unsplash</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-end">"Untitled" album cover</small>
+          </div>
+          <div>
+            <small class="d-flex justify-content-end font-weight-light">Artist Name</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="d-md-none">
+
+    <footer class="container footerBar mb-5 d-md-none">
+      <small class="d-flex justify-content-start font-weight-light">© Le'Push 2019</small>
+    </footer>
+    <!-- Footer-->
+
 
     <!-- ================================== -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
