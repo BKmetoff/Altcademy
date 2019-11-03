@@ -1,0 +1,56 @@
+body {
+  font-family: Cereal, sans-serif;
+  overflow-x: hidden;
+  background-color: #f8f9fa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.containerMain {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.redirectToContent {
+  font-weight: 900;
+  font-size: 320%;
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  margin-bottom: 0;
+  margin-top: 12px;
+}
+
+.col-6 {
+  margin-top: 10px;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+a:focus {
+  border: none;
+}
+
+@media (max-width: 576px) {
+  #band-logo {
+    width: 300px;
+    height: 200px;
+  }
+
+  .redirectToContent {
+    font-size: 210%;
+  }
+}
