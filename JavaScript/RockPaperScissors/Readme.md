@@ -2,8 +2,6 @@
 
 ## FullStack Course - JavaScript module
 
-----
-
 ### Assignment - Rock, Paper, Scissors
 
 #### Criteria:
