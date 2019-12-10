@@ -1,7 +1,11 @@
+// Math.floor (Math.random () * 51) + 1
 // var newGame = function () {};
 // var userChoice = function () {};
 // var userStand = function () {};
 // var userHit = function () {};
+
+
+
 
 
 var deck = [];
@@ -58,23 +62,40 @@ var dealCards = function () {
 };
 
 var random = function () {
-  return Math.floor (Math.random () * 51) + 1
+  return Math.floor (Math.random () * 51)
 };
 
 
 
-var checkDealtCards = function () {
+var calculateScore = function () {
 
-  if (randomCards[0].value >= 2 && randomCards[0].value <= 9) {
-    userScore = userScore + Number(randomCards[0].value)
+  for (var i = 0; i < randomCards.length; i++) {
+
+    userScore += cardScore(randomCards[i].value)
   }
-  else if ()
-
 
   return userScore;
 };
 
+var cardScore = function (cardValue) {
+
+  if (cardValue >= 2 && cardValue <= 9) {
+    return Number(cardValue);
+  }
+  else if (cardValue === 10 || cardValue === 'Jack' ||
+          cardValue === 'Queen' || cardValue === 'King') {
+
+    return 10
+  }
+}
+
+
+// var checkBlackJack = function () {
+//   if (randomCards[0].value === 'Ace' && randomCards[1].value === ) {}
+// };
+
 createDeck();
 dealCards();
-checkDealtCards();
-console.log (checkDealtCards())
+
+// console.log ( cardScore(dealCards()[0].value) )
+console.log (calculateScore())
