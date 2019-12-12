@@ -1,48 +1,61 @@
-// Math.floor (Math.random () * 51) + 1
+// scores:
+//  - Ace + Ace = 12
+//  - Ace + 10 = BlackJack
+//  - Ace + >10 = sum
+//  - 10 + 10 = sum
+//  - 10 + >10 = sum
+//  - >10 + >10 = sum
+
+
 // var newGame = function () {};
 // var userChoice = function () {};
 // var userStand = function () {};
 // var userHit = function () {};
-
-
-
-
+// var userScore = 0;
+// var userScoreCheck = function ();
 
 var deck = [];
 var suits = ['Clubs', 'Spades', 'Diamonds', 'Hearts'];
-var specialValues = ['Jack', 'Queen', 'King', 'Ace'];
-var card = { suit: '', value: ''};
+var specialNames = ['Jack', 'Queen', 'King', 'Ace'];
+var card = { suit: '', name: '', value: '' };
 var randomCards = [];
 var userScore = 0;
 
+// returns an array of card objects
 var createDeck = function () {
 
-  deck = [];
-  card = { suit: '', value: ''};
+  card = { suit: '', name: '', value: ''};
 
   for (var i = 0; i < suits.length; i++) {
     for (var j = 2; j <= 10; j++) {
       card.suit = suits[i];
-      card.value = j.toString();
+      card.name = j.toString();
+      card.value = j;
       deck.push(card);
-      card = { suit: '', value: ''}; // clear object elements after each iteration
+      card = {suit: '', name: '', value: ''}; // clear object elements after each iteration
     }
 
-    for (var k = 0; k < specialValues.length; k++) {
+    for (var k = 0; k < specialNames.length; k++) {
       card.suit = suits[i];
-      card.value = specialValues[k];
+      card.name = specialNames[k];
+
+      // assign values to "10" cards
+      if (specialNames[k] !== 'Ace') {card.value = 10}
+      else {card.value = 1}
+
       deck.push(card);
-      card = { suit: '', value: ''};
+      card = { suit: '', name: '', value: ''};
     }
-  };
+  }
 
   return deck;
 };
 
+// returns an array of 2 random cards
 var dealCards = function () {
 
   randomCards = [];
-  var randomCard = 0;
+  var randomCard = NaN;
   var firstDraw = 0;
 
   for (var i = 0; i < 2; i++) {
@@ -50,7 +63,7 @@ var dealCards = function () {
     randomCard = random();
 
     // failsafe against getting the same random draw twice:
-    while (randomCard === firstDraw) { randomCard = random() };
+    while (randomCard === firstDraw) { randomCard = random() }
 
     randomCards.push(deck[randomCard]);
     deck.splice(randomCard, 1); // remove drawn cards from deck
@@ -61,41 +74,42 @@ var dealCards = function () {
   return randomCards;
 };
 
+// returns random card from the remaining array elements after a card has been removed on each draw
 var random = function () {
-  return Math.floor (Math.random () * 51)
+  return Math.floor (Math.random () * deck.length);
 };
 
 
-
-var calculateScore = function () {
-
-  for (var i = 0; i < randomCards.length; i++) {
-
-    userScore += cardScore(randomCards[i].value)
+// check of first 2 cards that are dealt:
+var cardsCheck = function () {
+  console.log (randomCards[0].value, randomCards[1].value);
+  // both cards are Ace
+  if (randomCards[0].value === 'Ace' && randomCards[1].value === 'Ace') {
+    userScore = 12;
+    console.log (randomCards[0].value, randomCards[1].value);
+    return userScore;
   }
 
-  return userScore;
+  // one card is Ace, other card is a "10" card
+  else if ((randomCards[0].value === 10 && randomCards[1].value === 'Ace')
+  || (randomCards[0].value === 'Ace' && randomCards[1].value === 10)) {
+
+    userScore = 21;
+    console.log (randomCards[0].value, randomCards[1].value);
+    return userScore;
+  }
+
+  // both cards are "10" cards
+  else if (randomCards[0].value === 10 && randomCards[1].value === 10) {
+    userScore = 20;
+    console.log (randomCards[0].value, randomCards[1].value);
+    return userScore;
+
+  }
 };
 
-var cardScore = function (cardValue) {
-
-  if (cardValue >= 2 && cardValue <= 9) {
-    return Number(cardValue);
-  }
-  else if (cardValue === 10 || cardValue === 'Jack' ||
-          cardValue === 'Queen' || cardValue === 'King') {
-
-    return 10
-  }
-}
-
-
-// var checkBlackJack = function () {
-//   if (randomCards[0].value === 'Ace' && randomCards[1].value === ) {}
-// };
 
 createDeck();
 dealCards();
-
-// console.log ( cardScore(dealCards()[0].value) )
-console.log (calculateScore())
+console.log(cardsCheck());
+console.log(userScore);
