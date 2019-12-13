@@ -14,7 +14,7 @@ var randomCards = [];
 var userScore = 0;
 
 var createDeck = function () {
-  console.log (deck.length);
+
   card = { suit: '', name: '', value: ''};
 
   for (var i = 0; i < suits.length; i++) {
@@ -41,7 +41,6 @@ var createDeck = function () {
   }
 
   return deck;
-  // return dealCards(deck, 2);
 };
 
 var dealCards = function (numberOfCards) {
@@ -50,89 +49,82 @@ var dealCards = function (numberOfCards) {
   var randomCard = NaN;
   var firstDraw = 0;
 
-  // on the 1st deal of the game, the player will receive 2 cards.
-  // on each Hit, the player will receive 1 card.
-  if (numberOfCards !== 1) {
-    numberOfCards = 2;
-  }
-
   for (var i = 0; i < numberOfCards; i++) {
 
     randomCard = random();
 
     // failsafe against getting the same random draw twice:
-    while (randomCard === firstDraw) {randomCard = random()}
+    while (randomCard === firstDraw) { randomCard = random() }
 
     randomCards.push(deck[randomCard]);
     deck.splice(randomCard, 1); // remove drawn cards from deck
 
     firstDraw = randomCard;
   }
-  console.log (deck.length);
-  return cardsCheck(randomCards);
+
+  // console.log (randomCards);
+  return cardsCheck(userScore, randomCards);
 };
 
 var random = function () {
-  // var checkNum = 0;
-  // checkNum = Math.floor (Math.random () * deck.length);
-  // return checkNum;
   return Math.floor (Math.random () * deck.length);
 };
 
 
-// calculate score of first 2 cards that are dealt:
-var cardsCheck = function (arrayOfRandomCards) {
-  console.log (arrayOfRandomCards[0])
-  console.log (arrayOfRandomCards[0].value, arrayOfRandomCards[1].value);
+// calculate score:
+var cardsCheck = function (userScore, arrayOfCards) {
 
-  // both cards are Ace
-  if (arrayOfRandomCards[0].name === 'Ace' && arrayOfRandomCards[1].name === 'Ace') {
-    userScore = 12;
-    // return userScore;
+  // after initial draw, check both cards in the array
+  if (userScore === 0) {
+    console.log (arrayOfCards[0].name)
+
+    // both cards are Ace
+    if (arrayOfCards[0].name === 'Ace' && arrayOfCards[1].name === 'Ace') {
+      userScore = 12;
+      console.log (userScore)
+      // return userScore;
+    }
+    // one card is Ace, other card is a "10" card
+    else if ((arrayOfCards[0].value === 10 && arrayOfCards[1].name === 'Ace')
+    || (arrayOfCards[0].name === 'Ace' && arrayOfCards[1].value === 10)) {
+
+      userScore = 21;
+      console.log (userScore)
+      // return userScore;
+    }
+    // sum card values in all other cases
+    else {
+      userScore = arrayOfCards[0].value + arrayOfCards[1].value;
+      console.log (userScore)
+      // return userScore;
+    }
   }
 
-  // one card is Ace, other card is a "10" card
-  else if ((arrayOfRandomCards[0].value === 10 && arrayOfRandomCards[1].name === 'Ace')
-  || (arrayOfRandomCards[0].name === 'Ace' && arrayOfRandomCards[1].value === 10)) {
-
-    userScore = 21;
-    // return userScore;
-  }
-
-  // sum card values in all other cases
+  // after initial draw, check current score and the 1 extra card
   else {
-    userScore = arrayOfRandomCards[0].value + arrayOfRandomCards[1].value;
-    // return userScore;
+    console.log (arrayOfCards);
+    console.log (userScore)  ;
   }
 
-  return userScore
 
 };
 
 
-// returns TRUE for Hit/FALSE for hold
-var hitOrHold = function () {
+// createDeck();
+// dealCards();
+// cardsCheck();
 
-  var hit = confirm('\nYou are dealt: ' + randomCards[0].name + ' of ' + randomCards[0].suit +
-' & ' + randomCards[1].name + ' of ' + randomCards[1].suit + '\nTotal score: ' + userScore + '\n\nOK = Hit\nCancel = Hold');
+var newGame = function () {
 
-  if (hit === true) {
-    return extraCard();
+  var startGame = confirm ('Start a new game?');
+  if (startGame !== true) {
+    return alert('Bye!');
+  }
+  else {
+    createDeck();
+    dealCards(2); // deal 2 cards at the start of the game
   }
 
-  // return newGame();
 };
 
-
-// calls dealCards()
-var extraCard = function () {
-  // console.log ('more card');
-  return dealCards(1);
-};
-
-
-createDeck();
-dealCards();
-cardsCheck();
-hitOrHold();
-// console.log (deck.length);
+newGame();
