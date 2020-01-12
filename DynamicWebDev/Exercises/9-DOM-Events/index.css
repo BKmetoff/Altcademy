@@ -1,0 +1,32 @@
+#container1 {
+  padding: 20px;
+  background-color: #999;
+}
+
+#box1,
+#box2 {
+  display: inline-block;
+  color: white;
+  width: 20%;
+  height: 100px;
+}
+
+#box1 {
+  background-color: green;
+}
+
+#box2 {
+  background-color: blue;
+}
+
+#log p {
+  margin: 0;
+}
+
+#blob {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+}
