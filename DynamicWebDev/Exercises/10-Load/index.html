@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Load Event</title>
+    <link rel="stylesheet" href="index.css" type="text/css">
+    <script>
+      window.addEventListener("load", function () {
+        var h1 = document.querySelector("h1");
+        h1.style.color = "blue";
+
+        var p = document.querySelector("p");
+        p.style.color = "red";
+      });
+    </script>
+  </head>
+  <body>
+
+    <p>this is red</p>
+    <h1>this is blue</h1>
+  </body>
+</html>
