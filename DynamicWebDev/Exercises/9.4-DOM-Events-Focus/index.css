@@ -1,0 +1,22 @@
+.control {
+  position: relative;
+  padding-top: 20px;
+}
+
+.label {
+  position: absolute;
+  bottom: 0;
+  padding-left: 2px;
+  transition: all 0.2s linear;
+  color: #666;
+}
+
+.label.displaced {
+  bottom: 20px;
+  font-size: smaller;
+}
+
+input {
+  position: relative;
+  background: transparent;
+}
