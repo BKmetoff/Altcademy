@@ -1,0 +1,54 @@
+.container {
+  padding-bottom: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 4px 8px 0 #eee, 0 4px 8px 0 #eee;
+}
+
+@media (min-width: 700px) {
+  .container {
+    width: 700px;
+    margin-right: auto;
+    margin-left: 30px;
+  }
+}
+
+#todo-list {
+  margin-top: 10px;
+}
+
+#todo-list :last-child {
+  margin-bottom: 0;
+}
+
+#todo-row {
+  margin-bottom: 10px;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h5 {
+  padding-left: 12px;
+}
+
+.btn {
+  width: 85px;
+}
+
+.todoIn {
+  margin-bottom: 10px;
+  opacity: 0;
+  -webkit-animation: fadeIn 0.5s linear forwards;
+  -moz-animation: fadeIn 0.5s linear forwards;
+  animation: fadeIn 0.5s linear forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
