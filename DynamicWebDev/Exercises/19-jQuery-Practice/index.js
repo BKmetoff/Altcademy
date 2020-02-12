@@ -1,7 +1,7 @@
 var updateMarketValue = function (el) {
 
-  var sharesOwned = parseFloat($(el).children('.shares').text());
-  var marketPrice = parseFloat($(el).children('.marketPrice').text());
+  var sharesOwned = parseFloat($(el).find('.shares input').val());
+  var marketPrice = parseFloat($(el).find('.marketPrice input').val());
   var marketValue = sharesOwned * marketPrice;
 
   $(el).children('.marketValue').html(marketValue);
@@ -10,8 +10,8 @@ var updateMarketValue = function (el) {
 }
 
 var updateUnrealizedProfit = function (el, marketValue) {
-  var sharesOwned = parseFloat($(el).children('.shares').text());
-  var costPerShare = parseFloat($(el).children('.cost').text());
+  var sharesOwned = parseFloat($(el).find('.shares input').val());
+  var costPerShare = parseFloat($(el).find('.cost input').val());
   var costOfPurchase = sharesOwned * costPerShare;
 
   var unrealizedProfit = marketValue - costOfPurchase;
@@ -22,6 +22,51 @@ var updateUnrealizedProfit = function (el, marketValue) {
 
 $(document).ready(function () {
   udpatePortfolioValueAndProfit();
+
+  $(document).on('click', '.btn.remove', function(event) {
+    $(this).closest('tr').remove();
+    udpatePortfolioValueAndProfit();
+  });
+
+
+  var timeout;
+  $(document).on('input', 'tr input',function (event) {
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(function () {
+      udpatePortfolioValueAndProfit();
+    }, 1000);
+
+  });
+
+  $('#addStock').on('submit', function (event) {
+
+    event.preventDefault();
+
+    var name = $(this).children('[name=name]').val();
+    var shares = $(this).children('[name=shares]').val();
+    var cost = $(this).children('[name=cost]').val();
+    var marketPrice = $(this).children('[name=marketPrice]').val();
+
+    $('tbody').append('<tr>' +
+    '<td class="name">' + name + '</td>' +
+    '<td class="shares"><input type="number" value="' + shares + '" /></td>' +
+    '<td class="cost"><input type="number" value="' + cost + '" /></td>' +
+    '<td class="marketPrice"><input type="number" value="' + marketPrice + '" /></td>' +
+    '<td class="marketValue"></td>' +
+    '<td class="profit"></td>' +
+    '<td><button class="btn btn-light btn-sm remove">remove</button></td>' +
+  '</tr>');
+
+  udpatePortfolioValueAndProfit();
+
+  $(this).children('[name=name]').val('');
+  $(this).children('[name=shares]').val('');
+  $(this).children('[name=cost]').val('');
+  $(this).children('[name=marketPrice]').val('');
+
+  });
 });
 
 
