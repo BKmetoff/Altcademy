@@ -6,6 +6,7 @@
     <title>Altcademy: Stock Portfolio Example</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="index.css">
 
   </head>
   <body>
@@ -28,27 +29,27 @@
             <tbody>
               <tr>
                 <td class="name">Feetbook</td>
-                <td class="shares">20</td>
-                <td class="cost">50</td>
-                <td class="marketPrice">130</td>
+                <td class="shares"><input type="number" value="20" /></td>
+                <td class="cost"><input type="number" value="50" /></td>
+                <td class="marketPrice"><input type="number" value="130" /></td>
                 <td class="marketValue"></td>
                 <td class="profit"></td>
                 <td><button class="btn btn-light btn-sm remove">remove</button></td>
               </tr>
               <tr>
                 <td class="name">Yamazon</td>
-                <td class="shares">5</td>
-                <td class="cost">200</td>
-                <td class="marketPrice">500</td>
+                <td class="shares"><input type="number" value="5" /></td>
+                <td class="cost"><input type="number" value="200" /></td>
+                <td class="marketPrice"><input type="number" value="500" /></td>
                 <td class="marketValue"></td>
                 <td class="profit"></td>
                 <td><button class="btn btn-light btn-sm remove">remove</button></td>
               </tr>
               <tr>
                 <td class="name">Snoozechat</td>
-                <td class="shares">100</td>
-                <td class="cost">20</td>
-                <td class="marketPrice">3</td>
+                <td class="shares"><input type="number" value="100" /></td>
+                <td class="cost"><input type="number" value="20" /></td>
+                <td class="marketPrice"><input type="number" value="3" /></td>
                 <td class="marketValue"></td>
                 <td class="profit"></td>
                 <td><button class="btn btn-light btn-sm remove">remove</button></td>
@@ -56,6 +57,15 @@
             </tbody>
           </table>
         </div>
+
+
+        <form class="col-12 mt-2 mb-4" id="addStock">
+          <input class="mx-2" type="text" name="name" placeholder="Name" required/>
+          <input class="mx-2" type="number" name="shares" placeholder="Shares" required/>
+          <input class="mx-2" name="cost" type="number" placeholder="Cost"/>
+          <input class="mx-2" name="marketPrice" type="number" placeholder="Price"/>
+          <button class="btn btn-primary btn-sm">add</button>
+        </form>
 
         <div class="col-12 col-md-6">
           <h3>Portfolio value: $ <span id="portfolioValue"></span></h3>
