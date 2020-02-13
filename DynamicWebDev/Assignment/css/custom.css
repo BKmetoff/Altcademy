@@ -7,7 +7,6 @@ input {
   margin-bottom: 5px;
 }
 
-.btn-primary,
-.btn-success {
+.btn-primary {
   margin-top: -3px;
 }

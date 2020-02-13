@@ -1,5 +1,3 @@
-// calculate sub-total per item;
-
 // calculate full price;
 // handle full price click & display full price;
 
@@ -13,25 +11,36 @@ var subTotal = function (price, quantity) {
 var udpateSubTotal = function (rowNumber) {
 
   var currentRow = '#row' + rowNumber;
-
   $(document).on('input', currentRow + ' input', function (event) {
 
     var price = $(currentRow + ' .price').html();
     var newQuantity = parseFloat($(currentRow + ' input').val());
     $(currentRow + ' .subTotal').text(price * newQuantity)
 
-    console.log(price);
-    console.log(currentRow);
-
   });
 }
 
+var totalPrice = function (sum, subTotal) {
+  return sum + subTotal;
+}
 
 $(document).ready(function() {
 
   $(document).on('click', '.btn.remove', function (event) {
     $(this).closest('tr').remove();
     // to do - recalculate total price
+  });
+
+  $('#calculateTotalPrice').on('submit', function(event) {
+    event.preventDefault();
+
+    var listOfSubTotals = [];
+    $('.subTotal').each(function (index, element) {
+      listOfSubTotals.push(Number($(element).text()))
+    });
+
+    console.log(listOfSubTotals);
+    console.log(listOfSubTotals.reduce(totalPrice));
   });
 
   var rowCounter = 1;
@@ -56,7 +65,6 @@ $(document).ready(function() {
     $(this).children('[name=price]').val('')
 
     udpateSubTotal(rowCounter);
-
     rowCounter++;
   });
 
