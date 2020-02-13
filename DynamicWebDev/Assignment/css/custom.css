@@ -1,0 +1,13 @@
+th {
+  width: 20%;
+}
+
+input {
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.btn-primary,
+.btn-success {
+  margin-top: -3px;
+}

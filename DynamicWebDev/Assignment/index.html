@@ -15,5 +15,45 @@
   </head>
   <body>
 
+    <div class="container">
+      <h1 class="text-center my-3">Shopping cart</h1>
+      <div class="row">
+        <div class="col-12">
+
+          <!-- list of items below -->
+          <table class="table table-responsive">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Price per piece $</th>
+                <th scope="col">Qantity</th>
+                <th scope="col">Sub-total $</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+
+              </tr>
+            </tbody>
+          </table>
+          <!-- list of items above -->
+
+          <!-- form -->
+          <form id="addItem" class="col-12 mt-2 mb-1">
+            <input type="text" name="item" placeholder="Item" required>
+            <input type="float" name="price" placeholder="Price" required>
+            <button class="btn btn-primary btn-sm">Add</button>
+            <button class="btn btn-success btn-sm">Calculate full price</button>
+          </form>
+
+          <!-- total price -->
+          <div class="col-6">
+            <h3>Total price: $ <span id="totalPrice"></span></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
