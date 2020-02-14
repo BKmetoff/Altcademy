@@ -33,7 +33,7 @@ var getTotalPrice = function () {
 $(document).ready(function() {
 
   $(document).on('click', '.btn.remove', function (event) {
-    $(this).closest('tr').remove();
+    $(this).closest('.row').remove();
 
     if ($('.subTotal').length !== 0) {
       // auto-update total price on item removal
@@ -54,44 +54,37 @@ $(document).ready(function() {
 
   var rowCounter = 1;
 
-  $('#addItem').on('submit', function (event) {
+  $('#addItem').on('click', function (event) {
+
     event.preventDefault();
 
-    var item = $(this).children('[name=item]').val();
-    var price = $(this).children('[name=price]').val();
+    var item = $('#item').val();
+    var price = $('#price').val();
 
     subTotal(price, 1);
 
-    // $('tbody').append('<tr id="row' + rowCounter + '">' +
-    // '<td class="item">' + item + '</td>' +
-    // '<td class="price">' + price + '</td>' +
-    // '<td class="quantity"><input type="number" value="1">' + '</td>' +
-    // '<td class="subTotal">' + subTotal(price, 1) + '</td>' +
-    // '<td><button class="btn btn-danger btn-sm remove">remove</button></td>' +
-    // '</tr>');
-
     $('#underListOfItems').before(
-      '<div class="row align-items-center">' +
+      '<div class="row my-1 border-bottom"' + 'id="row' + rowCounter + '">' +
           '<div class="col-4 item">' +
             item +
           '</div>' +
           '<div class="col-2 price">' +
             price +
           '</div>' +
-          '<div class="col-2 quantity">' +
-            '<input type="number" value="1">' +
+          '<div class="col-2 quantity form-group">' +
+            '<input type="number" class="form-control" value="1">' +
           '</div>' +
           '<div class="col-2 subTotal">' +
             subTotal(price, 1) +
           '</div>' +
-          '<div class="col-2">' +
+          '<div class="col-2 text-align: end">' +
             '<button class="btn btn-danger btn-sm remove">remove</button>' +
           '</div>' +
       '</div>'
     )
 
-    $(this).children('[name=item]').val('')
-    $(this).children('[name=price]').val('')
+    $('#item').val('');
+    $('#price').val('');
 
     udpateSubTotal(rowCounter);
     rowCounter++;
@@ -100,5 +93,4 @@ $(document).ready(function() {
     $('#total').show();
 
   });
-
 });

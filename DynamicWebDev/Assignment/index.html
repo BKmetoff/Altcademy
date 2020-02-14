@@ -15,9 +15,13 @@
   </head>
   <body>
 
-    <div class="container listOfItems">
-      <h1 class="text-center my-3">Shopping cart</h1>
-      <div class="row align-items-start">
+    <div class="container listOfItems mt-4 px-4 ">
+      <div class="row">
+        <div class="col-12 border-bottom my-4">
+          <h1 class="text-center">Shopping list</h1>
+        </div>
+      </div>
+      <div class="row border-bottom">
         <div class="col-4">
           <!-- item -->
           <h5>Item</h5>
@@ -40,37 +44,23 @@
         </div>
       </div>
 
-        <!-- <div class="col-12">
-          <table class="table table-responsive">
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Price per piece $</th>
-                <th scope="col">Qantity</th>
-                <th scope="col">Sub-total $</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
-
       <div id="underListOfItems" class="row">
-        <form id="addItem" class="col-6 mt-2 mb-1">
-          <input type="text" name="item" placeholder="Item" required>
-          <input type="float" name="price" placeholder="Price" required>
-          <button class="btn btn-primary btn-sm">Add</button>
-        </form>
+
+        <div class="input-group col-6 mt-2 mb-1 pl-2">
+
+          <input type="text" class="form-control" id="item" placeholder="Item" required>
+          <input type="float" class="form-control" id="price" placeholder="Price" required>
+
+          <div class="input-group-append">
+            <button id="addItem" type="submit" class="btn btn-outline-primary btn-sm">Add</button>
+          </div>
+        </div>
         <form id="calculateTotalPrice" class="col-6 mt-2 mb-1 hidden">
           <button class="btn btn-success btn-sm">Calculate full price</button>
         </form>
 
         <!-- total price -->
-        <div id="total" class="col-6 hidden">
+        <div id="total" class="col-12 hidden">
           <h3>Total price: <span id="totalPrice"></span></h3>
         </div>
       </div>
