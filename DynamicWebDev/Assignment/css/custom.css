@@ -10,3 +10,7 @@ input {
 .btn-primary {
   margin-top: -3px;
 }
+
+.hidden {
+  display: none;
+}

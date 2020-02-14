@@ -15,12 +15,32 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="container listOfItems">
       <h1 class="text-center my-3">Shopping cart</h1>
-      <div class="row">
-        <div class="col-12">
+      <div class="row align-items-start">
+        <div class="col-4">
+          <!-- item -->
+          <h5>Item</h5>
+        </div>
+        <div class="col-2">
+          <!-- price per piece -->
+          <h5>Price per piece</h5>
+        </div>
+        <div class="col-2">
+          <!-- Q -->
+          <h5>Quantity</h5>
+        </div>
+        <div class="col-2">
+          <!-- sub-totel 5-->
+          <h5>Sub-total $</h5>
+        </div>
+        <div class="col-2">
+          <!-- remove -->
+          <!-- <h5>xxxx</h5> -->
+        </div>
+      </div>
 
-          <!-- list of items below -->
+        <!-- <div class="col-12">
           <table class="table table-responsive">
             <thead>
               <tr>
@@ -37,24 +57,23 @@
               </tr>
             </tbody>
           </table>
+        </div> -->
 
-        </div>
+      <div id="underListOfItems" class="row">
         <form id="addItem" class="col-6 mt-2 mb-1">
           <input type="text" name="item" placeholder="Item" required>
           <input type="float" name="price" placeholder="Price" required>
           <button class="btn btn-primary btn-sm">Add</button>
         </form>
-        <form id="calculateTotalPrice" class="col-6 mt-2 mb-1">
+        <form id="calculateTotalPrice" class="col-6 mt-2 mb-1 hidden">
           <button class="btn btn-success btn-sm">Calculate full price</button>
         </form>
 
-
         <!-- total price -->
-        <div class="col-6">
+        <div id="total" class="col-6 hidden">
           <h3>Total price: <span id="totalPrice"></span></h3>
         </div>
       </div>
-
     </div>
 
   </body>
