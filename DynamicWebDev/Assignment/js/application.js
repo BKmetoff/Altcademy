@@ -1,8 +1,3 @@
-// calculate full price;
-// handle full price click & display full price;
-
-
-
 var subTotal = function (price, quantity) {
   return parseFloat(price) * parseFloat(quantity)
 }
@@ -16,6 +11,9 @@ var udpateSubTotal = function (rowNumber) {
     var newQuantity = parseFloat($(currentRow + ' input').val());
     $(currentRow + ' .subTotal').text(price * newQuantity)
 
+    // auto update price on item quantity chage
+    getTotalPrice();
+
   });
 }
 
@@ -23,22 +21,30 @@ var totalPrice = function (sum, subTotal) { return sum + subTotal }
 
 var getTotalPrice = function () {
   var listOfSubTotals = [];
+
   $('.subTotal').each(function (index, element) {
     listOfSubTotals.push(Number($(element).text()))
   });
 
   $('#totalPrice').html('$ ' + listOfSubTotals.reduce(totalPrice));
 
-  // console.log(listOfSubTotals);
-  // console.log(listOfSubTotals.reduce(totalPrice));
 }
-
 
 $(document).ready(function() {
 
   $(document).on('click', '.btn.remove', function (event) {
     $(this).closest('tr').remove();
-    getTotalPrice();
+
+    if ($('.subTotal').length !== 0) {
+      // auto-update total price on item removal
+      getTotalPrice();
+    }
+    else {
+      // hide total elements if no items on list
+      $('#calculateTotalPrice').hide();
+      $('#total').hide();
+      $('#totalPrice').html('');
+    }
   });
 
   $('#calculateTotalPrice').on('submit', function(event) {
@@ -56,19 +62,43 @@ $(document).ready(function() {
 
     subTotal(price, 1);
 
-    $('tbody').append('<tr id="row' + rowCounter + '">' +
-    '<td class="item">' + item + '</td>' +
-    '<td class="price">' + price + '</td>' +
-    '<td class="quantity"><input type="number" value="1">' + '</td>' +
-    '<td class="subTotal">' + subTotal(price, 1) + '</td>' +
-    '<td><button class="btn btn-danger btn-sm remove">remove</button></td>' +
-    '</tr>');
+    // $('tbody').append('<tr id="row' + rowCounter + '">' +
+    // '<td class="item">' + item + '</td>' +
+    // '<td class="price">' + price + '</td>' +
+    // '<td class="quantity"><input type="number" value="1">' + '</td>' +
+    // '<td class="subTotal">' + subTotal(price, 1) + '</td>' +
+    // '<td><button class="btn btn-danger btn-sm remove">remove</button></td>' +
+    // '</tr>');
+
+    $('#underListOfItems').before(
+      '<div class="row align-items-center">' +
+          '<div class="col-4 item">' +
+            item +
+          '</div>' +
+          '<div class="col-2 price">' +
+            price +
+          '</div>' +
+          '<div class="col-2 quantity">' +
+            '<input type="number" value="1">' +
+          '</div>' +
+          '<div class="col-2 subTotal">' +
+            subTotal(price, 1) +
+          '</div>' +
+          '<div class="col-2">' +
+            '<button class="btn btn-danger btn-sm remove">remove</button>' +
+          '</div>' +
+      '</div>'
+    )
 
     $(this).children('[name=item]').val('')
     $(this).children('[name=price]').val('')
 
     udpateSubTotal(rowCounter);
     rowCounter++;
+
+    $('#calculateTotalPrice').show();
+    $('#total').show();
+
   });
 
 });
