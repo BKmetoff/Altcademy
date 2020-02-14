@@ -7,7 +7,6 @@ var subTotal = function (price, quantity) {
   return parseFloat(price) * parseFloat(quantity)
 }
 
-
 var udpateSubTotal = function (rowNumber) {
 
   var currentRow = '#row' + rowNumber;
@@ -20,27 +19,31 @@ var udpateSubTotal = function (rowNumber) {
   });
 }
 
-var totalPrice = function (sum, subTotal) {
-  return sum + subTotal;
+var totalPrice = function (sum, subTotal) { return sum + subTotal }
+
+var getTotalPrice = function () {
+  var listOfSubTotals = [];
+  $('.subTotal').each(function (index, element) {
+    listOfSubTotals.push(Number($(element).text()))
+  });
+
+  $('#totalPrice').html('$ ' + listOfSubTotals.reduce(totalPrice));
+
+  // console.log(listOfSubTotals);
+  // console.log(listOfSubTotals.reduce(totalPrice));
 }
+
 
 $(document).ready(function() {
 
   $(document).on('click', '.btn.remove', function (event) {
     $(this).closest('tr').remove();
-    // to do - recalculate total price
+    getTotalPrice();
   });
 
   $('#calculateTotalPrice').on('submit', function(event) {
     event.preventDefault();
-
-    var listOfSubTotals = [];
-    $('.subTotal').each(function (index, element) {
-      listOfSubTotals.push(Number($(element).text()))
-    });
-
-    console.log(listOfSubTotals);
-    console.log(listOfSubTotals.reduce(totalPrice));
+    getTotalPrice();
   });
 
   var rowCounter = 1;
