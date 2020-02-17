@@ -3,19 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title>AJAX Movie Finder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
 
-    <div>
-      <input type="text" placeholder="title">
-      <button onclick="searchMovie()">Search</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 my-3 input-group input-group-lg">
+          <input type="text" class ="form-control" placeholder="Movie Title">
+          <div class="input-group-append">
+          <button class="btn btn-outline-success" type="button" onclick="searchMovie()">Search</button>
+          </div>
+
+
+
+        </div>
+        <div class="col-12 mb-2 font-weight-light font-italic text-center">
+          <p class="text-muted">Find dat movie!</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <p>placeholder details</p>
+          <!-- <h5>Ttitle: <span id="title"></span></h5>
+          <h5>Year: <span id="year"></span></h5>
+          <h5>imdbID: <span id="imdbID"></span></h5>
+          <h5>Type: <span id="type"></span></h5> -->
+        </div>
+        <div class="col-6">
+          <p>placeholder poster</p>
+          <!-- <img id="poster"/> -->
+        </div>
+
+      </div>
     </div>
-    <img id="poster"/>
-    <p>title: <span id="title"></span></p>
-    <p>year: <span id="year"></span></p>
-    <p>actors: <span id="actors"></span></p>
-    <p>plot: <span id="plot"></span></p>
+
 
     <script type="text/javascript" src="index.js"></script>
   </body>
