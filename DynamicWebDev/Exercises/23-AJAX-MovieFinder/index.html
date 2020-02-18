@@ -9,6 +9,7 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
   </head>
   <body>
 
@@ -17,29 +18,14 @@
         <div class="col-12 my-3 input-group input-group-lg">
           <input type="text" class ="form-control" placeholder="Search OMDB..." id="searchTitle">
           <div class="input-group-append">
-          <button class="btn btn-outline-success" type="button" onclick="searchMovie()">Find!</button>
+          <button class="btn btn-outline-success" type="button" onclick="searchMovie()">Go!</button>
           </div>
         </div>
         <div class="col-12 mb-2 font-weight-light font-italic text-center">
-          <p class="text-muted border-top pt-3">Find dat movie!</p>
+          <p class="border-top py-3" id="subTitle">Find dat movie!</p>
         </div>
       </div>
-
-      <!-- <div class="row" id="searchResults">
-        <div class="col-6">
-          <p>placeholder details</p>
-          <h5>Ttitle: <span id="title"></span></h5>
-          <h5>Year: <span id="year"></span></h5>
-          <h5>imdbID: <span id="imdbID"></span></h5>
-          <h5>Type: <span id="type"></span></h5>
-        </div>
-        <div class="col-6">
-          <p>placeholder poster</p>
-          <img id="poster"/>
-        </div>
-      </div> -->
     </div>
-
 
     <script type="text/javascript" src="index.js"></script>
   </body>
