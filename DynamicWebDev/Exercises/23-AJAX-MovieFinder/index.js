@@ -3,7 +3,6 @@ var httpRequest = new XMLHttpRequest();
 httpRequest.onload = function() {
   if (httpRequest.readyState === XMLHttpRequest.DONE) {
     if (httpRequest.status === 200) {
-      // console.log(httpRequest.responseText);
       var movies = JSON.parse(httpRequest.responseText);
 
       if (movies.Error) { displayError(); }
@@ -27,15 +26,15 @@ var searchMovie = function () {
     httpRequest.send(null);
 
     $('#searchTitle').val('')
-    $('#searchResults').remove();
+    $('div #searchResults').remove();
   }
 }
 
 var displayError = function () {
   $('.container').append(
     '<div class="row" id="searchResults">' +
-      '<div class="col-12 text-center" id="resultsList">' +
-        '<p class="border">No Results :(</p>' +
+      '<div class="col-12 text-center">' +
+        '<p id="noResults">No Results :(</p>' +
       '</div>' +
     '</div>'
 
@@ -43,30 +42,31 @@ var displayError = function () {
 }
 
 var displayResults = function (parsedJSON) {
-  // console.log(parsedJSON.Search);
 
   parsedJSON.Search.forEach((movie) => {
-    console.log(movie.Title);
 
-    // var title
-    // var year
-    // var type
-    // var posterURL
+    var poster = '';
+    if (movie.Poster === 'N/A') {
+      poster = '<p id="noImageAvailable">No Image Available</p>'
+    }
+    else {
+      poster = '<img id="poster" class="img-fluid" src="' + movie.Poster + '"/>'
+    }
 
     $('.container').append(
-      '<div class="row">' +
-        '<div class"col-6">' +
-        '<p id="title">' +
-        '</p>' +
+      '<div class="row text-center align-items-center" id="searchResults">' +
+        '<div class="col-6" id="movieDetails">' +
+          '<h2>'+
+            '<a href="https://www.imdb.com/title/' + movie.imdbID + '" id="title">' + movie.Title + '</a>' +
+          '</h2>'+
+          '<p id="year">' + movie.Year + '</p>' +
+          '<p id="type">' + movie.Type + '</p>' +
         '</div>' +
 
-        '<div class"col-6">' +
-          '<img id="poster"/>' +
+        '<div class="col-6">' +
+          poster +
         '</div>' +
       '</div>'
     )
   });
-
-
-
 }
