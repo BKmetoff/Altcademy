@@ -1,0 +1,27 @@
+#title {
+  font-weight: 100;
+}
+
+/* submit form below */
+
+.form-control {
+  height: 40px;
+  border-radius: 20px;
+}
+
+#submitItem {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 3.5rem;
+  border-color: #ced4da;
+  font-size: 0.8rem;
+}
+
+::placeholder {
+  font-style: italic;
+  font-weight: 100;
+  text-align: center;
+  letter-spacing: 0.3rem;
+}
+
+/* submit form above */

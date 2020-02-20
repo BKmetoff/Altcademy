@@ -5,7 +5,9 @@
     <title>To-Do List</title>
 
     <!-- bootstrap -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+     <!-- custom style -->
      <link rel="stylesheet" href="index.css">
 
      <!-- jQuery -->
@@ -22,25 +24,33 @@
   <body>
 
     <div class="container">
+
+      <!-- header -->
       <div class="row">
         <div class="col-xs-12">
-          <h2>To-Do List</h2>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12" id="todo-list"></div>
+          <h2 id="title">To-Do List</h2>
+          <hr class="my-3">
+        </div>
+      </div>
+
+      <!-- input -->
+      <div class="row">
+
+        <div class="input-group">
+          <input type="text" placeholder="Gimme gimme stuff" class="form-control">
+          <div class="input-group-append">
+            <button class="btn btn-outline-success btn-md" id="submitItem" type="button" name="button">
+              <i class="fa fa-plus"></i>
+            </button>
           </div>
         </div>
 
-        <div class="col-xs-12">
-          <hr class="hidden">
-          <div class="row">
-            <div class="col-xs-10">
-              <input id="todo-input" class="form-control" placeholder="New item"/>
-            </div>
-            <div class="d-flex col-xs-2 pl-0">
-              <button id="add-button" type="button" class="btn btn-md btn-primary">Add</button>
-            </div>
-          </div>
+      </div>
+
+      <!-- to-do items -->
+      <div class="row">
+        <div class="col-xs-12" id="todo-list">
+          <p>bla</p>
         </div>
       </div>
     </div>
