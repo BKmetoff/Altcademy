@@ -66,16 +66,23 @@ body {
   margin-bottom: 3rem;
 }
 
-#todoItem {
-  height: 40px;
+.todoItem {
+  height: auto;
   padding-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .todoContent {
-  margin: 0;
-  padding-bottom: 0.5rem;
   font-weight: 100;
+  margin-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #ced4da;
+}
+
+#activeItemActions {
+  text-align: center;
+  align-self: center;
 }
 
 .completeItem,
@@ -103,3 +110,6 @@ body {
   padding-bottom: 3px;
   padding-left: 10px;
 }
+
+/* .unCompleteItem {} */
+/* .unCompleteItem:hover {} */
