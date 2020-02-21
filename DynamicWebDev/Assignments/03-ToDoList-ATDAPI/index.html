@@ -23,13 +23,12 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="container" id="headerContainer">
 
       <!-- header -->
-      <div class="row">
+      <div class="row border-bottom" id="headerContent">
         <div class="col-xs-12">
           <h2 id="title">To-Do List</h2>
-          <hr class="my-3">
         </div>
       </div>
 
@@ -46,13 +45,21 @@
         </div>
 
       </div>
+    </div>
+    <!-- to-do items will populate below -->
+    <div class="container" id="todoContainer">
 
-      <!-- to-do items -->
-      <div class="row">
-        <div class="col-xs-12" id="todo-list">
-          <p>bla</p>
-        </div>
-      </div>
+      <!-- <div class="btn-group">
+        <button class="btn btn-outline-success btn-md completeItem" type="button" name="button">
+          <i class="fa fa-check-circle-o"></i>
+        </button>
+        <button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button">
+          <i class="fa fa-times-circle-o"></i>
+        </button>
+      </div> -->
+
+
+
     </div>
 
     <script src="index.js"></script>

@@ -1,8 +1,31 @@
-#title {
-  font-weight: 100;
+body {
+  background-color: #f5f5f5;
 }
 
+/* header */
+
+#headerContainer {
+  width: 65%;
+}
+
+#headerContent {
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+#title {
+  font-weight: 100;
+  margin-top: 2rem;
+}
+
+/* header above */
+
 /* submit form below */
+
+.input-group {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 
 .form-control {
   height: 40px;
@@ -13,8 +36,14 @@
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   width: 3.5rem;
-  border-color: #ced4da;
   font-size: 0.8rem;
+  border-color: #ced4da;
+  background-color: #fff;
+}
+
+#submitItem:hover {
+  color: #28a745;
+  font-size: 1rem;
 }
 
 ::placeholder {
@@ -25,3 +54,52 @@
 }
 
 /* submit form above */
+
+/* to-do list below */
+
+#todoContainer {
+  width: 55%;
+  margin-top: 2rem;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+  border-radius: 25px;
+  margin-bottom: 3rem;
+}
+
+#todoItem {
+  height: 40px;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.todoContent {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  font-weight: 100;
+}
+
+.completeItem,
+.deleteItem {
+  border: 0;
+  background-color: #fff;
+  font-size: 0.8rem;
+}
+
+.completeItem:hover {
+  font-size: 1rem;
+  background-color: #fff;
+  color: #28a745;
+  padding-top: 0;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 11px;
+}
+
+.deleteItem:hover {
+  font-size: 1rem;
+  background-color: #fff;
+  color: #dc3545;
+  padding-top: 0;
+  padding-bottom: 3px;
+  padding-left: 10px;
+}
