@@ -80,13 +80,15 @@ body {
   border-bottom: 1px solid #ced4da;
 }
 
-#activeItemActions {
+.activeItemActions,
+.completedItemActions {
   text-align: center;
   align-self: center;
 }
 
 .completeItem,
-.deleteItem {
+.deleteItem,
+.unCompleteItem {
   border: 0;
   background-color: #fff;
   font-size: 0.8rem;
@@ -111,8 +113,15 @@ body {
   padding-left: 10px;
 }
 
-/* .unCompleteItem {} */
-/* .unCompleteItem:hover {} */
+.unCompleteItem:hover {
+  font-size: 1rem;
+  background-color: #fff;
+  color: #007bff;
+  padding-top: 0;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 11px;
+}
 
 .completedItem {
   color: #e2e6ea;
