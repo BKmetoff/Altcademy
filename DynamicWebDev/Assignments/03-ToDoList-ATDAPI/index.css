@@ -124,17 +124,24 @@ body {
 }
 
 .completedItem {
-  color: #e2e6ea;
-  text-align: center;
+  color: #6c757d;
+  text-align: justify;
   text-decoration: line-through;
   font-style: italic;
   font-weight: 100;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   border-bottom: 0.5px solid #28a745;
-  border-left: 2.5px solid #28a745;
-  border-bottom-left-radius: 1rem;
-  border-top-left-radius: 2rem;
+  border-left: 1px solid #28a745;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
   margin-left: 0.5rem;
   margin-top: 0.5rem;
+}
+
+.badge-success {
+  font-style: normal;
+  font-weight: bolder;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
