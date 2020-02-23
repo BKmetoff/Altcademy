@@ -1,13 +1,13 @@
 // id: 104
 
-// round buttons:
-// - item:
-//   - add;
-//   - remove;
+// round buttons: DONE
+// - single item:
+//   - add DONE;
+//   - remove DONE
 //   - mark completed;
 //   - mark un-completed;
 //
-// - all items:
+// - bulk actions:
 //   - mark completed;
 //   - mark un-completed;
 //   - show completed;
@@ -22,6 +22,7 @@ var completedItemActions = '<div class="btn-group"><button class="btn btn-outlin
 
 $(document).ready(function () {
   getAllItems()
+  $('#todoInput').val('')
 })
 
 var getAllItems = function () {
@@ -37,7 +38,6 @@ var getAllItems = function () {
     },
   })
 }
-
 
 // render all items
 var getSuccess = function (jsonResponse) {
@@ -75,10 +75,56 @@ var deleteItem = function (itemId) {
 $(document).on('click', '.deleteItem', function () {
 
    var itemId = $(this).closest('.todoItem').attr('id')
-   console.log('item content: ' + $(this).closest('.row').text());
    deleteItem(itemId);
+   console.log('item content: ' + $(this).closest('.todoItem').text());
+
+   $(this).closest('.todoItem').hide('slow');
 
 })
+
+// add an item
+var postNewItem = function (newItemContent) {
+
+  $.ajax({
+    type: 'POST',
+    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/?api_key=104',
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({
+      task: { content: newItemContent }
+    }),
+    success: function (response, textStatus) {
+      console.log('new item created - ' + 'id: ' + response.task.id + ' content: ' + response.task.content);
+      renderNewItem(response.task.id, response.task.content)
+    },
+    error: function (request, textStatus, errorMessage) {
+      console.log(errorMessage, request);
+    }
+  })
+}
+
+var renderNewItem = function(newItemId, newItemContent) {
+  $('#todoContainer').append(
+    '<div class="row todoItem" id="' + newItemId + '">' +
+      '<div class="col-9">' +
+        '<p class="todoContent">' + newItemContent + '</p>' +
+      '</div>' +
+      '<div class="col-3" id="activeItemActions">' +
+        activeItemActions +
+      '</div>' +
+    '</div>'
+  );
+}
+
+
+
+$(document).on('click', '#submitItem', function () {
+  if ($('#todoInput').val() !== '') {
+    postNewItem($('#todoInput').val());
+    $('#todoInput').val('')
+  }
+})
+
 
 
 //error
