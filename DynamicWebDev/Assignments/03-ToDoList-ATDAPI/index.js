@@ -4,7 +4,7 @@
 // - single item:
 //   - add DONE;
 //   - remove DONE
-//   - mark completed;
+//   - mark completed DONE;
 //   - mark un-completed;
 //
 // - bulk actions:
@@ -15,10 +15,9 @@
 //   - show all;
 
 
-var activeItemActions = '<div class="btn-group"><button class="btn btn-outline-success btn-md completeItem" type="button" name="button"><i class="fa fa-check"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div>'
+var activeItemActions = '<div class="col-3 activeItemActions"><div class="btn-group"><button class="btn btn-outline-success btn-md completeItem" type="button" name="button"><i class="fa fa-check"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
 
-var completedItemActions = '<div class="btn-group"><button class="btn btn-outline-primary btn-md unCompleteItem" type="button" name="button"><i class="fa fa-undo"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div>'
-
+var completedItemActions = '<div class="col-3 completedItemActions"><div class="btn-group"><button class="btn btn-outline-primary btn-md unCompleteItem" type="button" name="button"><i class="fa fa-undo-alt"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
 
 $(document).ready(function () {
   getAllItems()
@@ -54,9 +53,7 @@ var getSuccess = function (jsonResponse) {
         '<div class="col-9">' +
           '<p class="todoContent">' + item.content + '</p>' +
         '</div>' +
-        '<div class="col-3" id="activeItemActions">' +
           activeItemActions +
-        '</div>' +
       '</div>'
     );
   });
@@ -145,12 +142,11 @@ var completeItem = function (itemId) {
 
 var renderItemCompleted = function (itemId) {
   $('#' + itemId).find('.todoContent').attr('class', 'completedItem');
-
+  $('#' + itemId).find('.activeItemActions').remove();
+  $('#' + itemId).append(completedItemActions);
 }
 
 $(document).on('click', '.completeItem', function () {
-
   var itemId = $(this).closest('.todoItem').attr('id');
   completeItem(itemId);
-
 })
