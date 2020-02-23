@@ -66,7 +66,6 @@ var deleteItem = function (itemId) {
     type: 'DELETE',
     url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + itemId + '?api_key=104',
     success: function (response, textStatus) {
-      console.log(response);
       console.log('item ' + itemId + ' has been deleted');
     },
     error: function (errorMessage) {
@@ -78,8 +77,6 @@ $(document).on('click', '.deleteItem', function () {
 
    var itemId = $(this).closest('.todoItem').attr('id')
    deleteItem(itemId);
-   console.log('item content: ' + $(this).closest('.todoItem').text());
-
    $(this).closest('.todoItem').hide('slow');
 
 })
@@ -110,9 +107,7 @@ var renderNewItem = function(newItemId, newItemContent) {
       '<div class="col-9">' +
         '<p class="todoContent">' + newItemContent + '</p>' +
       '</div>' +
-      '<div class="col-3" id="activeItemActions">' +
         activeItemActions +
-      '</div>' +
     '</div>'
   );
 }
@@ -124,7 +119,6 @@ $(document).on('click', '#submitItem', function () {
 })
 
 // mark completed
-
 var completeItem = function (itemId) {
 
   $.ajax({
@@ -139,14 +133,37 @@ var completeItem = function (itemId) {
     }
   })
 }
-
 var renderItemCompleted = function (itemId) {
   $('#' + itemId).find('.todoContent').attr('class', 'completedItem');
   $('#' + itemId).find('.activeItemActions').remove();
+  $('#' + itemId).find('p').prepend("<span class='badge badge-success badge-pill'>DONE</span>")
   $('#' + itemId).append(completedItemActions);
 }
-
 $(document).on('click', '.completeItem', function () {
   var itemId = $(this).closest('.todoItem').attr('id');
   completeItem(itemId);
+})
+
+
+// mark un-completed/active
+var unCompleteItem = function (itemId) {
+  $.ajax({
+    type: 'PUT',
+    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + itemId + '/mark_active?api_key=104',
+    success: function (response) {
+      console.log('item ' + itemId + ' has been marked active');
+      renderItemActive(itemId);
+    },
+  })
+}
+var renderItemActive = function (itemId) {
+  $('#' + itemId).find('.completedItem').attr('class', 'todoContent');
+  $('#' + itemId).find('.badge').remove();
+  $('#' + itemId).find('.completedItemActions').remove();
+  $('#' + itemId).append(activeItemActions);
+
+}
+$(document).on('click', '.unCompleteItem', function () {
+  var itemId = $(this).closest('.todoItem').attr('id');
+  unCompleteItem(itemId);
 })
