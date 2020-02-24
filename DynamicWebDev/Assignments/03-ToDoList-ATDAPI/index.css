@@ -57,6 +57,10 @@ body {
 
 /* to-do list below */
 
+.hidden {
+  display: none;
+}
+
 #todoContainer {
   width: 55%;
   margin-top: 2rem;
@@ -147,7 +151,9 @@ body {
   margin-left: 1rem;
 }
 
-/* item type selector */
+/* to-do list above */
+
+/* item type selector below */
 
 #itemSelectorRow {
   margin-right: -1rem;
@@ -165,9 +171,27 @@ body {
   border-right: 0;
 }
 
-/* #showAll */
+.showActiveHover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+#showAllHover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
 
 #showCompleted {
   border-top-right-radius: 25px;
   border-left: 0;
 }
+
+#showCompletedHover {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+/* item type selector above */
