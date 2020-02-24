@@ -1,19 +1,20 @@
-// id: 104
+// API key: 104
 
-// round buttons: DONE
 // - single item:
 //   - add DONE;
 //   - remove DONE
 //   - mark completed DONE;
-//   - mark un-completed;
-//
+//   - mark un-completed DONE;
+
 // - bulk actions:
 //   - mark completed;
-//   - mark un-completed;
+//   - mark active;
 //   - show completed;
-//   - show un-completed;
+//   - show active;
 //   - show all;
 
+// - order items by date modified;
+// - render only active items on load.
 
 var activeItemActions = '<div class="col-3 activeItemActions"><div class="btn-group"><button class="btn btn-outline-success btn-md completeItem" type="button" name="button"><i class="fa fa-check"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
 
@@ -24,6 +25,7 @@ $(document).ready(function () {
   $('#todoInput').val('')
 })
 
+// initial GET request
 var getAllItems = function () {
   $.ajax({
     type: 'GET',
@@ -58,7 +60,6 @@ var getSuccess = function (jsonResponse) {
     );
   });
 }
-
 
 // delete an item
 var deleteItem = function (itemId) {
@@ -144,7 +145,6 @@ $(document).on('click', '.completeItem', function () {
   completeItem(itemId);
 })
 
-
 // mark un-completed/active
 var unCompleteItem = function (itemId) {
   $.ajax({
@@ -167,3 +167,5 @@ $(document).on('click', '.unCompleteItem', function () {
   var itemId = $(this).closest('.todoItem').attr('id');
   unCompleteItem(itemId);
 })
+
+// show active items
