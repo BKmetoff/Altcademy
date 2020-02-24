@@ -13,8 +13,8 @@
 //   - show active;
 //   - show all;
 
-// - order items by date modified;
-// - render only active items on load.
+// - order items by date modified DONE;
+// - render only active items on load DONE.
 
 var activeItemActions = '<div class="col-3 activeItemActions"><div class="btn-group"><button class="btn btn-outline-success btn-md completeItem" type="button" name="button"><i class="fa fa-check"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
 
@@ -45,20 +45,37 @@ var getError = function (request, textStatus, errorMessage) {
   console.log(response);
 }
 
-// render all items
+// render active items
 var getSuccess = function (jsonResponse) {
 
-  jsonResponse.tasks.forEach((item) => {
+  var sortedTasks = _.sortBy(jsonResponse.tasks, 'updated_at')
 
-    $('#todoContainer').append(
-      '<div class="row todoItem" id="' + item.id + '">' +
-        '<div class="col-9">' +
-          '<p class="todoContent">' + item.content + '</p>' +
-        '</div>' +
-          activeItemActions +
-      '</div>'
-    );
+
+  sortedTasks.forEach((item) => {
+    if (item.completed === true) {
+      $('#todoContainer').append(
+        '<div class="row todoItem" id="' + item.id + '">' +
+          '<div class="col-9">' +
+            '<p class="todoContent">' + item.content + '</p>' +
+          '</div>' +
+            activeItemActions +
+        '</div>'
+      );
+    }
+    // else {
+    //   $('#todoContainer').append(
+    //     '<div class="row todoItem" id="' + item.id + '">' +
+    //       '<div class="col-9">' +
+    //         '<p class="completedItem"><span class="badge badge-success badge-pill">DONE</span>' + item.content + '</p>' +
+    //       '</div>' +
+    //         completedItemActions +
+    //     '</div>'
+    //   );
+    // }
   });
+
+  $('#showActive').addClass('showActiveHover');
+  $('#todoContainer').removeClass('hidden');
 }
 
 // delete an item

@@ -16,6 +16,9 @@
    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
    crossorigin="anonymous"></script>
 
+   <!-- Underscore -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+
    <!-- fort awesome -->
    <script src="https://kit.fontawesome.com/6fdb503d73.js" crossorigin="anonymous"></script>
 
@@ -43,28 +46,22 @@
           </div>
         </div>
       </div>
-
-
-
-
     </div>
 
     <!-- to-do items will populate below -->
-    <div class="container" id="todoContainer">
+    <div class="container hidden" id="todoContainer">
       <!-- item type selector -->
       <div class="row no-gutters" id="itemSelectorRow">
         <div class="col">
-          <button type="button" class="btn btn-outline-secondary btnTypeSelector" id="showActive">Active</button>
+          <button type="button" class="btn btn-outline-primary btnTypeSelector" id="showActive">Active</button>
         </div>
         <div class="col">
-          <button type="button" class="btn btn-outline-primary btnTypeSelector" id="showAll">All</button>
+          <button type="button" class="btn btn-outline-secondary btnTypeSelector" id="showAll">All</button>
         </div>
         <div class="col">
           <button type="button" class="btn btn-outline-success btnTypeSelector" id="showCompleted">Completed</button>
         </div>
       </div>
-
-
     </div>
 
 
