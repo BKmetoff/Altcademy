@@ -61,6 +61,7 @@ body {
   width: 55%;
   margin-top: 2rem;
   border: 1px solid #ced4da;
+  border-top: 0;
   background-color: #fff;
   border-radius: 25px;
   margin-bottom: 3rem;
@@ -144,4 +145,29 @@ body {
   font-weight: bolder;
   margin-right: 1rem;
   margin-left: 1rem;
+}
+
+/* item type selector */
+
+#itemSelectorRow {
+  margin-right: -1rem;
+  margin-left: -1rem;
+}
+
+.btnTypeSelector {
+  width: 100%;
+  border-radius: 0;
+  font-weight: 100;
+}
+
+#showActive {
+  border-top-left-radius: 25px;
+  border-right: 0;
+}
+
+/* #showAll */
+
+#showCompleted {
+  border-top-right-radius: 25px;
+  border-left: 0;
 }

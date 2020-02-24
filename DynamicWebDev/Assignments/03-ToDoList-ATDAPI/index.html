@@ -34,7 +34,6 @@
 
       <!-- input -->
       <div class="row">
-
         <div class="input-group">
           <input type="text" placeholder="Gimme gimme stuff" class="form-control" id="todoInput">
           <div class="input-group-append">
@@ -43,18 +42,31 @@
             </button>
           </div>
         </div>
-
       </div>
+
+
+
+
     </div>
 
     <!-- to-do items will populate below -->
     <div class="container" id="todoContainer">
-      <!-- <div class="btn-group">
-        <button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button">
-          <i class="fa fa-times"></i>
-        </button>
-      </div> -->
+      <!-- item type selector -->
+      <div class="row no-gutters" id="itemSelectorRow">
+        <div class="col">
+          <button type="button" class="btn btn-outline-secondary btnTypeSelector" id="showActive">Active</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-outline-primary btnTypeSelector" id="showAll">All</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-outline-success btnTypeSelector" id="showCompleted">Completed</button>
+        </div>
+      </div>
+
+
     </div>
+
 
     <script src="index.js"></script>
   </body>
