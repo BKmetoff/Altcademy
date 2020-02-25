@@ -7,11 +7,9 @@
 //   - mark un-completed DONE;
 
 // - bulk actions:
-//   - mark completed;
-//   - mark active;
-//   - show completed;
-//   - show active;
-//   - show all;
+//   - show completed DONE;
+//   - show active DONE;
+//   - show all DONE;
 
 // - order items by date modified DONE;
 // - render only active items on load DONE.
@@ -45,37 +43,163 @@ var getError = function (request, textStatus, errorMessage) {
   console.log(response);
 }
 
-// render active items
+// render only active items initially
+// add listeners for bulk-show/bulk-hide
 var getSuccess = function (jsonResponse) {
 
   var sortedTasks = _.sortBy(jsonResponse.tasks, 'updated_at')
-
-
-  sortedTasks.forEach((item) => {
-    if (item.completed === true) {
-      $('#todoContainer').append(
-        '<div class="row todoItem" id="' + item.id + '">' +
-          '<div class="col-9">' +
-            '<p class="todoContent">' + item.content + '</p>' +
-          '</div>' +
-            activeItemActions +
-        '</div>'
-      );
-    }
-    // else {
-    //   $('#todoContainer').append(
-    //     '<div class="row todoItem" id="' + item.id + '">' +
-    //       '<div class="col-9">' +
-    //         '<p class="completedItem"><span class="badge badge-success badge-pill">DONE</span>' + item.content + '</p>' +
-    //       '</div>' +
-    //         completedItemActions +
-    //     '</div>'
-    //   );
-    // }
-  });
+  showActive(sortedTasks);
+  $('.todoItem').addClass('activeShown');
 
   $('#showActive').addClass('showActiveHover');
   $('#todoContainer').removeClass('hidden');
+
+  // listener to show completed
+  $(document).on('click', '#showCompleted', function() {
+    if ($('.completedShown').length === 0) {
+      $('#showActive').removeClass('showActiveHover');
+      $('#showAll').removeClass('showAllHover');
+      $('#showCompleted').addClass('showCompletedHover');
+
+      showCompleted();
+    }
+  })
+
+  // listener to show active
+  $(document).on('click', '#showActive',function () {
+
+    $('#showActive').addClass('showActiveHover');
+    $('#showAll').removeClass('showAllHover');
+    $('#showCompleted').removeClass('showCompletedHover');
+
+    showActive()
+
+  })
+
+  // listener to show All
+  $(document).on('click', '#showAll', function () {
+
+    $('#showActive').removeClass('showActiveHover');
+    $('#showAll').addClass('showAllHover');
+    $('#showCompleted').removeClass('showCompletedHover');
+
+    showAll();
+  })
+}
+
+
+var sortTasks = function (jsonResponse) {
+  return jsonResponse.sort(function(a, b) {
+    var taskAModifiedAt = a.attributes.data.value;
+    var taskBModifiedAt = b.attributes.data.value;
+    if (taskAModifiedAt > taskBModifiedAt) { return -1; }
+    else if (taskAModifiedAt < taskBModifiedAt) { return 1; }
+    return 0;
+  })
+}
+
+// render all items
+var showAll = function () {
+  $('.todoItem').remove();
+  $.ajax({
+    type: 'GET',
+    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=104',
+    dataType: 'json',
+    success: function (response) {
+
+      response.tasks.forEach((item) => {
+        if (item.completed !== true) {
+          $('#todoContainer').append(
+            '<div class="row todoItem" data="' + item.updated_at + '" id="' + item.id + '">' +
+              '<div class="col-9">' +
+                '<p class="todoContent">' + item.content + '</p>' +
+              '</div>' +
+                activeItemActions +
+            '</div>'
+          );
+        }
+        else {
+          $('#todoContainer').append(
+            '<div class="row todoItem" data="' + item.updated_at + '" id="' + item.id + '">' +
+              '<div class="col-9">' +
+                '<p class="completedItem"><span class="badge badge-success badge-pill">DONE</span>' + item.content + '</p>' +
+              '</div>' +
+                completedItemActions +
+              '</div>'
+          );
+        }
+      });
+
+      var allTasks = $('.todoItem').detach();
+      sortTasks(allTasks).appendTo('#todoContainer');
+    },
+
+    error: function (response, textStatus) {
+      console.log(response , textStatus);
+    }
+  })
+}
+
+// render active items
+var showActive = function () {
+  $('.todoItem').remove();
+  $.ajax({
+    type: 'GET',
+    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=104',
+    dataType: 'json',
+    success: function (response) {
+      response.tasks.forEach((item) => {
+        if (item.completed !== true) {
+          $('#todoContainer').append(
+            '<div class="row todoItem" data="' + item.updated_at + '" id="' + item.id + '">' +
+              '<div class="col-9">' +
+                '<p class="todoContent">' + item.content + '</p>' +
+              '</div>' +
+                activeItemActions +
+            '</div>'
+          );
+        }
+      });
+
+      var allTasks = $('.todoItem').detach();
+      sortTasks(allTasks).appendTo('#todoContainer');
+    },
+
+    error: function (response, textStatus) {
+      console.log(response, textStatus);
+    }
+  })
+}
+
+// render completed items
+var showCompleted = function () {
+  $('.todoItem').remove();
+  $.ajax({
+    type: 'GET',
+    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=104',
+    dataType: 'json',
+    success: function (response) {
+      response.tasks.forEach((item) => {
+        if (item.completed === true) {
+          $('#todoContainer').append(
+            '<div class="row todoItem" data="' + item.updated_at + '" id="' + item.id + '">' +
+              '<div class="col-9">' +
+                '<p class="completedItem"><span class="badge badge-success badge-pill">DONE</span>' + item.content + '</p>' +
+              '</div>' +
+                completedItemActions +
+              '</div>'
+          );
+        }
+      });
+
+      var allTasks = $('.todoItem').detach();
+      sortTasks(allTasks).appendTo('#todoContainer');
+    },
+
+    error: function (response, textStatus) {
+      console.log(response, textStatus);
+    }
+  })
 }
 
 // delete an item
@@ -184,5 +308,3 @@ $(document).on('click', '.unCompleteItem', function () {
   var itemId = $(this).closest('.todoItem').attr('id');
   unCompleteItem(itemId);
 })
-
-// show active items

@@ -177,7 +177,7 @@ body {
   border-color: #007bff;
 }
 
-#showAllHover {
+.showAllHover {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
@@ -188,7 +188,7 @@ body {
   border-left: 0;
 }
 
-#showCompletedHover {
+.showCompletedHover {
   color: #fff;
   background-color: #28a745;
   border-color: #28a745;
