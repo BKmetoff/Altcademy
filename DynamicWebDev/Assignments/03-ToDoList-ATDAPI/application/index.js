@@ -218,14 +218,23 @@ var postNewItem = function (newItemContent) {
   })
 }
 var renderNewItem = function(newItemId, newItemContent) {
-  $('#todoContainer').append(
-    '<div class="row todoItem" id="' + newItemId + '">' +
+
+  $('<div class="row todoItem" id="' + newItemId + '">' +
       '<div class="col-9">' +
         '<p class="todoContent">' + newItemContent + '</p>' +
       '</div>' +
         activeItemActions +
-    '</div>'
-  );
+    '</div>').insertAfter('#itemSelectorRow')
+
+
+  // $('#todoContainer').append(
+  //   '<div class="row todoItem" id="' + newItemId + '">' +
+  //     '<div class="col-9">' +
+  //       '<p class="todoContent">' + newItemContent + '</p>' +
+  //     '</div>' +
+  //       activeItemActions +
+  //   '</div>'
+  // );
 }
 $(document).on('click', '#submitItem', function () {
   if ($('#todoInput').val() !== '') {
