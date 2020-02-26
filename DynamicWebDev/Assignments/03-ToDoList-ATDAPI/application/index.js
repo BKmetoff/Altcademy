@@ -27,29 +27,30 @@ $(document).ready(function () {
 
 // listener to show completed
 $(document).on('click', '#showCompleted', function() {
-  if ($('.completedShown').length === 0) {
-    $('#showActive').removeClass('showActiveHover');
-    $('#showAll').removeClass('showAllHover');
-    $('#showCompleted').addClass('showCompletedHover');
 
-    showCompleted();
-  }
+  $('#showActive').removeClass('showActiveHover');
+  $('#showAll').removeClass('showAllHover');
+  $('#showCompleted').addClass('showCompletedHover');
+  $('.loadingSpinner').removeClass('hidden');
+
+  showCompleted();
 })
 
 // listener to show active
 $(document).on('click', '#showActive',function () {
 
+  $('.loadingSpinner').removeClass('hidden');
   $('#showActive').addClass('showActiveHover');
   $('#showAll').removeClass('showAllHover');
   $('#showCompleted').removeClass('showCompletedHover');
 
   showActive()
-
 })
 
 // listener to show All
 $(document).on('click', '#showAll', function () {
 
+  $('.loadingSpinner').removeClass('hidden');
   $('#showActive').removeClass('showActiveHover');
   $('#showAll').addClass('showAllHover');
   $('#showCompleted').removeClass('showCompletedHover');
@@ -101,6 +102,7 @@ var showAll = function () {
 
       var allTasks = $('.todoItem').detach();
       sortTasks(allTasks).appendTo('#todoContainer');
+      $('.loadingSpinner').addClass('hidden');
     },
 
     error: function (response, textStatus) {
@@ -133,6 +135,7 @@ var showActive = function () {
 
       var allTasks = $('.todoItem').detach();
       sortTasks(allTasks).appendTo('#todoContainer');
+      $('.loadingSpinner').addClass('hidden');
     },
 
     error: function (response, textStatus) {
@@ -164,6 +167,7 @@ var showCompleted = function () {
 
       var allTasks = $('.todoItem').detach();
       sortTasks(allTasks).appendTo('#todoContainer');
+      $('.loadingSpinner').addClass('hidden');
     },
 
     error: function (response, textStatus) {
