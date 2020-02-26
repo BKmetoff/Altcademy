@@ -19,74 +19,43 @@ var activeItemActions = '<div class="col-3 activeItemActions"><div class="btn-gr
 var completedItemActions = '<div class="col-3 completedItemActions"><div class="btn-group"><button class="btn btn-outline-primary btn-md unCompleteItem" type="button" name="button"><i class="fa fa-undo-alt"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
 
 $(document).ready(function () {
-  getAllItems()
+  showActive()
   $('#todoInput').val('')
-})
-
-// initial GET request
-var getAllItems = function () {
-  $.ajax({
-    type: 'GET',
-    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=104',
-    dataType: 'json',
-    success: function (response, textStatus) {
-      getSuccess(response);
-    },
-    error: function (request, textStatus, errorMessage) {
-      getError(request, textStatus, errorMessage);
-    },
-  })
-}
-
-// error
-var getError = function (request, textStatus, errorMessage) {
-  console.log(response);
-}
-
-// render only active items initially
-// add listeners for bulk-show/bulk-hide
-var getSuccess = function (jsonResponse) {
-
-  var sortedTasks = _.sortBy(jsonResponse.tasks, 'updated_at')
-  showActive(sortedTasks);
-  $('.todoItem').addClass('activeShown');
-
   $('#showActive').addClass('showActiveHover');
   $('#todoContainer').removeClass('hidden');
+})
 
-  // listener to show completed
-  $(document).on('click', '#showCompleted', function() {
-    if ($('.completedShown').length === 0) {
-      $('#showActive').removeClass('showActiveHover');
-      $('#showAll').removeClass('showAllHover');
-      $('#showCompleted').addClass('showCompletedHover');
-
-      showCompleted();
-    }
-  })
-
-  // listener to show active
-  $(document).on('click', '#showActive',function () {
-
-    $('#showActive').addClass('showActiveHover');
-    $('#showAll').removeClass('showAllHover');
-    $('#showCompleted').removeClass('showCompletedHover');
-
-    showActive()
-
-  })
-
-  // listener to show All
-  $(document).on('click', '#showAll', function () {
-
+// listener to show completed
+$(document).on('click', '#showCompleted', function() {
+  if ($('.completedShown').length === 0) {
     $('#showActive').removeClass('showActiveHover');
-    $('#showAll').addClass('showAllHover');
-    $('#showCompleted').removeClass('showCompletedHover');
+    $('#showAll').removeClass('showAllHover');
+    $('#showCompleted').addClass('showCompletedHover');
 
-    showAll();
-  })
-}
+    showCompleted();
+  }
+})
 
+// listener to show active
+$(document).on('click', '#showActive',function () {
+
+  $('#showActive').addClass('showActiveHover');
+  $('#showAll').removeClass('showAllHover');
+  $('#showCompleted').removeClass('showCompletedHover');
+
+  showActive()
+
+})
+
+// listener to show All
+$(document).on('click', '#showAll', function () {
+
+  $('#showActive').removeClass('showActiveHover');
+  $('#showAll').addClass('showAllHover');
+  $('#showCompleted').removeClass('showCompletedHover');
+
+  showAll();
+})
 
 var sortTasks = function (jsonResponse) {
   return jsonResponse.sort(function(a, b) {
@@ -142,6 +111,7 @@ var showAll = function () {
 
 // render active items
 var showActive = function () {
+
   $('.todoItem').remove();
   $.ajax({
     type: 'GET',
