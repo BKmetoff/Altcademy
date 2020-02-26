@@ -74,7 +74,7 @@ var sortTasks = function (jsonResponse) {
 var checkEmptyState = function () {
   if ($('.todoItem').length === 0) {
     $('.todoItem').remove();
-    $('#todoContainer').append(emptyState)
+    $('#todoContainer').append(emptyState);
   }
   else {
     var allTasks = $('.todoItem').detach();
@@ -206,9 +206,11 @@ var deleteItem = function (itemId) {
 }
 $(document).on('click', '.deleteItem', function () {
 
-   var itemId = $(this).closest('.todoItem').attr('id')
-   deleteItem(itemId);
-   $(this).closest('.todoItem').hide('slow');
+  var itemId = $(this).closest('.todoItem').attr('id')
+  deleteItem(itemId);
+  $(this).closest('.todoItem').remove();
+
+  checkEmptyState();
 
 })
 
