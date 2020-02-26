@@ -13,10 +13,13 @@
 
 // - order items by date modified DONE;
 // - render only active items on load DONE.
+// - empty state DONE.
 
 var activeItemActions = '<div class="col-3 activeItemActions"><div class="btn-group"><button class="btn btn-outline-success btn-md completeItem" type="button" name="button"><i class="fa fa-check"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
 
 var completedItemActions = '<div class="col-3 completedItemActions"><div class="btn-group"><button class="btn btn-outline-primary btn-md unCompleteItem" type="button" name="button"><i class="fa fa-undo-alt"></i></button><button class="btn btn-outline-danger btn-md deleteItem" type="button" name="button"><i class="fa fa-times"></i></button></div></div>'
+
+var emptyState = '<div class="row todoItem"><div class="col-12 emptyState"<p class="todoContent">No items yet</p></div></div>'
 
 $(document).ready(function () {
   showActive()
@@ -58,6 +61,7 @@ $(document).on('click', '#showAll', function () {
   showAll();
 })
 
+// helpers
 var sortTasks = function (jsonResponse) {
   return jsonResponse.sort(function(a, b) {
     var taskAModifiedAt = a.attributes.data.value;
@@ -66,6 +70,16 @@ var sortTasks = function (jsonResponse) {
     else if (taskAModifiedAt < taskBModifiedAt) { return 1; }
     return 0;
   })
+}
+var checkEmptyState = function () {
+  if ($('.todoItem').length === 0) {
+    $('.todoItem').remove();
+    $('#todoContainer').append(emptyState)
+  }
+  else {
+    var allTasks = $('.todoItem').detach();
+    sortTasks(allTasks).appendTo('#todoContainer');
+  }
 }
 
 // render all items
@@ -100,8 +114,8 @@ var showAll = function () {
         }
       });
 
-      var allTasks = $('.todoItem').detach();
-      sortTasks(allTasks).appendTo('#todoContainer');
+      checkEmptyState();
+
       $('.loadingSpinner').addClass('hidden');
     },
 
@@ -120,6 +134,7 @@ var showActive = function () {
     url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=104',
     dataType: 'json',
     success: function (response) {
+
       response.tasks.forEach((item) => {
         if (item.completed !== true) {
           $('#todoContainer').append(
@@ -133,8 +148,8 @@ var showActive = function () {
         }
       });
 
-      var allTasks = $('.todoItem').detach();
-      sortTasks(allTasks).appendTo('#todoContainer');
+      checkEmptyState();
+
       $('.loadingSpinner').addClass('hidden');
     },
 
@@ -165,8 +180,8 @@ var showCompleted = function () {
         }
       });
 
-      var allTasks = $('.todoItem').detach();
-      sortTasks(allTasks).appendTo('#todoContainer');
+      checkEmptyState();
+
       $('.loadingSpinner').addClass('hidden');
     },
 
@@ -226,15 +241,9 @@ var renderNewItem = function(newItemId, newItemContent) {
         activeItemActions +
     '</div>').insertAfter('#itemSelectorRow')
 
-
-  // $('#todoContainer').append(
-  //   '<div class="row todoItem" id="' + newItemId + '">' +
-  //     '<div class="col-9">' +
-  //       '<p class="todoContent">' + newItemContent + '</p>' +
-  //     '</div>' +
-  //       activeItemActions +
-  //   '</div>'
-  // );
+    if ($('.emptyState')) {
+      $('.emptyState').closest('.row').remove();
+    }
 }
 $(document).on('click', '#submitItem', function () {
   if ($('#todoInput').val() !== '') {
