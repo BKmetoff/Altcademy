@@ -19,7 +19,7 @@
   </head>
   <body>
 
-    <div class="container-fluid mt-3">
+    <div class="container mt-3">
 
       <!-- header -->
       <div class="row">
@@ -31,29 +31,36 @@
         </div>
       </div>
 
+      <!-- score & timer -->
       <div class="row mt-4">
-        <div class="col-6">
-          <h5>Current Score: <span id="currentScore"></span></h5>
+        <div class="col-6 container">
+          <div class="row">
+            <div class="col-12">
+              <h5>Current Score: <span id="currentScore"></span></h5>
+            </div>
+            <div class="col-12">
+              <h5>Time left: <span id="timer"></span></h5>
+            </div>
+          </div>
+
+
         </div>
 
+        <!-- question & user input -->
         <div class="col-6 container">
           <div class="row">
             <div class="col-12">
               <h5 id="equation"></h5>
             </div>
+
             <div class="col-12">
               <div class="input-group mb-3">
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" id="userInput">
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
-
-
-
     </div>
 
 

@@ -1,3 +1,7 @@
+body {
+  background: #f5f5f5;
+}
+
 .col-12,
 .col-6 {
   display: flex;
