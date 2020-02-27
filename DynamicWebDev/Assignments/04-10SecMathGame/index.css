@@ -1,0 +1,27 @@
+.col-12,
+.col-6 {
+  display: flex;
+  justify-content: center;
+}
+
+h2,
+h5,
+p {
+  font-weight: 100;
+}
+
+p {
+  font-style: italic;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.form-control {
+  width: 1rem;
+  height: 1.8rem;
+}
+
+input[type='number'] {
+  font-weight: 100;
+  text-align: center;
+}
