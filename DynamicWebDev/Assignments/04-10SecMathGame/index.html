@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <!-- score & timer -->
+      <!-- score & timer / question & user input-->
       <div class="row mt-4">
         <div class="col-6 container">
           <div class="row">
@@ -57,8 +57,16 @@
               <div class="input-group mb-3">
                 <input type="number" class="form-control" id="userInput">
               </div>
+              <h5 class="hidden" id="gameOver">Game Over!</h5>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- new game button -->
+      <div class="row hidden" id="newGame">
+        <div class="col-12">
+          <button class="btn btn-outline-success" id="startNewGame">New game!</button>
         </div>
       </div>
     </div>
