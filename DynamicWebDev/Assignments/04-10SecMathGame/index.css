@@ -2,6 +2,10 @@ body {
   background: #f5f5f5;
 }
 
+/* .row {
+  align-items: center;
+} */
+
 .col-12,
 .col-6 {
   display: flex;
@@ -12,6 +16,10 @@ h2,
 h5,
 p {
   font-weight: 100;
+}
+
+h5 {
+  margin-bottom: 1rem;
 }
 
 p {
@@ -28,4 +36,25 @@ p {
 input[type='number'] {
   font-weight: 100;
   text-align: center;
+}
+
+#gameOver {
+  background: #dc3545;
+  color: #fff;
+  border-radius: 50px;
+  border: 1px solid #dc3545;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-top: 2px;
+}
+
+.btn {
+  border-radius: 50px;
+  font-weight: 100;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.hidden {
+  display: none;
 }

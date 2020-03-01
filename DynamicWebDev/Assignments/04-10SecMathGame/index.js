@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
   // store current question, score & time;
+  var interval;
   var currentQ;
   var userScore = 0;
   var userTime = 10;
@@ -31,12 +32,14 @@ $(document).ready(function () {
 
   // user score
   var updateUserScore = function () {
-    $('#currentScore').text(userScore);
+    $('#currentScore').text(userScore++);
   };
 
   // listener, user input
   $('#userInput').on('keyup', function () {
     compareAnswer(Number($(this).val()),currentQ.answer);
+
+    startGame();
   })
 
   // compare user input
@@ -46,7 +49,6 @@ $(document).ready(function () {
       $('#userInput').val('');
       getNewQuestion();
       updateUserScore();
-      userScore++;
 
       $('#timer').text(updateTimer(1));
       console.log('userinput ' + userTime);
@@ -54,20 +56,40 @@ $(document).ready(function () {
     }
   }
 
-  // display question on load
-  getNewQuestion();
-  updateUserScore();
+  // start timer (saw this from walkthrough)
+  var startGame = function () {
+    if (!interval) {
+
+      if (userTime === 0) {
+        clearInterval(interval);
+      }
+
+      interval = setInterval(function () {
+        $('#timer').text(updateTimer(-1));
+        if (userTime === 0) {
+          clearInterval(interval);
+          interval = undefined;
+          gameOver();
+        }
+        console.log('timer ' + userTime);
+      }, 1000)
+    }
+  }
+
+  var gameOver = function () {
+    $('#timer').css('color', '#dc3545');
+    $('.input-group').addClass('hidden');
+    $('#newGame').removeClass('hidden');
+    $('#gameOver').removeClass('hidden');
+    $('#userInput').val('');
+  }
 
   // update timer
   var updateTimer = function (seconds) { return userTime += seconds; }
 
-  // decrease time
-  var timer = setInterval(function () {
-
-    $('#timer').text(updateTimer(-1));
-
-    if (userTime === 0) { clearInterval(timer);}
-    console.log('timer ' + userTime);
-  }, 1000)
+  // on load
+  getNewQuestion();
+  updateUserScore();
+  $('#userInput').val('');
 
 })
