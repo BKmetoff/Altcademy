@@ -61,7 +61,7 @@ $(document).ready(function () {
     if (!interval) {
 
       if (userTime === 0) {
-        clearInterval(interval);
+        updateTimer(10);
       }
 
       interval = setInterval(function () {
@@ -78,11 +78,31 @@ $(document).ready(function () {
 
   var gameOver = function () {
     $('#timer').css('color', '#dc3545');
+    $('.main').css('box-shadow', '0 0 36px 10px #de7781')
     $('.input-group').addClass('hidden');
     $('#newGame').removeClass('hidden');
     $('#gameOver').removeClass('hidden');
     $('#userInput').val('');
   }
+
+  // listener to start new game
+  $('#startNewGame').on('click', function () {
+
+    $('.main').css('box-shadow', '0 0 36px 10px #afcded')
+    $('#timer').css('color', '#212529');
+    $('.input-group').removeClass('hidden');
+    $('#newGame').addClass('hidden');
+    $('#gameOver').addClass('hidden');
+
+    userScore = 0;
+    $('#userInput').val('');
+
+    getNewQuestion();
+    updateUserScore();
+
+    startGame();
+
+  })
 
   // update timer
   var updateTimer = function (seconds) { return userTime += seconds; }
@@ -90,6 +110,5 @@ $(document).ready(function () {
   // on load
   getNewQuestion();
   updateUserScore();
-  $('#userInput').val('');
 
 })
