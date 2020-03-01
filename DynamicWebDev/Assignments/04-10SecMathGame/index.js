@@ -76,6 +76,7 @@ $(document).ready(function () {
     }
   }
 
+  // finish game
   var gameOver = function () {
     $('#timer').css('color', '#dc3545');
     $('.main').css('box-shadow', '0 0 36px 10px #de7781')
