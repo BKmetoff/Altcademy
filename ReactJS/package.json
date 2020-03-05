@@ -1,7 +1,7 @@
 {
-  "name": "react_preprocess_demo",
+  "name": "ReactJS",
   "version": "1.0.0",
-  "description": "",
+  "description": "FullStack Course",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
