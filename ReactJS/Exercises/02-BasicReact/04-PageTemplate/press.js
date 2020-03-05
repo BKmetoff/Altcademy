@@ -5,7 +5,7 @@ var App = function App() {
     React.createElement(
       'h1',
       null,
-      'React is awesome!'
+      'Press page!'
     )
   );
 };
