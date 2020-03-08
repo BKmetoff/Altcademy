@@ -1,0 +1,32 @@
+.title {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #999;
+  border-radius: 5px;
+  width: 14rem;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn-outline-danger {
+  margin-left: 0.45rem;
+  margin-right: 0.45rem;
+}
+
+.title,
+.btn {
+  font-weight: 100;
+}
