@@ -1,0 +1,11 @@
+body {
+  height: 200vh;
+}
+
+.logger {
+  position: fixed;
+  background: white;
+  padding: 2rem;
+  right: 0;
+  top: 0;
+}
