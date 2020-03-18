@@ -1,5 +1,5 @@
 {
-  "name": "first-react-app",
+  "name": "04-react-app-movie-finder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

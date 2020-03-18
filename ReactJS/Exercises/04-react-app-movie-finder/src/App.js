@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import './App.css';
 
 const Home = () => {
@@ -14,15 +14,11 @@ const Contact = () => {
   return <h2>Contact</h2>;
 }
 
-const NotFound = () => {
-  return <h2>404 not found</h2>;
-}
-
 const App = () => {
   return (
     <Router>
       <div className="container">
-        <h2>React Router Demo</h2>
+        <h2>React Rotuer Demo</h2>
         <nav>
           <ul>
             <li>
@@ -32,23 +28,26 @@ const App = () => {
               <Link to="/about/">About</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <a href="/about/">About (normal anchor link, page will full reload)</a>
+            </li>
+            <li>
+              <Link to="/contact/">Contact</Link>
             </li>
           </ul>
         </nav>
-        <Route path="/" exact component={Home} />
+        <Route path="/" component={Home} />
         <Route path="/about/" component={About} />
         <Route path="/contact/" component={Contact} />
         <hr />
+        <p>Using Switch</p>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" component={Home} />
           <Route path="/about/" component={About} />
           <Route path="/contact/" component={Contact} />
-          <Route component={NotFound} />
         </Switch>
       </div>
     </Router>
-  )
+  );
 }
 
 export default App;
