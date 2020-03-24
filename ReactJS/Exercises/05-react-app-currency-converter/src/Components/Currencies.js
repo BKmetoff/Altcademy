@@ -45,7 +45,7 @@ class CurrencyTable extends React.Component {
         
         {/* TODO: bootstrap container, rows, etc... */}
 
-        <h1>Table of shit</h1>
+        <h1>Table of stuff</h1>
         <select
         className="btn btn-outline-danger currency-selector"
         name="currency-selector"
