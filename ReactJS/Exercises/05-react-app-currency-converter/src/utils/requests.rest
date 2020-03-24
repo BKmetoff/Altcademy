@@ -1,9 +1,10 @@
 
 ### base, retuts all curencies
-https://alt-exchange-rate.herokuapp.com/latest?base=BGN
+https://alt-exchange-rate.herokuapp.com/latest?base=USD
 
 ### start/end date
 https://alt-exchange-rate.herokuapp.com/history?start_at=2018-01-01&end_at=2018-09-01
+
 
 ### limits response
 https://alt-exchange-rate.herokuapp.com/latest?base=USD&symbols=GBP  

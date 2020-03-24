@@ -1,45 +1,51 @@
 import React from 'react';
 import { json, checkStatus } from '../utils/utils.js'
-// import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
-
-const Currency = (props) => {
-  const { base, date, rates } = props.currency
-
-  return (
-    <p>{base}, {date}</p>
-  )
-}
-
 
 class CurrencyTable extends React.Component {
   constructor (props) {
     super (props);
-    this.state = { selectedCurrency: '', currencyData: [], date: '',  error: ''};
+    this.state = {
+      selectedCurrency: 'EUR',
+      currencyData: [],
+      currencyName: '',
+      currencyRate: '',
+      date: '',
+      error: ''
+    };
     this.userInput = this.userInput.bind(this);
+  }
+
+  componentDidMount () {
+    fetch(`https://alt-exchange-rate.herokuapp.com/latest`)
+    .then(checkStatus)
+    .then(json)    
+    .then((data) => {
+      this.setState({ currencyData: data.rates, date: data.date, selectedCurrency: data.base })
+      console.log('default currency: ' + this.state.selectedCurrency);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    // console.log(this.state.currencyName);
   }
 
   userInput(event) {
 
-    this.setState({ selectedCurrency: event.target.value})
-    let {selectedCurrency} = this.state;
-
-    fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${selectedCurrency}`)
+    fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${event.target.value}`)
     .then(checkStatus)
     .then(json)    
     .then((data) => {
-      this.setState({ currencyData: data.rates, date: data.date })
-      console.log(this.state.currencyData);
+      this.setState({ currencyData: data.rates, date: data.date, selectedCurrency: data.base })
+      console.log('selected currency: ' + this.state.selectedCurrency);
     })
     .catch((error) => {
       console.log(error);
     })
 
-  }
-
-  // const DropDownChoice
+  } 
 
   render () {
-    const { selectedCurrency, currencyData, error} = this.state;
+    const { selectedCurrency, currencyData } = this.state;
     return (
       <div>
         
@@ -47,22 +53,35 @@ class CurrencyTable extends React.Component {
 
         <h1>Table of stuff</h1>
         <select
-        className="btn btn-outline-danger currency-selector"
-        name="currency-selector"
-        onChange={this.userInput}>
+          className="btn btn-outline-danger currency-selector"
+          name="currency-selector"
+          onChange={this.userInput}>
           
-          {/* placeholder, drop-down choice component */}
-
-          <option value="BGN">BGN</option>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
+          {Object.entries(currencyData).map((currency) => {
+            const [ currencyName ] = currency;
+            return <DropDownChoice key={currencyName} currencyName={currencyName} />
+          })}
         </select>
 
-        {/* placeholder, currency list item component */}
-
+        {Object.entries(currencyData).map((currencyRate) => {
+          const [ currencyName, value ] = currencyRate;
+          return <Currency  key={currencyName} value={value} currencyName={currencyName} />
+        })}
+        
       </div>
     )
   }
+}
+
+const DropDownChoice = (props) => {
+  // TODO: default choice - EUR
+  const { currencyName } = props;
+  return ( <option value={currencyName}>{currencyName}</option> )
+}
+
+const Currency = (props) => {
+  const {value, currencyName} = props;
+  return ( <p>{currencyName} : {value}</p> )
 }
 
 export default CurrencyTable;
