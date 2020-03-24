@@ -8,6 +8,9 @@ li {
   text-align: center;
 }
 
+
+/* Navbar */
+
 .navbar {
   justify-content: flex-start;
   background-color: rgb(143, 192, 223);
@@ -30,4 +33,11 @@ li {
 .nav-item:hover,
 .navbar-brand:hover {
   color: rgb(49, 172, 210);
+}
+
+/* Navbar above */
+
+.currency-selector {
+  width: 10%;
+
 }
