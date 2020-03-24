@@ -5,7 +5,7 @@ import './App.css';
 
 import Nav from './Components/Nav';
 import Home from './Components/Home';
-import Currencies from './Components/Currencies';
+import CurrencyTable from './Components/Currencies';
 import Converter from './Components/Converter';
 
 
@@ -20,7 +20,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/converter" component={Converter} />
-          <Route path="/currencies" component={Currencies} />
+          <Route path="/currencies" component={CurrencyTable} />
           {/* placeholder for error page */}
         </Switch>
 
