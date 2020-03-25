@@ -37,7 +37,6 @@ li {
 
 /* Navbar above */
 
-.currency-selector {
-  width: 10%;
-
+.row {
+  justify-content: center;
 }

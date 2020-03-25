@@ -4,15 +4,3 @@ export const checkStatus = (response) => {
 }
 
 export const json = (response) => response.json();
-
-// export const currencyDataIterator = (currencyData) => {
-    
-//     return (
-//         Object.entries(currencyData).map((currencyEntry) => {
-//             const [ name, rate] = currencyEntry;
-//             this.setState({currencyName: name, currencyRate: rate});
-//             console.log(name, rate);
-            
-//           })
-//     );
-//   }
