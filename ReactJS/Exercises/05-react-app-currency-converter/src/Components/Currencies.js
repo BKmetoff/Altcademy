@@ -34,6 +34,7 @@ class CurrencyTable extends React.Component {
 
   userInput(event) {
     
+    // ignore clicks on the same currency
     if (event.target.name !== this.state.selectedCurrency) {
       fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${event.target.name}`)
       .then(checkStatus)
@@ -56,27 +57,27 @@ class CurrencyTable extends React.Component {
         <Row>
           <Col>
             <h3>Currencies</h3>
-
             {Object.entries(currencyData).map((currency) => {
               const [ currencyName ] = currency;
               return <CurrencyButton
                 key={currencyName}
                 currencyName={currencyName}
-                newCurrency={this.userInput} />
+                newCurrency={this.userInput}
+                />
             })}
-
           </Col>
+          
           <Col>
-
            <h3>{selectedCurrency} rates:</h3>
-
             {Object.entries(currencyData).map((currencyRate) => {
               const [ currencyName, value ] = currencyRate;
-              return <Currency  key={currencyName} value={value} currencyName={currencyName} />
+              return <Currency
+                key={currencyName}
+                value={value}
+                currencyName={currencyName}
+                />
             })}
-
           </Col>
-
         </Row>
       </Container>
     
@@ -88,11 +89,15 @@ class CurrencyTable extends React.Component {
 class CurrencyButton extends React.Component {
   render () {
     const { currencyName, newCurrency } = this.props
-      return (
-        <Row>
-         <Button variant="outline-info" name={currencyName} onClick={newCurrency}>{currencyName}</Button>
-        </Row>
-      )
+    return (
+      <Row>
+        <Button
+          variant="outline-info"
+          name={currencyName}
+          onClick={newCurrency}>{currencyName}
+        </Button>
+      </Row>
+    )
   }
 }
 

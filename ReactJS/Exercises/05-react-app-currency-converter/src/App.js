@@ -23,6 +23,8 @@ function App() {
           <Route path="/currencies" component={CurrencyTable} />
           {/* placeholder for error page */}
         </Switch>
+        {/* placeholder for loading animation ??  */}
+        {/* placeholder for footer */}
 
       </div>
     </Router>
