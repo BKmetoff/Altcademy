@@ -26,6 +26,7 @@ class  Converter extends React.Component  {
     this.selectCurrencyValue = this.selectCurrencyValue.bind(this);
     this.fetchRate = this.fetchRate.bind(this);
     this.calculateRate = this.calculateRate.bind(this);
+    this.swapCurrencies = this.swapCurrencies.bind(this);
   }
   
   componentDidMount () {
@@ -55,12 +56,11 @@ class  Converter extends React.Component  {
   }
 
   fetchRate () {
-    // console.log(this.state.inputCurrency, this.state.outputCurrency);
 
     // prevent redundant API calls
     if (this.state.inputCurrency !== 'Currency' 
     &&  this.state.outputCurrency !== 'Currency'
-    &&  this.state.amountInputCurrency !== 0) {
+    &&  this.state.amountInputCurrency !== 0) {      
       fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)
       .then(checkStatus)
       .then(json)
@@ -68,7 +68,7 @@ class  Converter extends React.Component  {
         this.setState({ date: data.date })
         Object.entries(data.rates).map(currency => {
           let rate = currency[1];
-          this.setState({ currencyRate: Number(rate).toFixed(4) })
+          return this.setState({ currencyRate: Number(rate).toFixed(2) })
         })
       })
       .catch((error) => {
@@ -80,27 +80,25 @@ class  Converter extends React.Component  {
 
   calculateRate () {
     this.setState({ amountOutputCurrency: equation(this.state.amountInputCurrency, this.state.currencyRate) })
-    console.log(
-      'amount:',
-      this.state.amountInputCurrency,
-      '| from:',
-      this.state.inputCurrency,
-      '| to:',
-      this.state.outputCurrency,
-      '| is:',
-      this.state.amountOutputCurrency
-    );
-    
+  }
+
+  swapCurrencies () {    
+    const buffer = [this.state.inputCurrency, this.state.outputCurrency];
+    this.setState({
+      inputCurrency: buffer[1],
+      outputCurrency: buffer[0],
+      currencyRate: 0,
+      amountOutputCurrency: 0,
+     })
   }
 
   render () {
     const {
       currencyData,
       inputCurrency,
-      amountInputCurrency,
-      selectCurrencyValue,
-      selectCurrency,
-      outputCurrency
+      outputCurrency,
+      amountOutputCurrency,
+      currencyRate,
     } = this.state;
 
     // drop-down identifier
@@ -173,7 +171,16 @@ class  Converter extends React.Component  {
           </Button>
           
         </Row>
+
+        {/* output  */}
+        <Row>
+          <h2>{amountOutputCurrency}</h2>
+        </Row>
+        <Row>
+          <h3>Rate: {currencyRate}</h3>
+        </Row>
   
+        <Button onClick={this.swapCurrencies}>Swap currencies</Button>
       </Container>
     );
   }

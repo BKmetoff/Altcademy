@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { json, checkStatus } from '../utils/utils.js'
+import { checkStatus, json } from '../utils/utils.js'
 
 class CurrencyTable extends React.Component {
   constructor (props) {
@@ -17,35 +17,28 @@ class CurrencyTable extends React.Component {
       error: ''
     };
     this.userInput = this.userInput.bind(this);
+    this.fetchAllRates = this.fetchAllRates.bind(this);
   }
 
-  componentDidMount () {
-    fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=USD`)
+  fetchAllRates (selectedCurrency) {
+    fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${selectedCurrency}`)
     .then(checkStatus)
     .then(json)    
     .then((data) => {
       this.setState({ currencyData: data.rates, date: data.date, selectedCurrency: data.base })
-      console.log('default currency: ' + this.state.selectedCurrency);
+      console.log('base currency: ' + this.state.selectedCurrency);
     })
     .catch((error) => {
       console.log(error);
     })
   }
 
+  componentDidMount () { this.fetchAllRates(this.state.selectedCurrency); }
+
   userInput(event) {
-    
     // ignore clicks on the same currency
     if (event.target.name !== this.state.selectedCurrency) {
-      fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${event.target.name}`)
-      .then(checkStatus)
-      .then(json)    
-      .then((data) => {
-        this.setState({ currencyData: data.rates, date: data.date, selectedCurrency: data.base })
-        console.log('selected currency: ' + this.state.selectedCurrency);
-      })
-      .catch((error) => {
-        console.log(error);
-      })  
+      this.fetchAllRates(event.target.name);
     }
   } 
 
@@ -105,7 +98,7 @@ const Currency = (props) => {
   const {value, currencyName} = props;
   return (
     <Row> 
-      <p>{currencyName} : {value} </p>
+      <p>{currencyName} : {Number(value).toFixed(2)} </p>
     </Row>
   )
 }
