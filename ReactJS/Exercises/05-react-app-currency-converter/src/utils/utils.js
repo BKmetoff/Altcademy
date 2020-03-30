@@ -4,3 +4,5 @@ export const checkStatus = (response) => {
 }
 
 export const json = (response) => response.json();
+
+export const equation = (base, rate) => Number(base * rate).toFixed(4);
