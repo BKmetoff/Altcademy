@@ -5,22 +5,17 @@ import { Link } from 'react-router-dom';
 
 function Nav() {
   return (
-    <nav className="navbar">
-      
-      <Link className="navbar-brand"  to="/">
-        <h2>Logo</h2>
-      </Link>
 
-      <ul className="navbar-nav">
-        <Link className="nav-item"  to="/converter">
-          <li className="nav-link">Converter</li>
+    <div id="sidebar-wrapper">
+      <ul className="sidebar-nav">
+        <Link to="/converter">
+          <li className="sidebarListItem">Converter</li>
         </Link>
-        <Link className="nav-item" to="/currencies">
-          <li className="nav-link">Currencies</li>
+        <Link to="/currencies">
+          <li className="sidebarListItem">Currencies</li>
         </Link>
       </ul>
-    </nav>
-    
+    </div>    
   );
 }
 

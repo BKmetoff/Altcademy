@@ -1,13 +1,6 @@
 import React from 'react';
 import { json, checkStatus, equation } from '../utils/utils.js'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Dropdown from 'react-bootstrap/Dropdown'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
-
+import { Container, Row, Col, Form, Dropdown, FormControl, Button } from 'react-bootstrap' 
 
 class  Converter extends React.Component  {
   constructor (props) {
@@ -105,7 +98,7 @@ class  Converter extends React.Component  {
     let dropDownId = true;
 
     return (
-      <Container>
+      <Container fluid>
         
         {/* header  */}
         <Row>
