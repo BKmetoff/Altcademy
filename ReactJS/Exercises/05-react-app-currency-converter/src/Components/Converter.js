@@ -1,9 +1,9 @@
 import React from 'react';
-import { json, checkStatus } from '../utils/utils.js'
+import { json, checkStatus, equation } from '../utils/utils.js'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import InputGroup from 'react-bootstrap/InputGroup'
+import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
@@ -14,56 +14,98 @@ class  Converter extends React.Component  {
     super (props);
     this.state = {
       currencyData: [],
-      selectedInputCurrency: 'Currency', // will be rendered on load
+      inputCurrency: 'Currency', // will be rendered on load
+      outputCurrency: 'Currency', // will be rendered on load
       amountInputCurrency: 0,
-      selectedOutputCurrency: 'Currency', // will be rendered on load
       amountOutputCurrency: 0,
-      currencyRate: '',
+      currencyRate: 0,
       date: '',
       error: ''
     }
     this.selectCurrency = this.selectCurrency.bind(this);
     this.selectCurrencyValue = this.selectCurrencyValue.bind(this);
+    this.fetchRate = this.fetchRate.bind(this);
     this.calculateRate = this.calculateRate.bind(this);
   }
   
   componentDidMount () {
     
-    // fetching data for USD, as the default base (EUR) does not include EUR in the response.
-    // therefore, EUR would be missing from the drop-downs
+    // fetching data for USD on load, as the API
+    // does not return data for EUR by default,  
+    // therefore, EUR would be missing from the drop-downs below
+
     fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=USD`)
     .then(checkStatus)
     .then(json)    
     .then((data) => {
       this.setState({ currencyData: data.rates, date: data.date })
-      // console.log(this.state.currencyData);
     })
     .catch((error) => {
       console.log(error);
     })
   }
 
-  selectCurrency (currencyName) {
-    this.setState({ selectedInputCurrency: currencyName })
+  selectCurrency (currencyName, dropDownId) {
+    if (dropDownId) { this.setState({ inputCurrency: currencyName }) } 
+    else { this.setState({ outputCurrency: currencyName }) }
   }
 
   selectCurrencyValue (event) {
-    this.setState({ selectCurrencyValue: event.target.value })
+    this.setState({ amountInputCurrency:event.target.value });
+  }
+
+  fetchRate () {
+    // console.log(this.state.inputCurrency, this.state.outputCurrency);
+
+    // prevent redundant API calls
+    if (this.state.inputCurrency !== 'Currency' 
+    &&  this.state.outputCurrency !== 'Currency'
+    &&  this.state.amountInputCurrency !== 0) {
+      fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)
+      .then(checkStatus)
+      .then(json)
+      .then((data) => {
+        this.setState({ date: data.date })
+        Object.entries(data.rates).map(currency => {
+          let rate = currency[1];
+          this.setState({ currencyRate: Number(rate).toFixed(4) })
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(this.calculateRate)
+    }
   }
 
   calculateRate () {
-    console.log(this.state.selectedInputCurrency, this.state.selectCurrencyValue);
+    this.setState({ amountOutputCurrency: equation(this.state.amountInputCurrency, this.state.currencyRate) })
+    console.log(
+      'amount:',
+      this.state.amountInputCurrency,
+      '| from:',
+      this.state.inputCurrency,
+      '| to:',
+      this.state.outputCurrency,
+      '| is:',
+      this.state.amountOutputCurrency
+    );
+    
   }
-
 
   render () {
     const {
       currencyData,
-      selectedInputCurrency,
+      inputCurrency,
       amountInputCurrency,
-      selectedOutputCurrency,
-      amountOutputCurrency
+      selectCurrencyValue,
+      selectCurrency,
+      outputCurrency
     } = this.state;
+
+    // drop-down identifier
+    let dropDownId = true;
+
     return (
       <Container>
         
@@ -76,88 +118,77 @@ class  Converter extends React.Component  {
   
         {/* user input */}
         <Row>
-          <Col>
-            <UserInputGroup
-            currencyData={currencyData}
-            selectCurrency={this.selectCurrency}
-            selectedInputCurrency={selectedInputCurrency}
-            selectCurrencyValue={this.selectCurrencyValue}
-            amountInputCurrency={amountInputCurrency} />
-          </Col>
+          <Form>
+            <FormControl placeholder="Amount" type="number" onChange={this.selectCurrencyValue} />
+          </Form>
 
-          <Col>
-            <UserInputGroup
-            currencyData={currencyData}
-            selectCurrency={this.selectCurrency}
-            selectedInputCurrency={selectedInputCurrency}
-            selectCurrencyValue={this.selectCurrencyValue}
-            amountInputCurrency={amountInputCurrency} />
-          </Col>
+          {/* input currency */}
+          <Dropdown>
+            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+              {inputCurrency}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {
+                Object.entries(currencyData).map(currency => {
+                  const [ currencyName ] = currency;
+                  return <CurrencyDropdownItem
+                  key={currencyName}
+                  currencyName={currencyName}
+                  inputCurrency={inputCurrency}
+                  selectCurrency={this.selectCurrency}
+                  dropDownId={dropDownId}
+                  />  
+                })
+              }
+            </Dropdown.Menu>
+          </Dropdown>
+
+          { dropDownId = false }
+
+          {/* output currency */}
+          <Dropdown>
+            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+              {outputCurrency}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {
+                Object.entries(currencyData).map(currency => {
+                  const [ currencyName ] = currency;
+                  return <CurrencyDropdownItem
+                  key={currencyName}
+                  currencyName={currencyName}
+                  outputCurrency={outputCurrency}
+                  selectCurrency={this.selectCurrency}
+                  dropDownId={dropDownId}
+                  />  
+                })
+              }
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Button onClick={this.fetchRate}>
+            Dollah dollah bills yo
+          </Button>
           
-          <Col>
-            <Button onClick={this.calculateRate}>
-              Dollah dollah bills yo
-            </Button>
-          </Col>
         </Row>
   
       </Container>
     );
   }
-  
 }
 
-class UserInputGroup extends React.Component {
+class CurrencyDropdownItem extends React.Component {
   render () {
-    const { 
-      currencyData,
-      selectCurrency,
-      selectedInputCurrency,
-      selectCurrencyValue
-    } = this.props;
+    const { currencyName, selectCurrency, dropDownId } = this.props    
     
     return (
-      <InputGroup>
-        <FormControl
-          placeholder="Amount"
-          type="number"
-          onChange={selectCurrencyValue}
-          />
-        <Dropdown>
-
-          <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
-            {selectedInputCurrency}
-          </Dropdown.Toggle>
-            
-          <Dropdown.Menu>
-          {Object.entries(currencyData).map(currency => {
-            const [ currencyName ] = currency;
-            return <InputCurrencyDropdown
-              key={currencyName}
-              currencyName={currencyName}
-              selectedInputCurrency={selectedInputCurrency}
-              selectCurrency={selectCurrency}
-              />  
-            })}
-          </Dropdown.Menu>
-        </Dropdown>
-      </InputGroup>
-    )
-  }
-}
-
-class InputCurrencyDropdown extends React.Component {
-  render () {
-     
-    const { currencyName, selectCurrency } = this.props    
-    return (
-      <Row>
-        <Dropdown.Item
-          name={currencyName}
-          onClick={function () {selectCurrency(currencyName)} } >
-          {currencyName}
-        </Dropdown.Item>
-      </Row>
+      <Dropdown.Item
+        name={currencyName}
+        onClick={function () {selectCurrency(currencyName, dropDownId)} } >
+        {currencyName}
+      </Dropdown.Item>
     )
   }
 }
