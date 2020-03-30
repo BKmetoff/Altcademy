@@ -1,42 +1,61 @@
-li {
-  margin: 0;
-  padding: 0;
-}
-
-
 .App {
   text-align: center;
 }
 
+ul,
+li {
+  padding: 0;
+  list-style: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
 
 /* Navbar */
 
-.navbar {
-  justify-content: flex-start;
-  background-color: rgb(143, 192, 223);
+#sidebar-wrapper {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  overflow-y: hidden;
+  background:  #2c3e50;
+  opacity: 0.9;
 }
 
-.navbar-nav {
-  flex-direction: row;
+.sidebar-nav li {
+  line-height: 40px;
 }
 
-.nav-item {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+.sidebarListItem {
+  color: #ddd;
 }
 
-.nav-item,
-.navbar-brand {
-  color: #fff;
+.sidebarListItem:hover {
+  background: #16a085;
 }
 
-.nav-item:hover,
-.navbar-brand:hover {
-  color: rgb(49, 172, 210);
-}
 
 /* Navbar above */
 
+/* content */
+
+#content-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  position: absolute;
+  padding: 15px;
+  padding-left: 200px;
+}
+
 .row {
   justify-content: center;
+}
+
+/* footer  */
+
+.footerListItem {
+  color: #ddd;
 }

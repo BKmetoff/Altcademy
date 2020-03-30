@@ -1,9 +1,6 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 import { checkStatus, json } from '../utils/utils.js'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 class CurrencyTable extends React.Component {
   constructor (props) {
@@ -46,7 +43,7 @@ class CurrencyTable extends React.Component {
     const { selectedCurrency, currencyData } = this.state;
     return (
       
-      <Container>
+      <Container fluid>
         <Row>
           <Col>
             <h3>Currencies</h3>
