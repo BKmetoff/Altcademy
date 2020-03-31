@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { far, faDizzy } from '@fortawesome/free-regular-svg-icons'
+
+library.add(far,faDizzy )
 
 class NotFound extends React.Component {
     render () {
@@ -11,7 +13,12 @@ class NotFound extends React.Component {
             <Container>
                 <Row>
                     <Col>
-                        <h2>Nope, didn't find that!</h2>
+                        <div className="notFound">
+                            <FontAwesomeIcon icon={faDizzy} />
+                        </div>
+                        <h2>
+                            Nope, didn't find that!
+                        </h2>
                     </Col>
                 </Row>
                 <Row>

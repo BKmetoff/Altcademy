@@ -19,7 +19,7 @@ function App() {
           
           <Nav />
           
-          <div id="content-wrapper">
+          <div id="contentWrapper">
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/converter" component={Converter} />

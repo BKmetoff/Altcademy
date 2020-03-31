@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fas, faBookOpen } from '@fortawesome/free-solid-svg-icons'
 import { fab, faGithub } from '@fortawesome/free-brands-svg-icons'
 
-library.add(fas, fab, faGithub)
+library.add(fas, fab, faGithub, faBookOpen)
 
 class Footer extends React.Component {
         
@@ -26,12 +26,17 @@ class Footer extends React.Component {
                 </ul>
                 
                 <ul className="footerRight">    
-                    <li className="footerGit">v1.0</li>
                     <Link to="https://github.com/BKmetoff">
                         <li className="footerListItem">
                             <FontAwesomeIcon icon={faGithub} /> /bkmetoff
                         </li>
                     </Link>
+                    <Link to="https://www.altcademy.com/">
+                        <li className="footerListItem">
+                            <FontAwesomeIcon icon={faBookOpen} />  Altcademy
+                        </li>
+                    </Link>
+                    <li className="footerGit">v1.0</li>
                 </ul>
             </div>
         )
