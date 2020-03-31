@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 ul,
 li {
@@ -8,11 +8,20 @@ li {
   list-style: none;
 }
 
+p,
+ul {
+  margin: 0;
+}
+
 a:hover {
   text-decoration: none;
 }
 
-/* Navbar */
+a {
+  text-decoration: none;
+}
+
+/* sidebar */
 
 #sidebar-wrapper {
   z-index: 1;
@@ -30,6 +39,7 @@ a:hover {
 
 .sidebarListItem {
   color: #ddd;
+  letter-spacing: 0.4px;
 }
 
 .sidebarListItem:hover {
@@ -37,7 +47,7 @@ a:hover {
 }
 
 
-/* Navbar above */
+/* sidebar above */
 
 /* content */
 
@@ -46,7 +56,6 @@ a:hover {
   height: 100%;
   overflow-x: scroll;
   position: absolute;
-  padding: 15px;
   padding-left: 200px;
 }
 
@@ -54,8 +63,37 @@ a:hover {
   justify-content: center;
 }
 
+/* content above */
+
 /* footer  */
 
-.footerListItem {
-  color: #ddd;
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
 }
+
+.footerListItem,
+.footerGit {
+  color: #333;
+  font-weight: 200;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+.footerListItem:hover {
+  color:#16a085;
+  font-weight: bolder;
+}
+
+.footerRight {
+  text-align: right;
+}
+
+.footerLeft {
+  text-align: left;
+}
+
+/* footer above */
