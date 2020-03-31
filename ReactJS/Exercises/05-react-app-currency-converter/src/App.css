@@ -1,5 +1,6 @@
 /* .App {
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 } */
 
 ul,
@@ -13,33 +14,58 @@ ul {
   margin: 0;
 }
 
+a,
 a:hover {
-  text-decoration: none;
-}
-
-a {
   text-decoration: none;
 }
 
 /* sidebar */
 
-#sidebar-wrapper {
+#sidebarWrapper {
   z-index: 1;
   position: absolute;
   height: 100%;
-  width: 200px;
+  width: 220px;
   overflow-y: hidden;
   background:  #2c3e50;
   opacity: 0.9;
 }
 
-.sidebar-nav li {
-  line-height: 40px;
+.navBrand {
+  font-size: 100px;
+  text-align: center;
+  align-content: center;
+}
+
+.navLogo {
+  font-weight: 300;
+  font-size: 14px;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: 0.4px;
+  padding-left: 15px;
+  padding-right: 15px;
+  line-height: 18px;
+  color: #5ddbc2;
+}
+
+.navBrand svg {
+  color: rgb(255, 120, 2);
+}
+
+.navBrand svg:hover {
+  color: #16a085;
+}
+
+.sidebarNav {
+  padding-top: 20px;
 }
 
 .sidebarListItem {
   color: #ddd;
   letter-spacing: 0.4px;
+  line-height: 40px;
+  padding-left: 25px;
 }
 
 .sidebarListItem:hover {
@@ -51,12 +77,12 @@ a {
 
 /* content */
 
-#content-wrapper {
+#contentWrapper {
   width: 100%;
   height: 100%;
   overflow-x: scroll;
   position: absolute;
-  padding-left: 200px;
+  padding-left: 220px;
 }
 
 .row {
@@ -97,3 +123,85 @@ a {
 }
 
 /* footer above */
+
+/* error page */
+
+.notFound {
+  font-size: 120px;
+  color: #ddd;
+}
+
+/* error page above */
+
+
+/* mobile */
+
+
+@media (max-width: 768px) {
+  
+  /* sidebar/navbar */
+
+  #sidebarWrapper {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    position: static;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .navLogo {
+    display: none;
+  }
+
+  .navBrand {
+    font-size: 35px;
+  }
+
+  .sidebarNav {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0;
+    align-items: center;
+  }
+
+  .sidebarListItem {
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+    line-height: 30px;
+  }
+
+  /* sidebar/navbar above */
+
+  /* content */
+
+  #contentWrapper {
+    padding-left: 0;
+  }
+
+  /* content above */
+
+  /* footer */
+
+  .footer {
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    margin: 30px;
+  }
+
+  .footerLeft {
+    display: none;
+  }
+
+  .footerRight {
+    text-align: left;
+  }
+
+  /* footer above  */
+}
+
+/* mobile above  */
