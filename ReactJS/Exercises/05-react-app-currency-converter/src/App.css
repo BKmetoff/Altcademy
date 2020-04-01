@@ -78,12 +78,18 @@ a:hover {
   overflow-x: scroll;
   position: absolute;
   padding-left: 220px;
+  background: #f3bc551c;
 }
 
 .converterContainer {
   height: 88%;
   width: 65%;
   margin-top: 50px;
+}
+
+.converterUserInput {
+  border-radius: 33px;
+  box-shadow: 3px 19px 20px -7px #16a0851a;
 }
 
 .dropdownOutputCurrency,
@@ -112,8 +118,8 @@ a:hover {
   width: 100%;
   height: 100%;
   border-top-left-radius: 0;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-top-right-radius: 33px;
+  border-bottom-right-radius: 33px;
   border-bottom-left-radius: 0;
   border-left: none;
 }
@@ -141,17 +147,39 @@ a:hover {
   border-radius: 0;
   border-top: none ;
 }
+
 .dropdownInputCurrency {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-bottom-left-radius: 50px;
+  border-bottom-left-radius: 33px;
   border-top: none;
   border-right: none;
 }
 
+.dropdown-menu.show {
+  text-align: center;
+  width: 101%;
+  overflow-y: scroll;
+  height: 500%;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 33px;
+  border-bottom-right-radius: 5px;
+  right: auto;
+  bottom: auto;
+  transform: translate(110px, 37px); 
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 6px 19px 20px 0 #16a0851a;
+  margin-top: -38px;
+}
+
+.dropdown-item {
+  width: 33%;
+}
+
 .userAmountInput {
-  border-top-left-radius: 50px;
+  border-top-left-radius: 33px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -290,5 +318,7 @@ input[type='number'] {
 
   /* footer above  */
 }
+
+
 
 /* mobile above  */
