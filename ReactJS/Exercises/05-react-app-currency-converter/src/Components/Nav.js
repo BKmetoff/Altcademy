@@ -10,16 +10,12 @@ library.add(fas, faCommentsDollar)
 
 function Nav() {
   return (
-
     <div id="sidebarWrapper">
-      
       <div className="navBrand">
         <Link to="/">
           <FontAwesomeIcon icon={faCommentsDollar} />
         </Link>
-
         <p className="navLogo">"If ya know what ya got, then ya ain't got much!"</p>
-
       </div>
       
       <ul className="sidebarNav">
@@ -30,9 +26,7 @@ function Nav() {
           <li className="sidebarListItem">Currencies</li>
         </Link>
       </ul>
-    </div>
-
-    
+    </div>    
   );
 }
 
