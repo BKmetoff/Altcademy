@@ -7,8 +7,8 @@ class  Converter extends React.Component  {
     super (props);
     this.state = {
       currencyData: [],
-      inputCurrency: 'Currency', // will be rendered on load
-      outputCurrency: 'Currency', // will be rendered on load
+      inputCurrency: 'From', // will be rendered on load
+      outputCurrency: 'To', // will be rendered on load
       amountInputCurrency: 0,
       amountOutputCurrency: 0,
       currencyRate: 0,
@@ -45,15 +45,18 @@ class  Converter extends React.Component  {
   }
 
   selectCurrencyValue (event) {
-    this.setState({ amountInputCurrency:event.target.value });
+    if (parseFloat(event.target.value) !== 0) {
+      this.setState({ amountInputCurrency: parseFloat(event.target.value) });  
+    }
+
   }
 
   fetchRate () {
 
     // prevent redundant API calls
-    if (this.state.inputCurrency !== 'Currency' 
-    &&  this.state.outputCurrency !== 'Currency'
-    &&  this.state.amountInputCurrency !== 0) {      
+    if (this.state.amountInputCurrency !== 0
+    &&  this.state.inputCurrency !== 'From' 
+    &&  this.state.outputCurrency !== 'To') {      
       fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)
       .then(checkStatus)
       .then(json)
@@ -69,6 +72,8 @@ class  Converter extends React.Component  {
       })
       .then(this.calculateRate)
     }
+    console.log('amount state: ' + this.state.amountInputCurrency);
+    
   }
 
   calculateRate () {
@@ -98,7 +103,7 @@ class  Converter extends React.Component  {
     let dropDownId = true;
 
     return (
-      <Container fluid>
+      <Container fluid className="converterContainer">
         
         {/* header  */}
         <Row>
@@ -107,63 +112,82 @@ class  Converter extends React.Component  {
           </Col>
         </Row>
   
-        {/* user input */}
-        <Row>
-          <Form>
-            <FormControl placeholder="Amount" type="number" onChange={this.selectCurrencyValue} />
-          </Form>
 
-          {/* input currency */}
-          <Dropdown>
-            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-              {inputCurrency}
-            </Dropdown.Toggle>
+        {/* amount input */}
+        <Row noGutters className="converterUserInput">
 
-            <Dropdown.Menu>
-              {
-                Object.entries(currencyData).map(currency => {
-                  const [ currencyName ] = currency;
-                  return <CurrencyDropdownItem
-                  key={currencyName}
-                  currencyName={currencyName}
-                  inputCurrency={inputCurrency}
-                  selectCurrency={this.selectCurrency}
-                  dropDownId={dropDownId}
-                  />  
-                })
-              }
-            </Dropdown.Menu>
-          </Dropdown>
+          <Col lg={9}>
+            
+            <Form>
+              <FormControl
+                placeholder="Amount"
+                type="number"
+                onChange={this.selectCurrencyValue}
+                className="userAmountInput" />
+            </Form>
 
-          { dropDownId = false }
+            <Row noGutters>   
 
-          {/* output currency */}
-          <Dropdown>
-            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-              {outputCurrency}
-            </Dropdown.Toggle>
+              {/* input currency */}              
+              <Col>
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-basic" className="dropdownInputCurrency">
+                    {inputCurrency}
+                  </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              {
-                Object.entries(currencyData).map(currency => {
-                  const [ currencyName ] = currency;
-                  return <CurrencyDropdownItem
-                  key={currencyName}
-                  currencyName={currencyName}
-                  outputCurrency={outputCurrency}
-                  selectCurrency={this.selectCurrency}
-                  dropDownId={dropDownId}
-                  />  
-                })
-              }
-            </Dropdown.Menu>
-          </Dropdown>
+                  <Dropdown.Menu>
+                    {
+                      Object.entries(currencyData).map(currency => {
+                        const [ currencyName ] = currency;
+                        return <CurrencyDropdownItem
+                        key={currencyName}
+                        currencyName={currencyName}
+                        inputCurrency={inputCurrency}
+                        selectCurrency={this.selectCurrency}
+                        dropDownId={dropDownId}
+                        />  
+                      })
+                    }
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Col>
 
-          <Button onClick={this.fetchRate}>
-            Dollah dollah bills yo
-          </Button>
-          
+              { dropDownId = false }
+
+              {/* output currency */}
+              <Col>
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-basic" className="dropdownOutputCurrency">
+                    {outputCurrency}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {
+                      Object.entries(currencyData).map(currency => {
+                        const [ currencyName ] = currency;
+                        return <CurrencyDropdownItem
+                        key={currencyName}
+                        currencyName={currencyName}
+                        outputCurrency={outputCurrency}
+                        selectCurrency={this.selectCurrency}
+                        dropDownId={dropDownId}
+                        />  
+                      })
+                    }
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Col>
+            </Row>
+          </Col>
+
+
+          <Col lg={3}>
+            <Button onClick={this.fetchRate} className="calculateButton">
+              Go!
+            </Button>
+          </Col>  
         </Row>
+        
 
         {/* output  */}
         <Row>
