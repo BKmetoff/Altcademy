@@ -111,7 +111,7 @@ a:hover {
 .btn-primary:not(:disabled):not(.disabled):active:focus {
   background: #16a085;
   border-color: #16a085;
-  box-shadow: none;
+  box-shadow: 6px 19px 20px 0 #16a0851a;
 }
 
 .calculateButton {
@@ -133,14 +133,14 @@ a:hover {
 .calculateButton:hover {
   background: #ff7802;
   border-color: #ff7802;
-  box-shadow: none;
+  box-shadow: 3px 19px 20px -7px #ff78022b;
 }
-
+/* 
 .calculateButton:active {
   background: #ff7802;
   border-color: #ff7802;
   box-shadow: none;
-}
+} */
 
 
 .dropdownOutputCurrency {
@@ -159,23 +159,40 @@ a:hover {
 
 .dropdown-menu.show {
   text-align: center;
-  width: 101%;
+  width: 100%;
   overflow-y: scroll;
-  height: 500%;
+  max-height: 50vh;
   border-top-left-radius: 0px;
-  border-bottom-left-radius: 33px;
+  border-top-right-radius: 0%;
+  border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  right: auto;
-  bottom: auto;
-  transform: translate(110px, 37px); 
   display: flex;
   flex-wrap: wrap;
   box-shadow: 6px 19px 20px 0 #16a0851a;
-  margin-top: -38px;
+  border-color: #16a085;
+  margin-top: -1px;
+}
+
+.show.dropdown > .dropdownInputCurrency {
+  border-bottom-left-radius: 0;
+  box-shadow: 3px 19px 20px -7px #16a0851a;
+  box-shadow: 6px 19px 20px 0 #16a0851a;
+}
+
+.dropdownOutputCurrencyWrapper > .dropdown-menu.show {
+  border-bottom-left-radius: 5px;
 }
 
 .dropdown-item {
+  border-radius: 15px;
   width: 33%;
+  font-weight: 250;
+  padding-left: 20px;
+}
+
+.dropdown-item:hover {
+  background-color: #16a0851a;
+  font-weight: 400;
 }
 
 .userAmountInput {
@@ -199,9 +216,6 @@ input[type='number'] {
   text-align: center;
   letter-spacing: 1px;
 }
-
-
-
 
 
 /* content above */
