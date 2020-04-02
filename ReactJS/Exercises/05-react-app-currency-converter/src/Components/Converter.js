@@ -130,7 +130,7 @@ class  Converter extends React.Component  {
 
               {/* input currency */}              
               <Col>
-                <Dropdown>
+                <Dropdown className="dropdownInputCurrencyWrapper">
                   <Dropdown.Toggle id="dropdown-basic" className="dropdownInputCurrency">
                     {inputCurrency}
                   </Dropdown.Toggle>
@@ -156,7 +156,7 @@ class  Converter extends React.Component  {
 
               {/* output currency */}
               <Col>
-                <Dropdown>
+                <Dropdown className="dropdownOutputCurrencyWrapper">
                   <Dropdown.Toggle id="dropdown-basic" className="dropdownOutputCurrency">
                     {outputCurrency}
                   </Dropdown.Toggle>
