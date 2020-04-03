@@ -82,40 +82,57 @@ a:hover {
 }
 
 .converterContainer {
-  height: 88%;
+  height: 90%;
   width: 65%;
-  margin-top: 50px;
+  padding-top: 50px;
 }
 
-.converterUserInput {
+.converterTitleWrapper {
+  justify-content: flex-end;
+  padding: 25px;
+}
+
+.converterTitleFont {
+  font-size: 44px;
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 8px rgba(44, 62, 80, 0.3);
+  font-style: italic;
+  color: #333333a6;
+  border-bottom: 0.5px solid  #333333a6;
+}
+
+.converterUserInput,
+.converterOutputWrapper {
   border-radius: 33px;
   box-shadow: 3px 19px 20px -7px #16a0851a;
 }
 
 .dropdownOutputCurrency,
 .dropdownInputCurrency,
-.calculateButton {
+.calculateButton,
+.converterOutputSwitch {
   width: 100%;
   border: 1px solid #ced4da;
   background: #fff;
-  color: #2c3e50;
+  color: #333333a6;
   font-weight: 250;
   letter-spacing: 1px;
+  font-style: italic;
 }
 
-.btn-primary:focus,
-.btn-primary:hover,
-.show > .btn-primary.dropdown-toggle,
-.show > .btn-primary.dropdown-toggle:focus,
+.btn:focus,
+.btn:hover,
 .btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:not(:disabled):not(.disabled):active:focus {
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle,
+.show > .btn-primary.dropdown-toggle:focus {
   background: #16a085;
   border-color: #16a085;
   box-shadow: 6px 19px 20px 0 #16a0851a;
-}
+} 
 
 .calculateButton {
-  width: 100%;
   height: 100%;
   border-top-left-radius: 0;
   border-top-right-radius: 33px;
@@ -124,23 +141,29 @@ a:hover {
   border-left: none;
 }
 
-.calculateButton:not(:active) {
+.calculateButton:not(:active),
+.converterOutputSwitch:not(:active) {
   background-color: #fff;
   border-color: #ced4da;
-  color: #2c3e50;
+  color: #333333a6;
+  box-shadow: none;
 }
 
-.calculateButton:hover {
+.calculateButton:hover,
+.converterOutputSwitch:hover {
   background: #ff7802;
   border-color: #ff7802;
+  color: #fff;
   box-shadow: 3px 19px 20px -7px #ff78022b;
 }
-/* 
-.calculateButton:active {
+
+
+.calculateButton:active,
+.converterOutputSwitch:active {
   background: #ff7802;
   border-color: #ff7802;
   box-shadow: none;
-} */
+}
 
 
 .dropdownOutputCurrency {
@@ -209,12 +232,37 @@ a:hover {
 
 ::placeholder {
   text-align: center;
+  font-style: italic;
 }
 
 input[type='number'] {
   font-weight: 250;
   text-align: center;
   letter-spacing: 1px;
+  font-style: italic;
+}
+
+.converterOutputWrapper {
+  height: 50%;
+  background: #fff;
+  margin-top: 55px;
+  margin-bottom: 55px ;
+  justify-content: center;
+  border: 1px solid #ced4da;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outputPadding {
+  padding: 10px
+}
+
+.converterOutputSwitch {
+  border-radius: 33px;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 14px;
 }
 
 
@@ -225,9 +273,10 @@ input[type='number'] {
 .footer {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
-  border-top: 1px solid #ddd;
+  margin-left: 20px;
+  margin-right: 20px;
   padding-top: 5px;
+  border-top: 1px solid #ddd;
 }
 
 .footerListItem,
@@ -325,8 +374,6 @@ input[type='number'] {
 
   .footer {
     padding-top: 15px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
     margin: 30px;
   }
 
@@ -369,15 +416,34 @@ input[type='number'] {
     border-bottom-left-radius: 33px;
   }
 
+  .converterTitleFont {
+    font-size: 36px;
+  }
+
 }
 
 @media (max-width: 576px) {
   .converterContainer {
-    width: 90%
+    width: 90%;
   }
 
   .dropdown-item {
     width: 33%;
+  }
+
+  .converterTitleWrapper {
+    display: none;
+  }
+
+  .converterTitleFont {
+    font-size: 24px;
+    color: #333;
+    text-shadow: none;
+    letter-spacing: 0.2px;
+  }
+
+  .converterOutputSwitch {
+    font-size: 16px;
   }
 }
 

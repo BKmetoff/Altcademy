@@ -7,11 +7,11 @@ class  Converter extends React.Component  {
     super (props);
     this.state = {
       currencyData: [],
-      inputCurrency: 'From', // will be rendered on load
-      outputCurrency: 'To', // will be rendered on load
+      inputCurrency: 'from', // will be rendered on load
+      outputCurrency: 'to', // will be rendered on load
       amountInputCurrency: 0,
-      amountOutputCurrency: 0,
-      currencyRate: 0,
+      amountOutputCurrency: '',
+      currencyRate: '',
       date: '',
       error: ''
     }
@@ -106,10 +106,8 @@ class  Converter extends React.Component  {
       <Container fluid className="converterContainer">
         
         {/* header  */}
-        <Row>
-          <Col>
-            <h1>Single currency converter</h1>
-          </Col>
+        <Row className="converterTitleWrapper">
+          <p className="converterTitleFont">your currency converter</p>
         </Row>
   
 
@@ -120,7 +118,7 @@ class  Converter extends React.Component  {
             
             <Form>
               <FormControl
-                placeholder="Amount"
+                placeholder="amount"
                 type="number"
                 onChange={this.selectCurrencyValue}
                 className="userAmountInput" />
@@ -183,21 +181,24 @@ class  Converter extends React.Component  {
 
           <Col lg={3}>
             <Button onClick={this.fetchRate} className="calculateButton">
-              Go!
+              go!
             </Button>
           </Col>  
         </Row>
         
 
         {/* output  */}
-        <Row>
-          <h2>{amountOutputCurrency}</h2>
-        </Row>
-        <Row>
-          <h3>Rate: {currencyRate}</h3>
-        </Row>
-  
-        <Button onClick={this.swapCurrencies}>Swap currencies</Button>
+        <Row className="converterOutputWrapper no-gutters">
+          <div className="converterTitleFont outputPadding">
+            <p>amount: {amountOutputCurrency}</p>
+          </div>
+          <div className="converterTitleFont outputPadding">
+            <p>rate: {currencyRate}</p>
+          </div>
+          <div className="outputPadding">
+            <Button className="converterOutputSwitch" onClick={this.swapCurrencies}>Swap currencies</Button>
+          </div>
+        </Row>       
       </Container>
     );
   }

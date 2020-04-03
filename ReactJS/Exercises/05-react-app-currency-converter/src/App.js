@@ -26,9 +26,10 @@ function App() {
               <Route path="/currencies" component={CurrencyTable} />
               <Route component={NotFound}/>
             </Switch>
+            <Footer />
             {/* placeholder for loading animation ??  */}
 
-            <Footer />
+            
           </div>
         </div>
       </div>
