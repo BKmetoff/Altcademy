@@ -10,23 +10,15 @@ library.add(far,faDizzy )
 class NotFound extends React.Component {
     render () {
         return (
-            <Container>
-                <Row>
-                    <Col>
-                        <div className="notFound">
-                            <FontAwesomeIcon icon={faDizzy} />
-                        </div>
-                        <h2>
-                            Nope, didn't find that!
-                        </h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Link to="/">
-                            <Button variant="light">Go Home</Button>
-                        </Link>
-                    </Col>
+            <Container className="notFoundContainer">
+                <Row className="notFoundWrapper">
+                    <div className="notFoundIcon">
+                        <FontAwesomeIcon icon={faDizzy} />
+                    </div>
+                    <p className="notFoundSecondaryFont">Nope, didn't find that!</p>
+                    <Link to="/">
+                        <p className="goHomeButton">go home</p>
+                    </Link>
                 </Row>
             </Container>
         )
