@@ -32,10 +32,10 @@ class CurrencyTable extends React.Component {
 
   componentDidMount () { this.fetchAllRates(this.state.selectedCurrency); }
 
-  userInput(event) {
+  userInput(newCurrencyName) {
     // ignore clicks on the same currency
-    if (event.target.name !== this.state.selectedCurrency) {
-      this.fetchAllRates(event.target.name);
+    if (newCurrencyName !== this.state.selectedCurrency) {
+      this.fetchAllRates(newCurrencyName);
     }
   } 
 
@@ -43,34 +43,46 @@ class CurrencyTable extends React.Component {
     const { selectedCurrency, currencyData } = this.state;
     return (
       
-      <Container fluid>
-        <Row>
-          <Col>
-            <h3>Currencies</h3>
-            {Object.entries(currencyData).map((currency) => {
-              const [ currencyName ] = currency;
-              return <CurrencyButton
-                key={currencyName}
-                currencyName={currencyName}
-                newCurrency={this.userInput}
-                />
-            })}
-          </Col>
-          
-          <Col>
-           <h3>{selectedCurrency} rates:</h3>
-            {Object.entries(currencyData).map((currencyRate) => {
-              const [ currencyName, value ] = currencyRate;
-              return <Currency
-                key={currencyName}
-                value={value}
-                currencyName={currencyName}
-                />
-            })}
-          </Col>
+      <Container fluid className="currenciesContainer">
+        
+        <Row className="currenciesTitleWrapper">
+            <p className="converterTitleFont">your currencies & rates</p>
         </Row>
+
+        <Row className="titleSecondaryWrapper">
+          <p className="converterTitleSecondaryFont">rates for: {selectedCurrency}</p>
+        </Row>
+        
+        <Row noGutters>
+          <Col lg={3} className="currencyChoiceWrapper">
+            <ul>
+              {Object.entries(currencyData).map((currency) => {
+                  const [ currencyName ] = currency;
+                  return <CurrencyButton
+                    selectedCurrency={selectedCurrency}
+                    key={currencyName}
+                    currencyName={currencyName}
+                    newCurrency={this.userInput}
+                    />
+                })}
+            </ul>       
+          </Col>
+
+
+          <Col lg={9} className="currenciesRatesWrapper">
+            <ul>
+              {Object.entries(currencyData).map((currencyRate) => {
+                const [ currencyName, value ] = currencyRate;
+                return <Currency
+                  key={currencyName}
+                  value={value}
+                  currencyName={currencyName}
+                  />
+              })}
+            </ul>
+          </Col>
+        </Row>        
       </Container>
-    
     )
   }
 }
@@ -78,15 +90,26 @@ class CurrencyTable extends React.Component {
 
 class CurrencyButton extends React.Component {
   render () {
-    const { currencyName, newCurrency } = this.props
-    return (
-      <Row>
-        <Button
-          variant="outline-info"
+    const { currencyName, newCurrency, selectedCurrency } = this.props
+    
+    if (selectedCurrency === currencyName) {
+      return (
+        <li
+          className="currencyListItem selectedCurrency"
           name={currencyName}
-          onClick={newCurrency}>{currencyName}
-        </Button>
-      </Row>
+          onClick={function () {newCurrency(currencyName)}} >
+          {currencyName}
+        </li>
+      )
+    }
+    
+    return (
+      <li
+        className="currencyListItem"        
+        name={currencyName}
+        onClick={function () {newCurrency(currencyName)}} >
+        {currencyName}
+      </li>
     )
   }
 }
@@ -94,9 +117,9 @@ class CurrencyButton extends React.Component {
 const Currency = (props) => {
   const {value, currencyName} = props;
   return (
-    <Row> 
-      <p>{currencyName} : {Number(value).toFixed(2)} </p>
-    </Row>
+    <li className="rateListItem">
+      {currencyName} : {Number(value).toFixed(2)}
+    </li>
   )
 }
 

@@ -56,15 +56,27 @@ a:hover {
   padding-top: 20px;
 }
 
-.sidebarListItem {
+.sidebarListItem,
+.currencyListItem,
+.rateListItem {
   color: #ddd;
   letter-spacing: 0.4px;
   line-height: 40px;
   padding-left: 25px;
 }
 
-.sidebarListItem:hover {
+.currencyListItem,
+.rateListItem {
+  color: #333333a6;
+  padding-right: 25px;
+  font-weight: 300; 
+}
+
+.sidebarListItem:hover,
+.currencyListItem:hover {
   background: #16a085;
+  color: #fff;
+  cursor: pointer;
 }
 
 
@@ -83,19 +95,27 @@ a:hover {
   flex-direction: column;
 }
 
-.converterContainer {
+.converterContainer,
+.currenciesContainer {
   /* height: 90%; */
   width: 65%;
   padding-top: 50px;
   flex: 1 0 auto;
 }
 
-.converterTitleWrapper {
+.converterTitleWrapper,
+.currenciesTitleWrapper,
+.titleSecondaryWrapper {
   justify-content: flex-end;
   padding: 25px;
 }
 
-.converterTitleFont {
+.titleSecondaryWrapper {
+  padding-top: 0;
+}
+
+.converterTitleFont,
+.converterTitleSecondaryFont {
   font-size: 44px;
   font-weight: 100;
   letter-spacing: 1.5px;
@@ -105,10 +125,21 @@ a:hover {
   border-bottom: 0.5px solid  #333333a6;
 }
 
+.converterTitleSecondaryFont {
+  font-size: 24px;
+  font-weight: 100;
+}
+
 .converterUserInput,
 .converterOutputWrapper {
+  background: #fff;
+  border: 1px solid #ced4da;
   border-radius: 33px;
   box-shadow: 3px 19px 20px -7px #16a0851a;
+}
+
+.converterUserInput {
+   border: none;
 }
 
 .dropdownOutputCurrency,
@@ -120,7 +151,7 @@ a:hover {
   background: #fff;
   color: #333333a6;
   font-weight: 250;
-  letter-spacing: 1px;
+  letter-spacing: 0.7px;
   font-style: italic;
 }
 
@@ -212,8 +243,9 @@ a:hover {
 .dropdown-item {
   border-radius: 15px;
   width: 33%;
-  font-weight: 250;
+  font-weight: 300;
   padding-left: 20px;
+  color: #333333a6;
 }
 
 .dropdown-item:hover {
@@ -247,11 +279,9 @@ input[type='number'] {
 
 .converterOutputWrapper {
   height: 50%;
-  background: #fff;
   margin-top: 55px;
   margin-bottom: 55px ;
   justify-content: center;
-  border: 1px solid #ced4da;
   flex-direction: column;
   align-items: center;
 }
@@ -268,6 +298,49 @@ input[type='number'] {
   margin-top: 14px;
 }
 
+
+.currencyChoiceWrapper,
+.currenciesRatesWrapper {
+  height: 70vh;
+  overflow-y: scroll;
+  box-shadow: 3px 19px 20px -7px #16a0851a;
+  background: #fff;
+  border: 1px solid #ced4da;
+  text-align: center;
+}
+
+.currencyChoiceWrapper {
+  border-right: 0;
+  border-top-left-radius: 33px;
+  border-bottom-left-radius: 33px;
+}
+
+.currenciesRatesWrapper {
+  border-top-right-radius: 33px;
+  border-bottom-right-radius: 33px;
+}
+
+.selectedCurrency {
+  background: #16a085;
+  color: #fff;
+}
+
+.currencyListItem:first-child,
+.rateListItem:first-child {
+  margin-top: 10px;
+}
+
+.currencyListItem:last-child,
+.rateListItem:last-child {
+  margin-bottom: 10px;
+}
+
+.rateListItem {
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 8px;
+  border-bottom: 0.5px solid  #333333a6;
+}
 
 /* content above */
 
@@ -392,7 +465,8 @@ input[type='number'] {
 /* user input */
 
 @media (max-width: 1200px) {
-  .converterContainer {
+  .converterContainer
+  .currenciesContainer {
     width: 80%;
   }
 }
@@ -423,7 +497,8 @@ input[type='number'] {
 }
 
 @media (max-width: 576px) {
-  .converterContainer {
+  .converterContainer,
+  .currenciesContainer {
     width: 90%;
   }
 
