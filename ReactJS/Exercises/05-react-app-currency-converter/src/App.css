@@ -118,6 +118,7 @@ a:hover {
 .converterTitleSecondaryFont {
   font-size: 44px;
   font-weight: 100;
+  text-align: right;
   letter-spacing: 1.5px;
   text-shadow: 2px 2px 8px rgba(44, 62, 80, 0.3);
   font-style: italic;
@@ -469,6 +470,11 @@ input[type='number'] {
   .currenciesContainer {
     width: 80%;
   }
+
+  .rateListItem {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 }
 
 
@@ -502,15 +508,25 @@ input[type='number'] {
     width: 90%;
   }
 
+  .currenciesContainer {
+    padding-top: 30px;
+  }
+
   .dropdown-item {
     width: 33%;
   }
 
-  .converterTitleWrapper {
+  .converterTitleWrapper,
+  .currenciesTitleWrapper {
     display: none;
   }
 
-  .converterTitleFont {
+  .titleSecondaryWrapper {
+    justify-content: center;
+  }
+
+  .converterTitleFont,
+  .converterTitleSecondaryFont {
     font-size: 24px;
     color: #333;
     text-shadow: none;
@@ -520,6 +536,12 @@ input[type='number'] {
   .converterOutputSwitch {
     font-size: 16px;
   }
+
+  .rateListItem {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+
 }
 
 @media (max-width: 568px) {
@@ -530,6 +552,8 @@ input[type='number'] {
   .dropdown-menu.show {
     max-height: 40vh;
   }
+
+  
 }
 
 /* mobile above  */

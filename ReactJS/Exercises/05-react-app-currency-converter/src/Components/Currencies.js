@@ -1,6 +1,6 @@
 import React from 'react';
 import { checkStatus, json } from '../utils/utils.js'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class CurrencyTable extends React.Component {
   constructor (props) {
@@ -50,11 +50,11 @@ class CurrencyTable extends React.Component {
         </Row>
 
         <Row className="titleSecondaryWrapper">
-          <p className="converterTitleSecondaryFont">rates for: {selectedCurrency}</p>
+          <p className="converterTitleSecondaryFont">current base: {selectedCurrency}</p>
         </Row>
         
         <Row noGutters>
-          <Col lg={3} className="currencyChoiceWrapper">
+          <Col lg={3} xs={5} className="currencyChoiceWrapper">
             <ul>
               {Object.entries(currencyData).map((currency) => {
                   const [ currencyName ] = currency;
@@ -68,8 +68,7 @@ class CurrencyTable extends React.Component {
             </ul>       
           </Col>
 
-
-          <Col lg={9} className="currenciesRatesWrapper">
+          <Col lg={9} xs={7} className="currenciesRatesWrapper">
             <ul>
               {Object.entries(currencyData).map((currencyRate) => {
                 const [ currencyName, value ] = currencyRate;
