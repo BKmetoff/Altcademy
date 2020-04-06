@@ -96,7 +96,9 @@ a:hover {
 }
 
 .converterContainer,
-.currenciesContainer {
+.currenciesContainer,
+.homeContainer,
+.notFoundContainer {
   /* height: 90%; */
   width: 65%;
   padding-top: 50px;
@@ -105,7 +107,8 @@ a:hover {
 
 .converterTitleWrapper,
 .currenciesTitleWrapper,
-.titleSecondaryWrapper {
+.titleSecondaryWrapper,
+.homeTitleWrapper {
   justify-content: flex-end;
   padding: 25px;
 }
@@ -115,7 +118,9 @@ a:hover {
 }
 
 .converterTitleFont,
-.converterTitleSecondaryFont {
+.converterTitleSecondaryFont,
+.homeTitleSecondaryFont,
+.homeNavButton {
   font-size: 44px;
   font-weight: 100;
   text-align: right;
@@ -126,13 +131,18 @@ a:hover {
   border-bottom: 0.5px solid  #333333a6;
 }
 
-.converterTitleSecondaryFont {
-  font-size: 24px;
+.converterTitleSecondaryFont,
+.homeTitleSecondaryFont,
+.homeNavButton,
+.notFoundSecondaryFont,
+.goHomeButton {
+  font-size: 20px;
   font-weight: 100;
 }
 
 .converterUserInput,
-.converterOutputWrapper {
+.converterOutputWrapper,
+.homeNavigationWrapper {
   background: #fff;
   border: 1px solid #ced4da;
   border-radius: 33px;
@@ -185,7 +195,9 @@ a:hover {
 }
 
 .calculateButton:hover,
-.converterOutputSwitch:hover {
+.converterOutputSwitch:hover,
+.homeNavButton:hover,
+.goHomeButton:hover {
   background: #ff7802;
   border-color: #ff7802;
   color: #fff;
@@ -278,7 +290,8 @@ input[type='number'] {
   font-style: italic;
 }
 
-.converterOutputWrapper {
+.converterOutputWrapper,
+.homeNavigationWrapper  {
   height: 50%;
   margin-top: 55px;
   margin-bottom: 55px ;
@@ -291,14 +304,24 @@ input[type='number'] {
   padding: 10px
 }
 
-.converterOutputSwitch {
-  border-radius: 33px;
-  border: none;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 14px;
+
+.homeNavButton,
+.goHomeButton {
+  padding: 2px;
+  text-align: center;
+  color: #333333a6
 }
 
+.converterOutputSwitch,
+.homeNavButton,
+.goHomeButton {
+  border-radius: 33px;
+  border: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
 
 .currencyChoiceWrapper,
 .currenciesRatesWrapper {
@@ -352,8 +375,9 @@ input[type='number'] {
   justify-content: space-between;
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: 50px;
   padding-top: 15px;
-  margin: 30px;
+  padding-bottom: 30px;
   border-top: 1px solid #ddd;
   flex-shrink: 0;
 }
@@ -383,10 +407,18 @@ input[type='number'] {
 
 /* error page */
 
-.notFound {
-  font-size: 120px;
-  color: #ddd;
+.notFoundIcon {
+  font-size: 150px;
+  color: #333333a6;
 }
+
+
+.notFoundWrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
+
 
 /* error page above */
 
@@ -467,7 +499,8 @@ input[type='number'] {
 
 @media (max-width: 1200px) {
   .converterContainer
-  .currenciesContainer {
+  .currenciesContainer,
+  .homeContainer {
     width: 80%;
   }
 
@@ -504,11 +537,13 @@ input[type='number'] {
 
 @media (max-width: 576px) {
   .converterContainer,
-  .currenciesContainer {
+  .currenciesContainer,
+  .homeContainer {
     width: 90%;
   }
 
-  .currenciesContainer {
+  .currenciesContainer,
+  .homeContainer {
     padding-top: 30px;
   }
 
@@ -526,7 +561,8 @@ input[type='number'] {
   }
 
   .converterTitleFont,
-  .converterTitleSecondaryFont {
+  .converterTitleSecondaryFont,
+   {
     font-size: 24px;
     color: #333;
     text-shadow: none;
@@ -540,6 +576,12 @@ input[type='number'] {
   .rateListItem {
     margin-left: 15%;
     margin-right: 15%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .homeTitleSecondaryFont {
+    display: none;
   }
 
 }

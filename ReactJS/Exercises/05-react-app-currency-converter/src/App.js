@@ -28,8 +28,6 @@ function App() {
             </Switch>
             <Footer />
             {/* placeholder for loading animation ??  */}
-
-            
           </div>
         </div>
       </div>
