@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { changeNavItemBackground } from '../utils/utils.js'
+import { Container, Row  } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far, faDizzy } from '@fortawesome/free-regular-svg-icons'
@@ -8,6 +9,7 @@ import { far, faDizzy } from '@fortawesome/free-regular-svg-icons'
 library.add(far,faDizzy )
 
 class NotFound extends React.Component {
+    componentDidMount () { changeNavItemBackground() }
     render () {
         return (
             <Container className="notFoundContainer">

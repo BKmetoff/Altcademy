@@ -1,5 +1,5 @@
 import React from 'react';
-import { checkStatus, json } from '../utils/utils.js'
+import { checkStatus, json, changeNavItemBackground } from '../utils/utils.js'
 import { Container, Row, Col } from 'react-bootstrap'
 
 class CurrencyTable extends React.Component {
@@ -30,7 +30,10 @@ class CurrencyTable extends React.Component {
     })
   }
 
-  componentDidMount () { this.fetchAllRates(this.state.selectedCurrency); }
+  componentDidMount () {
+    this.fetchAllRates(this.state.selectedCurrency); 
+    changeNavItemBackground('currencies')
+  }
 
   userInput(newCurrencyName) {
     // ignore clicks on the same currency

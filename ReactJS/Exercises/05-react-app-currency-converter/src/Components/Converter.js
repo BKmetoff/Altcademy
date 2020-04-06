@@ -1,5 +1,5 @@
 import React from 'react';
-import { json, checkStatus, equation } from '../utils/utils.js'
+import { json, checkStatus, equation, changeNavItemBackground } from '../utils/utils.js'
 import { Container, Row, Col, Form, Dropdown, FormControl, Button } from 'react-bootstrap' 
 
 class  Converter extends React.Component  {
@@ -37,6 +37,8 @@ class  Converter extends React.Component  {
     .catch((error) => {
       console.log(error);
     })
+
+    changeNavItemBackground('converter')
   }
 
   selectCurrency (currencyName, dropDownId) {
