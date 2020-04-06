@@ -79,12 +79,15 @@ a:hover {
   position: absolute;
   padding-left: 220px;
   background: #f3bc551c;
+  display: flex;
+  flex-direction: column;
 }
 
 .converterContainer {
-  height: 90%;
+  /* height: 90%; */
   width: 65%;
   padding-top: 50px;
+  flex: 1 0 auto;
 }
 
 .converterTitleWrapper {
@@ -275,8 +278,10 @@ input[type='number'] {
   justify-content: space-between;
   margin-left: 20px;
   margin-right: 20px;
-  padding-top: 5px;
+  padding-top: 15px;
+  margin: 30px;
   border-top: 1px solid #ddd;
+  flex-shrink: 0;
 }
 
 .footerListItem,
@@ -371,11 +376,6 @@ input[type='number'] {
   /* content above */
 
   /* footer */
-
-  .footer {
-    padding-top: 15px;
-    margin: 30px;
-  }
 
   .footerLeft {
     display: none;
