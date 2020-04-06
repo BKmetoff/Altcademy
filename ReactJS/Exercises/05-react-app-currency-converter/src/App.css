@@ -79,6 +79,11 @@ a:hover {
   cursor: pointer;
 }
 
+.currentPage {
+  background: #16a085;
+  color: #fff;
+}
+
 
 /* sidebar above */
 
@@ -366,6 +371,16 @@ input[type='number'] {
   border-bottom: 0.5px solid  #333333a6;
 }
 
+.notFoundIcon {
+  font-size: 150px;
+  color: #333333a6;
+}
+
+.notFoundWrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
 /* content above */
 
 /* footer  */
@@ -383,7 +398,7 @@ input[type='number'] {
 }
 
 .footerListItem,
-.footerGit {
+.footerVersion {
   color: #333;
   font-weight: 200;
   font-size: 14px;
@@ -404,23 +419,6 @@ input[type='number'] {
 }
 
 /* footer above */
-
-/* error page */
-
-.notFoundIcon {
-  font-size: 150px;
-  color: #333333a6;
-}
-
-
-.notFoundWrapper {
-  flex-direction: column;
-  align-items: center;
-}
-
-
-
-/* error page above */
 
 
 /* mobile */
@@ -561,8 +559,7 @@ input[type='number'] {
   }
 
   .converterTitleFont,
-  .converterTitleSecondaryFont,
-   {
+  .converterTitleSecondaryFont {
     font-size: 24px;
     color: #333;
     text-shadow: none;

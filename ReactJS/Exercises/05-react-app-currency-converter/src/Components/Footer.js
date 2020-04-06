@@ -25,18 +25,28 @@ class Footer extends React.Component {
                     </Link>
                 </ul>
                 
-                <ul className="footerRight">    
-                    <Link to="https://github.com/BKmetoff">
-                        <li className="footerListItem">
+                <ul className="footerRight">
+                    
+                    <li>
+                        <a
+                            className="footerListItem"
+                            href="https://github.com/BKmetoff"
+                            target="_blank"
+                            rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faGithub} /> /bkmetoff
-                        </li>
-                    </Link>
-                    <Link to="https://www.altcademy.com/">
-                        <li className="footerListItem">
-                            <FontAwesomeIcon icon={faBookOpen} />  Altcademy
-                        </li>
-                    </Link>
-                    <li className="footerGit">v1.0</li>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            className="footerListItem"
+                            href="https://www.altcademy.com/"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faBookOpen} /> Altcademy
+                        </a>
+                    </li>
+                
+                    <li className="footerVersion">v1.0</li>
                 </ul>
             </div>
         )
