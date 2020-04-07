@@ -198,7 +198,7 @@ class  Converter extends React.Component  {
             <p>rate: {currencyRate}</p>
           </div>
           <div className="outputPadding">
-            <Button className="converterOutputSwitch" onClick={this.swapCurrencies}>Swap currencies</Button>
+            <Button className="converterOutputSwitch" onClick={this.swapCurrencies}>swap currencies</Button>
           </div>
         </Row>       
       </Container>
