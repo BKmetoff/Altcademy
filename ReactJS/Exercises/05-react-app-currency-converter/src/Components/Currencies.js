@@ -1,6 +1,6 @@
 import React from 'react';
-import { checkStatus, json, changeNavItemBackground } from '../utils/utils.js'
-import { Container, Row, Col } from 'react-bootstrap'
+import { checkStatus, json, changeNavItemBackground, hideLoading } from '../utils/utils.js'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 
 class CurrencyTable extends React.Component {
   constructor (props) {
@@ -35,6 +35,10 @@ class CurrencyTable extends React.Component {
     changeNavItemBackground('currencies')
   }
 
+  componentDidUpdate () {
+    hideLoading()
+  }
+
   userInput(newCurrencyName) {
     // ignore clicks on the same currency
     if (newCurrencyName !== this.state.selectedCurrency) {
@@ -58,6 +62,12 @@ class CurrencyTable extends React.Component {
         
         <Row noGutters>
           <Col lg={3} xs={5} className="currencyChoiceWrapper">
+            
+            <div className="loadingSpinnerWrapper">
+              <Spinner animation="border" variant="primary" />
+            </div>
+            
+
             <ul>
               {Object.entries(currencyData).map((currency) => {
                   const [ currencyName ] = currency;
@@ -72,6 +82,11 @@ class CurrencyTable extends React.Component {
           </Col>
 
           <Col lg={9} xs={7} className="currenciesRatesWrapper">
+
+            <div className="loadingSpinnerWrapper">
+              <Spinner animation="border" variant="primary" />
+            </div>
+            
             <ul>
               {Object.entries(currencyData).map((currencyRate) => {
                 const [ currencyName, value ] = currencyRate;

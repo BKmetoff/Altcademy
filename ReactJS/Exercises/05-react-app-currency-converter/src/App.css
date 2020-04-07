@@ -14,6 +14,24 @@ a:hover {
   text-decoration: none;
 }
 
+
+.loadingSpinnerWrapper  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.loadingSpinnerWrapper .text-primary {
+  color:#16a085 !important;
+}
+
+
+
 /* sidebar */
 
 #sidebarWrapper {
@@ -26,13 +44,13 @@ a:hover {
   opacity: 0.9;
 }
 
-.navBrand {
+.navLogo {
   font-size: 100px;
   text-align: center;
   align-content: center;
 }
 
-.navLogo {
+.navSlogan {
   font-weight: 300;
   font-size: 14px;
   font-style: italic;
@@ -44,11 +62,11 @@ a:hover {
   color: #5ddbc2;
 }
 
-.navBrand svg {
+.navLogo svg {
   color: #ff7802;
 }
 
-.navBrand svg:hover {
+.navLogo svg:hover {
   color: #16a085;
 }
 
@@ -142,7 +160,7 @@ a:hover {
 .notFoundSecondaryFont,
 .goHomeButton {
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .converterUserInput,
@@ -258,7 +276,9 @@ a:hover {
   border-bottom-left-radius: 5px;
 }
 
-.dropdown-item {
+.dropdown-item,
+.dropdown-item.active,
+.dropdown-item:active {
   border-radius: 15px;
   width: 33%;
   font-weight: 300;
@@ -266,7 +286,8 @@ a:hover {
   color: #333333a6;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,
+.dropdown-item:active {
   background-color: #16a0851a;
   font-weight: 400;
 }
@@ -317,11 +338,15 @@ input[type='number'] {
   color: #333333a6
 }
 
+.converterOutputSwitch {
+  border: none;
+}
+
 .converterOutputSwitch,
 .homeNavButton,
 .goHomeButton {
   border-radius: 33px;
-  border: none;
+  border-bottom: 1px solid #ced4da;
   padding-left: 30px;
   padding-right: 30px;
   margin-top: 14px;
@@ -439,11 +464,11 @@ input[type='number'] {
     padding-right: 20px;
   }
 
-  .navLogo {
+  .navSlogan {
     display: none;
   }
 
-  .navBrand {
+  .navLogo {
     font-size: 35px;
   }
 
@@ -458,6 +483,7 @@ input[type='number'] {
     padding-right: 10px;
     padding-left: 10px;
     border-radius: 5px;
+    margin-left: 10px;
     line-height: 30px;
   }
 
