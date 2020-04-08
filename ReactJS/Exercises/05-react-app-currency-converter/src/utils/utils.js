@@ -5,8 +5,17 @@ export const checkStatus = (response) => {
 
 export const json = (response) => response.json();
 
-// single currency exchange:
-export const equation = (base, rate) => Number(base * rate).toFixed(2);
+export const checkLoading = (stateIsLoading) => (!stateIsLoading) ? true : true
+
+// single currency exchange
+export const convertInputToOutput = (inputAmount, currencyRate) => {
+    return Number(inputAmount * currencyRate).toFixed(2);
+}
+
+export const convertOutputToInput = (outputAmount, currencyRate) => {
+    return Number(outputAmount *  (1 / currencyRate)).toFixed(2);
+}
+
 
 // add a background to the navigation links
 // when visiting the corresponding page.
