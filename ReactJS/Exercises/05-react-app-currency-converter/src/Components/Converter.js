@@ -1,6 +1,13 @@
 import React from 'react';
-import { json, checkStatus, equation, changeNavItemBackground } from '../utils/utils.js'
 import { Container, Row, Col, Form, Dropdown, FormControl, Button } from 'react-bootstrap' 
+import {
+  json,
+  checkStatus,
+  convertInputToOutput,
+  convertOutputToInput,
+  checkLoading,
+  changeNavItemBackground
+} from '../utils/utils.js'
 
 class  Converter extends React.Component  {
   constructor (props) {
@@ -13,7 +20,8 @@ class  Converter extends React.Component  {
       amountOutputCurrency: '',
       currencyRate: '',
       date: '',
-      error: ''
+      error: '',
+      isLoading: true // the OutputCurrency component will be rendered based on this
     }
     this.selectCurrency = this.selectCurrency.bind(this);
     this.selectCurrencyValue = this.selectCurrencyValue.bind(this);
@@ -42,30 +50,44 @@ class  Converter extends React.Component  {
   }
 
   selectCurrency (currencyName, dropDownId) {
-    if (dropDownId) { this.setState({ inputCurrency: currencyName }) } 
-    else { this.setState({ outputCurrency: currencyName }) }
+    if (dropDownId) {
+      this.setState({ inputCurrency: currencyName })
+      this.setState({ isLoading: checkLoading(this.state.isLoading) })
+      
+    }  else {
+      this.setState({ outputCurrency: currencyName })
+      this.setState({ isLoading: checkLoading(this.state.isLoading) })
+    }
   }
 
   selectCurrencyValue (event) {
     if (parseFloat(event.target.value) !== 0) {
       this.setState({ amountInputCurrency: parseFloat(event.target.value) });  
+      this.setState({ isLoading: checkLoading(this.state.isLoading) });
     }
-
   }
 
   fetchRate () {
 
     // prevent redundant API calls
     if (this.state.amountInputCurrency !== 0
-    &&  this.state.inputCurrency !== 'From' 
-    &&  this.state.outputCurrency !== 'To') {      
+    &&  this.state.inputCurrency !== 'from' 
+    &&  this.state.outputCurrency !== 'to') {      
+      
+      this.setState({ isLoading: true })
+      
+      console.log('state from Fetch:' + this.state.inputCurrency);
+      
       fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
+        // console.log(data);
+        
         this.setState({ date: data.date })
         Object.entries(data.rates).map(currency => {
           let rate = currency[1];
+          console.log(rate);
           return this.setState({ currencyRate: Number(rate).toFixed(2) })
         })
       })
@@ -74,22 +96,22 @@ class  Converter extends React.Component  {
       })
       .then(this.calculateRate)
     }
-    console.log('amount state: ' + this.state.amountInputCurrency);
     
-  }
-
-  calculateRate () {
-    this.setState({ amountOutputCurrency: equation(this.state.amountInputCurrency, this.state.currencyRate) })
+    this.setState({ isLoading: false })
   }
 
   swapCurrencies () {    
-    const buffer = [this.state.inputCurrency, this.state.outputCurrency];
+    const buffer = [ this.state.inputCurrency, this.state.outputCurrency ];
     this.setState({
       inputCurrency: buffer[1],
       outputCurrency: buffer[0],
-      currencyRate: 0,
-      amountOutputCurrency: 0,
+      amountOutputCurrency: convertOutputToInput(this.state.amountInputCurrency, this.state.currencyRate),
+      currencyRate: (1 / this.state.currencyRate).toFixed(4)
      })
+  }
+
+  calculateRate () {
+    this.setState({ amountOutputCurrency: convertInputToOutput(this.state.amountInputCurrency, this.state.currencyRate) })
   }
 
   render () {
@@ -97,8 +119,10 @@ class  Converter extends React.Component  {
       currencyData,
       inputCurrency,
       outputCurrency,
+      amountInputCurrency,
       amountOutputCurrency,
       currencyRate,
+      isLoading
     } = this.state;
 
     // drop-down identifier
@@ -190,19 +214,49 @@ class  Converter extends React.Component  {
         
 
         {/* output  */}
-        <Row className="converterOutputWrapper no-gutters">
-          <div className="converterTitleFont outputPadding">
-            <p>amount: {amountOutputCurrency}</p>
-          </div>
-          <div className="converterTitleFont outputPadding">
-            <p>rate: {currencyRate}</p>
-          </div>
-          <div className="outputPadding">
-            <Button className="converterOutputSwitch" onClick={this.swapCurrencies}>swap currencies</Button>
-          </div>
-        </Row>       
+        { !isLoading ? (
+            <CurrencyOutput
+              amountInputCurrency={amountInputCurrency}
+              inputCurrency={inputCurrency}
+              amountOutputCurrency={amountOutputCurrency}
+              outputCurrency={outputCurrency}
+              currencyRate={currencyRate}
+              swapCurrencies={this.swapCurrencies}
+              />
+            ) : (
+              null
+            ) 
+          }
+        
       </Container>
     );
+  }
+}
+
+class CurrencyOutput extends React.Component {
+  render () {
+    const { 
+      amountInputCurrency,
+      inputCurrency,
+      amountOutputCurrency,
+      outputCurrency,
+      currencyRate,
+      swapCurrencies
+    } = this.props
+
+    return (
+      <Row className="converterOutputWrapper no-gutters">
+        <div className="converterTitleFont outputPadding">
+          <p>{amountInputCurrency} {inputCurrency} = {amountOutputCurrency} {outputCurrency} </p>
+        </div>
+        <div className="converterTitleSecondaryFont outputPadding">
+          <p>1 {inputCurrency} = {currencyRate} {outputCurrency} </p>
+        </div>
+        <div className="outputPadding">
+          <Button className="converterOutputSwitch" onClick={swapCurrencies}>swap currencies</Button>
+        </div>
+      </Row>
+    )
   }
 }
 

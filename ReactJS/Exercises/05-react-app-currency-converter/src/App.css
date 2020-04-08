@@ -557,6 +557,10 @@ input[type='number'] {
     font-size: 36px;
   }
 
+  .converterTitleWrapper {
+    justify-content: center;
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -584,8 +588,7 @@ input[type='number'] {
     justify-content: center;
   }
 
-  .converterTitleFont,
-  .converterTitleSecondaryFont {
+  .converterTitleFont {
     font-size: 24px;
     color: #333;
     text-shadow: none;
