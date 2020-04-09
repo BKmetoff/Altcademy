@@ -5,7 +5,7 @@ export const checkStatus = (response) => {
 
 export const json = (response) => response.json();
 
-export const checkLoading = (stateIsLoading) => (!stateIsLoading) ? true : true
+export const checkHidden = (stateIsHidden) => (!stateIsHidden) ? true : true
 
 // single currency exchange
 export const convertInputToOutput = (inputAmount, currencyRate) => {
