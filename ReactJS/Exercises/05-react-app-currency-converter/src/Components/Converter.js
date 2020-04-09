@@ -5,7 +5,7 @@ import {
   checkStatus,
   convertInputToOutput,
   convertOutputToInput,
-  checkLoading,
+  checkHidden,
   changeNavItemBackground
 } from '../utils/utils.js'
 
@@ -21,7 +21,7 @@ class  Converter extends React.Component  {
       currencyRate: '',
       date: '',
       error: '',
-      isLoading: true // the OutputCurrency component will be rendered based on this
+      isHidden: true // the OutputCurrency component will be rendered based on this
     }
     this.selectCurrency = this.selectCurrency.bind(this);
     this.selectCurrencyValue = this.selectCurrencyValue.bind(this);
@@ -52,18 +52,18 @@ class  Converter extends React.Component  {
   selectCurrency (currencyName, dropDownId) {
     if (dropDownId) {
       this.setState({ inputCurrency: currencyName })
-      this.setState({ isLoading: checkLoading(this.state.isLoading) })
+      this.setState({ isHidden: checkHidden(this.state.isHidden) })
       
     }  else {
       this.setState({ outputCurrency: currencyName })
-      this.setState({ isLoading: checkLoading(this.state.isLoading) })
+      this.setState({ isHidden: checkHidden(this.state.isHidden) })
     }
   }
 
   selectCurrencyValue (event) {
     if (parseFloat(event.target.value) !== 0) {
       this.setState({ amountInputCurrency: parseFloat(event.target.value) });  
-      this.setState({ isLoading: checkLoading(this.state.isLoading) });
+      this.setState({ isHidden: checkHidden(this.state.isHidden) });
     }
   }
 
@@ -74,20 +74,15 @@ class  Converter extends React.Component  {
     &&  this.state.inputCurrency !== 'from' 
     &&  this.state.outputCurrency !== 'to') {      
       
-      this.setState({ isLoading: true })
-      
-      console.log('state from Fetch:' + this.state.inputCurrency);
+      this.setState({ isHidden: true })
       
       fetch(`https://alt-exchange-rate.herokuapp.com/latest?base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        // console.log(data);
-        
         this.setState({ date: data.date })
         Object.entries(data.rates).map(currency => {
           let rate = currency[1];
-          console.log(rate);
           return this.setState({ currencyRate: Number(rate).toFixed(2) })
         })
       })
@@ -97,7 +92,7 @@ class  Converter extends React.Component  {
       .then(this.calculateRate)
     }
     
-    this.setState({ isLoading: false })
+    this.setState({ isHidden: false })
   }
 
   swapCurrencies () {    
@@ -122,7 +117,7 @@ class  Converter extends React.Component  {
       amountInputCurrency,
       amountOutputCurrency,
       currencyRate,
-      isLoading
+      isHidden
     } = this.state;
 
     // drop-down identifier
@@ -214,7 +209,7 @@ class  Converter extends React.Component  {
         
 
         {/* output  */}
-        { !isLoading ? (
+        { !isHidden ? (
             <CurrencyOutput
               amountInputCurrency={amountInputCurrency}
               inputCurrency={inputCurrency}
