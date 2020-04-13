@@ -143,7 +143,7 @@ a:hover {
 .converterTitleSecondaryFont,
 .homeTitleSecondaryFont,
 .homeNavButton {
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 100;
   text-align: right;
   letter-spacing: 1.5px;
@@ -540,6 +540,11 @@ input[type='number'] {
     margin-left: 20%;
     margin-right: 20%;
   }
+
+  .converterTitleFont {
+    font-size: 32px;
+  }
+
 }
 
 
@@ -562,7 +567,7 @@ input[type='number'] {
   }
 
   .converterTitleFont {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .converterTitleWrapper {

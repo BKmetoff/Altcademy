@@ -55,10 +55,10 @@ export const updateSlogan = ()  =>  navSlogans[randomInt]
 export const hideLoading = () => {
     
     let spinners = document.getElementsByClassName('loadingSpinnerWrapper');
-   
+    
     return (
-        Object.entries(spinners).forEach((spinner) => {
-            spinner[1].classList.add('hidden')  
+        Object.values(spinners).forEach((spinner) => {
+            spinner.classList.add('hidden')  
         })
     )
     
