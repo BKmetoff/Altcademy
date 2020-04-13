@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Row, Col, Form, Dropdown, FormControl, Button } from 'react-bootstrap' 
+import Chart from 'chart.js'
 import {
   json,
   checkStatus,
   convertInputToOutput,
   convertOutputToInput,
   checkHidden,
-  changeNavItemBackground
+  changeNavItemBackground,
+  getHistoricalCurrencyChartDates
 } from '../utils/utils.js'
 
 class  Converter extends React.Component  {
@@ -19,16 +21,23 @@ class  Converter extends React.Component  {
       amountInputCurrency: 0,
       amountOutputCurrency: '',
       currencyRate: '',
-      date: '',
+      currentDate: '',
       error: '',
-      isHidden: true // the OutputCurrency component will be rendered based on this
+      isHidden: true, // the OutputCurrency component will be rendered based on this
+      historicalCurrencyData: {},
+      historicalCurrencyChartDates: {}
     }
     this.selectCurrency = this.selectCurrency.bind(this);
     this.selectCurrencyValue = this.selectCurrencyValue.bind(this);
     this.fetchRate = this.fetchRate.bind(this);
     this.calculateRate = this.calculateRate.bind(this);
     this.swapCurrencies = this.swapCurrencies.bind(this);
+    this.createChart = this.createChart.bind(this)
+
+    this.chartRef = React.createRef();
   }
+
+  
   
   componentDidMount () {
     
@@ -40,13 +49,22 @@ class  Converter extends React.Component  {
     .then(checkStatus)
     .then(json)    
     .then((data) => {
-      this.setState({ currencyData: data.rates, date: data.date })
+      this.setState({ currencyData: data.rates, currentDate: data.currentDate })
     })
     .catch((error) => {
       console.log(error);
     })
 
     changeNavItemBackground('converter')
+    this.setState({ historicalCurrencyChartDates: getHistoricalCurrencyChartDates() })
+    
+    
+    if (this.state.inputCurrency !== 'from'
+    && this.state.outputCurrency !== 'to'
+    && this.state.historicalCurrencyChartDates !== {} ) {
+      this.fetchRateHistory()
+    }
+
   }
 
   selectCurrency (currencyName, dropDownId) {
@@ -80,19 +98,20 @@ class  Converter extends React.Component  {
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        this.setState({ date: data.date })
+        this.setState({ currentDate: data.currentDate })
         Object.entries(data.rates).map(currency => {
           let rate = currency[1];
           return this.setState({ currencyRate: Number(rate).toFixed(2) })
         })
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error);  
       })
       .then(this.calculateRate)
     }
     
     this.setState({ isHidden: false })
+
   }
 
   swapCurrencies () {    
@@ -103,10 +122,53 @@ class  Converter extends React.Component  {
       amountOutputCurrency: convertOutputToInput(this.state.amountInputCurrency, this.state.currencyRate),
       currencyRate: (1 / this.state.currencyRate).toFixed(4)
      })
+
+     this.createChart(buffer[1], buffer[0])
   }
 
   calculateRate () {
-    this.setState({ amountOutputCurrency: convertInputToOutput(this.state.amountInputCurrency, this.state.currencyRate) })
+    this.setState({ amountOutputCurrency: convertInputToOutput(this.state.amountInputCurrency, this.state.currencyRate) }) 
+    this.createChart(this.state.inputCurrency, this.state.outputCurrency)
+  }
+
+  createChart (input, output) {
+
+    // fetch(`https://alt-exchange-rate.herokuapp.com/history?start_at=${this.state.historicalCurrencyChartDates.startDate}&end_at=${this.state.historicalCurrencyChartDates.endDate}&base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)    
+
+    fetch(`https://alt-exchange-rate.herokuapp.com/history?start_at=${this.state.historicalCurrencyChartDates.startDate}&end_at=${this.state.historicalCurrencyChartDates.endDate}&base=${input}&symbols=${output}`)
+    .then(checkStatus)
+    .then(json)
+    .then((data) => {
+      
+      let rates = Object.values(data.rates).map(rate => rate[this.state.outputCurrency])
+      let dates = Object.keys(data.rates).map(date => date)
+      
+      this.chart = new Chart(this.chartRef.current.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: dates,
+          datasets: [
+            {
+              label: `${this.state.inputCurrency}/${this.state.outputCurrency}`,
+              data: rates,
+              fill: false,
+              tension: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      })
+
+      // console.log(rates, dates);
+      console.log(data);
+      
+      
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   render () {
@@ -117,12 +179,12 @@ class  Converter extends React.Component  {
       amountInputCurrency,
       amountOutputCurrency,
       currencyRate,
-      isHidden
+      isHidden,
     } = this.state;
 
     // drop-down identifier
     let dropDownId = true;
-
+    
     return (
       <Container fluid className="converterContainer">
         
@@ -223,6 +285,10 @@ class  Converter extends React.Component  {
             ) 
           }
         
+        {/* chart  */}
+          <Row className="chartWrapper">
+            <canvas ref={this.chartRef}></canvas>
+          </Row>
       </Container>
     );
   }
@@ -268,5 +334,4 @@ class CurrencyDropdownItem extends React.Component {
     )
   }
 }
-
 export default Converter;

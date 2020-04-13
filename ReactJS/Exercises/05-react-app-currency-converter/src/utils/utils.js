@@ -52,7 +52,6 @@ const randomInt = Math.floor(Math.random() * navSlogans.length)
 export const updateSlogan = ()  =>  navSlogans[randomInt]
 
 // hide loading animation
-
 export const hideLoading = () => {
     
     let spinners = document.getElementsByClassName('loadingSpinnerWrapper');
@@ -63,5 +62,16 @@ export const hideLoading = () => {
         })
     )
     
+}
+
+// from Altcademy example 
+export const getHistoricalCurrencyChartDates = () => {
+    
+    const chartDates = {};
+
+    chartDates.endDate = new Date().toISOString().split('T')[0];
+    chartDates.startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+
+    return chartDates
 }
 
