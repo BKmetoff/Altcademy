@@ -122,7 +122,7 @@ a:hover {
 .currenciesContainer,
 .homeContainer,
 .notFoundContainer {
-  width: 75%;
+  width: 65%;
   padding-top: 50px;
   flex: 1 0 auto;
 }
@@ -163,7 +163,7 @@ a:hover {
 }
 
 .converterUserInput,
-.converterOutputWrapper,
+.outputRateWrapper,
 .homeNavigationWrapper {
   background: #fff;
   border: 1px solid #ced4da;
@@ -315,9 +315,13 @@ input[type='number'] {
   font-style: italic;
 }
 
-.converterOutputWrapper,
+.converterWrapper {
+  flex-direction: column;
+}
+
+.outputRateWrapper,
 .homeNavigationWrapper  {
-  height: 50%;
+  height: 350px;
   margin-top: 55px;
   margin-bottom: 55px ;
   justify-content: center;
@@ -498,8 +502,13 @@ input[type='number'] {
     width: 200%
   }
 
-  .dropdown-item {
+  .dropdown-item,
+  .dropdown-item:active {
     width: 20%;
+  }
+
+  .dropdownOutputCurrencyWrapper > .dropdown-menu.show {
+    transform: translate3d(-50%, 37px, 0px) !important;
   }
 
   /* content above */
@@ -553,7 +562,7 @@ input[type='number'] {
   }
 
   .converterTitleFont {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .converterTitleWrapper {

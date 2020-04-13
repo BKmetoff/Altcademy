@@ -133,8 +133,6 @@ class  Converter extends React.Component  {
 
   createChart (input, output) {
 
-    // fetch(`https://alt-exchange-rate.herokuapp.com/history?start_at=${this.state.historicalCurrencyChartDates.startDate}&end_at=${this.state.historicalCurrencyChartDates.endDate}&base=${this.state.inputCurrency}&symbols=${this.state.outputCurrency}`)    
-
     fetch(`https://alt-exchange-rate.herokuapp.com/history?start_at=${this.state.historicalCurrencyChartDates.startDate}&end_at=${this.state.historicalCurrencyChartDates.endDate}&base=${input}&symbols=${output}`)
     .then(checkStatus)
     .then(json)
@@ -272,7 +270,10 @@ class  Converter extends React.Component  {
 
         {/* output  */}
         { !isHidden ? (
-            <CurrencyOutput
+        
+
+        <Row className="converterWrapper">
+          <CurrencyOutput
               amountInputCurrency={amountInputCurrency}
               inputCurrency={inputCurrency}
               amountOutputCurrency={amountOutputCurrency}
@@ -280,15 +281,19 @@ class  Converter extends React.Component  {
               currencyRate={currencyRate}
               swapCurrencies={this.swapCurrencies}
               />
+          <canvas ref={this.chartRef}></canvas>
+          </Row>
+        
+        
             ) : (
               null
             ) 
           }
         
         {/* chart  */}
-          <Row className="chartWrapper">
-            <canvas ref={this.chartRef}></canvas>
-          </Row>
+          
+            
+
       </Container>
     );
   }
@@ -306,7 +311,7 @@ class CurrencyOutput extends React.Component {
     } = this.props
 
     return (
-      <Row className="converterOutputWrapper no-gutters">
+      <Row className="outputRateWrapper no-gutters">
         <div className="converterTitleFont outputPadding">
           <p>{amountInputCurrency} {inputCurrency} = {amountOutputCurrency} {outputCurrency} </p>
         </div>
