@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Form, Dropdown, FormControl, Button } from 'react-bootstrap' 
+import { Container, Row, Col, Form, Dropdown, FormControl, Button  } from 'react-bootstrap' 
 import Chart from 'chart.js'
 import {
   json,
@@ -8,7 +8,8 @@ import {
   convertOutputToInput,
   checkHidden,
   changeNavItemBackground,
-  getHistoricalCurrencyChartDates
+  getHistoricalCurrencyChartDates,
+  hideLoading
 } from '../utils/utils.js'
 
 class  Converter extends React.Component  {
@@ -36,8 +37,6 @@ class  Converter extends React.Component  {
 
     this.chartRef = React.createRef();
   }
-
-  
   
   componentDidMount () {
     
@@ -65,6 +64,8 @@ class  Converter extends React.Component  {
       this.fetchRateHistory()
     }
 
+    hideLoading()
+
   }
 
   selectCurrency (currencyName, dropDownId) {
@@ -86,11 +87,13 @@ class  Converter extends React.Component  {
   }
 
   fetchRate () {
-
+    
     // prevent redundant API calls
-    if (this.state.amountInputCurrency !== 0
-    &&  this.state.inputCurrency !== 'from' 
-    &&  this.state.outputCurrency !== 'to') {      
+    if (this.state.amountInputCurrency === 0
+    &&  this.state.inputCurrency === 'from' 
+    &&  this.state.outputCurrency === 'to') {
+     return  null
+    } else {
       
       this.setState({ isHidden: true })
       
@@ -111,7 +114,6 @@ class  Converter extends React.Component  {
     }
     
     this.setState({ isHidden: false })
-
   }
 
   swapCurrencies () {    
@@ -138,7 +140,7 @@ class  Converter extends React.Component  {
     .then(json)
     .then((data) => {
       
-      let rates = Object.values(data.rates).map(rate => rate[this.state.outputCurrency])
+      let rates = Object.values(data.rates).map(rate => Number(rate[this.state.outputCurrency]).toFixed(3))
       let dates = Object.keys(data.rates).map(date => date)
       
       this.chart = new Chart(this.chartRef.current.getContext('2d'), {
@@ -150,7 +152,9 @@ class  Converter extends React.Component  {
               label: `${this.state.inputCurrency}/${this.state.outputCurrency}`,
               data: rates,
               fill: false,
-              tension: 0
+              tension: 0,
+              backgroundColor: '#16a085',
+              borderColor: '#16a0851a'
             }
           ]
         },
@@ -159,10 +163,7 @@ class  Converter extends React.Component  {
         }
       })
 
-      // console.log(rates, dates);
-      console.log(data);
-      
-      
+      console.log(rates);
     })
     .catch((error) => {
       console.log(error);
@@ -212,6 +213,9 @@ class  Converter extends React.Component  {
                 <Dropdown className="dropdownInputCurrencyWrapper">
                   <Dropdown.Toggle id="dropdown-basic" className="dropdownInputCurrency">
                     {inputCurrency}
+                    <div className="loadingSpinnerWrapper">
+                      <div className="spinner-border text-primary"></div>
+                    </div>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -238,6 +242,9 @@ class  Converter extends React.Component  {
                 <Dropdown className="dropdownOutputCurrencyWrapper">
                   <Dropdown.Toggle id="dropdown-basic" className="dropdownOutputCurrency">
                     {outputCurrency}
+                    <div className="loadingSpinnerWrapper">
+                      <div className="spinner-border text-primary"></div>
+                    </div>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
