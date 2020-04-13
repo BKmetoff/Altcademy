@@ -3,7 +3,7 @@
 https://alt-exchange-rate.herokuapp.com/latest?base=USD
 
 ### start/end date
-https://alt-exchange-rate.herokuapp.com/history?start_at=2018-01-01&end_at=2018-09-01
+https://alt-exchange-rate.herokuapp.com/history?start_at=2020-03-10&end_at=2020-04-10&base=BGN&symbols=EUR
 
 
 ### limits response
