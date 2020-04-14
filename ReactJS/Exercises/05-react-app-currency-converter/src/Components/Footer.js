@@ -46,7 +46,7 @@ class Footer extends React.Component {
                         </a>
                     </li>
                 
-                    <li className="footerVersion">v1.1</li>
+                    <li className="footerVersion">v1.2</li>
                 </ul>
             </div>
         )
