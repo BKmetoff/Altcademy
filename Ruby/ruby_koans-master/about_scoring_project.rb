@@ -38,16 +38,15 @@ def score(dice)
   return 100 if dice.length == 1 && dice[0] == 1
   return 1000 if dice.length == 3 && dice.all?(1)
 
-  result = 0
-  result_of_ones = 0
-  result_of_fives = 0
-
-  result_of_ones += handle_ones(dice.count(1)) if dice.any?(1)
-  result_of_fives += handle_fives(dice.count(5)) if dice.any?(5)
+  result_of_ones = compute_score(dice.count(1), 1000)
+  result_of_fives = compute_score(dice.count(5), 500)
 
   result = result_of_ones + result_of_fives
 
-  dice.delete_if { |number| number == 1 || number == 5 }
+  # dice.delete_if { |number| [1, 5].include?(number) }
+
+  hash_of_numbers_to_remove = { 1 => nil, 5 => nil }
+  dice.delete_if { |number| hash_of_numbers_to_remove.key?(number) }
 
   count = {}
   dice.each do |number|
@@ -60,30 +59,19 @@ def score(dice)
     result_from_other_numbers += (100 * key) if value == 3
   end
 
-  result += result_from_other_numbers
-  result
+  result + result_from_other_numbers
 end
 
-def handle_fives(count_of_fives)
-  result_to_return = 0
-  result_to_return + if count_of_fives > 3
-                       500 + (50 * (count_of_fives - 3))
-                     elsif count_of_fives < 3
-                       (50 * count_of_fives)
-                     else
-                       500
-                     end
-end
+def compute_score(count, score)
+  score_divided_by10 = score / 10
 
-def handle_ones(count_of_ones)
-  result_to_return = 0
-  result_to_return + if count_of_ones > 3
-                       1000 + (100 * (count_of_ones - 3))
-                     elsif count_of_ones < 3
-                       (100 * count_of_ones)
-                     else
-                       1000
-                     end
+  if count > 3
+    score + (score_divided_by10 * (count - 3))
+  elsif count < 3
+    (score_divided_by10 * count)
+  else
+    score
+  end
 end
 
 class AboutScoringProject < Neo::Koan
