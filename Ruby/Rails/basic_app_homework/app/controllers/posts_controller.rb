@@ -14,4 +14,8 @@ class PostsController < ApplicationController
     @posts = Post.all
     render 'posts/list.jbuilder'
   end
+
+  def show
+    @post = Post.find(params[:id])
+  end
 end
