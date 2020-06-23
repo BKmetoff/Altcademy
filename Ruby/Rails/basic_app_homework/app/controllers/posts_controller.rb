@@ -25,4 +25,10 @@ class PostsController < ApplicationController
     @post.update_attribute :content, params[:content]
     render 'posts/update.jbuilder'
   end
+
+  def delete
+    @post = Post.find(params[:id]).destroy
+    render 'posts/delete.jbuilder'
+    # TO DO: display a message after un/successful deletion
+  end
 end
