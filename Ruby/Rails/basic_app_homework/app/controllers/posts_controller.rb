@@ -17,5 +17,12 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    render 'posts/show.jbuilder'
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update_attribute :content, params[:content]
+    render 'posts/update.jbuilder'
   end
 end
