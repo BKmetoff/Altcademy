@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todos</title>
+    <%= csrf_meta_tags %>
+
+    <%= javascript_include_tag 'application' %>
+    <!-- loading jquery library bootstrap jquery library and custom app.js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- loading bootstrap css font awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+  </head>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= yield %>
+  </body>
+</html>

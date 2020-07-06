@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <button type="button" id="open-login-signup-modal-btn" class="btn btn-default pull-right" data-toggle="modal" data-target=".login-signup-modal">Login</button>
+    <button type="button" id="log-out-btn" class="btn btn-default pull-right">Logout</button>
+    <div class="col-xs-12">
+      <h2 id="title" class="text-center">Todos</h2>
+      <div class="row">
+        <div class='col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3'>
+          <div id="todo-list-wrapper">
+            <div id="input-wrapper">
+              <span id="toggle-all"></span>
+              <input id='task-input' class="form-control" placeholder='What needs to be done?' autocomplete="off">
+            </div>
+            <div id='todo-list'>
+            </div>
+            <div id="footer">
+              <span><span id="active-tasks"></span> items left</span>
+              <ul>
+                <li class="filter-button" id="All">All</li>
+                <li class="filter-button" id="Active">Active</li>
+                <li class="filter-button" id="Completed">Completed</li>
+              </ul>
+              <span id="clear-completed">Clear completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade login-signup-modal" tabindex="-1" role="dialog" aria-labelledby="loginSignupForm">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" id="myModalLabel">Login/Signup</h5>
+      </div>
+      <div class="modal-body">
+        <form id="log-in-form" class="row" autocomplete="off">
+          <div class="form-group col-xs-12">
+            <input type="text" class="form-control username" placeholder="Username" autocomplete="off" required>
+          </div>
+          <div class="form-group col-xs-12">
+            <input type="password" class="form-control password" placeholder="Password" autocomplete="off" required>
+          </div>
+          <span class="col-xs-12" id="login-error">Wrong email and password</span>
+        </form>
+        <form id="sign-up-form" class="row">
+          <div class="form-group col-xs-12">
+            <input type="text" class="form-control username" placeholder="Username" required>
+          </div>
+          <div class="form-group col-xs-12">
+            <input type="password" class="form-control password" placeholder="Password" required>
+          </div>
+        </form>
+        <div class="text-right">
+          <button type="button" id="toggle-signup-form" class="btn btn-default">I want to sign up instead</button>
+          <button id="log-in-btn" class="btn btn-default btn-primary">Log in</button>
+          <button type="button" id="toggle-login-form" class="btn btn-default">I want to log in instead</button>
+          <button id="sign-up-btn" class="btn btn-default btn-warning">Sign up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
