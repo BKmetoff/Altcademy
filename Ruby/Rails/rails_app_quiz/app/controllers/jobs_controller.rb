@@ -19,6 +19,11 @@ class JobsController < ApplicationController
     # @job = Job.new(job_params)
   end
 
+  def show
+    @job = Job.find_by(id: params[:id])
+    render 'jobs/show'
+  end
+
   # def job_params
   #   params.require(:job)
   # end
