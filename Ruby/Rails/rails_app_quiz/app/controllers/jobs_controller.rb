@@ -3,6 +3,11 @@
 class JobsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def index
+    @jobs = Job.all
+    render 'jobs/index'
+  end
+
   def create
     @job = Job.create(
       job_title: params[:job_title],
