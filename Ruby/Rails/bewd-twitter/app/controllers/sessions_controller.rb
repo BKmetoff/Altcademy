@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user && (@user.password == params[:user][:password])
       session = @user.sessions.create
 
-      cookies.permanent.signed[:bewdtwitter_session_token] = {
+      cookies.permanent.signed[:twitter_session_token] = {
         value: session.token,
         httponly: true
       }
