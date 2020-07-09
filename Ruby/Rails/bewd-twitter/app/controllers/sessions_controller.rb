@@ -34,4 +34,11 @@ class SessionsController < ApplicationController
       render json: { authenticated: false }
     end
   end
+
+  def destroy
+    token = cookies.signed[:twitter_session_token]
+    session = Session.find_by(token: token)
+
+    render json: { success: true } if session&.destroy
+  end
 end
