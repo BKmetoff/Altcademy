@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Session < ApplicationRecord
+  belongs_to :user
+  validates :user_id, presence: true
+
   before_validation :generate_session_token
 
   private
