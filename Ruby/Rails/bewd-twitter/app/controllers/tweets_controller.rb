@@ -62,13 +62,9 @@ class TweetsController < ApplicationController
         }
       end
 
-      render json: {
-        tweets: all_user_tweets
-      }
+      render json: { tweets: all_user_tweets }
     else
-      render json: {
-        success: false
-      }
+      render json: { success: false }
     end
   end
 
@@ -82,18 +78,12 @@ class TweetsController < ApplicationController
 
       if @tweet && (@tweet.user_id == user.id)
         @tweet.destroy
-        render json: {
-          success: true
-        }
+        render json: { success: true }
       else
-        render json: {
-          success: false
-        }
+        render json: { success: false }
       end
     else
-      render json: {
-        session: false
-      }
+      render json: { success: false }
     end
   end
 

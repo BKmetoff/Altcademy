@@ -14,9 +14,7 @@ class UsersController < ApplicationController
         }
       }
     else
-      render json: {
-        success: false
-      }
+      render json: { success: false }
     end
   end
 
