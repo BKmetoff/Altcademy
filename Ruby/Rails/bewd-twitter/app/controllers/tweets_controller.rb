@@ -26,6 +26,18 @@ class TweetsController < ApplicationController
     end
   end
 
+  def index
+    @tweets = Tweet.all.order(created_at: :desc)
+
+    render json: {
+      tweets: [
+        {
+          id: @tweets.ids
+        }
+      ]
+    }
+  end
+
   private
 
   def tweet_params
