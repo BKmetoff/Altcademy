@@ -38,6 +38,29 @@ class TweetsController < ApplicationController
     }
   end
 
+  def index_by_user
+    @user = User.find_by(username: params[:username])
+    @tweets = Tweet.where(user_id: @user.id)
+
+    if @user && @tweets
+      all_user_tweets = @tweets.map do |tweet|
+        {
+          id: tweet.id,
+          username: @user.username,
+          message: tweet.message
+        }
+      end
+
+      render json: {
+        tweets: all_user_tweets
+      }
+    else
+      render json: {
+        success: false
+      }
+    end
+  end
+
   def destroy
     token = cookies.signed[:twitter_session_token]
     session = Session.find_by(token: token)
