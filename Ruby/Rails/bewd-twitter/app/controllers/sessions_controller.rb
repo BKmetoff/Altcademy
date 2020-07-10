@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user && (@user.password == params[:user][:password])
       session = @user.sessions.create
 
-      cookies.permanent.signed[:bewdtwitter_session_token] = {
+      cookies.permanent.signed[:twitter_session_token] = {
         value: session.token,
         httponly: true
       }
@@ -33,5 +33,12 @@ class SessionsController < ApplicationController
     else
       render json: { authenticated: false }
     end
+  end
+
+  def destroy
+    token = cookies.signed[:twitter_session_token]
+    session = Session.find_by(token: token)
+
+    render json: { success: true } if session&.destroy
   end
 end
