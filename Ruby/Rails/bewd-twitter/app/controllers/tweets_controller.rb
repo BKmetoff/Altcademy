@@ -28,14 +28,25 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.all.order(created_at: :desc)
+    @users = User.select(:username, :id)
 
-    render json: {
-      tweets: [
-        {
-          id: @tweets.ids
-        }
-      ]
-    }
+    all_tweets = []
+
+    @tweets.map do |tweet|
+      @users.map do |user|
+        next unless user.id == tweet.user_id
+
+        all_tweets.push(
+          {
+            id: tweet.id,
+            username: user.username,
+            message: tweet.message
+          }
+        )
+      end
+    end
+
+    render json: { tweets: all_tweets }
   end
 
   def index_by_user
