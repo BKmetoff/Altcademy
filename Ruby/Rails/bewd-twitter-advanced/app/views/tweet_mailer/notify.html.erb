@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.username %>, your Tweet has successfully been posted</h1>
+    <p>
+      Here's the Tweet:
+    </p>
+    <p>
+      <%= @tweet.message %>
+
+      <% if @tweet.image.attached? %>
+        <%= image_tag url_for(@tweet.image) %>
+      <% end %>
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

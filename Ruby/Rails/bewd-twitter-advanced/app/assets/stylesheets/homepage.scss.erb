@@ -1,0 +1,120 @@
+// Place all the styles related to the Homepage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  min-width: 900px;
+}
+
+#homeback {
+  background-image: url(<%= asset_path 'background_1.png' %>);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  min-width: 100vw;
+  position: fixed;
+}
+
+.navbar {
+  background-color: #fff;
+}
+
+.navbar-header {
+  float: left;
+}
+
+.navbar-right {
+  float: right;
+}
+
+.fa-twitter {
+  color: #00aced;
+  font-size: 24px;
+}
+
+.main {
+  margin-top: 50px;
+}
+
+.front-card {
+  margin-top: 70px;
+}
+
+.welcome, .welcome a {
+  color: #fff;
+}
+
+#welcome-text {
+  height: 320px;
+}
+
+#welcome-text h1 {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+#welcome-text p {
+  font-size: 20px;
+}
+
+#twit-account {
+  text-decoration: underline;
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.log-in, .sign-up {
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.log-in {
+  padding-bottom: 6px;
+}
+
+.log-in .form-group {
+  padding: 0;
+}
+
+.log-in div:nth-child(2) {
+  margin-bottom: 5px;
+}
+
+.log-in label, .log-in a {
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.log-in label, .sign-up span {
+  color: #8899a6;
+}
+
+.sign-up {
+  margin-top: 10px;
+}
+
+.dropdown-menu {
+  border: none;
+}
+
+.homepage .dropdown-menu {
+  left: 0 !important;
+}
+
+.dropdown-menu li {
+  padding: 0;
+}
+
+#sign-up-btn {
+  background-color: #ffac33;
+  background-image: linear-gradient(#ffcc4d,#ffac33);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffcc4d, endColorstr=#ffac33, GradientType=0)";
+  border-color: #f1a02a;
+  color: #292f33;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
