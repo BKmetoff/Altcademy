@@ -1,0 +1,186 @@
+// Place all the styles related to the User controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.feeds.index {
+  min-height: calc(100vh - 51px);
+  background-image: url(https://abs.twimg.com/images/themes/theme1/bg.png);
+  background-position: left 40px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: #C0DEED;
+}
+
+.navbar {
+  background-color: #fff;
+}
+
+.navbar-header {
+  float: left;
+}
+
+.navbar-right {
+  float: right;
+}
+
+.search-bar {
+  height: 50px;
+  padding-top: 7px;
+}
+
+.fa-twitter {
+  color: #00aced;
+  font-size: 24px;
+}
+
+.main {
+  margin-top: 50px;
+  padding-top: 10px;
+  min-width: 1000px;
+}
+
+.profile-trends, .follow-footnote {
+  width: 290px;
+}
+
+.profileCard {
+  background: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.user-field .username {
+  font-weight: 700;
+  font-size: 18px;
+  color: inherit!important;
+}
+
+.user-field .screenName {
+  color: #66757f;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.user-stats div {
+  margin-top: 5px;
+}
+
+.user-stats a {
+  text-decoration: none;
+}
+
+.user-stats a span:first-child {
+  color: #8c9ca9;
+  font-size: 10px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.user-stats a span:first-child:hover {
+  color: #0084B4;
+}
+
+/*a:hover {
+  color: #0084B4;
+}*/
+
+.trends {
+  background: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.trends-header {
+  margin-bottom: 10px;
+}
+
+.trends-header span:first-child {
+  color: #66757f;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.trends-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.feed-box {
+  width: 600px;
+}
+
+.post-tweet-box {
+  padding-top: 10px;
+  background: #C0DEED;
+  border: 1px solid #BFE0EC;
+  border-radius: 5px 5px 0 0 ;
+}
+
+.post-tweet-box div {
+  margin: 10px 0;
+}
+
+#upload-image-btn:hover {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+#image-select {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+#image-preview {
+  max-height: 40px;
+  max-width: 40px;
+  &:hover {
+    cursor: pointer;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+  }
+}
+
+.post-char-counter {
+  margin-right: 10px;
+  color: #8899a6;
+}
+
+.tweet {
+  background: #fff;
+  border: 1px solid #BFE0EC;
+  border-top: none;
+  padding: 10px 10px;
+}
+
+.tweet-username {
+  font-size: 14px;
+  font-weight: bold;
+  color: #292f33;
+}
+
+.tweet-screenName {
+  color: #b1bbc3;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.tweet-screenName:hover {
+  text-decoration: none;
+  color: #b1bbc3;
+}
+
+.tweet p {
+  margin-bottom: 0;
+}
+
+.tweet img {
+  padding: 10px 0;
+}
+
+.delete-tweet {
+  float: right;
+}
