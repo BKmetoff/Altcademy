@@ -2,7 +2,7 @@
 
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.all.order(created_at: :desc)
+    @tweets = Tweet.all.order(created_at: :asc)
     render 'tweets/index'
   end
 
