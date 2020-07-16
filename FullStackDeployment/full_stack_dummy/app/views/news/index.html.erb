@@ -2,7 +2,7 @@
 <a href="/">home</a>
 
 <% @articles.each do |article| %>
-  <div class="article">
+  <div class="article p-2 bg-light my-2">
     <p class="title"><b><%= article[:title] %></b></p>
     <p><%= article[:content] %></p>
   </div>
