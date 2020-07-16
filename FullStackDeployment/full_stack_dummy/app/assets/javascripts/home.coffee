@@ -1,1 +1,0 @@
-usefulWidget('sup from home')
