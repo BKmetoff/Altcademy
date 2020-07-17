@@ -1,0 +1,13 @@
+<% content_for :head do %>
+  <title>News - FullStackDummy</title>
+  <meta name="description" content="News for a dummy full-stack app."/>
+<% end %>
+
+<h1>News!</h1>
+
+<% @articles.each do |article| %>
+  <div class="article p-2 bg-light my-2">
+    <p class="title"><b><%= article[:title] %></b></p>
+    <p><%= article[:content] %></p>
+  </div>
+<%end%>

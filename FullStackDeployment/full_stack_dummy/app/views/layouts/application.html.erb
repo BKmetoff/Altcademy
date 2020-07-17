@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+    <% if content_for? :head %>
+      <%= yield :head %>
+    <% else %>
+      <title>FullStackDummy</title>
+      <meta name="description" content="A dummy full-stack app."/>
+    <% end %>
+  </head>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= render "shared/navigation" %>
+    <%= yield %>
+    <%= render "shared/footer" %>
+  </body>
+</html>
