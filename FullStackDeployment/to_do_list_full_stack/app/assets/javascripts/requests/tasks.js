@@ -1,3 +1,9 @@
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+	},
+})
+
 var indexTasks = function () {
 	var request = {
 		type: 'GET',
@@ -19,9 +25,6 @@ var postTask = function (content) {
 	var request = {
 		type: 'POST',
 		url: 'api/tasks?api_key=1',
-		headers: {
-			'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-		},
 		data: {
 			task: {
 				content: content,
@@ -38,4 +41,4 @@ var postTask = function (content) {
 	$.ajax(request)
 }
 
-// postTask('this is a new task')
+// postTask('this is another task')
