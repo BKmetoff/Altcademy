@@ -13,4 +13,6 @@ Rails.application.routes.draw do
     put    'tasks/:id/mark_active'    => 'tasks#mark_active'
     delete 'tasks/:id'                => 'tasks#destroy'
   end
+
+  root 'static_pages#index'
 end
