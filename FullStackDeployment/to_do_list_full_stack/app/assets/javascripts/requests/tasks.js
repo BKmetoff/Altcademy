@@ -15,8 +15,6 @@ var indexTasks = function (successCB, errorCB) {
 	$.ajax(request)
 }
 
-indexTasks()
-
 var postTask = function (content, successCB, errorCB) {
 	var request = {
 		type: 'POST',
