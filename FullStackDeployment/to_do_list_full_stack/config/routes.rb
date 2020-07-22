@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#index'
+
+  # Redirect unknown routes to root
+  get '*path' => 'static_pages#index'
 end
