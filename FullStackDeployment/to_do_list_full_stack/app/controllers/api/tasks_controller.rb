@@ -2,6 +2,8 @@
 
 module Api
   class TasksController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     before_action :validate_user
 
     def show
@@ -68,10 +70,24 @@ module Api
       render 'show', status: :ok
     end
 
+    def show_status
+      user = User.find_by(id: params[:api_key])
+
+      @tasks = if params[:completed] == 'active'
+                 user.tasks.where(completed: false)
+               elsif params[:completed] == 'completed'
+                 user.tasks.where(completed: true)
+               else
+                 user.tasks.all
+               end
+
+      render 'index', status: :ok
+    end
+
     private
 
     def task_params
-      params.require(:task).permit(:content, :due)
+      params.require(:task).permit(:content, :due, :completed)
     end
 
     def validate_user

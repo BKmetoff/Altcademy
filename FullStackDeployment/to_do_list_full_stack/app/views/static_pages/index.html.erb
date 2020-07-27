@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>To Do List</h1>
+      
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button
+            class="btn btn-outline-primary"
+            id="taskAdd"
+            type="button">
+            Add
+          </button>
+        </div>
+        <input
+          id="taskDescriptionInput"
+          placeholder="Add a new task">
+      </div>
+      <div class="btn-group show-tasks-by-status" role="group" aria-label="Basic example">
+        <button 
+          type="button"
+          class="btn btn-outline-secondary showBulk showActive">
+          Acitve
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary showBulk showAll">
+          All
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary showBulk showCompleted">
+          Completed
+        </button>
+      </div>
+      <div class="row" id="tasks"></div>
+    </div>
+  </div>
+</div>
