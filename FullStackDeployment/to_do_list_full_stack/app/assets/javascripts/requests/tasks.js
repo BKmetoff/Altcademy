@@ -31,4 +31,50 @@ var postTask = function (content, successCB, errorCB) {
 	$.ajax(request)
 }
 
-// postTask('this is another task')
+var destroyTask = function (taskId) {
+	var request = {
+		type: 'DELETE',
+		url: 'api/tasks/' + taskId + '?api_key=1',
+	}
+
+	$.ajax(request)
+}
+
+var completeTask = function (taskId, successCB, errorCB) {
+	var request = {
+		type: 'PUT',
+		url: 'api/tasks/' + taskId + '?api_key=1/mark_complete',
+		data: {
+			task: { completed: true },
+		},
+		success: successCB,
+		error: errorCB,
+	}
+
+	$.ajax(request)
+}
+
+var unCompleteTask = function (taskId, successCB, errorCB) {
+	var request = {
+		type: 'PUT',
+		url: 'api/tasks/' + taskId + '?api_key=1/mark_active',
+		data: {
+			task: { completed: false },
+		},
+		success: successCB,
+		error: errorCB,
+	}
+
+	$.ajax(request)
+}
+
+var filterTasks = function (status, successCB, errorCB) {
+	var request = {
+		type: 'GET',
+		url: 'api/tasks/' + status + '?api_key=1',
+		success: successCB,
+		error: errorCB,
+	}
+
+	$.ajax(request)
+}

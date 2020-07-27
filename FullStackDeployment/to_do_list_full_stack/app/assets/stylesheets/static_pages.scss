@@ -1,3 +1,53 @@
-// Place all the styles related to the StaticPages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+	font-weight: 200;
+
+	.container {
+		margin-top: 80px;
+		border: 1px solid #33333317;
+		border-radius: 10px;
+
+		h1,
+		input::placeholder {
+			font-weight: 200;
+		}
+
+		input {
+			width: 200px;
+		}
+
+		input::placeholder {
+			text-align: center;
+		}
+
+		h1,
+		.input-group,
+		.show-tasks-by-status {
+			display: flex;
+			justify-content: center;
+			margin: 12px 0 12px 0;
+		}
+
+		.btn {
+			width: 100px;
+			font-weight: 200;
+		}
+
+		#tasks {
+			margin-top: 40px;
+		}
+		.task {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid #33333317;
+
+			.deleteTask {
+				margin-left: 10px;
+			}
+
+			.taskContent {
+				padding-left: 10px;
+			}
+		}
+	}
+}
