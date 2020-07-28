@@ -73,15 +73,15 @@ $(document).on('turbolinks:load', function () {
 $(document).on('turbolinks:load', function () {
 	$(document).on('click', '.showBulk', function () {
 		if ($(this).hasClass('showActive')) {
-			filterTasks('active', function (response) {
+			filterTasks({ completed: false }, function (response) {
 				renderFilteredTasks(response)
 			})
 		} else if ($(this).hasClass('showCompleted')) {
-			filterTasks('completed', function (response) {
+			filterTasks({ completed: true }, function (response) {
 				renderFilteredTasks(response)
 			})
 		} else {
-			filterTasks('all', function (response) {
+			filterTasks({}, function (response) {
 				renderFilteredTasks(response)
 			})
 		}

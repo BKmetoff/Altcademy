@@ -17,7 +17,12 @@ module Api
 
     def index
       user = User.find_by(id: params[:api_key])
-      @tasks = user.tasks.all
+      @tasks = if params[:completed].present?
+                 user.tasks.where(completed: parse_boolean(params[:completed]))
+               else
+                 user.tasks.all
+               end
+
       render 'index', status: :ok
     end
 
@@ -70,20 +75,6 @@ module Api
       render 'show', status: :ok
     end
 
-    def show_status
-      user = User.find_by(id: params[:api_key])
-
-      @tasks = if params[:completed] == 'active'
-                 user.tasks.where(completed: false)
-               elsif params[:completed] == 'completed'
-                 user.tasks.where(completed: true)
-               else
-                 user.tasks.all
-               end
-
-      render 'index', status: :ok
-    end
-
     private
 
     def task_params
@@ -105,6 +96,10 @@ module Api
       else
         false
       end
+    end
+
+    def parse_boolean(input_string)
+      ActiveRecord::Type::Boolean.new.deserialize(input_string)
     end
   end
 end
