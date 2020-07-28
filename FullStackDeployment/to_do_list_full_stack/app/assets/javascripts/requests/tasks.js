@@ -68,10 +68,11 @@ var unCompleteTask = function (taskId, successCB, errorCB) {
 	$.ajax(request)
 }
 
-var filterTasks = function (status, successCB, errorCB) {
+var filterTasks = function (params, successCB, errorCB) {
+	params.api_key = '1'
 	var request = {
 		type: 'GET',
-		url: 'api/tasks/' + status + '?api_key=1',
+		url: 'api/tasks?' + $.param(params),
 		success: successCB,
 		error: errorCB,
 	}
