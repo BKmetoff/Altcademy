@@ -12,8 +12,6 @@ Rails.application.routes.draw do
 
   get '/tweets' => 'tweets#index_all'
   post '/tweets' => 'tweets#create'
-
-  # retrieve current user, delete tweet by id
   delete '/tweets/:id' => 'tweets#destroy'
 
   # get all tweets of current user

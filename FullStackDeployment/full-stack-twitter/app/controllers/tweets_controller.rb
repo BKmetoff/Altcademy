@@ -59,6 +59,34 @@ class TweetsController < ApplicationController
     end
   end
 
+  # retrieve current user, delete tweet by id
+  def destroy
+    token = cookies.signed[:twitter_session_token]
+    session = Session.find_by(token: token)
+
+    unless session
+      return render json: {
+        error: 'invalid request. user session not found.'
+      }
+    end
+
+    user = session.user
+
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if @tweet && (@tweet.user_id == user.id)
+      @tweet.destroy
+      render json: {
+        tweet: {
+          state: 'tweet deleted',
+          user: user.id
+        }
+      }
+    else
+      render json: { tweet: { state: 'error: failed to  delete tweet' } }
+    end
+  end
+
   private
 
   def tweet_params
