@@ -5,13 +5,12 @@ Rails.application.routes.draw do
   get 'demo' => 'static_pages#demo'
 
   post '/users' => 'users#create'
- 
+
   post '/sessions' => 'sessions#create'
   get '/authenticated' => 'sessions#authenticated'
   delete '/sessions' => 'sessions#destroy'
 
-
-  # find current user, create tweet
+  get '/tweets' => 'tweets#index_all'
   post '/tweets' => 'tweets#create'
 
   # retrieve current user, delete tweet by id
