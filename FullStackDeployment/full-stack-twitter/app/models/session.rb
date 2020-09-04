@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Session < ApplicationRecord
-  validates :user_id, presence: true
-  
   belongs_to :user
+  validates :user_id, presence: true
+  before_validation :generate_session_token
 
-  #  generate token before validations
+  private
+
+  def generate_session_token
+    self.token = SecureRandom.urlsafe_base64
+  end
 end
