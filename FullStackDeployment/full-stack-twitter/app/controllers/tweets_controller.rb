@@ -87,6 +87,35 @@ class TweetsController < ApplicationController
     end
   end
 
+  # get all tweets of current user
+  def index_by_user
+    token = cookies.signed[:twitter_session_token]
+    session = Session.find_by(token: token)
+
+    unless session
+      return render json: {
+        error: 'invalid request. user session not found.'
+      }
+    end
+
+    user = User.find_by(username: params[:username])
+
+    @all_tweets_of_user = Tweet.where(user_id: user.id)
+
+    if @all_tweets_of_user
+      render json: {
+        tweets: {
+          user: user.username,
+          tweets: @all_tweets_of_user
+        }
+      }
+    else
+      render json: {
+        tweets: 'Error. Could not find user.'
+      }
+    end
+  end
+
   private
 
   def tweet_params
