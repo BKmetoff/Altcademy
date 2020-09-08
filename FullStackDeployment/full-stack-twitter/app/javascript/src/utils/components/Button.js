@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components'
 import { COLORS } from './Theme'
 
 const BaseButton = styled.button`
-	padding: 0.5rem;
-	margin: 0.3rem;
+	width: 130px;
+	padding: 10px;
+	margin: 5px;
 	outline: none;
 	border: none;
 	border-radius: 3px;

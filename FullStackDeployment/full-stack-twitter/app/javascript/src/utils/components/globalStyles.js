@@ -2,15 +2,24 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 
-html {
-  height : 100%
-}
-
 body * {
   padding: 0;
   margin: 0;
   font-weight: 200;
   font-family: 'Iosevka';
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+::placeholder {
+  text-align: center;
 }
 
 `

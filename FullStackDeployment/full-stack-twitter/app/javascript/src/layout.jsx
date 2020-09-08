@@ -6,13 +6,13 @@ import GlobalStyle from './utils/components/globalStyles'
 import { Theme } from './utils/components/Theme'
 
 import { Footer } from './utils/components/Footer'
-import Wrapper from './utils/components/Wrapper'
+import { MainWrapper } from './utils/components/Wrapper'
 
 const Layout = (props) => {
 	return (
 		<ThemeProvider theme={Theme}>
 			<GlobalStyle />
-			<Wrapper>{props.children}</Wrapper>
+			<MainWrapper>{props.children}</MainWrapper>
 			<Footer />
 		</ThemeProvider>
 	)
