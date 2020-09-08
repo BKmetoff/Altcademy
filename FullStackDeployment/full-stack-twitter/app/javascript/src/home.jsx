@@ -1,17 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import styled from 'styled-components'
 import Layout from './layout'
+import { TitleBig, Text } from './utils/components/Text'
+import Sheet from './utils/components/Sheet'
+import Button from './utils/components/Button'
 
-const Title = styled.h1`
-	font-size: 1.5em;
-	text-align: center;
-	color: palevioletred;
-`
 const Home = () => (
 	<Layout>
-		<Title>sup?!</Title>
+		<TitleBig>holly $h!t, not another twitter copy!</TitleBig>
+		<Sheet>
+			<Text>log in or sign up</Text>
+
+			<Button type='primary'>log in</Button>
+			<Button type='secondary'>sign up</Button>
+		</Sheet>
 	</Layout>
 )
 

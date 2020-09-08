@@ -1,22 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
-const Wrapper = styled.section`
-	padding: 4em;
-	background: papayawhip;
-`
+import GlobalStyle from './utils/components/globalStyles'
+import { Theme } from './utils/components/Theme'
 
-const Footer = styled.footer`
-	padding: 1.5em;
-	background: blue;
-`
+import { Footer } from './utils/components/Footer'
+import Wrapper from './utils/components/Wrapper'
 
 const Layout = (props) => {
 	return (
-		<React.Fragment>
+		<ThemeProvider theme={Theme}>
+			<GlobalStyle />
 			<Wrapper>{props.children}</Wrapper>
-			<Footer></Footer>
-		</React.Fragment>
+			<Footer />
+		</ThemeProvider>
 	)
 }
 
