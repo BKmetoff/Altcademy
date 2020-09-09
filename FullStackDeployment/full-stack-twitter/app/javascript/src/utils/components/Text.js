@@ -1,4 +1,6 @@
+import React from 'react'
 import styled from 'styled-components'
+
 import { COLORS } from './Theme'
 
 export const TitleBig = styled.h1`
@@ -8,7 +10,8 @@ export const TitleBig = styled.h1`
 	color: ${COLORS.blue_heavy};
 `
 
-export const Text = styled.p`
+const BaseText = styled.p`
 	font-size: 1rem;
 	margin: 0.5rem;
 `
+export const Text = ({ children }) => <BaseText>{children}</BaseText>

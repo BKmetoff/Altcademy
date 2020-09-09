@@ -1,39 +1,56 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 
 import { ActionsWrapper } from './Wrapper'
 import Button from './Button'
-import { Text } from './Text'
 import Input from './Input'
 
-export class Form extends Component {
-	constructor(props) {
-		super(props)
-		this.inputRef = React.createRef()
+export default function Form(props) {
+	const [userDetails, setState] = useState({
+		username: '',
+		email: '',
+		password: '',
+	})
+
+	const handleSubmit = (e) => {
+		console.log(userDetails)
 	}
 
-	render() {
-		return (
+	return (
+		<div>
 			<ActionsWrapper>
-				{this.props.type == 'signup' ? (
-					<>
-						<Text>
-							don't have an account?
-							<br /> how dare you.
-						</Text>
-						<Input ref={this.inputRef} placeholder='username'></Input>
-					</>
+				{props.type == 'signup' ? (
+					<Input
+						placeholder='username'
+						name={userDetails.username}
+						onChange={(e) =>
+							setState({ ...userDetails, username: e.target.value })
+						}
+					/>
 				) : null}
 
-				<Input ref={this.inputRef} placeholder='email'></Input>
-				<Input ref={this.inputRef} placeholder='password'></Input>
+				<Input
+					placeholder='email'
+					name={userDetails.email}
+					onChange={(e) => setState({ ...userDetails, email: e.target.value })}
+				/>
+				<Input
+					placeholder='password'
+					name={userDetails.password}
+					onChange={(e) =>
+						setState({ ...userDetails, password: e.target.value })
+					}
+				/>
 
-				{this.props.type == 'signup' ? (
-					<Button type='primary'>create account</Button>
+				{props.type == 'signup' ? (
+					<Button type='primary' onClick={handleSubmit}>
+						create account
+					</Button>
 				) : (
-					<Button type='primary'>log in</Button>
+					<Button type='primary' onClick={handleSubmit}>
+						log in
+					</Button>
 				)}
 			</ActionsWrapper>
-		)
-	}
+		</div>
+	)
 }

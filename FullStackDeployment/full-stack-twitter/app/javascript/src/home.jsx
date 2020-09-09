@@ -10,7 +10,7 @@ import { ActionsWrapper } from './utils/components/Wrapper'
 import { TitleBig, Text } from './utils/components/Text'
 import Sheet from './utils/components/Sheet'
 import Button from './utils/components/Button'
-import { Form } from './utils/components/Form'
+import Form from './utils/components/Form'
 
 const Home = () => (
 	<Router>
