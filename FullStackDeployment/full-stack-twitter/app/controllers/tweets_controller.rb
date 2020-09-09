@@ -15,7 +15,7 @@ class TweetsController < ApplicationController
     end
 
     @tweets = Tweet.all
-    render 'index', status: :ok
+    render 'tweets', status: :ok
   end
 
   # find current user, create tweet

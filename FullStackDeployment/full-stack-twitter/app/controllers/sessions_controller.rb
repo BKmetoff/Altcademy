@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   #  new session, set session token
   #  compare input PW to DB PW
   def create
-    @user = User.find_by(username: params[:user][:username])
+    @user = User.find_by(email: params[:user][:email])
 
     if @user && (@user.password == params[:user][:password])
       session = @user.sessions.create
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       render json: {
         session: {
           state: 'login successful',
-          user: @user.username
+          user: @user.email
         }
       }
     else
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
       render json: {
         authentication: {
           state: 'successfully authenticated',
-          user: user.username
+          user: user.email
         }
       }
     else

@@ -1,18 +1,19 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Not Another Twitter Copy</title>
+		<title>Not Another Twitter Copy - Tweets</title>
 		<%= csrf_meta_tags %>
 		<%= csp_meta_tag %>
 
 		<%# <%= stylesheet_link_tag 'application', media: 'all', 'data-turbulinks-track': 'reload' %>
 		<%# <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %> 
     <%= javascript_include_tag 'application' %>
-    
-		<%= javascript_pack_tag 'home' %>
+			
+		<%= javascript_pack_tag 'tweets' %>
 		
 	</head>
 	<body>
-	 <%= yield %>
 	</body>
 </html>

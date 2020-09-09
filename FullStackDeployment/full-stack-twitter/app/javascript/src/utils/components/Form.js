@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 import { ActionsWrapper } from './Wrapper'
 import Button from './Button'
 import Input from './Input'
 
 export default function Form(props) {
+	let history = useHistory()
 	const [userDetails, setState] = useState({
 		username: '',
 		email: '',
@@ -13,6 +16,22 @@ export default function Form(props) {
 
 	const handleSubmit = (e) => {
 		console.log(userDetails)
+
+		axios
+			.post('/sessions', {
+				user: {
+					email: userDetails.email,
+					username: userDetails.username,
+					password: userDetails.password,
+				},
+			})
+			.then(() => {
+				history.push('/tweets')
+			})
+			.catch((error) => {
+				console.log(error)
+				history.push('/error')
+			})
 	}
 
 	return (
