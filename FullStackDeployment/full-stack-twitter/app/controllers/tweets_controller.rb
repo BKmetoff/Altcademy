@@ -14,11 +14,8 @@ class TweetsController < ApplicationController
       }
     end
 
-    @all_tweets = Tweet.all
-
-    render json: {
-      all_tweets: @all_tweets
-    }
+    @tweets = Tweet.all
+    render 'tweets', status: :ok
   end
 
   # find current user, create tweet
@@ -37,26 +34,10 @@ class TweetsController < ApplicationController
     new_tweet = tweet_params
     new_tweet[:user_id] = user.id
 
-    puts '-' * 100
-    puts new_tweet.inspect.to_s
-    puts '-' * 100
-
     @tweet = Tweet.new(new_tweet)
-    if @tweet.save
-      render json: {
-        tweet: {
-          state: 'tweet saved',
-          tweet: @tweet.message,
-          user_id: @tweet.user_id
-        }
-      }
-    else
-      render json: {
-        tweet: {
-          state: 'failed to save tweet.'
-        }
-      }
-    end
+    return render json: { error: 'Error. Could not save tweet.' } unless @tweet.save
+
+    render 'show', status: :ok
   end
 
   # retrieve current user, delete tweet by id
@@ -83,7 +64,7 @@ class TweetsController < ApplicationController
         }
       }
     else
-      render json: { tweet: { state: 'error: failed to  delete tweet' } }
+      render json: { tweet: { state: 'error: failed to delete tweet' } }
     end
   end
 
@@ -99,21 +80,10 @@ class TweetsController < ApplicationController
     end
 
     user = User.find_by(username: params[:username])
+    return render json: { error: 'Error. Could not find user.' } unless user
 
-    @all_tweets_of_user = Tweet.where(user_id: user.id)
-
-    if @all_tweets_of_user
-      render json: {
-        tweets: {
-          user: user.username,
-          tweets: @all_tweets_of_user
-        }
-      }
-    else
-      render json: {
-        tweets: 'Error. Could not find user.'
-      }
-    end
+    @tweets = Tweet.where(user_id: user.id)
+    render 'index', status: :ok
   end
 
   private
