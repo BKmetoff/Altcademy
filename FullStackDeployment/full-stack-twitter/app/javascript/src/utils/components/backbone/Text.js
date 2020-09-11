@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { COLORS } from './Theme'
+import { COLORS } from '../theme/Theme'
 
 export const TitleBig = styled.h1`
 	margin: 0.5rem;

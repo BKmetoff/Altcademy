@@ -1,12 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import GlobalStyle from './utils/components/globalStyles'
-import { Theme } from './utils/components/Theme'
+import GlobalStyle from './utils/components/theme/GlobalStyles'
+import { Theme } from './utils/components/theme/Theme'
 
 import { Footer } from './utils/components/Footer'
-import { MainWrapper } from './utils/components/Wrapper'
+import { MainWrapper } from './utils/components/backbone/Wrapper'
 
 const Layout = (props) => {
 	return (

@@ -9,18 +9,35 @@ import {
 } from 'react-router-dom'
 import axios from 'axios'
 
-import Layout from './layout'
-import { TitleBig, Text } from './utils/components/Text'
-import { ActionsWrapper } from './utils/components/Wrapper'
-import Button from './utils/components/Button'
-import Input from './utils/components/Input'
+// import { authenticateUser } from '../src/utils/helpers/authenticateUser'
+// import { getTweets } from '../helpers/getTweets'
 
-export default function Tweets() {
-	const getTweets = axios.get('/tweets').then((response) => {
-		console.log(response)
+import Layout from './layout'
+import { TitleBig, Text } from './utils/components/backbone/Text'
+import { ActionsWrapper } from './utils/components/backbone/Wrapper'
+import Sheet from './utils/components/backbone/Sheet'
+import Button from './utils/components/backbone/Button'
+import Input from './utils/components/backbone/Input'
+
+export default function Tweets(props) {
+	const [state, setState] = useState({
+		isAuthenticated: false,
+		currentUser: {
+			username: '',
+			email: '',
+		},
+		tweets: [],
+		error: '',
 	})
 
-	return <Layout>blabla</Layout>
+	// authenticateUser()
+	// getTweets()
+
+	return (
+		<Layout>
+			<Sheet>{state}</Sheet>
+		</Layout>
+	)
 }
 
 document.addEventListener('DOMContentLoaded', () => {

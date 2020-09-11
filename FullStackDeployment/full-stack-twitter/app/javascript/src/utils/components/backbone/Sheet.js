@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { COLORS } from './Theme'
+import { COLORS } from '../theme/Theme'
 
 const BaseSheet = styled.div`
 	background: ${COLORS.light};
