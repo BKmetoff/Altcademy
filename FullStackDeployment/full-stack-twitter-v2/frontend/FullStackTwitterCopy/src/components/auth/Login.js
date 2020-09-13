@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export default class Register extends Component {
+export default class Login extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
 			email: '',
 			password: '',
-			password_confirmation: '',
-			registrationErrors: '',
+			loginErrors: '',
 		}
 
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,16 +16,15 @@ export default class Register extends Component {
 	}
 
 	handleSubmit(event) {
-		const { email, password, password_confirmation } = this.state
+		const { email, password } = this.state
 
 		axios
 			.post(
-				'http://localhost:3001/registrations',
+				'http://localhost:3001/sessions',
 				{
 					user: {
 						email: email,
 						password: password,
-						password_confirmation: password_confirmation,
 					},
 				},
 				{
@@ -34,12 +32,12 @@ export default class Register extends Component {
 				}
 			)
 			.then((response) => {
-				if (response.data.status === 'created') {
+				if (response.data.logged_in) {
 					this.props.handleSuccessfulAuth(response.data)
 				}
 			})
 			.catch((error) => {
-				console.log('reg error', error)
+				console.log('login error', error)
 			})
 
 		event.preventDefault()
@@ -71,15 +69,7 @@ export default class Register extends Component {
 						onChange={this.handleChange}
 						required
 					/>
-					<input
-						type='password'
-						name='password_confirmation'
-						placeholder='password confirmation'
-						value={this.state.password_confirmation}
-						onChange={this.handleChange}
-						required
-					/>
-					<button type='submit'>register</button>
+					<button type='submit'>log in</button>
 				</form>
 			</div>
 		)
