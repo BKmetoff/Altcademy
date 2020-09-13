@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Login from './auth/Login'
 
 import Register from './auth/Register'
 
@@ -21,6 +22,7 @@ export default class Home extends Component {
 				<h2>Status: {this.props.loggedInStatus} </h2>
 
 				<Register handleSuccessfulAuth={this.handleSuccessfulAuth} />
+				<Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
 			</div>
 		)
 	}
