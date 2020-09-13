@@ -10,8 +10,7 @@ export default class Home extends Component {
 	}
 
 	handleSuccessfulAuth(userData) {
-		// TODO update parent component
-
+		this.props.handleLogin(userData)
 		this.props.history.push('/tweets')
 	}
 
