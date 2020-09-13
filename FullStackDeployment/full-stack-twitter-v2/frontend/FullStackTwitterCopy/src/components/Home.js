@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import Login from './auth/Login'
 
+import Login from './auth/Login'
 import Register from './auth/Register'
 
 export default class Home extends Component {
 	constructor(props) {
 		super(props)
-
 		this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
 	}
 
