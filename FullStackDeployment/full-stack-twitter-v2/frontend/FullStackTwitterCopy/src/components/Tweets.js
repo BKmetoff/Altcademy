@@ -1,5 +1,12 @@
 import React from 'react'
 
-export default function Tweets() {
-	return <div>tweets</div>
+const Tweets = (props) => {
+	return (
+		<div>
+			<h1>tweets</h1>
+			<h2>Status: {props.loggedInStatus}</h2>
+		</div>
+	)
 }
+
+export default Tweets
