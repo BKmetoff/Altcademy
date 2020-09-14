@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	useHistory,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './Home'
@@ -92,6 +87,7 @@ export default class App extends Component {
 									{...props}
 									loggedInStatus={this.state.loggedInStatus}
 									handleLogout={this.handleLogout}
+									currentUser={this.state.user}
 								/>
 							)}
 						/>
