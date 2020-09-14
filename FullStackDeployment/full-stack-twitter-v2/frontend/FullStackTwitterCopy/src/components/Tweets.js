@@ -36,6 +36,11 @@ const Tweets = (props) => {
 			})
 	}
 
+	const handleChange = (e) => {
+		e.preventDefault()
+		setState({ ...state, newTweet: e.target.value })
+	}
+
 	const postTweet = (e) => {
 		e.preventDefault()
 		axios
@@ -54,9 +59,18 @@ const Tweets = (props) => {
 			})
 	}
 
-	const handleChange = (e) => {
-		e.preventDefault()
-		setState({ ...state, newTweet: e.target.value })
+	const deleteTweet = (tweetId) => {
+		axios
+			.delete(`http://localhost:3001/tweets/${tweetId}`, {
+				withCredentials: true,
+			})
+			.then((response) => {
+				getTweets()
+				console.log(`delete tweet ${tweetId} response`, response.data)
+			})
+			.catch((error) => {
+				console.log(`delete tweet ${tweetId} error`, error)
+			})
 	}
 
 	return (
@@ -91,7 +105,12 @@ const Tweets = (props) => {
 							return (
 								<li key={tweet.id}>
 									<div>
-										<button>delete</button>
+										{tweet.user_id === props.currentUser.id ? (
+											<button onClick={() => deleteTweet(tweet.id)}>
+												delete
+											</button>
+										) : null}
+
 										{tweet.message}
 									</div>
 								</li>
