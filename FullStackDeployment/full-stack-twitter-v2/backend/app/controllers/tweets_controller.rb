@@ -31,6 +31,11 @@ class TweetsController < ApplicationController
     end
   end
 
+  def index
+    tweets = Tweet.all
+    render json: { tweets: tweets }
+  end
+
   private
 
   def validate_user
