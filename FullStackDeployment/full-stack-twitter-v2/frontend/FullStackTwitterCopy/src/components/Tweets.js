@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
+const _ = require('lodash')
+
 const Tweets = (props) => {
 	let history = useHistory()
+
+	const [tweets, setTweets] = useState()
+
 	const handleLogoutClick = () => {
 		axios
 			.delete('http://localhost:3001/logout', { withCredentials: true })
@@ -15,6 +20,23 @@ const Tweets = (props) => {
 				console.log('log out error: ', error)
 			})
 	}
+
+	function getTweets() {
+		axios
+			.get('http://localhost:3001/tweets', { withCredentials: true })
+			.then((response) => {
+				setTweets({
+					tweets: response.data.tweets,
+				})
+			})
+			.catch((error) => {
+				console.log('get tweets error: ', error)
+			})
+	}
+
+	useEffect(() => {
+		getTweets()
+	}, [])
 
 	return (
 		<div>
@@ -31,7 +53,11 @@ const Tweets = (props) => {
 				<div>
 					<h1>tweets</h1>
 					<button onClick={handleLogoutClick}>Log out</button>
-					<div>all tweets here</div>
+					<ul>
+						{_.flatMap(tweets).map((tweet) => {
+							return <li key={tweet.id}>{tweet.message}</li>
+						})}
+					</ul>
 				</div>
 			)}
 		</div>
