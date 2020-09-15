@@ -32,8 +32,10 @@ class TweetsController < ApplicationController
   end
 
   def index
-    tweets = Tweet.all
-    render json: { tweets: tweets }
+    tweets = Tweet.order(created_at: :desc)
+    # users = User.all
+    # tweets = Tweet.where
+    render json: tweets, include: [:user]
   end
 
   private

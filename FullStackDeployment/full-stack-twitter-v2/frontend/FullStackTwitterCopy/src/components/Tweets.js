@@ -29,7 +29,7 @@ const Tweets = (props) => {
 		axios
 			.get('http://localhost:3001/tweets', { withCredentials: true })
 			.then((response) => {
-				setState({ ...state, tweets: response.data.tweets })
+				setState({ ...state, tweets: response.data })
 			})
 			.catch((error) => {
 				console.log('get tweets error: ', error)
@@ -105,13 +105,22 @@ const Tweets = (props) => {
 							return (
 								<li key={tweet.id}>
 									<div>
-										{tweet.user_id === props.currentUser.id ? (
-											<button onClick={() => deleteTweet(tweet.id)}>
-												delete
-											</button>
-										) : null}
-
 										{tweet.message}
+										{tweet.user_id === props.currentUser.id ? (
+											<span>
+												<span>
+													{` `}You{` `}
+												</span>
+												<button onClick={() => deleteTweet(tweet.id)}>
+													delete
+												</button>
+											</span>
+										) : (
+											<span>
+												{` `}
+												{tweet.user.email}
+											</span>
+										)}
 									</div>
 								</li>
 							)
