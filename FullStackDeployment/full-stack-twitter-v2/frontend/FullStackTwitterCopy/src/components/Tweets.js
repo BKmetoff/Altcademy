@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom'
+
 import axios from 'axios'
+import TweetsList from './TweetsList'
 
 const _ = require('lodash')
 
 const Tweets = (props) => {
 	let history = useHistory()
 
-	const [state, setState] = useState({ tweets: [], newTweet: '' })
+	const [state, setState] = useState({
+		tweets: [],
+		newTweet: '',
+	})
+
+	const { currentUser, handleLogout, loggedInStatus } = props
 
 	const handleLogoutClick = () => {
 		axios
 			.delete('http://localhost:3001/logout', { withCredentials: true })
 			.then((response) => {
-				props.handleLogout()
+				handleLogout()
 				history.push('/')
 			})
 			.catch((error) => {
@@ -25,11 +32,22 @@ const Tweets = (props) => {
 		getTweets()
 	}, [])
 
-	const getTweets = () => {
+	const getTweets = (tweetAuthorId) => {
 		axios
 			.get('http://localhost:3001/tweets', { withCredentials: true })
 			.then((response) => {
-				setState({ ...state, tweets: response.data.tweets })
+				console.log(tweetAuthorId)
+				if (tweetAuthorId) {
+					setState({
+						...state,
+						tweets: response.data.filter(
+							(tweet) => tweet.user_id === tweetAuthorId
+						),
+					})
+					// history.push(`/tweets/user-${tweetAuthorId}`)
+				} else {
+					setState({ ...state, tweets: response.data })
+				}
 			})
 			.catch((error) => {
 				console.log('get tweets error: ', error)
@@ -59,25 +77,11 @@ const Tweets = (props) => {
 			})
 	}
 
-	const deleteTweet = (tweetId) => {
-		axios
-			.delete(`http://localhost:3001/tweets/${tweetId}`, {
-				withCredentials: true,
-			})
-			.then((response) => {
-				getTweets()
-				console.log(`delete tweet ${tweetId} response`, response.data)
-			})
-			.catch((error) => {
-				console.log(`delete tweet ${tweetId} error`, error)
-			})
-	}
-
 	return (
 		<div>
-			<h2>Status: {props.loggedInStatus}</h2>
+			<h2>Status: {loggedInStatus}</h2>
 
-			{props.loggedInStatus === 'NOT_LOGGED_IN' ? (
+			{loggedInStatus === 'NOT_LOGGED_IN' ? (
 				<div>
 					<div>you're not logged in</div>
 					<a href='/'>
@@ -85,39 +89,47 @@ const Tweets = (props) => {
 					</a>
 				</div>
 			) : (
-				<div>
-					<h1>tweets</h1>
-					<button onClick={handleLogoutClick}>Log out</button>
-					{/* {console.log(props)} */}
-					<form onSubmit={postTweet}>
-						<input
-							type='text'
-							placeholder='sup?'
-							name='tweet'
-							value={state.newTweet}
-							onChange={handleChange}
-							required
+				<Router>
+					<div>
+						<h1>tweets</h1>
+						<button onClick={handleLogoutClick}>Log out</button>
+						<form onSubmit={postTweet}>
+							<input
+								type='text'
+								placeholder='sup?'
+								name='tweet'
+								value={state.newTweet}
+								onChange={handleChange}
+								required
+							/>
+							<button type='submit'>post</button>
+						</form>
+						<Route
+							exact
+							path={`/tweets/:userId`}
+							render={(props) => (
+								<TweetsList
+									{...props}
+									tweets={state.tweets}
+									currentUser={currentUser}
+									getTweets={getTweets}
+								/>
+							)}
 						/>
-						<button type='submit'>post</button>
-					</form>
-					<ul>
-						{_.flatMap(state.tweets).map((tweet) => {
-							return (
-								<li key={tweet.id}>
-									<div>
-										{tweet.user_id === props.currentUser.id ? (
-											<button onClick={() => deleteTweet(tweet.id)}>
-												delete
-											</button>
-										) : null}
-
-										{tweet.message}
-									</div>
-								</li>
-							)
-						})}
-					</ul>
-				</div>
+						<Route
+							exact
+							path={'/tweets'}
+							render={(props) => (
+								<TweetsList
+									{...props}
+									tweets={state.tweets}
+									currentUser={currentUser}
+									getTweets={getTweets}
+								/>
+							)}
+						/>
+					</div>
+				</Router>
 			)}
 		</div>
 	)
