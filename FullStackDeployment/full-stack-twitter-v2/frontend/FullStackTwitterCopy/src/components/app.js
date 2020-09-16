@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './Home'
-import Tweets from './Tweets'
+import TweetsOverview from './TweetsOverview'
 
 export default class App extends Component {
 	constructor() {
@@ -76,14 +76,13 @@ export default class App extends Component {
 									{...props}
 									loggedInStatus={this.state.loggedInStatus}
 									handleLogin={this.handleLogin}
-									handleLogout={this.handleLogout}
 								/>
 							)}
 						/>
 						<Route
 							path={'/tweets'}
 							render={(props) => (
-								<Tweets
+								<TweetsOverview
 									{...props}
 									loggedInStatus={this.state.loggedInStatus}
 									handleLogout={this.handleLogout}

@@ -1,27 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState } from 'react'
+import Modal from './ModalTweetsByUser'
 
 export default function Tweet(props) {
-	const { tweet, currentUser, getTweets } = props
+	const { tweet, currentUser, deleteTweet } = props
 
-	const deleteTweet = (tweetId) => {
-		axios
-			.delete(`http://localhost:3001/tweets/${tweetId}`, {
-				withCredentials: true,
-			})
-			.then((response) => {
-				getTweets()
-				console.log(`delete tweet ${tweetId} response`, response.data)
-			})
-			.catch((error) => {
-				console.log(`delete tweet ${tweetId} error`, error)
-			})
+	const [isOpen, setIsOpen] = useState(false)
+
+	if (currentUser == null) {
+		return <div>{tweet.message}</div>
 	}
-
 	return (
 		<div>
 			{tweet.message}
+
 			{tweet.user_id === currentUser.id ? (
 				<span>
 					<span>
@@ -32,12 +23,14 @@ export default function Tweet(props) {
 			) : (
 				<span>
 					{` `}
-					<Link
-						onClick={() => getTweets(tweet.user_id)}
-						to={`/tweets/${tweet.user_id}`}
-					>
-						{tweet.user.email}
-					</Link>
+					<button onClick={() => setIsOpen(true)}>{tweet.user.email}</button>
+
+					<Modal
+						open={isOpen}
+						onClose={() => setIsOpen(false)}
+						tweetAuthor={tweet.user_id}
+						currentUser={currentUser}
+					/>
 				</span>
 			)}
 		</div>
