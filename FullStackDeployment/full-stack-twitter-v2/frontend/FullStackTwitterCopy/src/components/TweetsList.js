@@ -2,7 +2,7 @@ import React from 'react'
 import Tweet from './Tweet'
 
 const TweetsList = (props) => {
-	const { tweets, currentUser, getTweets } = props
+	const { currentUser, tweets, deleteTweet, modalIsOpen } = props
 
 	return (
 		<ul>
@@ -12,7 +12,8 @@ const TweetsList = (props) => {
 						<Tweet
 							tweet={tweet}
 							currentUser={currentUser}
-							getTweets={getTweets}
+							deleteTweet={deleteTweet}
+							modalIsOpen={modalIsOpen}
 						/>
 					</li>
 				)
