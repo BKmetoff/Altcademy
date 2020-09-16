@@ -33,8 +33,9 @@ class TweetsController < ApplicationController
 
   def index
     tweets = Tweet.order(created_at: :desc)
-    # users = User.all
-    # tweets = Tweet.where
+
+    tweets = tweets.where(user_id: params[:user_id]) if params[:user_id]
+
     render json: tweets, include: [:user]
   end
 
