@@ -32,7 +32,7 @@ class TweetsController < ApplicationController
   end
 
   def index
-    tweets = Tweet.order(created_at: :desc)
+    tweets = Tweet.order(created_at: :desc).includes(:user)
 
     tweets = tweets.where(user_id: params[:user_id]) if params[:user_id]
 
