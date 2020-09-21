@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 
+import Layout from './backbone/Layout'
+
 import Home from './Home'
 import TweetsOverview from './TweetsOverview'
 
@@ -66,32 +68,34 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className='app'>
-				<Router>
-					<Switch>
-						<Route
-							exact
-							path={'/'}
-							render={(props) => (
-								<Home
-									{...props}
-									loggedInStatus={this.state.loggedInStatus}
-									handleLogin={this.handleLogin}
-								/>
-							)}
-						/>
-						<Route
-							path={'/tweets'}
-							render={(props) => (
-								<TweetsOverview
-									{...props}
-									loggedInStatus={this.state.loggedInStatus}
-									handleLogout={this.handleLogout}
-									currentUser={this.state.user}
-								/>
-							)}
-						/>
-					</Switch>
-				</Router>
+				<Layout>
+					<Router>
+						<Switch>
+							<Route
+								exact
+								path={'/'}
+								render={(props) => (
+									<Home
+										{...props}
+										loggedInStatus={this.state.loggedInStatus}
+										handleLogin={this.handleLogin}
+									/>
+								)}
+							/>
+							<Route
+								path={'/tweets'}
+								render={(props) => (
+									<TweetsOverview
+										{...props}
+										loggedInStatus={this.state.loggedInStatus}
+										handleLogout={this.handleLogout}
+										currentUser={this.state.user}
+									/>
+								)}
+							/>
+						</Switch>
+					</Router>
+				</Layout>
 			</div>
 		)
 	}
