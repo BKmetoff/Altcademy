@@ -1,24 +1,27 @@
 import React from 'react'
 import Tweet from './Tweet'
 
+import Sheet from './backbone/Sheet'
+import { ActionsWrapper } from './backbone/Wrapper'
+
 const TweetsList = (props) => {
 	const { currentUser, tweets, deleteTweet, modalIsOpen } = props
 
 	return (
-		<ul>
+		<Sheet width='750'>
 			{tweets.map((tweet) => {
 				return (
-					<li key={tweet.id}>
+					<div key={tweet.id}>
 						<Tweet
 							tweet={tweet}
 							currentUser={currentUser}
 							deleteTweet={deleteTweet}
 							modalIsOpen={modalIsOpen}
 						/>
-					</li>
+					</div>
 				)
 			})}
-		</ul>
+		</Sheet>
 	)
 }
 

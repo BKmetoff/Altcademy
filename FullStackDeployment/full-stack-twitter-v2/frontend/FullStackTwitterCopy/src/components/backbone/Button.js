@@ -19,6 +19,10 @@ const kinds = {
 		color: ${COLORS.light};
 		background-color: ${COLORS.grey_heavy};
 	`,
+	danger: css`
+		color: ${COLORS.light};
+		background-color: ${COLORS.red};
+	`,
 }
 
 const Button = styled(BaseButton)`

@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import Modal from './ModalTweetsByUser'
 
+import Sheet from './backbone/Sheet'
+import { ActionsWrapper } from './backbone/Wrapper'
+import { Text } from './backbone/Text'
+import Button from './backbone/Button'
+
 export default function Tweet(props) {
 	const { tweet, currentUser, deleteTweet } = props
 
@@ -10,20 +15,24 @@ export default function Tweet(props) {
 		return <div>{tweet.message}</div>
 	}
 	return (
-		<div>
-			{tweet.message}
+		<Sheet>
+			<Text>{tweet.message}</Text>
 
 			{tweet.user_id === currentUser.id ? (
-				<span>
+				<ActionsWrapper>
 					<span>
 						{` `}You{` `}
 					</span>
-					<button onClick={() => deleteTweet(tweet.id)}>delete</button>
-				</span>
+					<Button kind='danger' onClick={() => deleteTweet(tweet.id)}>
+						delete
+					</Button>
+				</ActionsWrapper>
 			) : (
-				<span>
+				<ActionsWrapper>
 					{` `}
-					<button onClick={() => setIsOpen(true)}>{tweet.user.email}</button>
+					<Button kind='primary' onClick={() => setIsOpen(true)}>
+						{tweet.user.email}
+					</Button>
 
 					<Modal
 						open={isOpen}
@@ -31,8 +40,8 @@ export default function Tweet(props) {
 						tweetAuthor={tweet.user_id}
 						currentUser={currentUser}
 					/>
-				</span>
+				</ActionsWrapper>
 			)}
-		</div>
+		</Sheet>
 	)
 }

@@ -5,6 +5,7 @@ export const COLORS = {
 	grey_light: '#8899a6',
 	grey_heavy: '#192734',
 	dark: '#15202b',
+	red: '#ff7169',
 }
 
 export const SHADOW = '0 2px 5px rgba(0, 0, 0, 0.2)'

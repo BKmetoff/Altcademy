@@ -10,6 +10,7 @@ const BaseSheet = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	height: auto;
 `
 
 const Sheet = styled(BaseSheet)`
