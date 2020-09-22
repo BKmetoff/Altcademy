@@ -13,5 +13,8 @@ export const TitleBig = styled.h1`
 const BaseText = styled.p`
 	font-size: 1rem;
 	margin: 0.5rem;
+	color: ${COLORS.dark};
 `
-export const Text = ({ children }) => <BaseText>{children}</BaseText>
+export const Text = styled(BaseText)`
+	color: ${({ color }) => color};
+`

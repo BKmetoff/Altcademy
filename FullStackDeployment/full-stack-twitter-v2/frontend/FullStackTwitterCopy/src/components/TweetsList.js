@@ -2,7 +2,6 @@ import React from 'react'
 import Tweet from './Tweet'
 
 import Sheet from './backbone/Sheet'
-import { ActionsWrapper } from './backbone/Wrapper'
 
 const TweetsList = (props) => {
 	const { currentUser, tweets, deleteTweet, modalIsOpen } = props

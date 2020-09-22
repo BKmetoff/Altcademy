@@ -3,6 +3,10 @@ import { COLORS } from './theme/Theme'
 
 export const Footer = styled.footer`
 	background: ${COLORS.grey_heavy};
-	height: 5vh;
-	width: 100vw;
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	height: 40px;
+	width: 100%;
+	bottom: 0px;
 `

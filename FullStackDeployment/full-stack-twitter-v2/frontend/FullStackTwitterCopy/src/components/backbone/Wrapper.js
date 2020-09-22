@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const MainWrapper = styled.section`
 	background: ${(props) => props.theme.colors.blue_light};
-	height: 95vh;
-	width: 100vw;
+	height: 100%;
+	margin-bottom: 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
