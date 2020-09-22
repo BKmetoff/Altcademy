@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import BaseForm from '../backbone/Form'
+import { ActionsWrapper } from '../backbone/Wrapper'
+import Input from '../backbone/Input'
+import Button from '../backbone/Button'
+
 export default class Register extends Component {
 	constructor(props) {
 		super(props)
@@ -53,9 +58,9 @@ export default class Register extends Component {
 
 	render() {
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
-					<input
+			<BaseForm onSubmit={this.handleSubmit}>
+				<ActionsWrapper>
+					<Input
 						type='email'
 						name='email'
 						placeholder='email'
@@ -63,7 +68,7 @@ export default class Register extends Component {
 						onChange={this.handleChange}
 						required
 					/>
-					<input
+					<Input
 						type='password'
 						name='password'
 						placeholder='password'
@@ -71,17 +76,19 @@ export default class Register extends Component {
 						onChange={this.handleChange}
 						required
 					/>
-					<input
+					<Input
 						type='password'
 						name='password_confirmation'
-						placeholder='password confirmation'
+						placeholder='confirm password'
 						value={this.state.password_confirmation}
 						onChange={this.handleChange}
 						required
 					/>
-					<button type='submit'>register</button>
-				</form>
-			</div>
+					<Button type='submit' kind='primary'>
+						create account
+					</Button>
+				</ActionsWrapper>
+			</BaseForm>
 		)
 	}
 }

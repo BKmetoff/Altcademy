@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import BaseForm from '../backbone/Form'
+import { ActionsWrapper } from '../backbone/Wrapper'
+import Input from '../backbone/Input'
+import Button from '../backbone/Button'
+
 export default class Login extends Component {
 	constructor(props) {
 		super(props)
@@ -51,9 +56,9 @@ export default class Login extends Component {
 
 	render() {
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
-					<input
+			<BaseForm onSubmit={this.handleSubmit}>
+				<ActionsWrapper>
+					<Input
 						type='email'
 						name='email'
 						placeholder='email'
@@ -61,7 +66,7 @@ export default class Login extends Component {
 						onChange={this.handleChange}
 						required
 					/>
-					<input
+					<Input
 						type='password'
 						name='password'
 						placeholder='password'
@@ -69,9 +74,11 @@ export default class Login extends Component {
 						onChange={this.handleChange}
 						required
 					/>
-					<button type='submit'>log in</button>
-				</form>
-			</div>
+					<Button type='submit' kind='primary'>
+						log in
+					</Button>
+				</ActionsWrapper>
+			</BaseForm>
 		)
 	}
 }
