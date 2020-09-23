@@ -4,8 +4,8 @@ import { COLORS, SHADOW } from '../theme/Theme'
 const BaseSheet = styled.div`
 	background: ${COLORS.light};
 	padding: 20px;
-	margin: 30px;
-	border-radius: 3px;
+	margin: 15px;
+	border-radius: 5px;
 	box-shadow: ${SHADOW};
 	display: flex;
 	flex-direction: column;

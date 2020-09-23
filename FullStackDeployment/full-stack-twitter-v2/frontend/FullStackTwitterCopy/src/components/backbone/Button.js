@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components'
 import { COLORS, SHADOW } from '../theme/Theme'
 const BaseButton = styled.button`
-	width: 120px;
+	width: auto;
+	min-width: 50px;
 	padding: 10px;
 	margin: 5px;
 	outline: none;
 	border: none;
-	border-radius: 3px;
+	border-radius: 4px;
 	box-shadow: ${SHADOW};
 `
 

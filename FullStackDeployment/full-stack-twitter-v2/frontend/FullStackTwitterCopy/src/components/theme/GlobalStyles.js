@@ -1,11 +1,16 @@
 import { createGlobalStyle } from 'styled-components'
+import { COLORS } from './Theme'
 
 const GlobalStyle = createGlobalStyle`
 
-body * {
+body {
+  background: ${COLORS.blue_light};
+}
+
+* {
   padding: 0;
   margin: 0;
-  font-weight: 200;
+  font-weight: 400;
   font-family: 'Iosevka';
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -21,6 +26,7 @@ a {
 
 a:hover {
   cursor: pointer;
+  text-decoration: underline;
 }
 
 ::placeholder {
