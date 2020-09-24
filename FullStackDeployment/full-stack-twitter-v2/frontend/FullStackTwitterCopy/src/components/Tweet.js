@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { parseISO, format, formatRelative, subDays } from 'date-fns'
 
 import Modal from './ModalTweetsByUser'
 
@@ -21,11 +22,17 @@ export default function Tweet(props) {
 
 	const [isOpen, setIsOpen] = useState(false)
 
+	const formatDate = (tweetCreatedAt) => {
+		const parsedTweetDate = parseISO(tweetCreatedAt)
+		const parsedDateNow = parseISO(new Date().toISOString())
+		return formatRelative(parsedTweetDate, parsedDateNow, 1)
+	}
+
 	if (currentUser == null) {
 		return (
 			<Sheet>
 				<TweetHeader>
-					<Text>{tweet.created_at}</Text>
+					<Text>{formatDate(tweet.created_at)}</Text>
 					<Text>{tweet.user.email}</Text>
 				</TweetHeader>
 				<Text>{tweet.message}</Text>
@@ -36,14 +43,14 @@ export default function Tweet(props) {
 		<Sheet>
 			{tweet.user_id === currentUser.id ? (
 				<TweetHeader>
-					<Text>You on {tweet.created_at}</Text>
+					<Text>{formatDate(tweet.created_at)}</Text>
 					<Button kind='danger' onClick={() => deleteTweet(tweet.id)}>
 						delete
 					</Button>
 				</TweetHeader>
 			) : (
 				<TweetHeader>
-					<Text>{tweet.created_at}</Text>
+					<Text>{formatDate(tweet.created_at)}</Text>
 					<Button kind='primary' onClick={() => setIsOpen(true)}>
 						{tweet.user.email}
 					</Button>
