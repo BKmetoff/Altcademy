@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactDom from 'react-dom'
 import axios from 'axios'
+import styled from 'styled-components'
 
 import TweetsList from './TweetsList'
 
@@ -8,8 +9,13 @@ import Overlay from './backbone/Overlay'
 import StyledModal from './backbone/Modal'
 import Button from './backbone/Button'
 
+const ModalHeader = styled.div`
+	display: flex;
+	justify-content: flex-end;
+`
+
 export default function Modal(props) {
-	const { open, children, onClose, tweetAuthor, currentUser } = props
+	const { open, onClose, tweetAuthor, currentUser } = props
 
 	if (!open) {
 		return null
@@ -38,11 +44,12 @@ export default function Modal(props) {
 		<React.Fragment>
 			<Overlay />
 			<StyledModal>
-				{children}
+				<ModalHeader>
+					<Button kind='primary' style={{ fontSize: '18px' }} onClick={onClose}>
+						{String.fromCharCode(215)}
+					</Button>
+				</ModalHeader>
 				<TweetsList tweets={state.tweetsOfUser} currentUser={null} />
-				<Button kind='primary' onClick={onClose}>
-					close
-				</Button>
 			</StyledModal>
 		</React.Fragment>,
 		document.getElementById('portal')

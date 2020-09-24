@@ -14,6 +14,16 @@ import Input from './backbone/Input'
 import Button from './backbone/Button'
 import { Text } from './backbone/Text'
 
+const HeaderWrapper = styled.div`
+	width: 100%;
+	position: fixed;
+	top: 0;
+	overflow: hidden;
+	background: ${COLORS.blue_light};
+	mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+	-webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+`
+
 const FixedHeaderContentWrapper = styled.div`
 	position: fixed;
 	top: 0;
