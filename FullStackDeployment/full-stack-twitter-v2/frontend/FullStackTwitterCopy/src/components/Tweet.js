@@ -22,7 +22,15 @@ export default function Tweet(props) {
 	const [isOpen, setIsOpen] = useState(false)
 
 	if (currentUser == null) {
-		return <div>{tweet.message}</div>
+		return (
+			<Sheet>
+				<TweetHeader>
+					<Text>{tweet.created_at}</Text>
+					<Text>{tweet.user.email}</Text>
+				</TweetHeader>
+				<Text>{tweet.message}</Text>
+			</Sheet>
+		)
 	}
 	return (
 		<Sheet>

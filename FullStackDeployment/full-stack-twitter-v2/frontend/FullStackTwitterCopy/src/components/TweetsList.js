@@ -7,8 +7,13 @@ import Sheet from './backbone/Sheet'
 const TweetsList = (props) => {
 	const { currentUser, tweets, deleteTweet, modalIsOpen } = props
 
+	const UserTweetsWrapper = styled(Sheet)`
+		margin: ${currentUser ? '300' : '0'}px;
+		box-shadow: ${currentUser ? '' : 'none'};
+	`
+
 	return (
-		<Sheet width='750' style={{ marginTop: currentUser ? '300px' : '0px' }}>
+		<UserTweetsWrapper width='750'>
 			{tweets.map((tweet) => {
 				return (
 					<div key={tweet.id}>
@@ -21,7 +26,7 @@ const TweetsList = (props) => {
 					</div>
 				)
 			})}
-		</Sheet>
+		</UserTweetsWrapper>
 	)
 }
 
