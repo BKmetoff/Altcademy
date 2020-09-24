@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { parseISO, format, formatRelative, subDays } from 'date-fns'
+import { parseISO, formatRelative } from 'date-fns'
 
 import Modal from './ModalTweetsByUser'
 
@@ -43,7 +43,7 @@ export default function Tweet(props) {
 		<Sheet>
 			{tweet.user_id === currentUser.id ? (
 				<TweetHeader>
-					<Text>{formatDate(tweet.created_at)}</Text>
+					<Text>You, {formatDate(tweet.created_at)}</Text>
 					<Button kind='danger' onClick={() => deleteTweet(tweet.id)}>
 						delete
 					</Button>

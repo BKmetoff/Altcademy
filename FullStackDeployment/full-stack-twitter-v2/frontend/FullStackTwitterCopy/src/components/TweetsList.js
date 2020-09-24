@@ -4,29 +4,51 @@ import styled from 'styled-components'
 import Tweet from './Tweet'
 import Sheet from './backbone/Sheet'
 
+const TweetsOverviewSheetWrapper = styled(Sheet)`
+	margin-top: 300px;
+`
+
+const ModalTweetsSheetWrapper = styled(Sheet)`
+	padding: 0px;
+	margin: 0px;
+	box-shadow: none;
+`
+
 const TweetsList = (props) => {
 	const { currentUser, tweets, deleteTweet, modalIsOpen } = props
 
-	const UserTweetsWrapper = styled(Sheet)`
-		margin: ${currentUser ? '300' : '0'}px;
-		box-shadow: ${currentUser ? '' : 'none'};
-	`
-
 	return (
-		<UserTweetsWrapper width='750'>
-			{tweets.map((tweet) => {
-				return (
-					<div key={tweet.id}>
-						<Tweet
-							tweet={tweet}
-							currentUser={currentUser}
-							deleteTweet={deleteTweet}
-							modalIsOpen={modalIsOpen}
-						/>
-					</div>
-				)
-			})}
-		</UserTweetsWrapper>
+		<React.Fragment>
+			{currentUser ? (
+				<TweetsOverviewSheetWrapper width='750'>
+					{tweets.map((tweet) => {
+						return (
+							<div key={tweet.id}>
+								<Tweet
+									tweet={tweet}
+									currentUser={currentUser}
+									deleteTweet={deleteTweet}
+								/>
+							</div>
+						)
+					})}
+				</TweetsOverviewSheetWrapper>
+			) : (
+				<ModalTweetsSheetWrapper width='750'>
+					{tweets.map((tweet) => {
+						return (
+							<div key={tweet.id}>
+								<Tweet
+									tweet={tweet}
+									currentUser={currentUser}
+									deleteTweet={deleteTweet}
+								/>
+							</div>
+						)
+					})}
+				</ModalTweetsSheetWrapper>
+			)}
+		</React.Fragment>
 	)
 }
 
