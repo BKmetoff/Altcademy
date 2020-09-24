@@ -22,11 +22,9 @@ body {
 a {
   text-decoration: none;
   color: white;
-}
-
-a:hover {
-  cursor: pointer;
-  text-decoration: underline;
+  :hover {
+    cursor: pointer;
+  }
 }
 
 ::placeholder {

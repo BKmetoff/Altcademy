@@ -9,6 +9,10 @@ const BaseButton = styled.button`
 	border: none;
 	border-radius: 4px;
 	box-shadow: ${SHADOW};
+	:hover {
+		cursor: pointer;
+		opacity: 0.9;
+	}
 `
 
 const kinds = {

@@ -1,9 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import Sheet from './backbone/Sheet'
 import Button from './backbone/Button'
 import { Text } from './backbone/Text'
-import styled from 'styled-components'
 
 const CenteredContent = styled(Sheet)`
 	align-items: center;
