@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import TweetsList from './TweetsList'
+import ErrorState from './ErrorState'
 
 import { COLORS } from './theme/Theme'
 import Sheet from './backbone/Sheet'
@@ -18,12 +19,14 @@ const FixedHeaderContentWrapper = styled.div`
 	top: 0;
 	background: ${COLORS.blue_light};
 	border-radius: 3px;
+	mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+	-webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
 `
 
 const UserHeader = styled(Sheet)`
 	margin-top: 0px;
 	margin-bottom: 5px;
-	padding: 5px 20px 10px 20px;
+	padding: 5px 20px 5px 20px;
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 	flex-direction: row;
@@ -113,12 +116,7 @@ export default function TweetsOverview(props) {
 	return (
 		<ActionsWrapper>
 			{loggedInStatus === 'NOT_LOGGED_IN' ? (
-				<Sheet>
-					<div>you're not logged in</div>
-					<a href='/'>
-						<Button kind='primary'>Log in</Button>
-					</a>
-				</Sheet>
+				<ErrorState />
 			) : (
 				<React.Fragment>
 					<FixedHeaderContentWrapper>
@@ -146,7 +144,6 @@ export default function TweetsOverview(props) {
 							</NewTweetForm>
 						</Sheet>
 					</FixedHeaderContentWrapper>
-
 					<TweetsList
 						{...props}
 						currentUser={currentUser}
