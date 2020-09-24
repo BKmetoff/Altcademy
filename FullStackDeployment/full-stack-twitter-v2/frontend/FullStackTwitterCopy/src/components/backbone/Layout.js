@@ -22,7 +22,7 @@ const Layout = (props) => {
 			<Footer>
 				<FooterItemsWrapper>
 					<Text color='#fff'>meaningful footer</Text>
-					<Text color='#fff'> | </Text>
+					<Text color='#fff'>{` | `}</Text>
 					<a target='_blank' href='https://github.com/BKmetoff/Altcademy'>
 						<Text color='#fff'>github/bkmetoff</Text>
 					</a>

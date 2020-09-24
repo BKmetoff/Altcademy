@@ -12,7 +12,7 @@ export const TitleBig = styled.h1`
 
 const BaseText = styled.p`
 	font-size: 1rem;
-	margin: 0.5rem;
+	margin: 5px;
 	color: ${COLORS.dark};
 `
 export const Text = styled(BaseText)`

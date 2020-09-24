@@ -1,8 +1,44 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 
 import TweetsList from './TweetsList'
+import ErrorState from './ErrorState'
+
+import { COLORS } from './theme/Theme'
+import Sheet from './backbone/Sheet'
+import { ActionsWrapper } from './backbone/Wrapper'
+import BaseForm from './backbone/Form'
+import Input from './backbone/Input'
+import Button from './backbone/Button'
+import { Text } from './backbone/Text'
+
+const FixedHeaderContentWrapper = styled.div`
+	position: fixed;
+	top: 0;
+	background: ${COLORS.blue_light};
+	border-radius: 3px;
+	mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+	-webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+`
+
+const UserHeader = styled(Sheet)`
+	margin-top: 0px;
+	margin-bottom: 5px;
+	padding: 5px 20px 5px 20px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+`
+
+const NewTweetForm = styled(BaseForm)`
+	display: flex;
+	flex-wrap: wrap-reverse;
+	flex-direction: column;
+`
 
 export default function TweetsOverview(props) {
 	let history = useHistory()
@@ -78,29 +114,36 @@ export default function TweetsOverview(props) {
 	}
 
 	return (
-		<div>
+		<ActionsWrapper>
 			{loggedInStatus === 'NOT_LOGGED_IN' ? (
-				<div>
-					<div>you're not logged in</div>
-					<a href='/'>
-						<button>Log in</button>
-					</a>
-				</div>
+				<ErrorState />
 			) : (
-				<div>
-					<h1>tweets</h1>
-					<button onClick={handleLogoutClick}>Log out</button>
-					<form onSubmit={postTweet}>
-						<input
-							type='text'
-							placeholder='sup?'
-							name='tweet'
-							value={state.newTweet}
-							onChange={handleChange}
-							required
-						/>
-						<button type='submit'>post</button>
-					</form>
+				<React.Fragment>
+					<FixedHeaderContentWrapper>
+						<UserHeader width='750'>
+							<Text>Welcome, {currentUser.email}</Text>
+							<Button kind='secondary' onClick={handleLogoutClick}>
+								Log out
+							</Button>
+						</UserHeader>
+
+						<Sheet>
+							<NewTweetForm onSubmit={postTweet}>
+								<Input
+									type='text'
+									placeholder='sup?'
+									name='tweet'
+									value={state.newTweet}
+									onChange={handleChange}
+									required
+									height='50'
+								/>
+								<Button kind='primary' type='submit'>
+									post
+								</Button>
+							</NewTweetForm>
+						</Sheet>
+					</FixedHeaderContentWrapper>
 					<TweetsList
 						{...props}
 						currentUser={currentUser}
@@ -108,8 +151,8 @@ export default function TweetsOverview(props) {
 						deleteTweet={deleteTweet}
 						modalIsOpen={state.modalIsOpen}
 					/>
-				</div>
+				</React.Fragment>
 			)}
-		</div>
+		</ActionsWrapper>
 	)
 }
