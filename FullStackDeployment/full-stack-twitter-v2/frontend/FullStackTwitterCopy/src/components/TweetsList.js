@@ -4,15 +4,11 @@ import styled from 'styled-components'
 import Tweet from './Tweet'
 import Sheet from './backbone/Sheet'
 
-const TweetsWrapper = styled(Sheet)`
-	margin-top: 300px;
-`
-
 const TweetsList = (props) => {
 	const { currentUser, tweets, deleteTweet, modalIsOpen } = props
 
 	return (
-		<TweetsWrapper width='750'>
+		<Sheet width='750' style={{ marginTop: currentUser ? '300px' : '0px' }}>
 			{tweets.map((tweet) => {
 				return (
 					<div key={tweet.id}>
@@ -25,7 +21,7 @@ const TweetsList = (props) => {
 					</div>
 				)
 			})}
-		</TweetsWrapper>
+		</Sheet>
 	)
 }
 
