@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import BaseForm from '../backbone/Form'
+import Sheet from '../backbone/Sheet'
 import { ActionsWrapper } from '../backbone/Wrapper'
 import Input from '../backbone/Input'
 import Button from '../backbone/Button'
@@ -58,37 +59,39 @@ export default class Register extends Component {
 
 	render() {
 		return (
-			<BaseForm onSubmit={this.handleSubmit}>
-				<ActionsWrapper>
-					<Input
-						type='email'
-						name='email'
-						placeholder='email'
-						value={this.state.email}
-						onChange={this.handleChange}
-						required
-					/>
-					<Input
-						type='password'
-						name='password'
-						placeholder='password'
-						value={this.state.password}
-						onChange={this.handleChange}
-						required
-					/>
-					<Input
-						type='password'
-						name='password_confirmation'
-						placeholder='confirm password'
-						value={this.state.password_confirmation}
-						onChange={this.handleChange}
-						required
-					/>
-					<Button type='submit' kind='primary'>
-						create account
-					</Button>
-				</ActionsWrapper>
-			</BaseForm>
+			<Sheet height='250' width='250'>
+				<BaseForm onSubmit={this.handleSubmit}>
+					<ActionsWrapper>
+						<Input
+							type='email'
+							name='email'
+							placeholder='email'
+							value={this.state.email}
+							onChange={this.handleChange}
+							required
+						/>
+						<Input
+							type='password'
+							name='password'
+							placeholder='password'
+							value={this.state.password}
+							onChange={this.handleChange}
+							required
+						/>
+						<Input
+							type='password'
+							name='password_confirmation'
+							placeholder='confirm password'
+							value={this.state.password_confirmation}
+							onChange={this.handleChange}
+							required
+						/>
+						<Button type='submit' kind='primary'>
+							create account
+						</Button>
+					</ActionsWrapper>
+				</BaseForm>
+			</Sheet>
 		)
 	}
 }

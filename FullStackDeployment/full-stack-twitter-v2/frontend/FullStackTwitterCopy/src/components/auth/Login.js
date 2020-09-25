@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import BaseForm from '../backbone/Form'
 import { ActionsWrapper } from '../backbone/Wrapper'
+import Sheet from '../backbone/Sheet'
 import Input from '../backbone/Input'
 import Button from '../backbone/Button'
 
@@ -56,29 +57,31 @@ export default class Login extends Component {
 
 	render() {
 		return (
-			<BaseForm onSubmit={this.handleSubmit}>
-				<ActionsWrapper>
-					<Input
-						type='email'
-						name='email'
-						placeholder='email'
-						value={this.state.email}
-						onChange={this.handleChange}
-						required
-					/>
-					<Input
-						type='password'
-						name='password'
-						placeholder='password'
-						value={this.state.password}
-						onChange={this.handleChange}
-						required
-					/>
-					<Button type='submit' kind='primary'>
-						log in
-					</Button>
-				</ActionsWrapper>
-			</BaseForm>
+			<Sheet height='250' width='250'>
+				<BaseForm onSubmit={this.handleSubmit}>
+					<ActionsWrapper>
+						<Input
+							type='email'
+							name='email'
+							placeholder='email'
+							value={this.state.email}
+							onChange={this.handleChange}
+							required
+						/>
+						<Input
+							type='password'
+							name='password'
+							placeholder='password'
+							value={this.state.password}
+							onChange={this.handleChange}
+							required
+						/>
+						<Button type='submit' kind='primary'>
+							log in
+						</Button>
+					</ActionsWrapper>
+				</BaseForm>
+			</Sheet>
 		)
 	}
 }
