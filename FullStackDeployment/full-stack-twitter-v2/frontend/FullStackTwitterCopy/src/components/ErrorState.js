@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Sheet from './backbone/Sheet'
 import Button from './backbone/Button'
 import { Text } from './backbone/Text'
+import { MainWrapper } from './backbone/Wrapper'
 
 const CenteredContent = styled(Sheet)`
 	align-items: center;
@@ -11,11 +12,13 @@ const CenteredContent = styled(Sheet)`
 
 export default function ErrorState() {
 	return (
-		<CenteredContent height='150' width='200'>
-			<Text>you're not logged in</Text>
-			<Button kind='primary'>
-				<a href='/'>Log in</a>
-			</Button>
-		</CenteredContent>
+		<MainWrapper>
+			<CenteredContent height='150' width='200'>
+				<Text>you're not logged in</Text>
+				<Button kind='primary'>
+					<a href='/'>log in on sign up</a>
+				</Button>
+			</CenteredContent>
+		</MainWrapper>
 	)
 }

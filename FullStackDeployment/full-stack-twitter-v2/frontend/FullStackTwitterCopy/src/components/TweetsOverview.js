@@ -89,7 +89,7 @@ export default function TweetsOverview(props) {
 				{ withCredentials: true }
 			)
 			.then((response) => {
-				setState({ ...state, newTweet: '' })
+				setState((prevState) => ({ ...prevState, newTweet: '' }))
 				getAllTweets()
 				console.log('new tweet response:', response.data)
 			})
@@ -116,7 +116,7 @@ export default function TweetsOverview(props) {
 		axios
 			.get('http://localhost:3001/tweets', { withCredentials: true })
 			.then((response) => {
-				setState({ ...state, tweets: response.data })
+				setState((prevState) => ({ ...prevState, tweets: response.data }))
 			})
 			.catch((error) => {
 				console.log('get tweets error: ', error)
