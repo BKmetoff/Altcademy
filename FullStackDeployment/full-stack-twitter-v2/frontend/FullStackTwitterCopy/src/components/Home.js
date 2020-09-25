@@ -13,13 +13,13 @@ import Button from './backbone/Button'
 export default class Home extends Component {
 	constructor(props) {
 		super(props)
-		this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
+		// this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
 	}
 
-	handleSuccessfulAuth(userData) {
-		this.props.handleLogin(userData)
-		this.props.history.push('/tweets')
-	}
+	// handleSuccessfulAuth(userData) {
+	// 	this.props.handleLogin(userData)
+	// 	this.props.history.push('/tweets')
+	// }
 
 	render() {
 		return (
@@ -47,7 +47,7 @@ export default class Home extends Component {
 							)}
 						/>
 
-						<Route
+						{/* <Route
 							exact
 							path={'/login'}
 							render={(props) => (
@@ -56,7 +56,7 @@ export default class Home extends Component {
 									handleSuccessfulAuth={this.handleSuccessfulAuth}
 								/>
 							)}
-						></Route>
+						/>
 						<Route
 							exact
 							path={'/signup'}
@@ -66,7 +66,7 @@ export default class Home extends Component {
 									handleSuccessfulAuth={this.handleSuccessfulAuth}
 								/>
 							)}
-						></Route>
+						/> */}
 					</Switch>
 				</Sheet>
 			</Router>

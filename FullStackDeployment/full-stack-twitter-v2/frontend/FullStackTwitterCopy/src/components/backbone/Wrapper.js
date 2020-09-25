@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const MainWrapper = styled.section`
-	height: 100%;
-	margin-bottom: 40px;
+	height: 100vh;
+	/* margin-bottom: 40px; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
