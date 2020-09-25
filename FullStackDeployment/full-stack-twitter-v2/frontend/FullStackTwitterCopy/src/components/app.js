@@ -1,56 +1,64 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link,
+	useHistory,
+} from 'react-router-dom'
 import axios from 'axios'
 
-import Layout from './backbone/Layout'
-
-import Home from './Home'
+import Login from './auth/Login'
+import Register from './auth/Register'
 import TweetsOverview from './TweetsOverview'
 
-export default class App extends Component {
-	constructor() {
-		super()
+import Layout from './backbone/Layout'
+import Sheet from './backbone/Sheet'
+import { ActionsWrapper, MainWrapper } from './backbone/Wrapper'
+import Button from './backbone/Button'
+import { Text, TitleBig } from './backbone/Text'
 
-		this.state = {
-			loggedInStatus: 'NOT_LOGGED_IN',
-			user: {},
-		}
+export default function App() {
+	let history = useHistory()
 
-		this.handleLogin = this.handleLogin.bind(this)
-		this.handleLogout = this.handleLogout.bind(this)
-	}
+	const [state, setState] = useState({
+		loggedInStatus: 'NOT_LOGGED_IN',
+		user: {},
+	})
 
-	componentDidMount() {
-		this.checkLoginStatus()
-	}
+	useEffect(() => {
+		checkLoginStatus()
+	}, [])
 
-	handleLogout() {
-		this.setState({
+	const handleLogout = () => {
+		setState({
 			loggedInStatus: 'NOT_LOGGED_IN',
 			user: {},
 		})
 	}
 
-	checkLoginStatus() {
+	const checkLoginStatus = () => {
 		axios
 			.get('http://localhost:3001/logged_in', { withCredentials: true })
 			.then((response) => {
 				if (
 					response.data.logged_in &&
-					this.state.loggedInStatus === 'NOT_LOGGED_IN'
+					state.loggedInStatus === 'NOT_LOGGED_IN'
 				) {
-					this.setState({
+					setState((prevState) => ({
+						...prevState,
 						loggedInStatus: 'LOGGED_IN',
 						user: response.data.user,
-					})
+					}))
 				} else if (
 					!response.data.logged_in &&
-					this.state.loggedInStatus === 'LOGGED_IN'
+					state.loggedInStatus === 'LOGGED_IN'
 				) {
-					this.setState({
+					setState((prevState) => ({
+						...prevState,
 						loggedInStatus: 'NOT_LOGGED_IN',
 						user: {},
-					})
+					}))
 				}
 			})
 			.catch((error) => {
@@ -58,45 +66,87 @@ export default class App extends Component {
 			})
 	}
 
-	handleLogin(userData) {
-		this.setState({
+	const handleLogin = (userData) => {
+		setState((prevState) => ({
+			...prevState,
 			loggedInStatus: 'LOGGED_IN',
 			user: userData.user,
-		})
+		}))
 	}
 
-	render() {
-		return (
-			<div className='app'>
-				<Layout>
-					<Router>
-						<Switch>
-							<Route
-								exact
-								path={'/'}
-								render={(props) => (
-									<Home
-										{...props}
-										loggedInStatus={this.state.loggedInStatus}
-										handleLogin={this.handleLogin}
-									/>
-								)}
-							/>
-							<Route
-								path={'/tweets'}
-								render={(props) => (
-									<TweetsOverview
-										{...props}
-										loggedInStatus={this.state.loggedInStatus}
-										handleLogout={this.handleLogout}
-										currentUser={this.state.user}
-									/>
-								)}
-							/>
-						</Switch>
-					</Router>
-				</Layout>
-			</div>
-		)
+	const handleSuccessfulAuth = (userData) => {
+		handleLogin(userData)
+		history.push('/tweets')
+		history.go(0)
 	}
+
+	return (
+		<div className='app'>
+			<Layout>
+				<Router>
+					<Switch>
+						<Route
+							exact
+							path={'/tweets'}
+							render={(props) => (
+								<TweetsOverview
+									{...props}
+									loggedInStatus={state.loggedInStatus}
+									handleLogout={handleLogout}
+									currentUser={state.user}
+								/>
+							)}
+						/>
+
+						<Route
+							path={'/login'}
+							render={(props) => (
+								<MainWrapper>
+									<Login
+										{...props}
+										handleSuccessfulAuth={handleSuccessfulAuth}
+									/>
+								</MainWrapper>
+							)}
+						/>
+						<Route
+							path={'/signup'}
+							render={(props) => (
+								<MainWrapper>
+									<Register
+										{...props}
+										handleSuccessfulAuth={handleSuccessfulAuth}
+									/>
+								</MainWrapper>
+							)}
+						/>
+
+						<Route
+							path='/'
+							render={(props) => (
+								<MainWrapper>
+									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
+									<h2>Status: {state.loggedInStatus} </h2>
+
+									<Sheet height='250' width='250'>
+										<ActionsWrapper>
+											<Text>log in or sign up</Text>
+
+											<Link to='/login'>
+												<Button kind='primary'>log in</Button>
+											</Link>
+
+											<Link to='/signup'>
+												<Button kind='secondary'>sign up</Button>
+											</Link>
+										</ActionsWrapper>
+									</Sheet>
+								</MainWrapper>
+							)}
+						/>
+					</Switch>
+				</Router>
+			</Layout>
+		</div>
+	)
 }
