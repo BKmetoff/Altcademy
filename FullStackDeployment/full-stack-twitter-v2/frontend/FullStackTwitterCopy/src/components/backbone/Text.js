@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 import { COLORS } from '../theme/Theme'
@@ -17,4 +16,9 @@ const BaseText = styled.p`
 `
 export const Text = styled(BaseText)`
 	color: ${({ color }) => color};
+`
+
+export const ErrorText = styled(BaseText)`
+	color: ${COLORS.red};
+	text-align: center;
 `

@@ -24,6 +24,7 @@ export default function App() {
 	const [state, setState] = useState({
 		loggedInStatus: 'NOT_LOGGED_IN',
 		user: {},
+		authenticationError: '',
 	})
 
 	useEffect(() => {
@@ -80,6 +81,10 @@ export default function App() {
 		history.go(0)
 	}
 
+	const handleUnsuccessfulAuth = (authError) => {
+		setState((prevState) => ({ ...prevState, authenticationError: authError }))
+	}
+
 	return (
 		<div className='app'>
 			{console.log(state.loggedInStatus)}
@@ -107,6 +112,8 @@ export default function App() {
 									<Login
 										{...props}
 										handleSuccessfulAuth={handleSuccessfulAuth}
+										handleUnsuccessfulAuth={handleUnsuccessfulAuth}
+										authenticationError={state.authenticationError}
 									/>
 								</MainWrapper>
 							)}
@@ -119,6 +126,8 @@ export default function App() {
 									<Register
 										{...props}
 										handleSuccessfulAuth={handleSuccessfulAuth}
+										handleUnsuccessfulAuth={handleUnsuccessfulAuth}
+										authenticationError={state.authenticationError}
 									/>
 								</MainWrapper>
 							)}

@@ -6,6 +6,7 @@ import Sheet from '../backbone/Sheet'
 import { ActionsWrapper } from '../backbone/Wrapper'
 import Input from '../backbone/Input'
 import Button from '../backbone/Button'
+import { ErrorText } from '../backbone/Text'
 
 export default class Register extends Component {
 	constructor(props) {
@@ -20,6 +21,12 @@ export default class Register extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+	}
+
+	componentDidMount() {
+		this.props.authenticationError
+			? this.props.handleUnsuccessfulAuth('')
+			: null
 	}
 
 	handleSubmit(event) {
@@ -45,7 +52,9 @@ export default class Register extends Component {
 				}
 			})
 			.catch((error) => {
-				console.log('reg error', error)
+				this.props.handleUnsuccessfulAuth(
+					"email is taken or password confirmation doesn't match"
+				)
 			})
 
 		event.preventDefault()
@@ -86,6 +95,10 @@ export default class Register extends Component {
 							onChange={this.handleChange}
 							required
 						/>
+						{this.props.authenticationError ? (
+							<ErrorText>{this.props.authenticationError}</ErrorText>
+						) : null}
+
 						<Button type='submit' kind='primary'>
 							create account
 						</Button>
