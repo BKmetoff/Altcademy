@@ -10,9 +10,9 @@ import { COLORS } from './theme/Theme'
 import Sheet from './backbone/Sheet'
 import { ActionsWrapper } from './backbone/Wrapper'
 import BaseForm from './backbone/Form'
-import Input from './backbone/Input'
 import Button from './backbone/Button'
 import { Text } from './backbone/Text'
+import TextArea from './backbone/Textarea'
 
 const FixedHeaderContentWrapper = styled.div`
 	position: fixed;
@@ -129,18 +129,24 @@ export default function TweetsOverview(props) {
 
 						<Sheet>
 							<NewTweetForm onSubmit={postTweet}>
-								<Input
+								<TextArea
 									type='text'
-									placeholder='sup?'
+									placeholder='new tweet goes here'
 									name='tweet'
 									value={state.newTweet}
 									onChange={handleChange}
 									required
 									height='50'
 								/>
-								<Button kind='primary' type='submit'>
-									post
-								</Button>
+								{state.newTweet.length > 140 ? (
+									<React.Fragment>
+										<Text color={COLORS.red}>char limit exceeded</Text>
+									</React.Fragment>
+								) : (
+									<Button kind='primary' type='submit'>
+										post
+									</Button>
+								)}
 							</NewTweetForm>
 						</Sheet>
 					</FixedHeaderContentWrapper>

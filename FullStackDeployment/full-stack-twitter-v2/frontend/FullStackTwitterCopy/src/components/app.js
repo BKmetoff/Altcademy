@@ -82,6 +82,7 @@ export default function App() {
 
 	return (
 		<div className='app'>
+			{console.log(state.loggedInStatus)}
 			<Layout>
 				<Router>
 					<Switch>
@@ -102,6 +103,7 @@ export default function App() {
 							path={'/login'}
 							render={(props) => (
 								<MainWrapper>
+									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
 									<Login
 										{...props}
 										handleSuccessfulAuth={handleSuccessfulAuth}
@@ -113,6 +115,7 @@ export default function App() {
 							path={'/signup'}
 							render={(props) => (
 								<MainWrapper>
+									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
 									<Register
 										{...props}
 										handleSuccessfulAuth={handleSuccessfulAuth}
@@ -126,7 +129,6 @@ export default function App() {
 							render={(props) => (
 								<MainWrapper>
 									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
-									<h2>Status: {state.loggedInStatus} </h2>
 
 									<Sheet height='250' width='250'>
 										<ActionsWrapper>
