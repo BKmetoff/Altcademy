@@ -24,6 +24,7 @@ export default function App() {
 	const [state, setState] = useState({
 		loggedInStatus: 'NOT_LOGGED_IN',
 		user: {},
+		authenticationError: '',
 	})
 
 	useEffect(() => {
@@ -80,8 +81,13 @@ export default function App() {
 		history.go(0)
 	}
 
+	const handleUnsuccessfulAuth = (authError) => {
+		setState((prevState) => ({ ...prevState, authenticationError: authError }))
+	}
+
 	return (
 		<div className='app'>
+			{console.log(state.loggedInStatus)}
 			<Layout>
 				<Router>
 					<Switch>
@@ -102,9 +108,12 @@ export default function App() {
 							path={'/login'}
 							render={(props) => (
 								<MainWrapper>
+									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
 									<Login
 										{...props}
 										handleSuccessfulAuth={handleSuccessfulAuth}
+										handleUnsuccessfulAuth={handleUnsuccessfulAuth}
+										authenticationError={state.authenticationError}
 									/>
 								</MainWrapper>
 							)}
@@ -113,9 +122,12 @@ export default function App() {
 							path={'/signup'}
 							render={(props) => (
 								<MainWrapper>
+									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
 									<Register
 										{...props}
 										handleSuccessfulAuth={handleSuccessfulAuth}
+										handleUnsuccessfulAuth={handleUnsuccessfulAuth}
+										authenticationError={state.authenticationError}
 									/>
 								</MainWrapper>
 							)}
@@ -126,7 +138,6 @@ export default function App() {
 							render={(props) => (
 								<MainWrapper>
 									<TitleBig>holly sh$t, not another twitter copy</TitleBig>
-									<h2>Status: {state.loggedInStatus} </h2>
 
 									<Sheet height='250' width='250'>
 										<ActionsWrapper>

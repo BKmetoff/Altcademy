@@ -6,6 +6,7 @@ import { ActionsWrapper } from '../backbone/Wrapper'
 import Sheet from '../backbone/Sheet'
 import Input from '../backbone/Input'
 import Button from '../backbone/Button'
+import { ErrorText } from '../backbone/Text'
 
 export default class Login extends Component {
 	constructor(props) {
@@ -19,6 +20,12 @@ export default class Login extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+	}
+
+	componentDidMount() {
+		this.props.authenticationError
+			? this.props.handleUnsuccessfulAuth('')
+			: null
 	}
 
 	handleSubmit(event) {
@@ -40,6 +47,8 @@ export default class Login extends Component {
 			.then((response) => {
 				if (response.data.logged_in) {
 					this.props.handleSuccessfulAuth(response.data)
+				} else if (response.data.status === 401) {
+					this.props.handleUnsuccessfulAuth('invalid login credentials')
 				}
 			})
 			.catch((error) => {
@@ -76,6 +85,9 @@ export default class Login extends Component {
 							onChange={this.handleChange}
 							required
 						/>
+						{this.props.authenticationError ? (
+							<ErrorText>{this.props.authenticationError}</ErrorText>
+						) : null}
 						<Button type='submit' kind='primary'>
 							log in
 						</Button>
