@@ -5,7 +5,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://not-a-twitter-copy.herokuapp.com'
+    origins 'https://altcademy-fullstack-twitter.herokuapp.com'
     resource '*', headers: :any, methods: %i[get post put patch delete options head], credentials: true
   end
 end
