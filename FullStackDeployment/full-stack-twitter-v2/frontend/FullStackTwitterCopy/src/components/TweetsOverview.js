@@ -104,7 +104,9 @@ export default function TweetsOverview(props) {
 
 	const getAllTweets = () => {
 		axios
-			.get('http://localhost:3001/tweets', { withCredentials: true })
+			.get('http://localhost:3001/tweets', {
+				withCredentials: true,
+			})
 			.then((response) => {
 				setState((prevState) => ({ ...prevState, tweets: response.data }))
 			})
