@@ -27,7 +27,7 @@ export function safeCredentials(options = {}) {
 		mode: 'same-origin',
 		headers: Object.assign(
 			options.headers || {},
-			authenticityHeader(),
+			authenticityHelper(),
 			jsonHeader()
 		),
 	})
