@@ -8,6 +8,7 @@ import 'react-dates/lib/css/_datepicker.css'
 class BookingWidget extends React.Component {
 	state = {
 		authenticated: false,
+		existingBookings: [],
 		startDate: null,
 		endDate: null,
 		focusedInput: null,
@@ -21,6 +22,18 @@ class BookingWidget extends React.Component {
 			.then((data) => {
 				this.setState({
 					authenticated: data.authenticated,
+				})
+			})
+		this.getPropertyBookings()
+	}
+
+	getPropertyBookings = () => {
+		fetch(`/api/properties/${this.props.property_id}/bookings`)
+			.then(handleErrors)
+			.then((data) => {
+				console.log(data)
+				this.setState({
+					existingBookings: data.bookings,
 				})
 			})
 	}
@@ -59,6 +72,11 @@ class BookingWidget extends React.Component {
 
 	onFocusChange = (focusedInput) => this.setState({ focusedInput })
 
+	isDayBlocked = (day) =>
+		this.state.existingBookings.filter((b) =>
+			day.isBetween(b.start_date, b.end_date, null, '[)')
+		).length > 0
+
 	render() {
 		const { authenticated, startDate, endDate, focusedInput } = this.state
 		if (!authenticated) {
@@ -85,7 +103,7 @@ class BookingWidget extends React.Component {
 						${price_per_night} <small>per night</small>
 					</h5>
 					<hr />
-					<div className='mb-5'>
+					<div style={{ marginBottom: focusedInput ? '400px' : '2rem' }}>
 						<DateRangePicker
 							startDate={startDate}
 							startDateId='start_date'
@@ -94,6 +112,7 @@ class BookingWidget extends React.Component {
 							onDatesChange={this.onDatesChange}
 							focusedInput={focusedInput}
 							onFocusChange={this.onFocusChange}
+							isDayBlocked={this.isDayBlocked}
 							numberOfMonths={1}
 						/>
 					</div>
