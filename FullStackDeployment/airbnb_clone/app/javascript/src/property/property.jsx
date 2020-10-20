@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import Layout from './layout'
-import { handleErrors } from './utils/fetchHelper'
+import React from 'react'
+import Layout from '@src/layout'
+import BookingWidget from './bookingWidget'
+import { handleErrors } from '../utils/fetchHelper'
 
 import './property.scss'
 
-export default class Property extends Component {
+class Property extends React.Component {
 	state = {
 		property: {},
 		loading: true,
@@ -14,15 +14,18 @@ export default class Property extends Component {
 	componentDidMount() {
 		fetch(`/api/properties/${this.props.property_id}`)
 			.then(handleErrors)
-			.then((data) =>
-				this.setState({ property: data.property, loading: false })
-			)
+			.then((data) => {
+				this.setState({
+					property: data.property,
+					loading: false,
+				})
+			})
 	}
 
 	render() {
 		const { property, loading } = this.state
 		if (loading) {
-			return <p>Loading</p>
+			return <p>loading...</p>
 		}
 
 		const {
@@ -49,7 +52,7 @@ export default class Property extends Component {
 				/>
 				<div className='container'>
 					<div className='row'>
-						<div className='info col-12 col-lg-8'>
+						<div className='info col-12 col-lg-7'>
 							<div className='mb-3'>
 								<h3 className='mb-0'>{title}</h3>
 								<p className='text-uppercase mb-0 text-secondary'>
@@ -75,6 +78,12 @@ export default class Property extends Component {
 							<hr />
 							<p>{description}</p>
 						</div>
+						<div className='col-12 col-lg-5'>
+							<BookingWidget
+								property_id={id}
+								price_per_night={price_per_night}
+							/>
+						</div>
 					</div>
 				</div>
 			</Layout>
@@ -82,11 +91,4 @@ export default class Property extends Component {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-	const node = document.getElementById('params')
-	const data = JSON.parse(node.getAttribute('data-params'))
-	ReactDOM.render(
-		<Property property_id={data.property_id} />,
-		document.body.appendChild(document.createElement('div'))
-	)
-})
+export default Property
