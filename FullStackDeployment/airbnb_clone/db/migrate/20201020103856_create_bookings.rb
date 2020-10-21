@@ -6,7 +6,7 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.belongs_to :user, index: true, foreign_key: true
       t.belongs_to :property, index: true, foreign_key: true
 
-      t.timestamps  
+      t.timestamps
     end
   end
 end

@@ -1,5 +1,6 @@
 module Api
   class BookingsController < ApplicationController
+    
     def create
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)
@@ -13,7 +14,12 @@ module Api
       end
 
       begin
-        @booking = Booking.create({ user_id: session.user.id, property_id: property.id, start_date: params[:booking][:start_date], end_date: params[:booking][:end_date]})
+        @booking = Booking.create({
+                                    user_id: session.user.id,
+                                    property_id: property.id,
+                                    start_date: params[:booking][:start_date],
+                                    end_date: params[:booking][:end_date]
+                                  })
         render 'api/bookings/create', status: :created
       rescue ArgumentError => e
         render json: { error: e.message }, status: :bad_request
