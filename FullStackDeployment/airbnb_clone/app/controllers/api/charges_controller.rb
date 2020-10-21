@@ -23,13 +23,14 @@ module Api
           description: "Your booking is for #{booking.start_date} to #{booking.end_date}.",
           amount: (amount * 100.0).to_i,
           currency: 'usd',
-          quality: 1
+          quantity: 1
         }],
-        success_url: "#{ENV['URL']}#{params[:cancel_url]}"
+        success_url: "#{ENV['URL']}#{params[:cancel_url]}",
+        cancel_url: "#{ENV['URL']}#{params[:cancel_url]}"
       )
 
       @charge = booking.charges.new({
-                                      checkout_session_id: session_id,
+                                      checkout_session_id: session.id,
                                       currency: 'usd',
                                       amount: amount
                                     })
