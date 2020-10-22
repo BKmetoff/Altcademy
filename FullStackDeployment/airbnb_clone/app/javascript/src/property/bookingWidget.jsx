@@ -77,9 +77,7 @@ class BookingWidget extends React.Component {
 		)
 			.then(handleErrors)
 			.then((response) => {
-				const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY, {
-					locale: 'nl',
-				})
+				const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY)
 
 				stripe
 					.redirectToCheckout({
