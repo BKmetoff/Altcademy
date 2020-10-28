@@ -68,10 +68,15 @@ module Api
         session = event['data']['object']
         # Fulfill the purchase, mark related charge as complete
         charge = Charge.find_by(checkout_session_id: session.id)
-        return head :bad_request if !charge
+
+        unless charge
+          return head :bad_request
+        end
+
         charge.update({ complete: true })
         return head :ok
       end
+
       return head :bad_request
     end
   end

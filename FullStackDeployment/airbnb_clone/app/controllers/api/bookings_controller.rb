@@ -36,6 +36,15 @@ module Api
       render 'api/bookings/index'
     end
 
+    def show_by_user
+      user = User.find_by(id: params[:id])
+
+      if user
+        @user_bookings = Booking.where(user_id: user.id).includes(:charges, :property)
+        render 'api/bookings/show_by_user'
+      end
+    end
+
     def show
       @booking_to_show = Booking.find_by(id: params[:id])
 

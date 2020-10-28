@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/property/:id' => 'static_pages#property'
   get '/login' => 'static_pages#login'
-  
+
   # handle redirect to success url:
   get '/booking/:id/success' => 'static_pages#success'
 
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
     get '/authenticated' => 'sessions#authenticated'
+    get '/bookings/user/:id' => 'bookings#show_by_user'
 
     # webhook:
     post '/charges/mark_complete' => 'charges#mark_complete'
