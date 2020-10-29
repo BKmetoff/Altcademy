@@ -17,5 +17,14 @@ module Api
 
       render 'api/properties/show', status: :ok
     end
+
+    def show_by_user
+      user = User.find_by(id: params[:id])
+
+      if user
+        @user_properties = Property.where(user_id: user.id).includes(:bookings)
+        render 'api/properties/show_by_user'
+      end
+    end
   end
 end

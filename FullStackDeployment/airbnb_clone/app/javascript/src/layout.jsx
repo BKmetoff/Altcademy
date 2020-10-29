@@ -9,6 +9,7 @@ export default function Layout(props) {
 	})
 
 	const [bookings, setBookings] = useState()
+	const [properties, setProperties] = useState()
 	const [bookingsIsOpen, setBookingsIsOpen] = useState(false)
 	const [propertiesIsOpen, setPropertiesIsOpen] = useState(false)
 
@@ -20,6 +21,7 @@ export default function Layout(props) {
 		fetch('/api/authenticated')
 			.then(handleErrors)
 			.then((data) => {
+				console.log(data)
 				if (data.authenticated) {
 					setUser({
 						isLoggedIn: data.authenticated,
@@ -39,6 +41,7 @@ export default function Layout(props) {
 		fetch(`/api/bookings/user/${user.id}`)
 			.then(handleErrors)
 			.then((data) => {
+				console.log(data)
 				setBookings(data.user_bookings)
 			})
 			.catch((error) => {
@@ -51,10 +54,22 @@ export default function Layout(props) {
 		setPropertiesIsOpen((prevState) => !propertiesIsOpen)
 		setBookingsIsOpen(false)
 
-		fetch(`/api/bookings/user/${user.id}`)
+		fetch(`/api/properties/user/${user.id}`)
 			.then(handleErrors)
 			.then((data) => {
-				setBookings(data.user_bookings)
+				console.log(data)
+				setProperties(data.user_properties)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
+
+	const logOutUser = () => {
+		fetch('api/sessions/destroy', { method: 'DELETE' })
+			// .then(handleErrors)
+			.then((data) => {
+				data.ok ? (window.location.href = '/') : null
 			})
 			.catch((error) => {
 				console.log(error)
@@ -68,7 +83,7 @@ export default function Layout(props) {
 		zIndex: 1000,
 		position: 'fixed',
 		top: '60px',
-		left: propertiesIsOpen ? '240px' : '150px', //'150px',
+		left: propertiesIsOpen ? '240px' : '150px',
 		background: '#fff',
 		border: '1px solid #999',
 		borderRadius: '5px',
@@ -84,26 +99,41 @@ export default function Layout(props) {
 				<div className='collapse navbar-collapse'>
 					<ul className='navbar-nav'>
 						<li className='nav-item'>
-							<a className='nav-link' href='/'>
+							<Button variant='light' href='/'>
 								Home
-							</a>
-						</li>
-						<li className='nav-item'>
-							<Button
-								className='ml-2 nav-link btn-light'
-								onClick={getUserBookings}
-							>
-								Bookings
 							</Button>
 						</li>
-						<li className='nav-item'>
-							<Button
-								className='nav-link btn-light'
-								onClick={getUserProperties}
-							>
-								Properties
+						{user.isLoggedIn ? (
+							<React.Fragment>
+								<li className='nav-item'>
+									<Button
+										className='mx-2'
+										variant='light'
+										onClick={getUserBookings}
+									>
+										Bookings
+									</Button>
+								</li>
+								<li className='nav-item'>
+									<Button variant='light' onClick={getUserProperties}>
+										Properties
+									</Button>
+								</li>
+								<li className='nav-item'>
+									<Button
+										className=' ml-3'
+										variant='outline-danger'
+										onClick={logOutUser}
+									>
+										Log out
+									</Button>
+								</li>
+							</React.Fragment>
+						) : (
+							<Button variant='success' href='/login'>
+								Log In or Sign Up
 							</Button>
-						</li>
+						)}
 
 						{bookingsIsOpen ? (
 							<div style={dropdownStyle}>
@@ -118,9 +148,14 @@ export default function Layout(props) {
 						) : null}
 						{propertiesIsOpen ? (
 							<div style={dropdownStyle}>
-								{bookings ? (
-									bookings.map((booking) => {
-										return <div key={booking.id}>{booking.property_title}</div>
+								{properties ? (
+									properties.map((property) => {
+										return (
+											<div key={property.id}>
+												<div>{property.title}</div>
+												<div>bookings: {property.bookings.length}</div>
+											</div>
+										)
 									})
 								) : (
 									<span>Loading</span>
