@@ -2,8 +2,8 @@ import React from 'react'
 
 const DropDown = ({ data, dropDownType, onClose }) => {
 	const dropdownStyle = {
-		width: '350px',
-		maxHeight: '350px',
+		maxWidth: '320px',
+		maxHeight: '380px',
 		overflowY: 'scroll',
 		zIndex: 1000,
 		position: 'fixed',
@@ -24,22 +24,37 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 		right: 0,
 	}
 
+	if (data.length === 0) {
+		return (
+			<>
+				<div style={overlayStyle} onClick={onClose}></div>
+				<div style={dropdownStyle}>
+					<div>
+						No {dropDownType === 'bookings' ? 'bookings' : 'properties'} yet
+					</div>
+				</div>
+			</>
+		)
+	}
+
 	return (
 		<>
 			<div style={overlayStyle} onClick={onClose}></div>
 			<div style={dropdownStyle}>
-				{dropDownType === 'bookings'
-					? data.map((booking) => {
-							return <div key={booking.id}>{booking.title}</div>
-					  })
-					: data.map((property) => {
-							return (
-								<div key={property.id}>
-									<div>{property.title}</div>
-									<div>bookings: {property.bookings.length}</div>
-								</div>
-							)
-					  })}
+				{dropDownType === 'bookings' &&
+					data.map((booking) => {
+						return <div key={booking.id}>{booking.title}</div>
+					})}
+
+				{dropDownType === 'properties' &&
+					data.map((property) => {
+						return (
+							<div key={property.id}>
+								<div>{property.title}</div>
+								<div>bookings: {property.bookings.length}</div>
+							</div>
+						)
+					})}
 			</div>
 		</>
 	)
