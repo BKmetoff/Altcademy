@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { handleErrors } from './utils/fetchHelper'
+import DropDown from './dropdown/dropdown.jsx'
 
 export default function Layout(props) {
 	const [user, setUser] = useState({
@@ -50,7 +51,6 @@ export default function Layout(props) {
 	}
 
 	const getUserProperties = () => {
-		console.log('properties')
 		setPropertiesIsOpen((prevState) => !propertiesIsOpen)
 		setBookingsIsOpen(false)
 
@@ -76,23 +76,14 @@ export default function Layout(props) {
 			})
 	}
 
-	const dropdownStyle = {
-		width: '350px',
-		height: '350px',
-		overflowY: 'scroll',
-		zIndex: 1000,
-		position: 'fixed',
-		top: '60px',
-		left: propertiesIsOpen ? '240px' : '150px',
-		background: '#fff',
-		border: '1px solid #999',
-		borderRadius: '5px',
-		padding: '12px',
+	const onClose = () => {
+		setBookingsIsOpen(false)
+		setPropertiesIsOpen(false)
 	}
 
 	return (
 		<React.Fragment>
-			<nav className='navbar navbar-expand navbar-light bg-light'>
+			<nav className='navbar navbar-expand navbar-light bg-light w-100 fixed-top'>
 				<a href='/'>
 					<span className='navbar-brand mb-0 h1 text-danger'>Airbnb</span>
 				</a>
@@ -135,33 +126,27 @@ export default function Layout(props) {
 							</Button>
 						)}
 
-						{bookingsIsOpen ? (
-							<div style={dropdownStyle}>
-								{bookings ? (
-									bookings.map((booking) => {
-										return <div key={booking.id}>{booking.property_title}</div>
-									})
-								) : (
-									<span>Loading</span>
-								)}
-							</div>
-						) : null}
-						{propertiesIsOpen ? (
-							<div style={dropdownStyle}>
-								{properties ? (
-									properties.map((property) => {
-										return (
-											<div key={property.id}>
-												<div>{property.title}</div>
-												<div>bookings: {property.bookings.length}</div>
-											</div>
-										)
-									})
-								) : (
-									<span>Loading</span>
-								)}
-							</div>
-						) : null}
+						{bookingsIsOpen &&
+							(bookings ? (
+								<DropDown
+									data={bookings}
+									dropDownType='bookings'
+									onClose={onClose}
+								/>
+							) : (
+								<span>Loading</span>
+							))}
+
+						{propertiesIsOpen &&
+							(properties ? (
+								<DropDown
+									data={properties}
+									dropDownType='properties'
+									onClose={onClose}
+								/>
+							) : (
+								<span>Loading</span>
+							))}
 					</ul>
 				</div>
 			</nav>
