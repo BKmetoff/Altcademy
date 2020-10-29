@@ -151,7 +151,7 @@ export default function Layout(props) {
 				</div>
 			</nav>
 			{props.children}
-			<footer className='p-3 bg-light'>
+			<footer className='p-3 bg-light fixed-bottom'>
 				<div>
 					<p className='mr-3 mb-0 text-secondary'>Airbnb Clone</p>
 				</div>
