@@ -1,4 +1,5 @@
 import React from 'react'
+import { Badge } from 'react-bootstrap'
 
 const DropDown = ({ data, dropDownType, onClose }) => {
 	const dropdownStyle = {
@@ -27,7 +28,7 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 	if (data.length === 0) {
 		return (
 			<>
-				<div style={overlayStyle} onClick={onClose}></div>
+				<div style={overlayStyle} onClick={onClose} />
 				<div style={dropdownStyle}>
 					<div>
 						No {dropDownType === 'bookings' ? 'bookings' : 'properties'} yet
@@ -39,17 +40,30 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 
 	return (
 		<>
-			<div style={overlayStyle} onClick={onClose}></div>
+			<div style={overlayStyle} onClick={onClose} />
 			<div style={dropdownStyle}>
 				{dropDownType === 'bookings' &&
 					data.map((booking) => {
-						return <div key={booking.id}>{booking.title}</div>
+						return (
+							<div key={booking.id} className='mb-2'>
+								{!booking.charge[0] ? (
+									<Badge pill variant='danger' className='mr-2'>
+										not payed
+									</Badge>
+								) : (
+									<Badge pill variant='success' className='mr-2'>
+										payed
+									</Badge>
+								)}
+								{booking.title}
+							</div>
+						)
 					})}
 
 				{dropDownType === 'properties' &&
 					data.map((property) => {
 						return (
-							<div key={property.id}>
+							<div key={property.id} className='mb-2'>
 								<div>{property.title}</div>
 								<div>bookings: {property.bookings.length}</div>
 							</div>

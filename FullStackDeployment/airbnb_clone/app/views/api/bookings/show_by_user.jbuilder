@@ -1,5 +1,5 @@
 json.user_bookings do
-  json.array! @user_bookings, include: [:charges, :property] do |booking|
+  json.array! @user_bookings, include: %i[charges property] do |booking|
     json.id booking.id
     json.start_date booking.start_date
     json.end_date booking.end_date
