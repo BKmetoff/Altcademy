@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '@src/layout'
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
+import { dateFormat } from '../utils/dateFormat'
 
 import { Spinner, Badge, Button } from 'react-bootstrap'
 
@@ -49,12 +50,6 @@ export default function Booking(props) {
 		baths,
 		image_url,
 	} = state.property
-
-	const dateFormat = (date) => {
-		return date.includes('T')
-			? date.replaceAll('-', ' ').split('T')[0]
-			: date.replaceAll('-', ' ')
-	}
 
 	const continuePayment = (e) => {
 		e.preventDefault()

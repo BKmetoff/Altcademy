@@ -28,6 +28,7 @@ module Api
       return render json: { error: 'cannot find property' }, status: :not_found unless property
 
       @bookings = property.bookings.includes(:charges, :user)
+      
       render 'api/bookings/index'
     end
 
