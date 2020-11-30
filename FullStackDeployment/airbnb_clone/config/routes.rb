@@ -19,13 +19,11 @@ Rails.application.routes.draw do
     resources :bookings, only: %i[create show]
     resources :charges, only: [:create]
 
-    get '/properties/:id/bookings' => 'bookings#get_property_bookings'
+    get '/properties/:id/bookings' => 'bookings#property_bookings'
     get '/authenticated' => 'sessions#authenticated'
 
     get '/bookings/user/:id' => 'bookings#show_by_user'
     get '/properties/user/:id' => 'properties#show_by_user'
-
-    get '/properties/:id/bookings' => 'properties#show_property_bookings'
 
     # webhook:
     post '/charges/mark_complete' => 'charges#mark_complete'

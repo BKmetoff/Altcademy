@@ -23,11 +23,11 @@ module Api
       end
     end
 
-    def get_property_bookings
+    def property_bookings
       property = Property.find_by(id: params[:id])
       return render json: { error: 'cannot find property' }, status: :not_found unless property
 
-      @bookings = property.bookings.where('end_date > ? ', Date.today)
+      @bookings = property.bookings.includes(:charges, :user)
       render 'api/bookings/index'
     end
 

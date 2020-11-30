@@ -24,14 +24,5 @@ module Api
       @user_properties = Property.where(user_id: user.id).includes(:bookings)
       render 'api/properties/show_by_user', status: :ok
     end
-
-    def show_property_bookings
-      property = Property.find_by(id: params[:id])
-
-      return render json: { error: 'not_found' }, status: :not_found unless property
-
-      @property_bookings = Booking.where(property_id: property.id)
-      render 'api/properties/show_property_bookings'
-    end
   end
 end
