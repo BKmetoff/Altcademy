@@ -47,7 +47,8 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 						return (
 							<div key={booking.id} className='mb-2'>
 								<a href={`/booking/${booking.id}`} style={{ color: '#333' }}>
-									{!booking.charge[0] ? (
+									{!booking.charge[0] ||
+									!booking.charge[booking.charge.length - 1].complete ? (
 										<Badge pill variant='danger' className='mr-2'>
 											not payed
 										</Badge>
