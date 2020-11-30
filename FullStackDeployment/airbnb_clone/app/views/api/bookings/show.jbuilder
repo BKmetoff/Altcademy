@@ -23,6 +23,6 @@ json.booking do
     end
   end
 
-  json.charge @booking_charge
+  json.charges @booking_charges
   json.booking_expired @booking_expired
 end

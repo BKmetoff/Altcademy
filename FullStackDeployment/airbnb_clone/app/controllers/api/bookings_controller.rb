@@ -40,7 +40,7 @@ module Api
 
     def show
       @booking_to_show = Booking.find_by(id: params[:id])
-      @booking_charge = Charge.find_by(booking_id: @booking_to_show.id)
+      @booking_charges = Charge.where(booking_id: @booking_to_show.id)
       @booking_expired = @booking_to_show.end_date < Date.today
 
       return render json: { error: 'cannot find booking' }, status: :not_found unless @booking_to_show
