@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
 
   get '/property/:id' => 'static_pages#property'
+  get '/booking/:id' => 'static_pages#booking'
   get '/login' => 'static_pages#login'
 
   # handle redirect to success url:
@@ -10,9 +11,9 @@ Rails.application.routes.draw do
   namespace :api do
     # Add routes below this line
     resources :users, only: [:create]
-    resources :sessions, only: [:create, :destroy]
-    resources :properties, only: [:index, :show]
-    resources :bookings, only: [:create, :show]
+    resources :sessions, only: %i[create destroy]
+    resources :properties, only: %i[index show]
+    resources :bookings, only: %i[create show]
     resources :charges, only: [:create]
 
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'

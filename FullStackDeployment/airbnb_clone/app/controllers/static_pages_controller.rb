@@ -8,6 +8,11 @@ class StaticPagesController < ApplicationController
     render 'property'
   end
 
+  def booking
+    @data = { booking_id: params[:id] }.to_json
+    render 'booking'
+  end
+
   def login
     render 'login'
   end

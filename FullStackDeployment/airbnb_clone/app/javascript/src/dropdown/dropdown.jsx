@@ -46,16 +46,18 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 					data.map((booking) => {
 						return (
 							<div key={booking.id} className='mb-2'>
-								{!booking.charge[0] ? (
-									<Badge pill variant='danger' className='mr-2'>
-										not payed
-									</Badge>
-								) : (
-									<Badge pill variant='success' className='mr-2'>
-										payed
-									</Badge>
-								)}
-								{booking.title}
+								<a href={`/booking/${booking.id}`} style={{ color: '#333' }}>
+									{!booking.charge[0] ? (
+										<Badge pill variant='danger' className='mr-2'>
+											not payed
+										</Badge>
+									) : (
+										<Badge pill variant='success' className='mr-2'>
+											payed
+										</Badge>
+									)}
+									{booking.title}
+								</a>
 							</div>
 						)
 					})}

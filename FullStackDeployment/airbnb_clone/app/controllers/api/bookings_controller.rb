@@ -1,17 +1,12 @@
 module Api
   class BookingsController < ApplicationController
-    
     def create
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)
-      unless session
-        return render json: { error: 'user not logged in' }, status: :unauthorized 
-      end
+      return render json: { error: 'user not logged in' }, status: :unauthorized unless session
 
       property = Property.find_by(id: params[:booking][:property_id])
-      unless property
-        return render json: { error: 'cannot find property' }, status: :not_found
-      end
+      return render json: { error: 'cannot find property' }, status: :not_found unless property
 
       begin
         @booking = Booking.create({
@@ -28,9 +23,7 @@ module Api
 
     def get_property_bookings
       property = Property.find_by(id: params[:id])
-      unless property
-        return render json: { error: 'cannot find property' }, status: :not_found
-      end
+      return render json: { error: 'cannot find property' }, status: :not_found unless property
 
       @bookings = property.bookings.where('end_date > ? ', Date.today)
       render 'api/bookings/index'
@@ -47,10 +40,10 @@ module Api
 
     def show
       @booking_to_show = Booking.find_by(id: params[:id])
+      @booking_charge = Charge.find_by(booking_id: @booking_to_show.id)
+      @booking_expired = @booking_to_show.end_date < Date.today
 
-      unless @booking_to_show
-        return render json: { error: 'cannot find booking' }, status: :not_found
-      end
+      return render json: { error: 'cannot find booking' }, status: :not_found unless @booking_to_show
 
       render 'api/bookings/show'
     end
