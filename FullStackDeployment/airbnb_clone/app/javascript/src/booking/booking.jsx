@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '@src/layout'
-import { handleErrors } from '../utils/fetchHelper'
+import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
-import { Spinner } from 'react-bootstrap'
-import { Badge } from 'react-bootstrap'
+import { Spinner, Badge, Button } from 'react-bootstrap'
 
 // image style
 import '../property/property.scss'
@@ -14,7 +13,7 @@ export default function Booking(props) {
 		booking: {},
 		property: {},
 		host: {},
-		charge: {},
+		latestCharge: {},
 	})
 
 	useEffect(() => {
@@ -31,13 +30,13 @@ export default function Booking(props) {
 					booking: data.booking,
 					property: data.booking.property,
 					host: data.booking.property.user,
-					charge: data.booking.charge,
+					latestCharge: data.booking.charges[data.booking.charges.length - 1],
 				})
 			})
 	}
 
 	const { start_date, end_date, booking_expired } = state.booking
-	const { charge } = state.booking
+	const { charges } = state.booking
 	const { username } = state.host
 	const {
 		title,
@@ -57,6 +56,33 @@ export default function Booking(props) {
 			: date.replaceAll('-', ' ')
 	}
 
+	const continuePayment = (e) => {
+		e.preventDefault()
+		initiateStripeCheckout(state.booking.id)
+	}
+
+	const initiateStripeCheckout = (booking_id) => {
+		return fetch(
+			`/api/charges?booking_id=${booking_id}&cancel_url=${window.location.pathname}`,
+			safeCredentials({
+				method: 'POST',
+			})
+		)
+			.then(handleErrors)
+			.then((response) => {
+				const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY)
+
+				stripe
+					.redirectToCheckout({
+						sessionId: response.charge.checkout_session_id,
+					})
+					.then((result) => {})
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
+
 	return (
 		<Layout>
 			{isLoading ? (
@@ -67,7 +93,7 @@ export default function Booking(props) {
 						className='property-image mb-3'
 						style={{ backgroundImage: `url(${image_url})` }}
 					/>
-					{console.log(state.booking)}
+					{console.log(state.latestCharge)}
 					<div className='container'>
 						<div className='row'>
 							<div className='info col-6 col-lg-7'>
@@ -107,57 +133,70 @@ export default function Booking(props) {
 								<p className='text-uppercase mb-0 text-secondary'>
 									<small>to:</small>
 									<span className='ml-2 text-dark'>
-										{start_date ? dateFormat(start_date) : start_date}
+										{end_date ? dateFormat(end_date) : end_date}
 									</span>
 								</p>
 								<hr />
 								<div>
 									{booking_expired && (
 										<p className='mb-1'>
-											<small className='text-uppercase mb-0 text-secondary mt-2'>
-												attention:
-											</small>
-											<Badge pill variant='danger' className='ml-2'>
+											<Badge pill variant='danger'>
 												!
 											</Badge>
 											<span className='ml-2'>Your booking has expired!</span>
 										</p>
 									)}
+
 									<small className='text-uppercase mb-2 text-secondary mt-2'>
 										payment:
 									</small>
 
-									{!charge ? (
+									{!charges || !state.latestCharge.complete ? (
 										<>
 											<Badge pill variant='danger' className='ml-2'>
 												!
 											</Badge>
 											<span className='ml-2'>Not complete!</span>
+
+											{!booking_expired && (
+												<form onSubmit={continuePayment}>
+													<Button
+														variant='success'
+														size='sm'
+														className='w-100 mt-2'
+														type='submit'
+													>
+														Continue payment -{' '}
+														{!charges ? null : state.latestCharge.amount}{' '}
+														{!charges
+															? null
+															: state.latestCharge.currency.toUpperCase()}
+													</Button>
+												</form>
+											)}
 										</>
 									) : (
 										<>
 											<p className='mb-0 font-weight-bolder'>
 												Amount:
 												<span className='ml-2 font-weight-normal'>
-													{charge.amount}
+													{state.latestCharge.amount}
 												</span>
 											</p>
 											<p className='mb-0 font-weight-bolder'>
 												Currency:
 												<span className='ml-2 font-weight-normal'>
-													{charge.currency.toUpperCase()}
+													{state.latestCharge.currency.toUpperCase()}
 												</span>
 											</p>
 											<p className='mb-0 font-weight-bolder'>
 												Made on:
 												<span className='ml-2 font-weight-normal'>
-													{charge.updated_at
-														? dateFormat(charge.updated_at)
-														: charge.updated_at}
+													{state.latestCharge.updated_at
+														? dateFormat(state.latestCharge.updated_at)
+														: state.latestCharge.updated_at}
 												</span>
 											</p>
-
-											{console.log(charge)}
 										</>
 									)}
 								</div>
