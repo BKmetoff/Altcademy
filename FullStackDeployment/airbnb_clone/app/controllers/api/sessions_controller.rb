@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Api
   class SessionsController < ApplicationController
     def create
       @user = User.find_by(email: params[:user][:email])
 
-      if @user and BCrypt::Password.new(@user.password) == params[:user][:password]
+      if @user && (BCrypt::Password.new(@user.password) == params[:user][:password])
         session = @user.sessions.create
         cookies.permanent.signed[:airbnb_session_token] = {
           value: session.token,
@@ -33,11 +35,11 @@ module Api
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)
 
-      if session and session.destroy
+      if session&.destroy
         render json: {
           success: true
         }, status: :ok
-      else render json: {success: false }, status: :bad_request
+      else render json: { success: false }, status: :bad_request
       end
     end
   end

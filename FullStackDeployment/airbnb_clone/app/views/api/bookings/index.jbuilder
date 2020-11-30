@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.bookings do
   json.array! @bookings do |booking|
     json.id booking.id

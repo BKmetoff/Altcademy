@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root to: 'static_pages#home'
 
   get '/property/:id' => 'static_pages#property'
+  get '/property/:id/bookings' => 'static_pages#property_bookings'
   get '/booking/:id' => 'static_pages#booking'
   get '/login' => 'static_pages#login'
 
@@ -21,6 +24,8 @@ Rails.application.routes.draw do
 
     get '/bookings/user/:id' => 'bookings#show_by_user'
     get '/properties/user/:id' => 'properties#show_by_user'
+
+    get '/properties/:id/bookings' => 'properties#show_property_bookings'
 
     # webhook:
     post '/charges/mark_complete' => 'charges#mark_complete'

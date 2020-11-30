@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.booking do
   json.id @booking_to_show.id
   json.start_date @booking_to_show.start_date

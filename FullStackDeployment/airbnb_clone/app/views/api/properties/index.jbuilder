@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.total_pages @properties.total_pages
 json.next_page @properties.next_page
 

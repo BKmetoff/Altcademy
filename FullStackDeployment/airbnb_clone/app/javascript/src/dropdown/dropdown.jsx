@@ -58,6 +58,7 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 										</Badge>
 									)}
 									{booking.title}
+									<hr />
 								</a>
 							</div>
 						)
@@ -67,8 +68,16 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 					data.map((property) => {
 						return (
 							<div key={property.id} className='mb-2'>
-								<div>{property.title}</div>
-								<div>bookings: {property.bookings.length}</div>
+								<a
+									href={`/property/${property.id}/bookings`}
+									style={{ color: '#333' }}
+								>
+									<div>{property.title}</div>
+								</a>
+								<div className='text-secondary'>
+									Number of bookings: {property.bookings.length}
+								</div>
+								<hr />
 							</div>
 						)
 					})}

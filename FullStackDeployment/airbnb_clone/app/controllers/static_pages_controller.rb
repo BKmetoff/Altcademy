@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StaticPagesController < ApplicationController
   def home
     render 'home'
@@ -11,6 +13,11 @@ class StaticPagesController < ApplicationController
   def booking
     @data = { booking_id: params[:id] }.to_json
     render 'booking'
+  end
+
+  def property_bookings
+    @data = { property_id: params[:id] }.to_json
+    render 'property_bookings'
   end
 
   def login

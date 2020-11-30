@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class ChargesController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:mark_complete]

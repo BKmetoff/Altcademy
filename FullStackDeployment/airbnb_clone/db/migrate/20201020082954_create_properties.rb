@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProperties < ActiveRecord::Migration[5.2]
   def change
     create_table :properties do |t|
@@ -14,7 +16,7 @@ class CreateProperties < ActiveRecord::Migration[5.2]
       t.string :image_url
       t.belongs_to :user, index: true, foreign_key: true
 
-      t.timestamps      
+      t.timestamps
     end
   end
 end

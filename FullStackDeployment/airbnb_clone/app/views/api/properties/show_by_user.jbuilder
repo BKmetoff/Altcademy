@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.user_properties do
   json.array! @user_properties, include: [:bookings] do |property|
     json.id property.id
