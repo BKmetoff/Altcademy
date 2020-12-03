@@ -66,7 +66,7 @@ export default function Layout(props) {
 	}
 
 	const logOutUser = () => {
-		fetch('api/sessions/destroy', { method: 'DELETE' })
+		fetch('/api/sessions/destroy', { method: 'DELETE' })
 			// .then(handleErrors)
 			.then((data) => {
 				data.ok ? (window.location.href = '/') : null
@@ -121,7 +121,7 @@ export default function Layout(props) {
 								</li>
 							</React.Fragment>
 						) : (
-							<Button variant='success' href='/login'>
+							<Button variant='success' href='/login' className='ml-2'>
 								Log In or Sign Up
 							</Button>
 						)}
