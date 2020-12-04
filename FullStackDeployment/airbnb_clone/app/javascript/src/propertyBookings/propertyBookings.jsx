@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { handleErrors, safeCredentials } from '../utils/fetchHelper'
-import { Spinner, Badge } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 
 import Layout from '@src/layout'
 import PropertyDetails from './propertyDetails'

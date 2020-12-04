@@ -6,7 +6,30 @@ export default function EditPropertyDetails({
 	setIsEditing,
 	savePropertyEdits,
 }) {
+	const [image, setImage] = useState()
+	const [loading, setLoading] = useState(false)
 	const [edits, setEdits] = useState({ id: property.id })
+
+	const handleUpload = async (e) => {
+		setLoading(true)
+
+		const imageData = new FormData()
+		imageData.append('file', e.target.files[0])
+		imageData.append('upload_preset', 'altcademy-airbnb')
+
+		const response = await fetch(
+			'https://api.cloudinary.com/v1_1/dzdwgxbjl/image/upload',
+			{
+				method: 'POST',
+				body: imageData,
+			}
+		)
+
+		const data = await response.json()
+		console.log(data)
+		setEdits({ ...edits, image_url: data.secure_url })
+		setLoading(false)
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -130,16 +153,21 @@ export default function EditPropertyDetails({
 					/>
 				</Form.Group>
 
-				<Form.Group controlId='formPropertyImage'>
-					<Form.File id='formcheck-api-regular'>
-						<Form.File.Label>Upload image</Form.File.Label>
-						<Form.File.Input />
-					</Form.File>
-				</Form.Group>
+				{loading ? (
+					<Button
+						variant='success btn-sm'
+						type='submit'
+						className='w-100 mb-2'
+						disabled
+					>
+						Save
+					</Button>
+				) : (
+					<Button variant='success btn-sm' type='submit' className='w-100 mb-2'>
+						Save
+					</Button>
+				)}
 
-				<Button variant='success btn-sm' type='submit' className='w-100 mb-2'>
-					Save
-				</Button>
 				<Button
 					variant='danger btn-sm'
 					className='w-100'
@@ -148,6 +176,13 @@ export default function EditPropertyDetails({
 					Cancel
 				</Button>
 			</Form>
+
+			<Form.Group controlId='formPropertyImage' onChange={handleUpload}>
+				<Form.File id='formcheck-api-regular'>
+					<Form.File.Label>Upload image</Form.File.Label>
+					<Form.File.Input />
+				</Form.File>
+			</Form.Group>
 		</div>
 	)
 }
