@@ -8,7 +8,7 @@ export default function PropertyBookingsList({ propertyId }) {
 
 	useEffect(() => {
 		getPropertyBookings()
-	})
+	}, [])
 
 	const getPropertyBookings = () => {
 		fetch(`/api/properties/${propertyId}/bookings`)

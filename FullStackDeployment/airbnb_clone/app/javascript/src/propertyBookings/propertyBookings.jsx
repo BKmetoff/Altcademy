@@ -34,10 +34,14 @@ export default function PropertyBookings(props) {
 			`/api/properties/${propertyEdits.id}`,
 			safeCredentials({
 				method: 'PUT',
+				body: JSON.stringify({
+					property: propertyEdits,
+				}),
 			})
 		)
 			.then(handleErrors)
 			.then((data) => console.log(data))
+			.then(location.reload())
 	}
 
 	return (

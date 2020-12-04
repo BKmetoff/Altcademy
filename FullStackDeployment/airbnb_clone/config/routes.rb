@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     # Add routes below this line
     resources :users, only: [:create]
     resources :sessions, only: %i[create destroy]
-    resources :properties, only: %i[index show]
+    resources :properties
     resources :bookings, only: %i[create show]
     resources :charges, only: [:create]
 
