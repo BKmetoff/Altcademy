@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, ButtonGroup } from 'react-bootstrap'
 import { handleErrors } from './utils/fetchHelper'
 import DropDown from './dropdown/dropdown.jsx'
+
+import './layout.scss'
 
 export default function Layout(props) {
 	const [user, setUser] = useState({
@@ -67,7 +69,6 @@ export default function Layout(props) {
 
 	const logOutUser = () => {
 		fetch('/api/sessions/destroy', { method: 'DELETE' })
-			// .then(handleErrors)
 			.then((data) => {
 				data.ok ? (window.location.href = '/') : null
 			})
@@ -83,51 +84,32 @@ export default function Layout(props) {
 
 	return (
 		<React.Fragment>
-			<nav className='navbar navbar-expand navbar-light bg-light w-100 fixed-top'>
+			<nav className='nav-bar-shadow navbar navbar-expand navbar-light bg-light w-100 fixed-top'>
 				<a href='/'>
 					<span className='navbar-brand mb-0 h1 text-danger'>Airbnb</span>
 				</a>
 				<div className='collapse navbar-collapse'>
-					<ul className='navbar-nav'>
-						<li className='nav-item'>
-							<Button variant='light' href='/' className='btn-sm'>
-								Home
-							</Button>
-						</li>
+					<ul className='navbar-nav justify-content-between d-flex w-100'>
 						{user.isLoggedIn ? (
 							<React.Fragment>
 								<li className='nav-item'>
-									<Button
-										className='mx-2'
-										variant='light'
-										className='btn-sm'
-										onClick={getUserBookings}
-									>
-										Bookings
-									</Button>
-								</li>
-								<li className='nav-item'>
-									<Button
-										variant='light'
-										className='btn-sm'
-										onClick={getUserProperties}
-									>
-										Properties
-									</Button>
-								</li>
-								<li className='nav-item'>
-									<Button
-										variant='outline-success'
-										className='ml-3 btn-sm'
-										href='/property/create'
-									>
-										New property
-									</Button>
+									<ButtonGroup aria-label='bookings properties' size='sm'>
+										<Button variant='outline-info' onClick={getUserBookings}>
+											Bookings
+										</Button>
+										<Button variant='outline-info' onClick={getUserProperties}>
+											Properties
+										</Button>
+										<Button variant='outline-success' href='/property/create'>
+											Add new property
+										</Button>
+									</ButtonGroup>
 								</li>
 
 								<li className='nav-item'>
 									<Button
-										className=' ml-3 btn-sm'
+										className='mr-3 '
+										size='sm'
 										variant='outline-danger'
 										onClick={logOutUser}
 									>
@@ -136,7 +118,12 @@ export default function Layout(props) {
 								</li>
 							</React.Fragment>
 						) : (
-							<Button variant='success' href='/login' className='ml-2'>
+							<Button
+								variant='success'
+								size='sm'
+								href='/login'
+								className='ml-2'
+							>
 								Log In or Sign Up
 							</Button>
 						)}

@@ -1,35 +1,14 @@
 import React from 'react'
 import { Badge } from 'react-bootstrap'
 
+import './dropdown.scss'
+
 const DropDown = ({ data, dropDownType, onClose }) => {
-	const dropdownStyle = {
-		maxWidth: '320px',
-		maxHeight: '380px',
-		overflowY: 'scroll',
-		zIndex: 1000,
-		position: 'fixed',
-		top: '50px',
-		left: dropDownType === 'properties' ? '240px' : '150px',
-		background: '#fff',
-		border: '1px solid #999',
-		borderRadius: '5px',
-		padding: '12px',
-	}
-
-	const overlayStyle = {
-		position: 'fixed',
-		zIndex: 1000,
-		top: '56px',
-		bottom: 0,
-		left: 0,
-		right: 0,
-	}
-
 	if (data.length === 0) {
 		return (
 			<>
-				<div style={overlayStyle} onClick={onClose} />
-				<div style={dropdownStyle}>
+				<div className='overlay' onClick={onClose} />
+				<div className='nav-bar-dropdown'>
 					<div>
 						No {dropDownType === 'bookings' ? 'bookings' : 'properties'} yet
 					</div>
@@ -40,8 +19,8 @@ const DropDown = ({ data, dropDownType, onClose }) => {
 
 	return (
 		<>
-			<div style={overlayStyle} onClick={onClose} />
-			<div style={dropdownStyle}>
+			<div className='overlay' onClick={onClose} />
+			<div className='nav-bar-dropdown'>
 				{dropDownType === 'bookings' &&
 					data.map((booking) => {
 						return (

@@ -1,0 +1,30 @@
+.nav-bar-dropdown {
+	width: 294px;
+	max-height: 400px;
+
+	overflow-y: scroll;
+	z-index: 1000;
+	position: fixed;
+	top: 44px;
+	left: 92px;
+	background-color: #f0f5f7;
+	border: 1px solid #18a2b8;
+	border-top: none;
+	padding: 12px;
+	box-shadow: 1px 7px 16px 3px #17a2b880;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		left: 0;
+		border: none;
+	}
+}
+
+.overlay {
+	position: fixed;
+	z-index: 1000;
+	top: 56px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
