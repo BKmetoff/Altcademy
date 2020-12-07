@@ -90,7 +90,7 @@ export default function Layout(props) {
 				<div className='collapse navbar-collapse'>
 					<ul className='navbar-nav'>
 						<li className='nav-item'>
-							<Button variant='light' href='/'>
+							<Button variant='light' href='/' className='btn-sm'>
 								Home
 							</Button>
 						</li>
@@ -100,19 +100,34 @@ export default function Layout(props) {
 									<Button
 										className='mx-2'
 										variant='light'
+										className='btn-sm'
 										onClick={getUserBookings}
 									>
 										Bookings
 									</Button>
 								</li>
 								<li className='nav-item'>
-									<Button variant='light' onClick={getUserProperties}>
+									<Button
+										variant='light'
+										className='btn-sm'
+										onClick={getUserProperties}
+									>
 										Properties
 									</Button>
 								</li>
 								<li className='nav-item'>
 									<Button
-										className=' ml-3'
+										variant='outline-success'
+										className='ml-3 btn-sm'
+										href='property/create'
+									>
+										New property
+									</Button>
+								</li>
+
+								<li className='nav-item'>
+									<Button
+										className=' ml-3 btn-sm'
 										variant='outline-danger'
 										onClick={logOutUser}
 									>

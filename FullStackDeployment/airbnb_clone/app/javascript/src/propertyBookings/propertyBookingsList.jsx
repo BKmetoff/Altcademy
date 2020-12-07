@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { handleErrors, safeCredentials } from '../utils/fetchHelper'
+import { handleErrors } from '../utils/fetchHelper'
 import { dateFormat } from '../utils/dateFormat'
 import { Badge } from 'react-bootstrap'
 

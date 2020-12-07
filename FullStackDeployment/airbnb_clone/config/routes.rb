@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
 
+  get '/property/create' => 'static_pages#property_create'
   get '/property/:id' => 'static_pages#property'
   get '/property/:id/bookings' => 'static_pages#property_bookings'
   get '/booking/:id' => 'static_pages#booking'

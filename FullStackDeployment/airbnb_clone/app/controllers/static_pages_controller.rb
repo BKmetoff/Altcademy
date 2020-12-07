@@ -20,6 +20,10 @@ class StaticPagesController < ApplicationController
     render 'property_bookings'
   end
 
+  def property_create
+    render 'property_create'
+  end
+
   def login
     render 'login'
   end
