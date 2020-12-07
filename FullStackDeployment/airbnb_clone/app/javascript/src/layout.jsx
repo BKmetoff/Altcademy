@@ -119,7 +119,7 @@ export default function Layout(props) {
 									<Button
 										variant='outline-success'
 										className='ml-3 btn-sm'
-										href='property/create'
+										href='/property/create'
 									>
 										New property
 									</Button>

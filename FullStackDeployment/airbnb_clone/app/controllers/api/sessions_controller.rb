@@ -2,6 +2,7 @@
 
 module Api
   class SessionsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def create
       @user = User.find_by(email: params[:user][:email])
 
@@ -30,7 +31,7 @@ module Api
       end
     end
 
-    skip_before_action :verify_authenticity_token, only: [:destroy]
+    # skip_before_action :verify_authenticity_token, only: [:destroy]
     def destroy
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)
