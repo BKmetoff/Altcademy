@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.property do
   json.id @property.id
   json.title @property.title

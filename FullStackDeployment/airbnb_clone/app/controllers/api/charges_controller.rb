@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class ChargesController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:mark_complete]
@@ -5,14 +7,10 @@ module Api
     def create
       token = cookies.signed[:airbnb_session_token]
       session = Session.find_by(token: token)
-      unless session
-        return render json: {error: 'not logged in'}, status: :unauthorized
-      end
+      return render json: { error: 'not logged in' }, status: :unauthorized unless session
 
       booking = Booking.find_by(id: params[:booking_id])
-      unless booking
-        return render json: {error: 'cannot find booking'}, status: :not_found
-      end
+      return render json: { error: 'cannot find booking' }, status: :not_found unless booking
 
       property = booking.property
       days_booked = (booking.end_date - booking.start_date).to_i
@@ -68,11 +66,14 @@ module Api
         session = event['data']['object']
         # Fulfill the purchase, mark related charge as complete
         charge = Charge.find_by(checkout_session_id: session.id)
-        return head :bad_request if !charge
+
+        return head :bad_request unless charge
+
         charge.update({ complete: true })
         return head :ok
       end
-      return head :bad_request
+
+      head :bad_request
     end
   end
 end
