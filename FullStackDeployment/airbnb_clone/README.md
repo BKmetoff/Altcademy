@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Fullstack course assignment - AirBnB copy.
 
-Things you may want to cover:
+Features to complete:
 
-* Ruby version
+- Properties:
 
-* System dependencies
+  - ability to add properties;
+  - ability to edit existing properties;
 
-* Configuration
+- Bookings:
 
-* Database creation
+  - ability to see own bookings:
+    - payment status;
+    - ability to continue payment if payment is incomplete;
+  - ability to see bookings of owned properties:
+    - number of bookings per property;
+    - payment status of each booking;
+  - previously booked days should not be available to select when making a new booking;
 
-* Database initialization
+- Charges:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  - successful payments should redirect to `/booking/:id/success`
