@@ -1,0 +1,65 @@
+body,
+* {
+	margin: 0;
+	padding: 0;
+	font-family: monospace;
+}
+
+.App {
+	background-color: #e5b87626;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.App form {
+	width: 200px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.App button {
+	height: 40px;
+	width: 160px;
+	color: white;
+	background-color: #ff9800;
+	padding: 0 10px;
+	border: none;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.App button:hover {
+	opacity: 0.9;
+	cursor: pointer;
+}
+
+/* .App input {
+	height: 32px;
+	border-radius: none;
+	margin-bottom: 10px;
+} */
+
+.App img {
+	max-height: 400px;
+	margin: 10px;
+	border: 1px solid gray;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: white;
+}
+
+.App hr {
+	width: 120px;
+	margin: 10px 30px 10px 30px;
+}
+
+.result-message {
+	margin: 10px;
+}
+.App h3 {
+	color: #786b5a;
+}
