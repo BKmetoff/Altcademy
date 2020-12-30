@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <title>Is it a guitar??</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_pack_tag 'hello_react' %>
+    <%= javascript_pack_tag 'hello_react', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= yield %>
   </body>
+
 </html>
