@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { MOCK_DATA } from '../utils/mock'
@@ -32,9 +33,9 @@ export default function Header() {
 				<button>Log out</button>
 			</ItemsContainer>
 			<ItemsContainer>
-				<p>Upload Image</p>
-				<p>History</p>
-				<p>Leaderboard</p>
+				<Link to='/'>Upload Image</Link>
+				<Link to='/history'>History</Link>
+				<Link to='leaderboard'>Leaderboard</Link>
 			</ItemsContainer>
 		</HeaderContainer>
 	)

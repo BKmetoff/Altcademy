@@ -11,7 +11,7 @@ import { MOCK_DATA } from '../utils/mock'
 
 const loggedIn = MOCK_DATA.LOGGED_IN
 
-export const Layout = ({ children }) => {
+export default function Layout({ children }) {
 	return (
 		<Container>
 			{loggedIn && <Header />}
