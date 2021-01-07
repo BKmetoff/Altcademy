@@ -6,21 +6,23 @@ import Layout from './Layout'
 import History from './History'
 import Leaderboard from './Leaderboard'
 import CheckGuitar from './CheckGuitar'
+import LoginSignUp from './LoginSignUp'
+
+const routes = [
+	{ component: CheckGuitar, path: '/', exact: true },
+	{ component: History, path: '/history' },
+	{ component: Leaderboard, path: '/leaderboard' },
+	{ component: LoginSignUp, path: '/login' },
+]
 
 export default function App() {
 	return (
 		<Router>
 			<Layout>
 				<Switch>
-					<Route path='/' exact>
-						<CheckGuitar />
-					</Route>
-					<Route path='/history'>
-						<History />
-					</Route>
-					<Route path='/leaderboard'>
-						<Leaderboard />
-					</Route>
+					{routes.map((props) => {
+						return <Route key={props.path} {...props} />
+					})}
 				</Switch>
 			</Layout>
 		</Router>
