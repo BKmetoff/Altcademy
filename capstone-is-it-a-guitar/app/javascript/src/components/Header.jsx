@@ -35,7 +35,7 @@ export default function Header() {
 			<ItemsContainer>
 				<Link to='/'>Upload Image</Link>
 				<Link to='/history'>History</Link>
-				<Link to='leaderboard'>Leaderboard</Link>
+				<Link to='/leaderboard'>Leaderboard</Link>
 			</ItemsContainer>
 		</HeaderContainer>
 	)
