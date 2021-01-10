@@ -7,6 +7,7 @@ import History from './History'
 import Leaderboard from './Leaderboard'
 import CheckGuitar from './CheckGuitar'
 import LoginSignUp from './LoginSignUp'
+import NotFound from './NotFound'
 
 const stateMachine = {
 	initial: 'initial',
@@ -32,17 +33,21 @@ export default function App() {
 		{ component: History, path: '/history' },
 		{ component: Leaderboard, path: '/leaderboard' },
 		{ component: LoginSignUp, path: '/login' },
+		{ component: NotFound, path: '/' },
 	]
 
 	return (
 		<Router>
 			<Layout>
 				<Switch>
-					<Route to='/' exact>
+					<Route path='/' exact>
 						<CheckGuitar dispatch={dispatch} state={state} />
 					</Route>
-
 					{routes.map((props) => {
+						// props.component === CheckGuitar ?
+						// return <Route>
+						// <CheckGuitar pa
+						// </Route>:
 						return <Route key={props.path} {...props} />
 					})}
 				</Switch>
