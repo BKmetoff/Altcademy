@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef } from 'react'
+import React, { useState, useReducer } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 
