@@ -10,4 +10,11 @@ export const MOCK_DATA = Object.freeze({
 		IMG_DATE: '2021-01-23T07:26:29Z',
 		IMG_STATUS: true,
 	},
+	PEERS: [
+		{ USERNAME: 'DUDE 1', AVG_SCORE: '9.5', ATTEMPTS: '11' },
+		{ USERNAME: 'DUDE 2', AVG_SCORE: '6.5', ATTEMPTS: '11' },
+		{ USERNAME: 'DUDE 3', AVG_SCORE: '5.5', ATTEMPTS: '11' },
+		{ USERNAME: 'DUDE 4', AVG_SCORE: '10', ATTEMPTS: '19' },
+		{ USERNAME: 'DUDE 5', AVG_SCORE: '8', ATTEMPTS: '16' },
+	],
 })
