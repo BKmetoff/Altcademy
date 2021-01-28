@@ -1,42 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+
+import Button from '../backbone/Button'
+import Divider from '../backbone/Divider'
+import { Wrapper } from '../backbone/Container'
 
 import { MOCK_DATA } from '../utils/mock'
 
-const HeaderContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	max-width: 768px;
-	width: 100%;
-`
-
-const ItemsContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	${({ userActions }) =>
-		userActions
-			? css`
-					justify-content: space-between;
-					width: 100%;
-			  `
-			: css`
-					justify-content: center;
-			  `}
-`
-
 export default function Header() {
 	return (
-		<HeaderContainer>
-			<ItemsContainer userActions>
+		<Wrapper header column fullWidth>
+			<Wrapper between>
 				<p>{MOCK_DATA.USER.USERNAME}</p>
-				<button>Log out</button>
-			</ItemsContainer>
-			<ItemsContainer>
-				<Link to='/'>Upload Image</Link>
-				<Link to='/history'>History</Link>
-				<Link to='/leaderboard'>Leaderboard</Link>
-			</ItemsContainer>
-		</HeaderContainer>
+				<Button kind='secondary'>Log out</Button>
+			</Wrapper>
+			<Wrapper center>
+				<Button kind='headerLink'>
+					<Link to='/'>Upload Image</Link>
+				</Button>
+				<Divider vertical />
+				<Button kind='headerLink'>
+					<Link to='/history'>History</Link>
+				</Button>
+				<Divider vertical />
+				<Button kind='headerLink'>
+					<Link to='/leaderboard'>Leaderboard</Link>
+				</Button>
+			</Wrapper>
+		</Wrapper>
 	)
 }

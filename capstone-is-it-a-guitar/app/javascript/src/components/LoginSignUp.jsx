@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Form from '../backbone/Form'
-import { BaseDivider } from '../backbone/Divider'
+import BaseDivider from '../backbone/Divider'
 
 const FormsWrapper = styled.div`
 	display: flex;
