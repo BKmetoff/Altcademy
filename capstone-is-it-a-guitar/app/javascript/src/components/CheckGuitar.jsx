@@ -1,4 +1,8 @@
 import React, { useRef, useState } from 'react'
+import { Wrapper } from '../backbone/Container'
+
+import Image from '../backbone/Image'
+import Button from '../backbone/Button'
 
 export default function CheckGuitar({
 	state,
@@ -57,26 +61,36 @@ export default function CheckGuitar({
 	}
 
 	return (
-		<div
-			style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-		>
-			{console.log(state, isGuitar)}
+		<Wrapper column>
+			<Wrapper justifyCenter alignCenter>
+				{console.log(state, isGuitar)}
 
-			<input
-				type='file'
-				accept='image/*'
-				capture='camera'
-				ref={inputRef}
-				onChange={handleUpload}
-				hidden
-			/>
-			<button onClick={buttonProps[state].action}>
-				{buttonProps[state].text}
-			</button>
-			{showResults && (
-				<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
-			)}
-			{showImage && <img alt='upload-preview' src={imageURL} ref={imageRef} />}
-		</div>
+				<input
+					type='file'
+					accept='image/*'
+					capture='camera'
+					ref={inputRef}
+					onChange={handleUpload}
+					hidden
+				/>
+				<Button kind='primary' onClick={buttonProps[state].action}>
+					{buttonProps[state].text}
+				</Button>
+				{showResults && (
+					<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
+				)}
+				{showImage && (
+					<div style={{ width: '50%', margin: '0 auto' }}>
+						<img
+							style={{ width: '100%', height: 'auto' }}
+							imageCheckGuitar
+							alt='upload-preview'
+							src={imageURL}
+							ref={imageRef}
+						/>
+					</div>
+				)}
+			</Wrapper>
+		</Wrapper>
 	)
 }

@@ -10,11 +10,11 @@ import { MOCK_DATA } from '../utils/mock'
 export default function Header() {
 	return (
 		<Wrapper header column fullWidth>
-			<Wrapper between>
+			<Wrapper justifyBetween>
 				<p>{MOCK_DATA.USER.USERNAME}</p>
 				<Button kind='secondary'>Log out</Button>
 			</Wrapper>
-			<Wrapper center>
+			<Wrapper justifyCenter>
 				<Button kind='headerLink'>
 					<Link to='/'>Upload Image</Link>
 				</Button>
