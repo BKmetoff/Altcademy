@@ -1,11 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
-const SHADOW = 'rgba(143, 111, 63, 0.1) 0px 4px 8px;'
+const SHADOW = 'rgba(143, 111, 63, 0.37) 0px 4px 16px;'
 
 const COLORS = {
 	background: '#EFDA94',
 	secondary: '#F5C95C',
 	primary: '#FDAF09',
+	light: '#ebebeb',
 }
 
 const BORDER_RADIUS = {
