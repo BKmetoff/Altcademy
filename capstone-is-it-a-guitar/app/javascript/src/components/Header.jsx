@@ -18,11 +18,11 @@ export default function Header() {
 				<Button kind='headerLink'>
 					<Link to='/'>Upload Image</Link>
 				</Button>
-				<Divider vertical />
+				<Divider />
 				<Button kind='headerLink'>
 					<Link to='/history'>History</Link>
 				</Button>
-				<Divider vertical />
+				<Divider />
 				<Button kind='headerLink'>
 					<Link to='/leaderboard'>Leaderboard</Link>
 				</Button>

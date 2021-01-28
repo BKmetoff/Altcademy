@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 const SHADOW = 'rgba(143, 111, 63, 0.37) 0px 4px 16px;'
 
 const COLORS = {
+	dark: '#483400',
 	background: '#EFDA94',
 	secondary: '#F5C95C',
 	primary: '#FDAF09',
@@ -39,7 +40,7 @@ export const Theme = {
 	margin: MARGIN,
 	padding: PADDING,
 	opacity: 0.95,
-	hoverScale: 'scale(1.05)',
+	hoverScale: 'scale(1.02)',
 }
 
 export const GlobalStyle = createGlobalStyle`
@@ -72,5 +73,13 @@ export const GlobalStyle = createGlobalStyle`
 		letter-spacing: 1px;
 		line-height: 1.9; */
 		font-family: monospace
+	}
+
+	a {
+		text-decoration:none;
+	}
+
+	a:hover { 
+		text-decoration: none;
 	}
 `

@@ -22,6 +22,9 @@ export const Wrapper = styled.div`
 		css`
 			top: 0;
 			margin-top: ${Theme.margin.M};
+			margin-bottom: ${Theme.margin.XS};
+			border-bottom: 2px solid ${Theme.colors.background};
+			padding-bottom: ${Theme.margin.S};
 		`}
 
 	${({ footer }) =>

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Theme } from '../backbone/style/Theme'
 
 const BaseButton = styled.button`
@@ -13,14 +13,26 @@ const BaseButton = styled.button`
 
 	a {
 		text-decoration: none;
-		/* font-family: monospace; */
 	}
 `
 
 const kinds = {
-	primary: {},
+	primary: css`
+		background: ${Theme.colors.primary};
+	`,
 	secondary: {},
-	headerLink: {},
+	headerLink: css`
+		font-weight: 700;
+		font-size: 18px;
+		background: inherit;
+		letter-spacing: -0.7px;
+		:hover {
+			transform: ${Theme.hoverScale};
+		}
+		a {
+			color: ${Theme.colors.dark};
+		}
+	`,
 }
 
 const Button = styled(BaseButton)`
