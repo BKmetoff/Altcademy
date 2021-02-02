@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
-import { Wrapper } from '../backbone/Container'
+import styled from 'styled-components'
 
+import { Theme } from '../backbone/style/Theme'
+import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
 
@@ -60,37 +62,43 @@ export default function CheckGuitar({
 		nextState()
 	}
 
-	return (
-		<Wrapper column>
-			<Wrapper justifyCenter alignCenter>
-				{console.log(state, isGuitar)}
+	const ImageContainer = styled(Wrapper)`
+		overflow-y: hidden;
+		padding-top: ${Theme.margin.M};
+	`
 
-				<input
-					type='file'
-					accept='image/*'
-					capture='camera'
-					ref={inputRef}
-					onChange={handleUpload}
-					hidden
-				/>
-				<Button kind='primary' onClick={buttonProps[state].action}>
-					{buttonProps[state].text}
-				</Button>
-				{showResults && (
-					<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
-				)}
-				{showImage && (
-					<div style={{ width: '50%', margin: '0 auto' }}>
-						<img
-							style={{ width: '100%', height: 'auto' }}
-							imageCheckGuitar
-							alt='upload-preview'
-							src={imageURL}
-							ref={imageRef}
-						/>
-					</div>
-				)}
-			</Wrapper>
-		</Wrapper>
+	const ImageWrapper = styled.div`
+		width: 75%;
+		margin: auto;
+	`
+	return (
+		<ImageContainer alignCenter column>
+			{console.log(state, isGuitar)}
+
+			<input
+				type='file'
+				accept='image/*'
+				capture='camera'
+				ref={inputRef}
+				onChange={handleUpload}
+				hidden
+			/>
+			<Button kind='primary' onClick={buttonProps[state].action}>
+				{buttonProps[state].text}
+			</Button>
+			{showResults && (
+				<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
+			)}
+			{showImage && (
+				<ImageWrapper>
+					<Image
+						imageCheckGuitar
+						alt='upload-preview'
+						src={imageURL}
+						ref={imageRef}
+					/>
+				</ImageWrapper>
+			)}
+		</ImageContainer>
 	)
 }

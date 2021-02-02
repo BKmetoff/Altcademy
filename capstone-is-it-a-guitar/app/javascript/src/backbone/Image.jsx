@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { Theme } from './style/Theme'
 
 const Image = styled.img.attrs((props) => ({
 	src: props.src,
@@ -13,10 +14,10 @@ const Image = styled.img.attrs((props) => ({
 	${({ imageCheckGuitar }) =>
 		imageCheckGuitar !== undefined &&
 		css`
-			object-fit: cover;
 			width: 100%;
-			height: 400px;
+			height: auto;
 		`}
+	border-radius: ${Theme.borderRadius.S}
 `
 
 export default Image
