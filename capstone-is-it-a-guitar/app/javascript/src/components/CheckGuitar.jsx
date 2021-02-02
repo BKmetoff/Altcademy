@@ -1,4 +1,10 @@
 import React, { useRef, useState } from 'react'
+import styled, { css } from 'styled-components'
+
+import { Theme } from '../backbone/style/Theme'
+import { Wrapper } from '../backbone/Container'
+import Image from '../backbone/Image'
+import Button from '../backbone/Button'
 
 export default function CheckGuitar({
 	state,
@@ -56,10 +62,17 @@ export default function CheckGuitar({
 		nextState()
 	}
 
+	const ImageContainer = styled(Wrapper)`
+		overflow-y: hidden;
+		margin: auto;
+	`
+
+	const ImageWrapper = styled.div`
+		width: 75%;
+		margin: auto;
+	`
 	return (
-		<div
-			style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-		>
+		<ImageContainer alignCenter column>
 			{console.log(state, isGuitar)}
 
 			<input
@@ -70,13 +83,25 @@ export default function CheckGuitar({
 				onChange={handleUpload}
 				hidden
 			/>
-			<button onClick={buttonProps[state].action}>
-				{buttonProps[state].text}
-			</button>
+
+			{showImage && (
+				<ImageWrapper>
+					<Image
+						imageCheckGuitar
+						alt='upload-preview'
+						src={imageURL}
+						ref={imageRef}
+					/>
+				</ImageWrapper>
+			)}
+
 			{showResults && (
 				<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
 			)}
-			{showImage && <img alt='upload-preview' src={imageURL} ref={imageRef} />}
-		</div>
+
+			<Button kind='primary' onClick={buttonProps[state].action}>
+				{buttonProps[state].text}
+			</Button>
+		</ImageContainer>
 	)
 }
