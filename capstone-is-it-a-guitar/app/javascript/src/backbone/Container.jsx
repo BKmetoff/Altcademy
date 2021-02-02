@@ -22,6 +22,9 @@ export const Wrapper = styled.div`
 		css`
 			top: 0;
 			margin-top: ${Theme.margin.M};
+			margin-bottom: ${Theme.margin.XS};
+			border-bottom: 2px solid ${Theme.colors.background};
+			padding-bottom: ${Theme.margin.S};
 		`}
 
 	${({ footer }) =>
@@ -30,18 +33,25 @@ export const Wrapper = styled.div`
 			bottom: 0;
 			position: fixed;
 			padding-bottom: ${Theme.padding.M};
+			background-color: inherit;
 		`}
 
-	${({ between }) =>
-		between &&
+	${({ justifyBetween }) =>
+		justifyBetween &&
 		css`
 			justify-content: space-between;
 		`}
 
-	${({ center }) =>
-		center &&
+	${({ justifyCenter }) =>
+		justifyCenter &&
 		css`
 			justify-content: center;
+		`}
+
+	${({ alignCenter }) =>
+		alignCenter &&
+		css`
+			align-content: center;
 		`}
 
 	${({ fullWidth }) =>
@@ -50,6 +60,11 @@ export const Wrapper = styled.div`
 			width: 100%;
 		`}
 
+	${({ fullHeight }) =>
+		fullHeight &&
+		css`
+			height: 100%;
+		`}
 	${({ column }) =>
 		column &&
 		css`
