@@ -19,6 +19,10 @@ const BaseButton = styled.button`
 const kinds = {
 	primary: css`
 		background: ${Theme.colors.primary};
+		height: 40px;
+		width: 220px;
+		margin: ${Theme.margin.M} ${Theme.margin.auto} ${Theme.margin.auto}
+			${Theme.margin.auto};
 	`,
 	secondary: {},
 	headerLink: css`

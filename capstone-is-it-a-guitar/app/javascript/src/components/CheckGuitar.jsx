@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Theme } from '../backbone/style/Theme'
 import { Wrapper } from '../backbone/Container'
@@ -64,7 +64,7 @@ export default function CheckGuitar({
 
 	const ImageContainer = styled(Wrapper)`
 		overflow-y: hidden;
-		padding-top: ${Theme.margin.M};
+		margin: auto;
 	`
 
 	const ImageWrapper = styled.div`
@@ -83,12 +83,7 @@ export default function CheckGuitar({
 				onChange={handleUpload}
 				hidden
 			/>
-			<Button kind='primary' onClick={buttonProps[state].action}>
-				{buttonProps[state].text}
-			</Button>
-			{showResults && (
-				<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
-			)}
+
 			{showImage && (
 				<ImageWrapper>
 					<Image
@@ -99,6 +94,14 @@ export default function CheckGuitar({
 					/>
 				</ImageWrapper>
 			)}
+
+			{showResults && (
+				<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
+			)}
+
+			<Button kind='primary' onClick={buttonProps[state].action}>
+				{buttonProps[state].text}
+			</Button>
 		</ImageContainer>
 	)
 }
