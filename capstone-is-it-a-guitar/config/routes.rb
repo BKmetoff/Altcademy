@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [:create]
+    resources :sessions, only: %i[create destroy]
+    resources :attempts, only: [:create]
   end
 
   match '*path', to: 'static_pages#home', via: :all
