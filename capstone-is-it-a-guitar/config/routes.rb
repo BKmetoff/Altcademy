@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :users, only: [:create]
     resources :sessions, only: %i[create destroy]
     resources :attempts, only: [:create]
+
+    get '/authenticated' => 'sessions#authenticated'
   end
 
   match '*path', to: 'static_pages#home', via: :all
