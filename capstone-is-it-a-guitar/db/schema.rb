@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_26_141830) do
+ActiveRecord::Schema.define(version: 2021_02_28_110418) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer "user_id"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 2021_02_26_141830) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_attempts_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -30,4 +38,5 @@ ActiveRecord::Schema.define(version: 2021_02_26_141830) do
   end
 
   add_foreign_key "attempts", "users"
+  add_foreign_key "sessions", "users"
 end
