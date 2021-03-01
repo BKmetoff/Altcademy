@@ -3,9 +3,7 @@ module Api
     skip_before_action :verify_authenticity_token
 
     def create
-      token = cookies.signed[:guitar_session_token]
-      session = Session.find_by(token: token)
-      return render json: { error: 'user not logged in' }, status: :unauthorized unless session
+      return render json: { error: 'user not logged in' }, status: :unauthorized unless find_session
 
       attempt_success = attempt_params.fetch(:success)
       parsed_params = attempt_params.merge(:success => parse_boolean(attempt_success))
@@ -19,10 +17,9 @@ module Api
       end
     end
 
-    # return count of attempts per user
-    # and average success rate
     def index
-      # @attempts = Attempt.all.includes(:user)
+      # return count of attempts and average success
+      # per user
 
       users_with_attempts = []
       User.all.each do |user|
@@ -31,31 +28,43 @@ module Api
         end
       end
 
-      puts users_with_attempts.first
       @response_data = []
       
       users_with_attempts.each do |user|
         @response_data.push({
-          :user => user.username,
-          :attempts => user.attempts.count,
-          :average_success_rate => calculate_user_average(
-            user.attempts.count,
-            user.attempts.where(success: true).count
-          ).round(2)
-        })
+                              :user => user.username,
+                              :attempts => user.attempts.count,
+                              :average_success_rate => calculate_user_average(
+                                user.attempts.count,
+                                user.attempts.where(success: true).count
+                              )
+                            })
       end
 
-
-      # user: {
-      #   username: "asdf",
-      #   number_of_attempts: 50,
-      #   avg_success_rate: 4.5,
-      # }
-
-      # render json: @attempts, include: [:user]
       render json: @response_data
-      # render 'api/attempts/index'
     end
+
+    def show_per_user
+      # return average success
+      # and attempts
+      # for one user
+
+      return render json: { error: 'user not logged in' }, status: :unauthorized unless find_session
+
+      user = User.find_by(id: find_session.user.id)
+
+      user_attempts = Attempt.where(user_id: user.id)
+      user_average = calculate_user_average(
+                                              user_attempts.length, 
+                                              user_attempts.where(success: true).length
+                                            )
+
+      @user_stats = {:average => user_average, :attempts => user_attempts}
+      
+      render json: @user_stats
+      # render 'api/attempts/show_per_user'
+    end
+    
 
     private
 
@@ -63,12 +72,17 @@ module Api
       params.require(:attempt).permit(:user_id, :image_url, :success)
     end
 
+    def find_session
+      token = cookies.signed[:guitar_session_token]
+      session = Session.find_by(token: token)
+    end
+
     def parse_boolean(value)
       ActiveRecord::Type::Boolean.new.deserialize(value)
     end
 
     def calculate_user_average(attempts_count, successful_attempts)
-      successful_attempts / attempts_count.to_f   
+      ((successful_attempts / attempts_count.to_f) * 100).round(1)
     end
   end
 end

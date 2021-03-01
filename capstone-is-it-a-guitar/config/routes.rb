@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :attempts, only: %i[create index]
 
     get '/authenticated' => 'sessions#authenticated'
+    get '/attempts/user' => 'attempts#show_per_user'
   end
 
   match '*path', to: 'static_pages#home', via: :all
