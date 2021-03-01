@@ -22,7 +22,6 @@ module Api
     # return count of attempts per user
     # and average success rate
     def index
-      # @attempts = Attempt.all.includes(:user)
 
       users_with_attempts = []
       User.all.each do |user|
@@ -31,7 +30,6 @@ module Api
         end
       end
 
-      puts users_with_attempts.first
       @response_data = []
       
       users_with_attempts.each do |user|
@@ -41,20 +39,11 @@ module Api
           :average_success_rate => calculate_user_average(
             user.attempts.count,
             user.attempts.where(success: true).count
-          ).round(2)
+          ).round(1)
         })
       end
 
-
-      # user: {
-      #   username: "asdf",
-      #   number_of_attempts: 50,
-      #   avg_success_rate: 4.5,
-      # }
-
-      # render json: @attempts, include: [:user]
       render json: @response_data
-      # render 'api/attempts/index'
     end
 
     private
@@ -68,7 +57,7 @@ module Api
     end
 
     def calculate_user_average(attempts_count, successful_attempts)
-      successful_attempts / attempts_count.to_f   
+      (successful_attempts / attempts_count.to_f) * 100
     end
   end
 end
