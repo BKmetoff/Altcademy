@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
+// import checkLoggedIn from '../utils/checkLoggedIn'
 
 const Input = styled.input`
 	max-width: 200px;
@@ -17,6 +18,7 @@ export default function Form({ signUp }) {
 	let history = useHistory()
 
 	useEffect(() => {
+		// checkLoggedIn() ? history.push('/') : console.log('not logged in')
 		checkLoggedIn()
 	}, [])
 
@@ -70,6 +72,7 @@ export default function Form({ signUp }) {
 
 	return (
 		<BaseForm onSubmit={handleSubmit}>
+			<div>{signUp ? 'Sign up' : 'Log in'} </div>
 			<Input
 				type='email'
 				name='email'
