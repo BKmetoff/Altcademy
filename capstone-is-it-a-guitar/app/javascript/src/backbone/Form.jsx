@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import styled from 'styled-components'
+import { safeCredentials, handleErrors } from '../utils/fetchHelper'
+// import checkLoggedIn from '../utils/checkLoggedIn'
 
 const Input = styled.input`
 	max-width: 200px;
@@ -11,50 +15,101 @@ const BaseForm = styled.form`
 `
 
 export default function Form({ signUp }) {
-	const [formInput, setFormInput] = useState({
-		username: '',
+	let history = useHistory()
+
+	useEffect(() => {
+		// checkLoggedIn() ? history.push('/') : console.log('not logged in')
+		checkLoggedIn()
+	}, [])
+
+	const [loginDetails, setLoginDetails] = useState({
+		email: '',
 		password: '',
-		passwordConfirmation: '',
+		username: '',
 	})
+
+	const checkLoggedIn = () => {
+		fetch(
+			'/api/authenticated',
+			safeCredentials({
+				method: 'GET',
+			})
+		)
+			.then(handleErrors)
+			.then((data) => {
+				data.user && history.push('/')
+			})
+			.catch((error) => console.log(error))
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('submit clicked', formInput)
+		console.log('submit clicked', loginDetails)
+
+		fetch(
+			loginDetails.username ? '/api/users' : '/api/sessions',
+			safeCredentials({
+				method: 'POST',
+				body: JSON.stringify({
+					user: {
+						email: loginDetails.email,
+						password: loginDetails.password,
+						username: loginDetails.username,
+					},
+				}),
+			})
+		)
+			.then(handleErrors)
+			.then((data) => {
+				console.log(data)
+				clearFormInput()
+				data.success && history.push('/')
+			})
+			.catch((error) => console.log('login error: ', error))
 	}
 
 	const handleChange = (e) => {
-		setFormInput({ ...formInput, [e.target.name]: e.target.value })
+		setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value })
+	}
+
+	const clearFormInput = () => {
+		setLoginDetails({
+			email: '',
+			password: '',
+			username: '',
+		})
 	}
 
 	return (
 		<BaseForm onSubmit={handleSubmit}>
+			<div>{signUp ? 'Sign up' : 'Log in'} </div>
 			<Input
-				type='text'
-				name='username'
+				type='email'
+				name='email'
 				onChange={handleChange}
-				value={formInput.username}
-				placeholder='Username'
-				required
-			/>
-			<Input
-				type='password'
-				name='password'
-				onChange={handleChange}
-				value={formInput.password}
-				placeholder='Password'
+				value={loginDetails.email}
+				placeholder='Email'
 				required
 			/>
 			{signUp && (
 				<Input
-					type='password'
-					name='passwordConfirmation'
+					type='text'
+					name='username'
 					onChange={handleChange}
-					value={formInput.passwordConfirmation}
-					placeholder='Confirm password'
+					value={loginDetails.username}
+					placeholder='Username'
 					required
 				/>
 			)}
-			<button type='submit'>submit</button>
+			<Input
+				type='password'
+				name='password'
+				onChange={handleChange}
+				value={loginDetails.password}
+				placeholder='Password'
+				required
+			/>
+			<button type='submit'>{signUp ? 'Sign up' : 'Log in'}</button>
 		</BaseForm>
 	)
 }

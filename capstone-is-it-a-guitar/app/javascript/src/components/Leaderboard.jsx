@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 
-import { MOCK_DATA } from '../utils/mock'
 import sortUsers from '../utils/sortUsers'
+import { handleErrors } from '../utils/fetchHelper'
 
 const UserListWrapper = styled.div`
 	display: flex;
@@ -25,25 +25,49 @@ const UserRow = styled.div`
 			  `}
 `
 
+const UserListHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
+`
 export default function Leaderboard() {
+	useEffect(() => {
+		getStats()
+	}, [])
+
+	const [userStats, setUserStats] = useState([])
+
+	const getStats = () => {
+		fetch('/api/attempts')
+			.then(handleErrors)
+			.then((data) => {
+				setUserStats(data)
+			})
+	}
+
 	return (
 		<UserListWrapper>
-			{sortUsers(MOCK_DATA.PEERS).map((peer, index) => {
+			{console.log(userStats)}
+			<UserListHeader>
+				<div>Username</div>
+				<div>Average Score</div>
+				<div>Attempts</div>
+			</UserListHeader>
+			{sortUsers(userStats).map((user, index) => {
 				if (index % 2 !== 0) {
 					return (
 						<UserRow key={index} odd>
-							<p>{peer.USERNAME}</p>
-							<p>{peer.AVG_SCORE}</p>
-							<p>{peer.ATTEMPTS}</p>
+							<div>{user.user}</div>
+							<div>{`${user.average_success_rate} %`}</div>
+							<div>{user.attempts}</div>
 						</UserRow>
 					)
 				}
 
 				return (
 					<UserRow key={index}>
-						<p>{peer.USERNAME}</p>
-						<p>{peer.AVG_SCORE}</p>
-						<p>{peer.ATTEMPTS}</p>
+						<div>{user.user}</div>
+						<div>{`${user.average_success_rate} %`}</div>
+						<div>{user.attempts}</div>
 					</UserRow>
 				)
 			})}
