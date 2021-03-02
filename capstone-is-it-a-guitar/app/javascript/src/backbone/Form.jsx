@@ -25,7 +25,6 @@ export default function Form({ signUp }) {
 	const [loginDetails, setLoginDetails] = useState({
 		email: '',
 		password: '',
-		passwordConfirmation: '',
 		username: '',
 	})
 
@@ -48,16 +47,13 @@ export default function Form({ signUp }) {
 		console.log('submit clicked', loginDetails)
 
 		fetch(
-			loginDetails.passwordConfirmation && loginDetails.username
-				? '/api/users'
-				: '/api/sessions',
+			loginDetails.username ? '/api/users' : '/api/sessions',
 			safeCredentials({
 				method: 'POST',
 				body: JSON.stringify({
 					user: {
 						email: loginDetails.email,
 						password: loginDetails.password,
-						passwordConfirmation: loginDetails.passwordConfirmation,
 						username: loginDetails.username,
 					},
 				}),
@@ -80,7 +76,6 @@ export default function Form({ signUp }) {
 		setLoginDetails({
 			email: '',
 			password: '',
-			passwordConfirmation: '',
 			username: '',
 		})
 	}
@@ -114,16 +109,6 @@ export default function Form({ signUp }) {
 				placeholder='Password'
 				required
 			/>
-			{signUp && (
-				<Input
-					type='password'
-					name='passwordConfirmation'
-					onChange={handleChange}
-					value={loginDetails.passwordConfirmation}
-					placeholder='Confirm password'
-					required
-				/>
-			)}
 			<button type='submit'>{signUp ? 'Sign up' : 'Log in'}</button>
 		</BaseForm>
 	)
