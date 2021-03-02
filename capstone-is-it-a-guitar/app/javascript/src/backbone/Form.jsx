@@ -26,6 +26,7 @@ export default function Form({ signUp }) {
 		email: '',
 		password: '',
 		passwordConfirmation: '',
+		username: '',
 	})
 
 	const checkLoggedIn = () => {
@@ -47,13 +48,17 @@ export default function Form({ signUp }) {
 		console.log('submit clicked', loginDetails)
 
 		fetch(
-			'/api/sessions',
+			loginDetails.passwordConfirmation && loginDetails.username
+				? '/api/users'
+				: '/api/sessions',
 			safeCredentials({
 				method: 'POST',
 				body: JSON.stringify({
 					user: {
 						email: loginDetails.email,
 						password: loginDetails.password,
+						passwordConfirmation: loginDetails.passwordConfirmation,
+						username: loginDetails.username,
 					},
 				}),
 			})
@@ -61,6 +66,7 @@ export default function Form({ signUp }) {
 			.then(handleErrors)
 			.then((data) => {
 				console.log(data)
+				clearFormInput()
 				data.success && history.push('/')
 			})
 			.catch((error) => console.log('login error: ', error))
@@ -68,6 +74,15 @@ export default function Form({ signUp }) {
 
 	const handleChange = (e) => {
 		setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value })
+	}
+
+	const clearFormInput = () => {
+		setLoginDetails({
+			email: '',
+			password: '',
+			passwordConfirmation: '',
+			username: '',
+		})
 	}
 
 	return (
@@ -81,6 +96,16 @@ export default function Form({ signUp }) {
 				placeholder='Email'
 				required
 			/>
+			{signUp && (
+				<Input
+					type='text'
+					name='username'
+					onChange={handleChange}
+					value={loginDetails.username}
+					placeholder='Username'
+					required
+				/>
+			)}
 			<Input
 				type='password'
 				name='password'
@@ -99,7 +124,7 @@ export default function Form({ signUp }) {
 					required
 				/>
 			)}
-			<button type='submit'>submit</button>
+			<button type='submit'>{signUp ? 'Sign up' : 'Log in'}</button>
 		</BaseForm>
 	)
 }
