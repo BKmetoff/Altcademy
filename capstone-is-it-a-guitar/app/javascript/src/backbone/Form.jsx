@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import styled from 'styled-components'
+import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
 const Input = styled.input`
 	max-width: 200px;
@@ -11,36 +14,56 @@ const BaseForm = styled.form`
 `
 
 export default function Form({ signUp }) {
-	const [formInput, setFormInput] = useState({
-		username: '',
+	let history = useHistory()
+	const [loginDetails, setLoginDetails] = useState({
+		email: '',
 		password: '',
 		passwordConfirmation: '',
 	})
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('submit clicked', formInput)
+		console.log('submit clicked', loginDetails)
+
+		fetch(
+			'/api/sessions',
+			safeCredentials({
+				method: 'POST',
+				body: JSON.stringify({
+					user: {
+						email: loginDetails.email,
+						password: loginDetails.password,
+					},
+				}),
+			})
+		)
+			.then(handleErrors)
+			.then((data) => {
+				console.log(data)
+				data.success && history.push('/')
+			})
+			.catch((error) => console.log('login error: ', error))
 	}
 
 	const handleChange = (e) => {
-		setFormInput({ ...formInput, [e.target.name]: e.target.value })
+		setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value })
 	}
 
 	return (
 		<BaseForm onSubmit={handleSubmit}>
 			<Input
-				type='text'
-				name='username'
+				type='email'
+				name='email'
 				onChange={handleChange}
-				value={formInput.username}
-				placeholder='Username'
+				value={loginDetails.email}
+				placeholder='Email'
 				required
 			/>
 			<Input
 				type='password'
 				name='password'
 				onChange={handleChange}
-				value={formInput.password}
+				value={loginDetails.password}
 				placeholder='Password'
 				required
 			/>
@@ -49,7 +72,7 @@ export default function Form({ signUp }) {
 					type='password'
 					name='passwordConfirmation'
 					onChange={handleChange}
-					value={formInput.passwordConfirmation}
+					value={loginDetails.passwordConfirmation}
 					placeholder='Confirm password'
 					required
 				/>
