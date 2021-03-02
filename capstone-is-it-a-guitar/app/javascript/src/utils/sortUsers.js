@@ -1,6 +1,6 @@
 const sortUsers = (arrayUsers) => {
 	return arrayUsers.sort((a, b) => {
-		return b.AVG_SCORE - a.AVG_SCORE
+		return b.average_success_rate - a.average_success_rate
 	})
 }
 
