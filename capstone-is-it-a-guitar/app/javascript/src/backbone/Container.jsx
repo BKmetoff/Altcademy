@@ -51,7 +51,7 @@ export const Wrapper = styled.div`
 	${({ alignCenter }) =>
 		alignCenter &&
 		css`
-			align-content: center;
+			align-items: center;
 		`}
 
 	${({ fullWidth }) =>
