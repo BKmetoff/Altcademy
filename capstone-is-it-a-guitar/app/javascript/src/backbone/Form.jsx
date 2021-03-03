@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
-// import checkLoggedIn from '../utils/checkLoggedIn'
+
+import Button from '../backbone/Button'
 
 const Input = styled.input`
 	max-width: 200px;
@@ -17,34 +18,14 @@ const BaseForm = styled.form`
 export default function Form({ signUp }) {
 	let history = useHistory()
 
-	useEffect(() => {
-		// checkLoggedIn() ? history.push('/') : console.log('not logged in')
-		checkLoggedIn()
-	}, [])
-
 	const [loginDetails, setLoginDetails] = useState({
 		email: '',
 		password: '',
 		username: '',
 	})
 
-	const checkLoggedIn = () => {
-		fetch(
-			'/api/authenticated',
-			safeCredentials({
-				method: 'GET',
-			})
-		)
-			.then(handleErrors)
-			.then((data) => {
-				data.user && history.push('/')
-			})
-			.catch((error) => console.log(error))
-	}
-
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('submit clicked', loginDetails)
 
 		fetch(
 			loginDetails.username ? '/api/users' : '/api/sessions',
@@ -61,8 +42,7 @@ export default function Form({ signUp }) {
 		)
 			.then(handleErrors)
 			.then((data) => {
-				console.log(data)
-				clearFormInput()
+				console.log('submit login form data: ', data)
 				data.success && history.push('/')
 			})
 			.catch((error) => console.log('login error: ', error))
@@ -70,14 +50,6 @@ export default function Form({ signUp }) {
 
 	const handleChange = (e) => {
 		setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value })
-	}
-
-	const clearFormInput = () => {
-		setLoginDetails({
-			email: '',
-			password: '',
-			username: '',
-		})
 	}
 
 	return (
@@ -109,7 +81,10 @@ export default function Form({ signUp }) {
 				placeholder='Password'
 				required
 			/>
-			<button type='submit'>{signUp ? 'Sign up' : 'Log in'}</button>
+
+			<Button kind={signUp ? 'secondary' : 'primary'}>
+				{signUp ? 'Sign up' : 'Log in'}
+			</Button>
 		</BaseForm>
 	)
 }

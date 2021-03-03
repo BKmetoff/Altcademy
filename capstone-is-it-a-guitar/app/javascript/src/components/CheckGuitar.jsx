@@ -1,10 +1,22 @@
-import React, { useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useRef, useState, useContext, useEffect } from 'react'
+import styled from 'styled-components'
 
-import { Theme } from '../backbone/style/Theme'
+import { CurrentUserContext } from '../components/App'
+import LogInError from './LogInError'
+
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
+
+const ImageContainer = styled(Wrapper)`
+	overflow-y: hidden;
+	margin: auto;
+`
+
+const ImageWrapper = styled.div`
+	width: 75%;
+	margin: auto;
+`
 
 export default function CheckGuitar({
 	state,
@@ -12,10 +24,14 @@ export default function CheckGuitar({
 	stateMachine,
 	loadModel,
 	model,
+	checkLoggedIn,
 }) {
+	const { userLoggedInStatus } = useContext(CurrentUserContext)
+
 	const [imageURL, setImageURL] = useState(null)
 	const [isGuitar, setIsGuitar] = useState(false)
 	const [predictionResults, setPredictionResults] = useState([])
+
 	const imageRef = useRef()
 	const inputRef = useRef()
 
@@ -62,15 +78,14 @@ export default function CheckGuitar({
 		nextState()
 	}
 
-	const ImageContainer = styled(Wrapper)`
-		overflow-y: hidden;
-		margin: auto;
-	`
+	useEffect(() => {
+		checkLoggedIn()
+	}, [])
 
-	const ImageWrapper = styled.div`
-		width: 75%;
-		margin: auto;
-	`
+	if (!userLoggedInStatus.loggedIn && !userLoggedInStatus.user.user_id) {
+		return <LogInError />
+	}
+
 	return (
 		<ImageContainer alignCenter column>
 			{console.log(state, isGuitar)}

@@ -1,18 +1,47 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { CurrentUserContext } from '../components/App'
+
+import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
 import Button from '../backbone/Button'
 import Divider from '../backbone/Divider'
 import { Wrapper } from '../backbone/Container'
 
-import { MOCK_DATA } from '../utils/mock'
-
 export default function Header() {
+	let history = useHistory()
+	const { userLoggedInStatus, checkLoggedIn } = useContext(CurrentUserContext)
+
+	const logOutUser = () => {
+		fetch(
+			`/api/sessions/${userLoggedInStatus.user.user_id}`,
+			safeCredentials({
+				method: 'DELETE',
+			})
+		)
+			.then(handleErrors)
+			.then((data) => {
+				console.log('logout response data: ', data)
+				data.success && checkLoggedIn()
+			})
+			.then(history.push('/login'))
+			.then(window.location.reload())
+			.catch((error) => console.log('logout error: ', error))
+	}
+
 	return (
 		<Wrapper header column fullWidth>
 			<Wrapper justifyBetween>
-				<p>{MOCK_DATA.USER.USERNAME}</p>
-				<Button kind='secondary'>Log out</Button>
+				{userLoggedInStatus.loggedIn && (
+					<>
+						<p style={{ fontSize: 16, alignSelf: 'center' }}>
+							{userLoggedInStatus.user.username}
+						</p>
+						<Button kind='secondary' onClick={logOutUser}>
+							Log out
+						</Button>
+					</>
+				)}
 			</Wrapper>
 			<Wrapper justifyCenter>
 				<Button kind='headerLink'>
