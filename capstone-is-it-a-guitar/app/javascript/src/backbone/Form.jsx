@@ -17,30 +17,16 @@ const BaseForm = styled.form`
 export default function Form({ signUp }) {
 	let history = useHistory()
 
-	useEffect(() => {
-		// checkLoggedIn() ? history.push('/') : console.log('not logged in')
-		checkLoggedIn()
-	}, [])
+	// useEffect(() => {
+	// 	// checkLoggedIn() ? history.push('/') : console.log('not logged in')
+	// 	checkLoggedIn()
+	// }, [])
 
 	const [loginDetails, setLoginDetails] = useState({
 		email: '',
 		password: '',
 		username: '',
 	})
-
-	const checkLoggedIn = () => {
-		fetch(
-			'/api/authenticated',
-			safeCredentials({
-				method: 'GET',
-			})
-		)
-			.then(handleErrors)
-			.then((data) => {
-				data.user && history.push('/')
-			})
-			.catch((error) => console.log(error))
-	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
