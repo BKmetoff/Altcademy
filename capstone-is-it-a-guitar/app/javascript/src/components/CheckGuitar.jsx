@@ -2,11 +2,11 @@ import React, { useRef, useState, useContext } from 'react'
 import styled from 'styled-components'
 
 import { CurrentUserContext } from '../components/App'
+import LogInError from './LogInError'
 
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
-import { Link } from 'react-router-dom'
 
 const ImageContainer = styled(Wrapper)`
 	overflow-y: hidden;
@@ -78,14 +78,7 @@ export default function CheckGuitar({
 	}
 
 	if (!userLoggedInStatus.loggedIn && !userLoggedInStatus.user.user_id) {
-		return (
-			<Wrapper alignCenter justifyCenter column>
-				Not logged in!
-				<Button kind='primary'>
-					<Link to='/login'>Log in or Sign up</Link>
-				</Button>
-			</Wrapper>
-		)
+		return <LogInError />
 	}
 
 	return (
