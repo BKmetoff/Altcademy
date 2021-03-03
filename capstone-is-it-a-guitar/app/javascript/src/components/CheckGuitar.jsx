@@ -1,10 +1,19 @@
 import React, { useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import { Theme } from '../backbone/style/Theme'
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
+
+const ImageContainer = styled(Wrapper)`
+	overflow-y: hidden;
+	margin: auto;
+`
+
+const ImageWrapper = styled.div`
+	width: 75%;
+	margin: auto;
+`
 
 export default function CheckGuitar({
 	state,
@@ -62,15 +71,6 @@ export default function CheckGuitar({
 		nextState()
 	}
 
-	const ImageContainer = styled(Wrapper)`
-		overflow-y: hidden;
-		margin: auto;
-	`
-
-	const ImageWrapper = styled.div`
-		width: 75%;
-		margin: auto;
-	`
 	return (
 		<ImageContainer alignCenter column>
 			{console.log(state, isGuitar)}
