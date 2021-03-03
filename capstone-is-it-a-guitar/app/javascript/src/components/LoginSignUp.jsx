@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { CurrentUserContext } from '../components/App'
@@ -9,10 +9,14 @@ import BaseDivider from '../backbone/Divider'
 
 const FormsWrapper = styled.div`
 	display: flex;
-	flex-direction: ${(column) => (column ? 'column' : 'row')};
+	flex-direction: row;
 `
 export default function LoginSignUp() {
-	const { userLoggedInStatus } = useContext(CurrentUserContext)
+	const { userLoggedInStatus, checkLoggedIn } = useContext(CurrentUserContext)
+
+	useEffect(() => {
+		checkLoggedIn()
+	}, [])
 
 	if (userLoggedInStatus.loggedIn && userLoggedInStatus.user.user_id) {
 		return <LogInError loggedIn />
@@ -20,7 +24,6 @@ export default function LoginSignUp() {
 
 	return (
 		<FormsWrapper>
-			{console.log(userLoggedInStatus)}
 			<Form />
 			<BaseDivider />
 			<Form signUp />
