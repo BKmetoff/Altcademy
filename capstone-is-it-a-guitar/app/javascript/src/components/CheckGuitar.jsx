@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react'
+import React, { useRef, useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { CurrentUserContext } from '../components/App'
@@ -24,6 +24,7 @@ export default function CheckGuitar({
 	stateMachine,
 	loadModel,
 	model,
+	checkLoggedIn,
 }) {
 	const { userLoggedInStatus } = useContext(CurrentUserContext)
 
@@ -76,6 +77,10 @@ export default function CheckGuitar({
 		setImageURL(null)
 		nextState()
 	}
+
+	useEffect(() => {
+		checkLoggedIn()
+	}, [])
 
 	if (!userLoggedInStatus.loggedIn && !userLoggedInStatus.user.user_id) {
 		return <LogInError />
