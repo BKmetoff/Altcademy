@@ -47,7 +47,6 @@ export default function Leaderboard() {
 
 	return (
 		<UserListWrapper>
-			{console.log(userStats)}
 			<UserListHeader>
 				<div>Username</div>
 				<div>Average Score</div>

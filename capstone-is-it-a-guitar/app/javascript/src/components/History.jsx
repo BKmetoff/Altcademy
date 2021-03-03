@@ -14,7 +14,9 @@ export default function History() {
 	const [userStats, setUserStats] = useState({})
 
 	useEffect(() => {
-		getUserStats()
+		userLoggedInStatus.loggedIn &&
+			userLoggedInStatus.user.user_id &&
+			getUserStats()
 	}, [])
 
 	const getUserStats = () => {
@@ -22,6 +24,7 @@ export default function History() {
 			.then(handleErrors)
 			.then((data) => {
 				setUserStats(data)
+				console.log(data)
 			})
 			.catch((error) => console.log('history error: ', error))
 	}
@@ -32,7 +35,6 @@ export default function History() {
 
 	return (
 		<div>
-			{console.log(userStats)}
 			<ImageCard image={MOCK_DATA.IMAGE} />
 			<ImageCard image={MOCK_DATA.IMAGE} />
 			<ImageCard image={MOCK_DATA.IMAGE} />
