@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { CurrentUserContext } from '../components/App'
 
 import Button from '../backbone/Button'
 import Divider from '../backbone/Divider'
 import { Wrapper } from '../backbone/Container'
 
-import { MOCK_DATA } from '../utils/mock'
-
 export default function Header() {
+	const { userLoggedInStatus } = useContext(CurrentUserContext)
+
 	return (
 		<Wrapper header column fullWidth>
 			<Wrapper justifyBetween>
-				<p>{MOCK_DATA.USER.USERNAME}</p>
+				<p>{userLoggedInStatus.user.username}</p>
 				<Button kind='secondary'>Log out</Button>
 			</Wrapper>
 			<Wrapper justifyCenter>
