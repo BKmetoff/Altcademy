@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import styled from 'styled-components'
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
-// import checkLoggedIn from '../utils/checkLoggedIn'
 
 const Input = styled.input`
 	max-width: 200px;
@@ -16,12 +15,6 @@ const BaseForm = styled.form`
 
 export default function Form({ signUp }) {
 	let history = useHistory()
-
-	// useEffect(() => {
-	// 	// checkLoggedIn() ? history.push('/') : console.log('not logged in')
-	// 	checkLoggedIn()
-	// }, [])
-
 	const [loginDetails, setLoginDetails] = useState({
 		email: '',
 		password: '',
