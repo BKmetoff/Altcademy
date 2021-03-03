@@ -33,7 +33,7 @@ module Api
     
 
     def destroy
-      token = cookies.signed[:guitar_session_token]
+      token = cookies.permanent.signed[:guitar_session_token]
       session = Session.find_by(token: token)
 
       if session&.destroy
