@@ -1,9 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import styled from 'styled-components'
+
+import { CurrentUserContext } from '../components/App'
 
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
+import { Link } from 'react-router-dom'
 
 const ImageContainer = styled(Wrapper)`
 	overflow-y: hidden;
@@ -22,9 +25,12 @@ export default function CheckGuitar({
 	loadModel,
 	model,
 }) {
+	const { userLoggedInStatus } = useContext(CurrentUserContext)
+
 	const [imageURL, setImageURL] = useState(null)
 	const [isGuitar, setIsGuitar] = useState(false)
 	const [predictionResults, setPredictionResults] = useState([])
+
 	const imageRef = useRef()
 	const inputRef = useRef()
 
@@ -69,6 +75,17 @@ export default function CheckGuitar({
 		setPredictionResults([])
 		setImageURL(null)
 		nextState()
+	}
+
+	if (!userLoggedInStatus.loggedIn && !userLoggedInStatus.user.user_id) {
+		return (
+			<Wrapper alignCenter justifyCenter column>
+				Not logged in!
+				<Button kind='primary'>
+					<Link to='/login'>Log in or Sign up</Link>
+				</Button>
+			</Wrapper>
+		)
 	}
 
 	return (
