@@ -13,6 +13,7 @@ import Leaderboard from './Leaderboard'
 import CheckGuitar from './CheckGuitar'
 import LoginSignUp from './LoginSignUp'
 import NotFound from './NotFound'
+import LogInError from './LogInError'
 
 const routes = [
 	{ component: History, path: '/history' },
@@ -62,11 +63,6 @@ export default function App() {
 		next()
 	}
 
-	const currentUserContextValue = {
-		userLoggedInStatus,
-		setUserLoggedInStatus,
-	}
-
 	useEffect(() => {
 		checkLoggedIn()
 	}, [])
@@ -80,6 +76,7 @@ export default function App() {
 		)
 			.then(handleErrors)
 			.then((data) => {
+				console.log('app auth check: ', data)
 				data.user &&
 					setUserLoggedInStatus((prevState) => ({
 						...prevState,
@@ -89,6 +86,13 @@ export default function App() {
 			})
 			.catch((error) => console.log(error))
 	}
+
+	const currentUserContextValue = {
+		userLoggedInStatus,
+		setUserLoggedInStatus,
+		checkLoggedIn,
+	}
+
 	return (
 		<CurrentUserContext.Provider value={currentUserContextValue}>
 			<Router>
@@ -101,6 +105,7 @@ export default function App() {
 								nextState={next}
 								loadModel={loadModel}
 								model={model}
+								checkLoggedIn={checkLoggedIn}
 							/>
 						</Route>
 						{routes.map((props) => {
