@@ -34,14 +34,15 @@ export default function Leaderboard() {
 		getStats()
 	}, [])
 
-	const [userStats, setUserStats] = useState([])
+	const [leaderboardStats, setLeaderboardStats] = useState([])
 
 	const getStats = () => {
 		fetch('/api/attempts')
 			.then(handleErrors)
 			.then((data) => {
-				setUserStats(data)
+				setLeaderboardStats(data)
 			})
+			.catch((error) => console.log('leaderboard error: ', error))
 	}
 
 	return (
@@ -52,7 +53,7 @@ export default function Leaderboard() {
 				<div>Average Score</div>
 				<div>Attempts</div>
 			</UserListHeader>
-			{sortUsers(userStats).map((user, index) => {
+			{sortUsers(leaderboardStats).map((user, index) => {
 				if (index % 2 !== 0) {
 					return (
 						<UserRow key={index} odd>
