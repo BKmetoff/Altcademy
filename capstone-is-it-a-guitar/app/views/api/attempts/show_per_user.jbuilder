@@ -1,1 +1,0 @@
-json.extract! @user_attempts, :success
