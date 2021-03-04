@@ -62,12 +62,12 @@ export default function CheckGuitar({
 
 			const imageData = new FormData()
 			imageData.append('file', e.target.files[0])
-			imageData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_TEMPLATE)
-			// imageData.append('upload_preset', 'is-it-a-guitar')
+			// imageData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_TEMPLATE)
+			imageData.append('upload_preset', 'is-it-a-guitar')
 
 			const response = await fetch(
-				`https://api.cloudinary.com/v1_1/${process.env.CLOUDNAME}/image/upload`,
-				// `https://api.cloudinary.com/v1_1/dzdwgxbjl/image/upload`,
+				// `https://api.cloudinary.com/v1_1/${process.env.CLOUDNAME}/image/upload`,
+				`https://api.cloudinary.com/v1_1/dzdwgxbjl/image/upload`,
 				{
 					method: 'POST',
 					body: imageData,
