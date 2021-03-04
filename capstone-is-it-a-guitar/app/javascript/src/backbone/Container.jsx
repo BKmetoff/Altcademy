@@ -4,6 +4,7 @@ import { Theme } from '../backbone/style/Theme'
 export const ContentContainer = styled.div`
 	max-width: 1024px;
 	height: 100vh;
+	overflow-y: scroll;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -76,5 +77,11 @@ export const Wrapper = styled.div`
 		flexWrap &&
 		css`
 			flex-wrap: wrap;
+		`}
+
+	${({ marginBottom }) =>
+		marginBottom &&
+		css`
+			margin-bottom: ${Theme.margin.L};
 		`}
 `
