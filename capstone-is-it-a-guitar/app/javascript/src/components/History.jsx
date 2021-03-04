@@ -3,10 +3,10 @@ import { CurrentUserContext } from '../components/App'
 
 import LogInError from './LogInError'
 import ImageCard from '../backbone/ImageCard'
+import { Wrapper } from '../backbone/Container'
 
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
-
-import { MOCK_DATA } from '../utils/mock'
+import sortUsers from '../utils/sortUsers'
 
 export default function History() {
 	const { userLoggedInStatus } = useContext(CurrentUserContext)
@@ -24,7 +24,6 @@ export default function History() {
 			.then(handleErrors)
 			.then((data) => {
 				setUserStats(data)
-				console.log(data)
 			})
 			.catch((error) => console.log('history error: ', error))
 	}
@@ -33,11 +32,15 @@ export default function History() {
 		return <LogInError />
 	}
 
+	if (!userStats.attempts) {
+		return <div>loading</div>
+	}
+
 	return (
-		<div>
-			<ImageCard image={MOCK_DATA.IMAGE} />
-			<ImageCard image={MOCK_DATA.IMAGE} />
-			<ImageCard image={MOCK_DATA.IMAGE} />
-		</div>
+		<Wrapper flexWrap justifyCenter marginBottom>
+			{sortUsers(userStats.attempts, 'created_at').map((attempt, index) => {
+				return <ImageCard key={index} image={attempt} />
+			})}
+		</Wrapper>
 	)
 }

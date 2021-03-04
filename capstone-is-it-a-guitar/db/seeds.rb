@@ -61,3 +61,6 @@ attempts = Attempt.create([
                             { user_id: 8, image_url: 'url-here', success: false},
                             { user_id: 8, image_url: 'url-here', success: false }
                           ])
+
+Attempt.where(success: false).update(image_url: "https://res.cloudinary.com/dzdwgxbjl/image/upload/v1607100450/sample.jpg")
+Attempt.where(success: true).update(image_url: "https://res.cloudinary.com/dzdwgxbjl/image/upload/s--u4cUekWT--/v1614866396/zfdtocsuf8ucceive6zx.jpg")

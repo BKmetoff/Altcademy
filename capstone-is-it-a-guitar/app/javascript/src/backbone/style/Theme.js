@@ -44,9 +44,15 @@ export const Theme = {
 }
 
 export const GlobalStyle = createGlobalStyle`
-  body {
+  
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
     background: ${Theme.colors.background};
-    margin: 0;
+    padding: 0;
+		margin: 0;
     font-family: monospace;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
