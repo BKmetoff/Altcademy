@@ -37,7 +37,7 @@ export default function History() {
 	}
 
 	return (
-		<Wrapper flexWrap justifyCenter>
+		<Wrapper flexWrap justifyCenter marginBottom>
 			{sortUsers(userStats.attempts, 'created_at').map((attempt, index) => {
 				return <ImageCard key={index} image={attempt} />
 			})}

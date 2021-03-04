@@ -11,6 +11,7 @@ const Image = styled.img.attrs((props) => ({
 			border-radius: 3px;
 			max-width: 200px;
 			object-fit: contain;
+			margin-left: ${Theme.margin.XS};
 		`}
 
 	${({ imageCheckGuitar }) =>
