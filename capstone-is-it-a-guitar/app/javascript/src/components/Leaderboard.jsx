@@ -52,7 +52,7 @@ export default function Leaderboard() {
 				<div>Average Score</div>
 				<div>Attempts</div>
 			</UserListHeader>
-			{sortUsers(leaderboardStats).map((user, index) => {
+			{sortUsers(leaderboardStats, 'avg_success').map((user, index) => {
 				if (index % 2 !== 0) {
 					return (
 						<UserRow key={index} odd>
