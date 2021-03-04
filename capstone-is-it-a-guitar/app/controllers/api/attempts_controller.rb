@@ -41,7 +41,7 @@ module Api
                             })
       end
 
-      render json: @response_data
+      render 'api/attempts/index'
     end
 
     def show_per_user
