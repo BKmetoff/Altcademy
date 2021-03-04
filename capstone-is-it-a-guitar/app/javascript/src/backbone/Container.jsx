@@ -65,9 +65,16 @@ export const Wrapper = styled.div`
 		css`
 			height: 100%;
 		`}
+
 	${({ column }) =>
 		column &&
 		css`
 			flex-direction: column;
+		`}
+
+	${({ flexWrap }) =>
+		flexWrap &&
+		css`
+			flex-wrap: wrap;
 		`}
 `

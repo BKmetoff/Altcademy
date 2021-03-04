@@ -9,6 +9,8 @@ const Image = styled.img.attrs((props) => ({
 		css`
 			height: 100%;
 			border-radius: 3px;
+			max-width: 200px;
+			object-fit: contain;
 		`}
 
 	${({ imageCheckGuitar }) =>
