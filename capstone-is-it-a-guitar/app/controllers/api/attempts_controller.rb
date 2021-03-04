@@ -61,8 +61,7 @@ module Api
 
       @user_stats = {:average => user_average, :attempts => user_attempts}
       
-      render json: @user_stats
-      # render 'api/attempts/show_per_user'
+      render 'api/attempts/show_per_user'
     end
     
 
