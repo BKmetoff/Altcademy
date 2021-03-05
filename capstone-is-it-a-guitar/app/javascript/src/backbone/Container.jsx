@@ -4,6 +4,7 @@ import { Theme } from '../backbone/style/Theme'
 export const ContentContainer = styled.div`
 	max-width: 1024px;
 	height: 100vh;
+	overflow-y: scroll;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -34,6 +35,8 @@ export const Wrapper = styled.div`
 			position: fixed;
 			padding-bottom: ${Theme.padding.M};
 			background-color: inherit;
+			padding-top: ${Theme.padding.M};
+			border-top: 1px solid ${Theme.colors.background};
 		`}
 
 	${({ justifyBetween }) =>
@@ -51,7 +54,7 @@ export const Wrapper = styled.div`
 	${({ alignCenter }) =>
 		alignCenter &&
 		css`
-			align-content: center;
+			align-items: center;
 		`}
 
 	${({ fullWidth }) =>
@@ -65,9 +68,22 @@ export const Wrapper = styled.div`
 		css`
 			height: 100%;
 		`}
+
 	${({ column }) =>
 		column &&
 		css`
 			flex-direction: column;
+		`}
+
+	${({ flexWrap }) =>
+		flexWrap &&
+		css`
+			flex-wrap: wrap;
+		`}
+
+	${({ marginBottom }) =>
+		marginBottom &&
+		css`
+			margin-bottom: ${Theme.margin.XXL};
 		`}
 `

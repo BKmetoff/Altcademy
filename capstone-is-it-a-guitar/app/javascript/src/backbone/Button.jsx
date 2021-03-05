@@ -6,6 +6,8 @@ const BaseButton = styled.button`
 	font-family: monospace;
 	outline: none;
 	border: none;
+	width: 200px;
+	height: 40px;
 
 	:hover {
 		cursor: pointer;
@@ -19,20 +21,23 @@ const BaseButton = styled.button`
 const kinds = {
 	primary: css`
 		background: ${Theme.colors.primary};
-		height: 40px;
-		width: 220px;
-		margin: ${Theme.margin.M} ${Theme.margin.auto} ${Theme.margin.auto}
-			${Theme.margin.auto};
+		border-radius: ${Theme.borderRadius.S};
+		box-shadow: ${Theme.shadow};
 	`,
-	secondary: {},
+	secondary: css`
+		background: ${Theme.colors.background};
+		height: 30px;
+		width: 80px;
+		border-radius: 3px;
+		box-shadow: ${Theme.shadow};
+	`,
+
 	headerLink: css`
-		font-weight: 700;
+		width: 160px;
 		font-size: 18px;
 		background: inherit;
 		letter-spacing: -0.7px;
-		:hover {
-			transform: ${Theme.hoverScale};
-		}
+
 		a {
 			color: ${Theme.colors.dark};
 		}

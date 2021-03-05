@@ -1,10 +1,31 @@
-import React, { useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useRef, useState, useContext, useEffect } from 'react'
+import styled from 'styled-components'
+
+import { CurrentUserContext } from '../components/App'
+import LogInError from './LogInError'
+import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
 import { Theme } from '../backbone/style/Theme'
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
+import SuccessMessage from '../backbone/SuccessMessage'
+
+const ImageContainer = styled(Wrapper)`
+	overflow-y: hidden;
+	margin: auto;
+	padding: ${Theme.padding.M};
+`
+
+const ImageWrapper = styled.div`
+	width: 75%;
+	margin: auto;
+`
+
+const ResultsWrapper = styled.div`
+	margin-bottom: ${Theme.margin.M};
+	text-align: center;
+`
 
 export default function CheckGuitar({
 	state,
@@ -12,10 +33,18 @@ export default function CheckGuitar({
 	stateMachine,
 	loadModel,
 	model,
+	checkLoggedIn,
 }) {
+	const { userLoggedInStatus } = useContext(CurrentUserContext)
+
 	const [imageURL, setImageURL] = useState(null)
-	const [isGuitar, setIsGuitar] = useState(false)
 	const [predictionResults, setPredictionResults] = useState([])
+	const [attemptSaved, setAttemptSaved] = useState(false)
+	const [guitarInfo, setGuitarInfo] = useState({
+		isGuitar: false,
+		guitarCloudUrl: '',
+	})
+
 	const imageRef = useRef()
 	const inputRef = useRef()
 
@@ -28,15 +57,31 @@ export default function CheckGuitar({
 			text: 'Loaded. Upload photo',
 			action: () => inputRef.current.click(),
 		},
-		ready: { text: 'Go!', action: () => identify() },
+		ready: { text: 'Go', action: () => identify() },
 		classifying: { text: 'Working...', action: () => {} },
-		complete: { text: 'Reset!', action: () => reset() },
+		complete: { text: 'Try again', action: () => reset() },
 	}
 
-	const handleUpload = (e) => {
+	const handleUpload = async (e) => {
 		const { files } = e.target
 		if (files.length > 0) {
 			const url = URL.createObjectURL(files[0])
+
+			const imageData = new FormData()
+			imageData.append('file', e.target.files[0])
+			imageData.append('upload_preset', process.env.CLOUDINARY)
+
+			const response = await fetch(
+				`https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`,
+				{
+					method: 'POST',
+					body: imageData,
+				}
+			)
+
+			const data = await response.json()
+			setGuitarInfo({ ...guitarInfo, guitarCloudUrl: data.secure_url })
+
 			setImageURL(url)
 			nextState()
 		}
@@ -52,29 +97,52 @@ export default function CheckGuitar({
 			return resultsElement.className.includes('guitar')
 		}
 
-		setIsGuitar(results.some(isGuitarCheck))
+		setGuitarInfo({
+			...guitarInfo,
+			isGuitar: results.some(isGuitarCheck),
+		})
+
+		// save attempt to DB
+		fetch(
+			'/api/attempts',
+			safeCredentials({
+				method: 'POST',
+				body: JSON.stringify({
+					attempt: {
+						user_id: userLoggedInStatus.user.user_id,
+						success: results.some(isGuitarCheck),
+						image_url: guitarInfo.guitarCloudUrl,
+					},
+				}),
+			})
+		)
+			.then(handleErrors)
+			.then((data) => {
+				data.attempt.id && setAttemptSaved(true)
+			})
+			.catch((error) => console.log('save to DB error: ', error))
+
 		nextState()
 	}
 
 	const reset = () => {
 		setPredictionResults([])
 		setImageURL(null)
+		setGuitarInfo({ isGuitar: false, guitarCloudUrl: '' })
+		setAttemptSaved(false)
 		nextState()
 	}
 
-	const ImageContainer = styled(Wrapper)`
-		overflow-y: hidden;
-		margin: auto;
-	`
+	useEffect(() => {
+		checkLoggedIn()
+	}, [])
 
-	const ImageWrapper = styled.div`
-		width: 75%;
-		margin: auto;
-	`
+	if (!userLoggedInStatus.loggedIn && !userLoggedInStatus.user.user_id) {
+		return <LogInError />
+	}
+
 	return (
 		<ImageContainer alignCenter column>
-			{console.log(state, isGuitar)}
-
 			<input
 				type='file'
 				accept='image/*'
@@ -95,9 +163,15 @@ export default function CheckGuitar({
 				</ImageWrapper>
 			)}
 
-			{showResults && (
-				<div>{isGuitar ? 'It is a guitar.' : 'It is not a guitar'}</div>
-			)}
+			<ResultsWrapper>
+				{showResults && (
+					<div>
+						{guitarInfo.isGuitar ? 'It is a guitar' : 'It is not a guitar'}
+					</div>
+				)}
+
+				{attemptSaved && <div>New attempt saved</div>}
+			</ResultsWrapper>
 
 			<Button kind='primary' onClick={buttonProps[state].action}>
 				{buttonProps[state].text}

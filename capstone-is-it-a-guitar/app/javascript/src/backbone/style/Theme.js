@@ -22,6 +22,7 @@ const MARGIN = {
 	M: '30px',
 	L: '50px',
 	XL: '70px',
+	XXL: '100px',
 }
 
 const PADDING = {
@@ -44,9 +45,15 @@ export const Theme = {
 }
 
 export const GlobalStyle = createGlobalStyle`
-  body {
+  
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
     background: ${Theme.colors.background};
-    margin: 0;
+    padding: 0;
+		margin: 0;
     font-family: monospace;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -72,11 +79,13 @@ export const GlobalStyle = createGlobalStyle`
 		/* font-size:14px;
 		letter-spacing: 1px;
 		line-height: 1.9; */
-		font-family: monospace
+		font-family: monospace;
+		text-align: center
 	}
 
 	a {
 		text-decoration:none;
+		color: ${Theme.colors.dark}
 	}
 
 	a:hover { 

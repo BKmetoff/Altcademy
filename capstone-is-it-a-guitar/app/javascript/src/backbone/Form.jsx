@@ -1,8 +1,21 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import styled from 'styled-components'
+import { safeCredentials, handleErrors } from '../utils/fetchHelper'
+
+import Button from './Button'
+import SuccessMessage from './SuccessMessage'
+import { Theme } from './style/Theme'
 
 const Input = styled.input`
 	max-width: 200px;
+	height: 40px;
+	outline: none;
+	border: none;
+	border-radius: ${Theme.borderRadius.S};
+	margin-bottom: ${Theme.margin.XS};
+	box-shadow: ${Theme.shadow};
 `
 
 const BaseForm = styled.form`
@@ -11,50 +24,96 @@ const BaseForm = styled.form`
 `
 
 export default function Form({ signUp }) {
-	const [formInput, setFormInput] = useState({
+	let history = useHistory()
+
+	const [signUpResponse, setSignUpResponse] = useState({
+		success: false,
 		username: '',
+	})
+	const [loginDetails, setLoginDetails] = useState({
+		email: '',
 		password: '',
-		passwordConfirmation: '',
+		username: '',
 	})
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('submit clicked', formInput)
+
+		fetch(
+			loginDetails.username ? '/api/users' : '/api/sessions',
+			safeCredentials({
+				method: 'POST',
+				body: JSON.stringify({
+					user: {
+						email: loginDetails.email,
+						password: loginDetails.password,
+						username: loginDetails.username,
+					},
+				}),
+			})
+		)
+			.then(handleErrors)
+			.then((data) => {
+				console.log('submit form data: ', data)
+
+				// log in response
+				data.success && history.push('/')
+
+				// sign up response
+				if (data.user) {
+					setSignUpResponse({ success: true, username: data.user.username })
+					clearInput()
+					console.log(data.user.username)
+				}
+			})
+			.catch((error) => console.log('login error: ', error))
 	}
 
 	const handleChange = (e) => {
-		setFormInput({ ...formInput, [e.target.name]: e.target.value })
+		setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value })
+	}
+
+	const clearInput = () => {
+		setLoginDetails({ email: '', password: '', username: '' })
 	}
 
 	return (
 		<BaseForm onSubmit={handleSubmit}>
 			<Input
-				type='text'
-				name='username'
+				type='email'
+				name='email'
 				onChange={handleChange}
-				value={formInput.username}
-				placeholder='Username'
-				required
-			/>
-			<Input
-				type='password'
-				name='password'
-				onChange={handleChange}
-				value={formInput.password}
-				placeholder='Password'
+				value={loginDetails.email}
+				placeholder='Email'
 				required
 			/>
 			{signUp && (
 				<Input
-					type='password'
-					name='passwordConfirmation'
+					type='text'
+					name='username'
 					onChange={handleChange}
-					value={formInput.passwordConfirmation}
-					placeholder='Confirm password'
+					value={loginDetails.username}
+					placeholder='Username'
 					required
 				/>
 			)}
-			<button type='submit'>submit</button>
+			<Input
+				type='password'
+				name='password'
+				onChange={handleChange}
+				value={loginDetails.password}
+				placeholder='Password'
+				required
+			/>
+
+			<Button kind='primary'>{signUp ? 'Sign up' : 'Log in'}</Button>
+
+			{signUpResponse.success && signUpResponse.username && (
+				<SuccessMessage>
+					<p>welcome, {signUpResponse.username}</p>
+					<p>please log in</p>
+				</SuccessMessage>
+			)}
 		</BaseForm>
 	)
 }
