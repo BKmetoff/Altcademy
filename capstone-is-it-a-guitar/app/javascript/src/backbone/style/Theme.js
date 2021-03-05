@@ -22,6 +22,7 @@ const MARGIN = {
 	M: '30px',
 	L: '50px',
 	XL: '70px',
+	XXL: '100px',
 }
 
 const PADDING = {
@@ -83,6 +84,7 @@ export const GlobalStyle = createGlobalStyle`
 
 	a {
 		text-decoration:none;
+		color: ${Theme.colors.dark}
 	}
 
 	a:hover { 
