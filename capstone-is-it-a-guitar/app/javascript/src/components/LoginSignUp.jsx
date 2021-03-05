@@ -10,7 +10,6 @@ import BaseDivider from '../backbone/Divider'
 const FormsWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
-	margin: auto;
 `
 export default function LoginSignUp() {
 	const { userLoggedInStatus, checkLoggedIn } = useContext(CurrentUserContext)
