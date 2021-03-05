@@ -1,5 +1,5 @@
 const { environment } = require('@rails/webpacker')
-
+const webpack = require('webpack')
 const path = require('path')
 
 /* 
@@ -22,7 +22,20 @@ const customConfig = {
 	},
 }
 
+environment.plugins.prepend(
+	'Environment',
+	new webpack.EnvironmentPlugin(
+		JSON.parse(
+			JSON.stringify({
+				CLOUD_NAME: process.env.CLOUD_NAME,
+				CLOUDINARY: process.env.CLOUDINARY,
+			})
+		)
+	)
+)
+
 environment.config.merge(customConfig)
 
 environment.splitChunks()
+
 module.exports = environment
