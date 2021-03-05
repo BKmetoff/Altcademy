@@ -21,11 +21,17 @@ const BaseButton = styled.button`
 const kinds = {
 	primary: css`
 		background: ${Theme.colors.primary};
+		border-radius: ${Theme.borderRadius.S};
+		box-shadow: ${Theme.shadow};
 	`,
 	secondary: css`
 		background: ${Theme.colors.background};
 		height: 30px;
+		width: 80px;
+		border-radius: 3px;
+		box-shadow: ${Theme.shadow};
 	`,
+
 	headerLink: css`
 		width: 160px;
 		font-size: 18px;

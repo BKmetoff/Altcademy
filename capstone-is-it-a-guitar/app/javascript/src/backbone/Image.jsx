@@ -6,7 +6,7 @@ const Image = styled.img.attrs((props) => ({
 }))`
 	border-radius: ${Theme.borderRadius.S};
 	box-shadow: ${Theme.shadow};
-	margin: ${Theme.margin.M};
+	margin-bottom: ${Theme.margin.M};
 
 	${({ imageCard }) =>
 		imageCard !== undefined &&

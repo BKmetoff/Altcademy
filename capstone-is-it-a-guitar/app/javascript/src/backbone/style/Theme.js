@@ -79,7 +79,8 @@ export const GlobalStyle = createGlobalStyle`
 		/* font-size:14px;
 		letter-spacing: 1px;
 		line-height: 1.9; */
-		font-family: monospace
+		font-family: monospace;
+		text-align: center
 	}
 
 	a {
