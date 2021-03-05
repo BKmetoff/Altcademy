@@ -16,7 +16,7 @@ const UserTableWrapper = styled.div`
 	width: 100%;
 	box-shadow: ${Theme.shadow};
 	margin-top: ${Theme.margin.M};
-	margin-bottom: ${Theme.margin.XL};
+	margin-bottom: ${Theme.margin.XXL};
 `
 
 const TableRow = styled.div`

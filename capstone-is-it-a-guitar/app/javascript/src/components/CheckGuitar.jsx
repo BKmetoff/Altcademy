@@ -9,10 +9,12 @@ import { Theme } from '../backbone/style/Theme'
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
+import SuccessMessage from '../backbone/SuccessMessage'
 
 const ImageContainer = styled(Wrapper)`
 	overflow-y: hidden;
 	margin: auto;
+	padding: ${Theme.padding.M};
 `
 
 const ImageWrapper = styled.div`
