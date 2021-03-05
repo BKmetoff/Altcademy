@@ -1,35 +1,58 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styled, { css } from 'styled-components'
+
+import { CurrentUserContext } from '../components/App'
+import { Theme } from '../backbone/style/Theme'
 
 import sortUsers from '../utils/sortUsers'
 import { handleErrors } from '../utils/fetchHelper'
 
-const UserListWrapper = styled.div`
+import Badge from '../backbone/Badge'
+
+const UserTableWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	max-width: 768px;
 	width: 100%;
+	box-shadow: ${Theme.shadow};
+	margin-top: ${Theme.margin.M};
+	margin-bottom: ${Theme.margin.XXL};
 `
 
-const UserRow = styled.div`
+const TableRow = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
+	height: 40px;
+	align-items: center;
+
+	&:first-child {
+		border-bottom: 2px solid ${Theme.colors.primary};
+	}
+
 	${({ odd }) =>
 		odd
 			? css`
-					background-color: lightgray;
+					background-color: ${Theme.colors.secondary};
 			  `
 			: css`
-					background-color: white;
+					background-color: ${Theme.colors.background};
 			  `}
 `
 
-const UserListHeader = styled.div`
-	display: flex;
-	justify-content: space-between;
+const PositionNumber = styled.div`
+	flex-grow: 1;
+	text-align: center;
 `
+
+const UserData = styled.div`
+	flex-grow: 9;
+	display: flex;
+	justify-content: space-around;
+`
+
 export default function Leaderboard() {
+	const { userLoggedInStatus } = useContext(CurrentUserContext)
 	useEffect(() => {
 		getStats()
 	}, [])
@@ -46,31 +69,35 @@ export default function Leaderboard() {
 	}
 
 	return (
-		<UserListWrapper>
-			<UserListHeader>
-				<div>Username</div>
-				<div>Average Score</div>
-				<div>Attempts</div>
-			</UserListHeader>
+		<UserTableWrapper>
+			<TableRow odd>
+				<PositionNumber>#</PositionNumber>
+				<UserData>
+					<p>Username</p>
+					<p>Success</p>
+					<p>Attempts</p>
+				</UserData>
+			</TableRow>
 			{sortUsers(leaderboardStats, 'avg_success').map((user, index) => {
-				if (index % 2 !== 0) {
-					return (
-						<UserRow key={index} odd>
-							<div>{user.user}</div>
-							<div>{`${user.average_success_rate} %`}</div>
-							<div>{user.attempts}</div>
-						</UserRow>
-					)
-				}
-
 				return (
-					<UserRow key={index}>
-						<div>{user.user}</div>
-						<div>{`${user.average_success_rate} %`}</div>
-						<div>{user.attempts}</div>
-					</UserRow>
+					<TableRow key={index} odd={index % 2 !== 0}>
+						<PositionNumber>{index + 1}</PositionNumber>
+						<UserData>
+							<div>
+								{user.user_id == userLoggedInStatus.user.user_id ? (
+									<Badge>
+										<p>You</p>
+									</Badge>
+								) : (
+									user.username
+								)}
+							</div>
+							<p>{`${user.average_success_rate}%`}</p>
+							<p>{user.attempts}</p>
+						</UserData>
+					</TableRow>
 				)
 			})}
-		</UserListWrapper>
+		</UserTableWrapper>
 	)
 }

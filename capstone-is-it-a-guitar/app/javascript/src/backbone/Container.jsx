@@ -35,6 +35,8 @@ export const Wrapper = styled.div`
 			position: fixed;
 			padding-bottom: ${Theme.padding.M};
 			background-color: inherit;
+			padding-top: ${Theme.padding.M};
+			border-top: 1px solid ${Theme.colors.background};
 		`}
 
 	${({ justifyBetween }) =>
@@ -82,6 +84,6 @@ export const Wrapper = styled.div`
 	${({ marginBottom }) =>
 		marginBottom &&
 		css`
-			margin-bottom: ${Theme.margin.L};
+			margin-bottom: ${Theme.margin.XXL};
 		`}
 `

@@ -4,6 +4,10 @@ import { Theme } from './style/Theme'
 const Image = styled.img.attrs((props) => ({
 	src: props.src,
 }))`
+	border-radius: ${Theme.borderRadius.S};
+	box-shadow: ${Theme.shadow};
+	margin-bottom: ${Theme.margin.M};
+
 	${({ imageCard }) =>
 		imageCard !== undefined &&
 		css`
@@ -11,7 +15,7 @@ const Image = styled.img.attrs((props) => ({
 			border-radius: 3px;
 			max-width: 200px;
 			object-fit: contain;
-			margin-left: ${Theme.margin.XS};
+			margin: 0px 0px 0px ${Theme.margin.XS};
 		`}
 
 	${({ imageCheckGuitar }) =>
@@ -20,7 +24,6 @@ const Image = styled.img.attrs((props) => ({
 			width: 100%;
 			height: auto;
 		`}
-	border-radius: ${Theme.borderRadius.S}
 `
 
 export default Image
