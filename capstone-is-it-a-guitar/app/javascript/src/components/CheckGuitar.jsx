@@ -5,10 +5,10 @@ import { CurrentUserContext } from '../components/App'
 import LogInError from './LogInError'
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
+import { Theme } from '../backbone/style/Theme'
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
-// const config = require('config')
 
 const ImageContainer = styled(Wrapper)`
 	overflow-y: hidden;
@@ -18,6 +18,11 @@ const ImageContainer = styled(Wrapper)`
 const ImageWrapper = styled.div`
 	width: 75%;
 	margin: auto;
+`
+
+const ResultsWrapper = styled.div`
+	margin-bottom: ${Theme.margin.M};
+	text-align: center;
 `
 
 export default function CheckGuitar({
@@ -50,9 +55,9 @@ export default function CheckGuitar({
 			text: 'Loaded. Upload photo',
 			action: () => inputRef.current.click(),
 		},
-		ready: { text: 'Go!', action: () => identify() },
+		ready: { text: 'Go', action: () => identify() },
 		classifying: { text: 'Working...', action: () => {} },
-		complete: { text: 'Reset!', action: () => reset() },
+		complete: { text: 'Try again', action: () => reset() },
 	}
 
 	const handleUpload = async (e) => {
@@ -62,12 +67,10 @@ export default function CheckGuitar({
 
 			const imageData = new FormData()
 			imageData.append('file', e.target.files[0])
-			// imageData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_TEMPLATE)
-			imageData.append('upload_preset', 'is-it-a-guitar')
+			imageData.append('upload_preset', process.env.CLOUDINARY)
 
 			const response = await fetch(
-				// `https://api.cloudinary.com/v1_1/${process.env.CLOUDNAME}/image/upload`,
-				`https://api.cloudinary.com/v1_1/dzdwgxbjl/image/upload`,
+				`https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`,
 				{
 					method: 'POST',
 					body: imageData,
@@ -113,7 +116,6 @@ export default function CheckGuitar({
 		)
 			.then(handleErrors)
 			.then((data) => {
-				console.log(data)
 				data.attempt.id && setAttemptSaved(true)
 			})
 			.catch((error) => console.log('save to DB error: ', error))
@@ -139,8 +141,6 @@ export default function CheckGuitar({
 
 	return (
 		<ImageContainer alignCenter column>
-			{console.log(state, guitarInfo)}
-
 			<input
 				type='file'
 				accept='image/*'
@@ -161,13 +161,15 @@ export default function CheckGuitar({
 				</ImageWrapper>
 			)}
 
-			{showResults && (
-				<div>
-					{guitarInfo.isGuitar ? 'It is a guitar.' : 'It is not a guitar'}
-				</div>
-			)}
+			<ResultsWrapper>
+				{showResults && (
+					<div>
+						{guitarInfo.isGuitar ? 'It is a guitar' : 'It is not a guitar'}
+					</div>
+				)}
 
-			{attemptSaved && <div>New attempt saved.</div>}
+				{attemptSaved && <div>New attempt saved</div>}
+			</ResultsWrapper>
 
 			<Button kind='primary' onClick={buttonProps[state].action}>
 				{buttonProps[state].text}
