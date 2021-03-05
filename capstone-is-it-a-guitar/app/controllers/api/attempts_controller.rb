@@ -33,6 +33,7 @@ module Api
       users_with_attempts.each do |user|
         @response_data.push({
                               :user => user.username,
+                              :user_id => user.id,
                               :attempts => user.attempts.count,
                               :average_success_rate => calculate_user_average(
                                 user.attempts.count,
