@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { CurrentUserContext } from '../components/App'
 
+import styled from 'styled-components'
+import { Theme } from '../backbone/style/Theme'
+
 import LogInError from './LogInError'
 import ImageCard from '../backbone/ImageCard'
 import { Wrapper } from '../backbone/Container'
 
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 import sortUsers from '../utils/sortUsers'
+
+const UserStats = styled.div`
+	display: flex;
+	width: 350px;
+	flex-direction: column;
+	align-self: center;
+	margin-left: ${Theme.margin.S};
+	margin-right: ${Theme.margin.S};
+`
 
 export default function History() {
 	const { userLoggedInStatus } = useContext(CurrentUserContext)
@@ -37,10 +49,16 @@ export default function History() {
 	}
 
 	return (
-		<Wrapper flexWrap justifyCenter marginBottom>
-			{sortUsers(userStats.attempts, 'created_at').map((attempt, index) => {
-				return <ImageCard key={index} image={attempt} />
-			})}
-		</Wrapper>
+		<>
+			<Wrapper flexWrap justifyCenter marginBottom>
+				<UserStats>
+					<div>your average score: {userStats.average}%</div>
+					<div>attempts: {userStats.attempts.length}</div>
+				</UserStats>
+				{sortUsers(userStats.attempts, 'created_at').map((attempt, index) => {
+					return <ImageCard key={index} image={attempt} />
+				})}
+			</Wrapper>
+		</>
 	)
 }
