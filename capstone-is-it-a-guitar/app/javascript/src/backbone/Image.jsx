@@ -22,7 +22,8 @@ const Image = styled.img.attrs((props) => ({
 		imageCheckGuitar !== undefined &&
 		css`
 			width: 100%;
-			height: auto;
+			max-height: 500;
+			object-fit: contain;
 		`}
 `
 
