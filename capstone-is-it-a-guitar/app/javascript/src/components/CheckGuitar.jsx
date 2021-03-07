@@ -9,21 +9,21 @@ import { Theme } from '../backbone/style/Theme'
 import { Wrapper } from '../backbone/Container'
 import Image from '../backbone/Image'
 import Button from '../backbone/Button'
-import SuccessMessage from '../backbone/SuccessMessage'
 
 const ImageContainer = styled(Wrapper)`
-	overflow-y: hidden;
 	margin: auto;
 	padding: ${Theme.padding.M};
 `
 
 const ImageWrapper = styled.div`
-	width: 75%;
 	margin: auto;
+	display: flex;
+	justify-content: center;
 `
 
 const ResultsWrapper = styled.div`
-	margin-bottom: ${Theme.margin.M};
+	margin-top: ${Theme.margin.S};
+	margin-bottom: ${Theme.margin.S};
 	text-align: center;
 `
 
@@ -143,6 +143,19 @@ export default function CheckGuitar({
 
 	return (
 		<ImageContainer alignCenter column>
+			<Button kind='primary' onClick={buttonProps[state].action}>
+				{buttonProps[state].text}
+			</Button>
+
+			<ResultsWrapper>
+				{showResults && (
+					<div>
+						{guitarInfo.isGuitar ? 'It is a guitar' : 'It is not a guitar'}
+					</div>
+				)}
+
+				{attemptSaved && <div>New attempt saved</div>}
+			</ResultsWrapper>
 			<input
 				type='file'
 				accept='image/*'
@@ -162,20 +175,6 @@ export default function CheckGuitar({
 					/>
 				</ImageWrapper>
 			)}
-
-			<ResultsWrapper>
-				{showResults && (
-					<div>
-						{guitarInfo.isGuitar ? 'It is a guitar' : 'It is not a guitar'}
-					</div>
-				)}
-
-				{attemptSaved && <div>New attempt saved</div>}
-			</ResultsWrapper>
-
-			<Button kind='primary' onClick={buttonProps[state].action}>
-				{buttonProps[state].text}
-			</Button>
 		</ImageContainer>
 	)
 }
