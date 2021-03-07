@@ -1,6 +1,5 @@
 module Api
   class AttemptsController < ApplicationController
-    skip_before_action :verify_authenticity_token
 
     def create
       return render json: { error: 'user not logged in' }, status: :unauthorized unless find_session
