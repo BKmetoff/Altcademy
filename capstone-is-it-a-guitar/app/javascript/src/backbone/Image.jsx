@@ -21,9 +21,11 @@ const Image = styled.img.attrs((props) => ({
 	${({ imageCheckGuitar }) =>
 		imageCheckGuitar !== undefined &&
 		css`
-			width: 100%;
-			max-height: 500;
+			max-width: 60%;
+			max-height: 75%;
 			object-fit: contain;
+			margin-right: ${Theme.margin.S};
+			margin-left: ${Theme.margin.S};
 		`}
 `
 
