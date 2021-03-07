@@ -4,7 +4,9 @@ A [Rails](https://rubyonrails.org/)/[Webpacker](https://github.com/rails/webpack
 
 This is the capstone project of [Altcademy](https://www.altcademy.com/)'s [FullStack WebDev](https://www.altcademy.com/programs/fswd) course.
 
-A live version of the app is deployed on [Heroku](https://isitaguitar.herokuapp.com/)
+A live version of the app is deployed on [Heroku](https://isitaguitar.herokuapp.com/).
+
+The app is not meant to be used on mobile devises.
 
 ## Main features:
 
@@ -18,12 +20,25 @@ The app:
 - offers a Leaderboard sorting all users based on their success rate (# of success attempts/total number # of attempts)
 - uses [styled-components](https://styled-components.com/) because it's just better this way;
 
+## Requirements:
+
+- valid Cloudinary name and preset;
+- if you don't have ones, ping me;
+
 ## How to install:
 
 - clone the repo;
 - run `bundle`
 - run `rails db:migrate`
 - run `rails db:seed`
+
+## How to configure Cloudinary:
+
+- add your Cloudinary credentials in the `.env` file in the root directory:
+  ```
+  CLOUD_NAME=cloudinary_cloud_name
+  CLOUDINARY=cloudinary_template_name
+  ```
 
 ## How to run locally:
 
@@ -34,18 +49,13 @@ The app:
 
 - really?
 
-## Requirements:
-
-- valid Cloudinary name and preset;
-- if you don't have ones, ping me;
-
 ## Notes:
 
 - the app _does not_ return error messages to the frontend or the browser console - figure it out yourself ;)
 - once images are uploaded, the frontend will attempt to upload them to Cloudinary and store the Cloudinary image URLs in the DB;
 - the existing Cloudinary image URLs in the seed data expire, so you might see broken HTML image elements on `/history`;
 - the image recognition does not require Cloudinary credentials but the rest of the features of the app will not work as intended;
-- since the Tensorflow model loads and runs entirely in the frontend, it may be slow for some users
+- since the Tensorflow model loads and runs entirely in the frontend, it may be slow for some users;
 
 ## Resources:
 
