@@ -6,6 +6,7 @@ import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
 import Button from '../backbone/Button'
 import Divider from '../backbone/Divider'
+import Text from '../backbone/Text'
 import { Wrapper } from '../backbone/Container'
 
 export default function Header() {
@@ -31,19 +32,17 @@ export default function Header() {
 
 	return (
 		<Wrapper header column fullWidth>
-			<Wrapper justifyBetween>
+			<Wrapper justifyBetween marginLeft marginRight>
 				{userLoggedInStatus.loggedIn && (
 					<>
-						<p style={{ fontSize: 16, alignSelf: 'center' }}>
-							{userLoggedInStatus.user.username}
-						</p>
+						<Text>{userLoggedInStatus.user.username}</Text>
 						<Button kind='secondary' onClick={logOutUser}>
 							Log out
 						</Button>
 					</>
 				)}
 			</Wrapper>
-			<Wrapper justifyCenter>
+			<Wrapper justifyCenter marginLeft marginRight>
 				<Button kind='headerLink'>
 					<Link to='/'>Upload Image</Link>
 				</Button>
