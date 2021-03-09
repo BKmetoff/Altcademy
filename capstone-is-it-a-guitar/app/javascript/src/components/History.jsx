@@ -7,6 +7,7 @@ import { Theme } from '../backbone/style/Theme'
 import LogInError from './LogInError'
 import ImageCard from '../backbone/ImageCard'
 import { Wrapper } from '../backbone/Container'
+import Text from '../backbone/Text'
 
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 import sortUsers from '../utils/sortUsers'
@@ -26,9 +27,7 @@ export default function History() {
 	const [userStats, setUserStats] = useState({})
 
 	useEffect(() => {
-		userLoggedInStatus.loggedIn &&
-			userLoggedInStatus.user.user_id &&
-			getUserStats()
+		getUserStats()
 	}, [])
 
 	const getUserStats = () => {
@@ -52,8 +51,8 @@ export default function History() {
 		<>
 			<Wrapper flexWrap justifyCenter marginBottom>
 				<UserStats>
-					<div>your average score: {userStats.average}%</div>
-					<div>attempts: {userStats.attempts.length}</div>
+					<Text>your average score: {userStats.average}%</Text>
+					<Text>attempts: {userStats.attempts.length}</Text>
 				</UserStats>
 				{sortUsers(userStats.attempts, 'created_at').map((attempt, index) => {
 					return <ImageCard key={index} image={attempt} />
