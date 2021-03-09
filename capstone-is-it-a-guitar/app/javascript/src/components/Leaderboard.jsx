@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { CurrentUserContext } from '../components/App'
 import { Theme } from '../backbone/style/Theme'
+import Text from '../backbone/Text'
 
 import sortUsers from '../utils/sortUsers'
 import { handleErrors } from '../utils/fetchHelper'
@@ -73,9 +74,9 @@ export default function Leaderboard() {
 			<TableRow odd>
 				<PositionNumber>#</PositionNumber>
 				<UserData>
-					<p>Username</p>
-					<p>Success</p>
-					<p>Attempts</p>
+					<Text medium>Username</Text>
+					<Text medium>Success</Text>
+					<Text medium>Attempts</Text>
 				</UserData>
 			</TableRow>
 			{sortUsers(leaderboardStats, 'avg_success').map((user, index) => {
@@ -92,8 +93,8 @@ export default function Leaderboard() {
 									user.username
 								)}
 							</div>
-							<p>{`${user.average_success_rate}%`}</p>
-							<p>{user.attempts}</p>
+							<Text medium>{`${user.average_success_rate}%`}</Text>
+							<Text medium>{user.attempts}</Text>
 						</UserData>
 					</TableRow>
 				)

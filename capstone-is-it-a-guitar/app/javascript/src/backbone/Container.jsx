@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
 		css`
 			top: 0;
 			margin-top: ${Theme.margin.M};
-			margin-bottom: ${Theme.margin.XS};
+			margin-bottom: ${Theme.margin.M};
 			border-bottom: 2px solid ${Theme.colors.background};
 			padding-bottom: ${Theme.margin.S};
 		`}
@@ -85,5 +85,17 @@ export const Wrapper = styled.div`
 		marginBottom &&
 		css`
 			margin-bottom: ${Theme.margin.XXL};
+		`}
+
+		${({ marginRight }) =>
+		marginRight &&
+		css`
+			margin-right: ${Theme.margin.M};
+		`}
+
+		${({ marginLeft }) =>
+		marginLeft &&
+		css`
+			margin-left: ${Theme.margin.M};
 		`}
 `
