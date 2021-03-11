@@ -20,27 +20,11 @@ module Api
       # return count of attempts and average success
       # per user
 
-      attempts = Attempt.all.includes(:user)
-      users = attempts.map(&:user).uniq
-
-      @response_data = []
-
-      users.each do |user|
-
-        user_attempts = attempts.where(user_id: user.id)
-        successful_attempts = user_attempts.where(success: "true")
+      @response_data = User
+                        .joins(:attempts)
+                        .select('users.id, users.username, count(*) as all_attempts_count, (count(*) filter(where success) / (count(*) * 1.0) * 100) as average_success')
+                        .group('users.id, users.username')
         
-        @response_data.push({
-                              :user => user.username,
-                              :user_id => user.id,
-                              :attempts => user_attempts.count,
-                              :average_success_rate => calculate_user_average(
-                                user_attempts.count,
-                                successful_attempts.count
-                              )
-                            })  
-      end
-
       render 'api/attempts/index'
     end
 
@@ -80,12 +64,6 @@ module Api
       ActiveRecord::Type::Boolean.new.deserialize(value)
     end
 
-    def calculate_user_average(attempts_count, successful_attempts)
-      if successful_attempts == 0
-        return 0
-      end
-      
-      average = ((successful_attempts / attempts_count.to_f) * 100).round(1)
     end
   end
 end
